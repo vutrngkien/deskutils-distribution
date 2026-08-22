@@ -1,0 +1,8 @@
+.DS_Store
+*.dmg
+*.zip
+*.pem
+*.key
+*.p12
+DeskUtilsIcon.icon/
+Codex Image *.png

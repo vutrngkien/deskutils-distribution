@@ -1,0 +1,48 @@
+name: Deploy DeskUtils website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Verify required website files
+        run: |
+          test -f site/index.html
+          test -f site/install/index.html
+          test -f site/appcast.xml
+          test -f site/assets/css/site.css
+          test -f site/assets/js/site.js
+      - name: Verify latest DMG is public
+        run: >-
+          curl --fail --silent --show-error --location --head --retry 3
+          https://github.com/vutrngkien/deskutils-distribution/releases/latest/download/DeskUtils.dmg
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload website artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#070a12">
+    <meta name="description" content="DeskUtils puts clipboard history, color picking, keyboard cleaning, and sleep controls one click away in your Mac menu bar.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DeskUtils — Everyday Mac utilities, one menu bar away">
+    <meta property="og:description" content="A private, native toolkit for the small things you do every day on your Mac.">
+    <meta property="og:url" content="https://vutrngkien.github.io/deskutils-distribution/">
+    <meta property="og:image" content="https://vutrngkien.github.io/deskutils-distribution/assets/images/og-deskutils.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DeskUtils — Everyday Mac utilities, one menu bar away">
+    <meta name="twitter:description" content="Clipboard history, color picking, keyboard cleaning, and sleep controls for macOS.">
+    <meta name="twitter:image" content="https://vutrngkien.github.io/deskutils-distribution/assets/images/og-deskutils.png">
+    <link rel="canonical" href="https://vutrngkien.github.io/deskutils-distribution/">
+    <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
+    <link rel="stylesheet" href="./assets/css/site.css">
+    <title>DeskUtils — Everyday Mac utilities</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <div class="shell header-inner">
+        <a class="brand" href="./" aria-label="DeskUtils home">
+          <span class="app-icon app-icon--small" aria-hidden="true">
+            <img src="./assets/images/deskutils-icon.png" alt="">
+          </span>
+          <span>DeskUtils</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+          <span class="sr-only">Open navigation</span>
+          <span></span><span></span>
+        </button>
+
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-nav>
+          <a href="#features">Features</a>
+          <a href="#privacy">Privacy</a>
+          <a href="./install/">Install</a>
+          <a class="button button--small button--primary" href="https://github.com/vutrngkien/deskutils-distribution/releases/latest/download/DeskUtils.dmg" data-download>
+            Download Beta
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero section">
+        <div class="hero-glow hero-glow--one" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow--two" aria-hidden="true"></div>
+        <div class="shell hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow"><span class="eyebrow-dot"></span>A tiny toolkit for your Mac</p>
+            <h1>Everyday Mac utilities, <span>one menu bar away.</span></h1>
+            <p class="hero-lede">Clipboard history, precise color picking, keyboard cleaning, and sleep controls—native, private, and ready whenever you need them.</p>
+            <div class="hero-actions">
+              <a class="button button--primary button--large" href="https://github.com/vutrngkien/deskutils-distribution/releases/latest/download/DeskUtils.dmg" data-download>
+                <span class="button-icon" aria-hidden="true">↓</span>
+                Download free beta
+              </a>
+              <a class="button button--ghost button--large" href="./install/">Installation guide <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="hero-meta" aria-label="System requirements and release status">
+              <span>Requires macOS 26 or later</span>
+              <span class="meta-divider" aria-hidden="true"></span>
+              <span class="beta-note"><span aria-hidden="true">●</span> Beta · Not notarized yet</span>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal reveal--delay" aria-label="DeskUtils menu bar preview">
+            <div class="desktop-card">
+              <div class="desktop-wallpaper" aria-hidden="true">
+                <span class="orb orb--one"></span>
+                <span class="orb orb--two"></span>
+              </div>
+              <div class="mac-menu-bar">
+                <div class="mac-menu-left"><span class="apple-mark">●</span><strong>Finder</strong><span>File</span><span>Edit</span><span>View</span></div>
+                <div class="mac-menu-right"><span>◖</span><span>⌁</span><span>⌘</span><span>9:41</span></div>
+              </div>
+              <div class="deskutils-popover">
+                <div class="popover-row">
+                  <span class="utility-icon">▣</span><span class="utility-name">Clipboard Manager</span><kbd>⇧⌘V</kbd>
+                </div>
+                <div class="popover-row">
+                  <span class="utility-icon">⌁</span><span class="utility-name">Color Picker</span><kbd>⇧⌘C</kbd>
+                </div>
+                <div class="popover-row">
+                  <span class="utility-icon">⌨</span><span class="utility-name">Clean Keyboard</span><kbd>⇧⌘K</kbd><span class="switch switch--off"><span></span></span>
+                </div>
+                <div class="popover-separator"></div>
+                <div class="popover-row">
+                  <span class="utility-icon">◒</span><span class="utility-name">Prevent Sleep</span><kbd>⇧⌘P</kbd><span class="switch switch--on"><span></span></span>
+                </div>
+                <div class="popover-separator"></div>
+                <div class="popover-row popover-row--muted"><span class="utility-icon">⚙</span><span class="utility-name">Settings…</span><kbd>⌘,</kbd></div>
+                <div class="popover-row popover-row--muted"><span class="utility-icon">◯</span><span class="utility-name">Quit DeskUtils</span><kbd>⌘Q</kbd></div>
+              </div>
+              <div class="hero-icon app-icon" aria-hidden="true"><img src="./assets/images/deskutils-icon.png" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-strip" aria-label="Product principles">
+        <div class="shell trust-grid">
+          <div><strong>Native</strong><span>Built for macOS</span></div>
+          <div><strong>Local-first</strong><span>Your history stays on your Mac</span></div>
+          <div><strong>Focused</strong><span>Small tools, zero clutter</span></div>
+          <div><strong>Free beta</strong><span>Explore every utility</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Four thoughtful utilities</p>
+            <h2>Less app switching.<br><span>More flow.</span></h2>
+            <p>DeskUtils collects the little tools you reach for all day and keeps them quietly in your menu bar.</p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card feature-card--clipboard reveal">
+              <div class="feature-topline"><span class="feature-icon">▣</span><kbd>⇧⌘V</kbd></div>
+              <h3>Clipboard Manager</h3>
+              <p>Find text, images, and files you copied earlier. Search, pin, copy again, or paste directly without breaking your flow.</p>
+              <div class="mini-clipboard" aria-hidden="true">
+                <div class="mini-search">⌕&nbsp;&nbsp;Search clipboard</div>
+                <div class="mini-item"><span class="mini-app mini-app--blue">D</span><span><b>Design notes</b><small>Copied just now</small></span><em>⌘C</em></div>
+                <div class="mini-item"><span class="mini-app mini-app--violet">#</span><span><b>#0A84FF</b><small>12 minutes ago</small></span><em>⌘C</em></div>
+              </div>
+            </article>
+
+            <article class="feature-card feature-card--color reveal reveal--delay-1">
+              <div class="feature-topline"><span class="feature-icon">⌁</span><kbd>⇧⌘C</kbd></div>
+              <h3>Color Picker</h3>
+              <p>Sample any pixel on any display and copy clean HEX, RGB, or HSL values in the format your work needs.</p>
+              <div class="color-demo" aria-hidden="true">
+                <div class="color-canvas"><span class="picker-ring"></span></div>
+                <div class="color-code"><span></span><div><small>HEX</small><strong>#7C5CFF</strong></div><em>Copied</em></div>
+              </div>
+            </article>
+
+            <article class="feature-card feature-card--keyboard reveal">
+              <div class="feature-topline"><span class="feature-icon">⌨</span><kbd>⇧⌘K</kbd></div>
+              <h3>Clean Keyboard</h3>
+              <p>Temporarily block keyboard input while you clean your Mac. Toggle it from the menu, shortcut, or lock overlay.</p>
+              <div class="keyboard-demo" aria-hidden="true">
+                <div class="key-row"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="key-row key-row--offset"><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="lock-chip"><span>⌨</span> Keyboard locked</div>
+              </div>
+            </article>
+
+            <article class="feature-card feature-card--sleep reveal reveal--delay-1">
+              <div class="feature-topline"><span class="feature-icon">◒</span><kbd>⇧⌘P</kbd></div>
+              <h3>Prevent Sleep</h3>
+              <p>Keep your Mac awake while idle during long tasks, presentations, or downloads, then switch it off with one click.</p>
+              <div class="sleep-demo" aria-hidden="true">
+                <span class="moon">◒</span>
+                <div><strong>Prevent Sleep</strong><small>Idle system sleep blocked</small></div>
+                <span class="switch switch--on switch--large"><span></span></span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section showcase-section" id="preview">
+        <div class="shell">
+          <div class="section-heading section-heading--center reveal">
+            <p class="eyebrow">Designed to stay out of the way</p>
+            <h2>Small when idle.<br><span>Powerful when opened.</span></h2>
+          </div>
+
+          <div class="showcase-grid">
+            <article class="showcase-card showcase-card--wide reveal">
+              <div class="showcase-label"><span>Clipboard</span><small>Search and act instantly</small></div>
+              <div class="clipboard-window" aria-label="Clipboard Manager interface preview">
+                <div class="window-toolbar"><span class="traffic-lights"><i></i><i></i><i></i></span><span class="window-title">Clipboard Manager</span><kbd>Esc</kbd></div>
+                <div class="clipboard-shell">
+                  <div class="clipboard-search">⌕ <span>Search your clipboard</span><kbd>F</kbd></div>
+                  <div class="filter-pills"><b>All</b><span>Text</span><span>Images</span><span>Files</span><span>Pinned</span></div>
+                  <div class="history-card history-card--active"><span class="history-icon">Aa</span><div><strong>Everyday Mac utilities</strong><small>Notes · Just now</small></div><span>⌘C</span></div>
+                  <div class="history-card"><span class="history-icon history-icon--image"></span><div><strong>Product-preview.png</strong><small>1440 × 900 · 1.2 MB</small></div><span>⌘C</span></div>
+                  <div class="history-card"><span class="history-icon">#</span><div><strong>#0A84FF</strong><small>Safari · 8 minutes ago</small></div><span>⌘C</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="showcase-card reveal reveal--delay-1">
+              <div class="showcase-label"><span>Menu bar</span><small>Everything one click away</small></div>
+              <div class="menu-preview" aria-label="DeskUtils menu bar interface preview">
+                <div class="popover-row"><span class="utility-icon">▣</span><span class="utility-name">Clipboard Manager</span><kbd>⇧⌘V</kbd></div>
+                <div class="popover-row"><span class="utility-icon">⌁</span><span class="utility-name">Color Picker</span><kbd>⇧⌘C</kbd></div>
+                <div class="popover-row"><span class="utility-icon">⌨</span><span class="utility-name">Clean Keyboard</span><kbd>⇧⌘K</kbd><span class="switch switch--off"><span></span></span></div>
+                <div class="popover-separator"></div>
+                <div class="popover-row"><span class="utility-icon">◒</span><span class="utility-name">Prevent Sleep</span><kbd>⇧⌘P</kbd><span class="switch switch--on"><span></span></span></div>
+              </div>
+            </article>
+
+            <article class="showcase-card reveal reveal--delay-2">
+              <div class="showcase-label"><span>Settings</span><small>Make every tool yours</small></div>
+              <div class="settings-preview" aria-label="DeskUtils settings interface preview">
+                <div class="settings-sidebar">
+                  <strong>DeskUtils</strong>
+                  <span class="selected">⚙ General</span><span>▣ Clipboard</span><span>⌁ Color Picker</span><span>◒ Prevent Sleep</span>
+                </div>
+                <div class="settings-content"><small>GENERAL</small><strong>Launch DeskUtils at login</strong><span class="switch switch--on"><span></span></span><hr><small>UPDATES</small><b>Automatically check for updates</b><span class="switch switch--on"><span></span></span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section privacy-section" id="privacy">
+        <div class="shell privacy-grid">
+          <div class="privacy-copy reveal">
+            <p class="eyebrow">Private by default</p>
+            <h2>Your clipboard is <span>your business.</span></h2>
+            <p>DeskUtils keeps clipboard history and preferences locally on your Mac. There are no analytics, accounts, ads, or tracking pixels.</p>
+            <a class="text-link" href="#faq">Read the privacy FAQ <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="privacy-list reveal reveal--delay">
+            <article><span>⌂</span><div><strong>Local-first storage</strong><p>Clipboard text, images, and preferences stay inside DeskUtils' sandboxed app container.</p></div></article>
+            <article><span>◎</span><div><strong>Purpose-limited permissions</strong><p>Accessibility powers keyboard controls; Screen Recording is used only to sample pixel colors.</p></div></article>
+            <article><span>↻</span><div><strong>Updates, nothing else</strong><p>Network access is used by Sparkle to check the official update feed. Your content is never included.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq-section" id="faq">
+        <div class="shell faq-grid">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Good to know</p>
+            <h2>Questions,<br><span>answered.</span></h2>
+          </div>
+          <div class="faq-list reveal reveal--delay">
+            <details name="faq">
+              <summary>Is DeskUtils free?</summary>
+              <p>Yes. The current DeskUtils beta is free to download and use. Pricing may change for future stable releases, but we will always communicate changes clearly.</p>
+            </details>
+            <details name="faq">
+              <summary>Why does macOS show a security warning?</summary>
+              <p>The current beta is not notarized by Apple yet. macOS may ask you to confirm it in System Settings → Privacy &amp; Security. Follow the <a href="./install/">installation guide</a>; never disable Gatekeeper.</p>
+            </details>
+            <details name="faq">
+              <summary>Which macOS versions are supported?</summary>
+              <p>DeskUtils currently requires macOS 26 or later because it uses the latest native macOS interface technologies.</p>
+            </details>
+            <details name="faq">
+              <summary>What permissions are required?</summary>
+              <p>Clipboard history and Prevent Sleep need no special permission. Clean Keyboard and direct paste use Accessibility. Color Picker uses Screen &amp; System Audio Recording to read the pixel under your pointer.</p>
+            </details>
+            <details name="faq">
+              <summary>Where is clipboard history stored?</summary>
+              <p>It is stored locally inside DeskUtils' sandboxed Application Support container. Clipboard content is not uploaded to DeskUtils servers.</p>
+            </details>
+            <details name="faq">
+              <summary>How are updates delivered?</summary>
+              <p>DeskUtils uses Sparkle to check a signed update feed hosted with the official releases. You choose when to download and install an update.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta section">
+        <div class="shell">
+          <div class="cta-card reveal">
+            <div class="cta-glow" aria-hidden="true"></div>
+            <span class="app-icon" aria-hidden="true"><img src="./assets/images/deskutils-icon.png" alt=""></span>
+            <p class="eyebrow">One download. Four useful tools.</p>
+            <h2>Make your menu bar<br><span>work a little harder.</span></h2>
+            <p>Try DeskUtils Beta for free on macOS 26 or later.</p>
+            <div class="hero-actions hero-actions--center">
+              <a class="button button--primary button--large" href="https://github.com/vutrngkien/deskutils-distribution/releases/latest/download/DeskUtils.dmg" data-download>Download DeskUtils Beta</a>
+              <a class="button button--ghost button--large" href="./install/">Installation guide</a>
+            </div>
+            <small>Beta software · Not notarized by Apple yet</small>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <a class="brand" href="./"><span class="app-icon app-icon--small" aria-hidden="true"><img src="./assets/images/deskutils-icon.png" alt=""></span><span>DeskUtils</span></a>
+        <nav aria-label="Footer navigation">
+          <a href="./install/">Installation guide</a>
+          <a href="https://github.com/vutrngkien/deskutils-distribution/releases">Release notes</a>
+          <a href="https://github.com/vutrngkien/deskutils-distribution/issues/new">Report an issue</a>
+        </nav>
+        <p>© 2026 DeskUtils. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="./assets/js/site.js" defer></script>
+  </body>
+</html>

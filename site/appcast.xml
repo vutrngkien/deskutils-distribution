@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>DeskUtils</title>
+        <item>
+            <title>0.1.0</title>
+            <pubDate>Sun, 23 Aug 2026 02:17:51 +0700</pubDate>
+            <link>https://vutrngkien.github.io/deskutils-distribution/</link>
+            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.0</sparkle:fullReleaseNotesLink>
+            <sparkle:version>3</sparkle:version>
+            <sparkle:shortVersionString>0.1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.0/DeskUtils-0.1.0.zip" length="5240881" type="application/octet-stream" sparkle:edSignature="Ci5Ktv1VbuXQPMIE56shHxOJeUWmNl+gmyUSw3CoaXzVmvlMNUIiLsYuOCr5vvEJ8BvoM1803ZzFNZU885z2Dg=="/>
+        </item>
+    </channel>
+</rss><!-- sparkle-signatures:
+edSignature: 4PywfSMugip+O+JCMKbIc3LUKDmDoDDTG9ttIJO9c4PVaCNLJDy6+ojROoO+OoxE1cYcBGDFi4aXGnBK/DKxCA==
+length: 1037
+-->

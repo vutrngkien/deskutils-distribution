@@ -10,10 +10,11 @@
             <sparkle:version>3</sparkle:version>
             <sparkle:shortVersionString>0.1.0</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.0/DeskUtils-0.1.0.zip" length="5240881" type="application/octet-stream" sparkle:edSignature="Ci5Ktv1VbuXQPMIE56shHxOJeUWmNl+gmyUSw3CoaXzVmvlMNUIiLsYuOCr5vvEJ8BvoM1803ZzFNZU885z2Dg=="/>
+            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.0/DeskUtils-0.1.0.zip" length="5253811" type="application/octet-stream" sparkle:edSignature="O6u19B9cPGvVHe1EhcCc4ZGZDe/ZLCmAz07hEGh47uJSBJONkFIE0JwaVxeNMQKEyGzHobC5E63xgTVtPSqNAw=="/>
         </item>
     </channel>
-</rss><!-- sparkle-signatures:
-edSignature: 4PywfSMugip+O+JCMKbIc3LUKDmDoDDTG9ttIJO9c4PVaCNLJDy6+ojROoO+OoxE1cYcBGDFi4aXGnBK/DKxCA==
-length: 1037
+</rss>
+<!-- sparkle-signatures:
+edSignature: oJkfcqw3nfSXfTgXg+iEI+njmyAUcajLr6WRd3+yrylDTJEB1PUYv6k/s+qRVfUia0YpvI7Ob3vIJb0ocAKVCQ==
+length: 1038
 -->

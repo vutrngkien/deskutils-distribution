@@ -12,9 +12,19 @@
             <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
             <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.0/DeskUtils-0.1.0.zip" length="5253811" type="application/octet-stream" sparkle:edSignature="O6u19B9cPGvVHe1EhcCc4ZGZDe/ZLCmAz07hEGh47uJSBJONkFIE0JwaVxeNMQKEyGzHobC5E63xgTVtPSqNAw=="/>
         </item>
+        <item>
+            <title>0.1.1</title>
+            <pubDate>Sun, 23 Aug 2026 18:56:46 +0700</pubDate>
+            <link>https://vutrngkien.github.io/deskutils-distribution/</link>
+            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.1</sparkle:fullReleaseNotesLink>
+            <sparkle:version>1</sparkle:version>
+            <sparkle:shortVersionString>0.1.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.1/DeskUtils-0.1.1.zip" length="5550078" type="application/octet-stream" sparkle:edSignature="kPJYz5WK5S2YfsguIurwzIkLUuL9LlnaOvoaQ6ZYxOnLHbGGF9lXFou874K6D83jvMGWXuwV7vnC5EE3sEa3BQ=="/>
+        </item>
     </channel>
 </rss>
 <!-- sparkle-signatures:
-edSignature: oJkfcqw3nfSXfTgXg+iEI+njmyAUcajLr6WRd3+yrylDTJEB1PUYv6k/s+qRVfUia0YpvI7Ob3vIJb0ocAKVCQ==
-length: 1038
+edSignature: jHGFtZpmmvmvzm52BOXouXg9J3YVQa1FvU1mm6q+32ZJGzl0QYp896185xcqPhPTNQxwTGcPK3G4lkPKc6EaBw==
+length: 1880
 -->

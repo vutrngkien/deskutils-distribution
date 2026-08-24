@@ -5,7 +5,7 @@ menu bar utility app.
 
 This repository contains only:
 
-- The public landing page and installation guide.
+- The public landing page, installation guide, and legal pages.
 - GitHub Release assets such as the DMG, Sparkle ZIP, checksums and appcast.
 - The GitHub Pages deployment workflow.
 
@@ -16,7 +16,7 @@ keys.
 
 The static website lives in [`site/`](site/) and is deployed to:
 
-<https://vutrngkien.github.io/deskutils-distribution/>
+<https://deskutils.app/>
 
 Preview it locally with:
 
@@ -50,6 +50,7 @@ private key.
 ## GitHub Pages setup
 
 In repository settings, open **Pages** and select **GitHub Actions** as the
-source. Pushing `site/` changes to `main` then runs the deployment workflow.
+source, then configure `deskutils.app` as the custom domain. Pushing `site/`
+changes to `main` then runs the deployment workflow.
 The workflow intentionally refuses to publish until `site/appcast.xml` exists
 and the latest `DeskUtils.dmg` release asset is publicly reachable.

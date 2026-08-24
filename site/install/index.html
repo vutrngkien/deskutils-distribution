@@ -4,14 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#070a12">
-    <meta name="description" content="Download and install the DeskUtils beta safely on macOS.">
+    <meta name="description" content="Download DeskUtils Beta and follow the installation, first-launch, and macOS permissions guide.">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DeskUtils">
     <meta property="og:title" content="Install DeskUtils for macOS">
-    <meta property="og:description" content="Download DeskUtils Beta and follow the first-launch and permissions guide.">
-    <meta property="og:url" content="https://vutrngkien.github.io/deskutils-distribution/install/">
-    <meta property="og:image" content="https://vutrngkien.github.io/deskutils-distribution/assets/images/og-deskutils.png">
+    <meta property="og:description" content="Download DeskUtils Beta and follow the installation, first-launch, and macOS permissions guide.">
+    <meta property="og:url" content="https://deskutils.app/install/">
+    <meta property="og:image" content="https://deskutils.app/assets/images/og-deskutils.png">
+    <meta property="og:image:alt" content="DeskUtils — Essential macOS utilities, beautifully unified.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://vutrngkien.github.io/deskutils-distribution/install/">
+    <meta name="twitter:title" content="Install DeskUtils for macOS">
+    <meta name="twitter:description" content="Download DeskUtils Beta and follow the installation, first-launch, and macOS permissions guide.">
+    <meta name="twitter:image" content="https://deskutils.app/assets/images/og-deskutils.png">
+    <link rel="canonical" href="https://deskutils.app/install/">
     <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
     <link rel="stylesheet" href="../assets/css/site.css">
     <title>Install DeskUtils for macOS</title>
@@ -20,97 +27,44 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="shell header-inner">
-        <a class="brand" href="../" aria-label="DeskUtils home">
-          <span class="app-icon app-icon--small" aria-hidden="true"><img src="../assets/images/deskutils-icon.png" alt=""></span>
-          <span>DeskUtils</span>
-        </a>
+        <a class="brand" href="../" aria-label="DeskUtils home"><span class="app-icon app-icon--small" aria-hidden="true"><img src="../assets/images/deskutils-icon.png" alt="" width="30" height="30"></span><span>DeskUtils</span></a>
         <a class="button button--small button--primary" href="https://github.com/vutrngkien/deskutils-distribution/releases/latest/download/DeskUtils.dmg">Download Beta</a>
       </div>
     </header>
 
-    <main class="install-main" id="main">
+    <main class="interior-main" id="main">
       <div class="shell">
         <a class="back-link" href="../"><span aria-hidden="true">←</span> Back to DeskUtils</a>
-        <section class="install-hero reveal">
+        <section class="interior-hero interior-hero--center reveal">
           <p class="eyebrow">Installation guide</p>
           <h1>Get DeskUtils running <span>in a few minutes.</span></h1>
           <p>Download the free beta, move it to Applications, and grant only the permissions needed by the utilities you choose to use.</p>
-          <div class="hero-actions hero-actions--center">
+          <div class="hero-actions">
             <a class="button button--primary button--large" href="https://github.com/vutrngkien/deskutils-distribution/releases/latest/download/DeskUtils.dmg">↓ Download DeskUtils Beta</a>
-            <a class="button button--ghost button--large" href="https://github.com/vutrngkien/deskutils-distribution/releases">View releases</a>
+            <a class="button button--ghost button--large" href="https://github.com/vutrngkien/deskutils-distribution/releases">View Releases</a>
           </div>
         </section>
 
-        <div class="notice reveal" role="note">
-          <span aria-hidden="true">⚠</span>
-          <div><strong>This beta is not notarized by Apple yet.</strong><span>macOS may block the first launch. The steps below use Apple's supported “Open Anyway” flow. You never need to disable Gatekeeper.</span></div>
-        </div>
+        <div class="notice reveal" role="note"><span aria-hidden="true">⚠</span><div><strong>This beta is not notarized by Apple yet.</strong><span>macOS may block the first launch. The steps below use Apple’s supported “Open Anyway” flow. You never need to disable Gatekeeper.</span></div></div>
 
         <div class="install-layout">
-          <nav class="install-nav" aria-label="Installation sections">
-            <a href="#install">Install</a>
-            <a href="#gatekeeper">First launch</a>
-            <a href="#permissions">Permissions</a>
-            <a href="#verify">Verify download</a>
-          </nav>
-
+          <nav class="install-nav" aria-label="Installation sections"><a href="#requirements">Requirements</a><a href="#install">Install</a><a href="#gatekeeper">First launch</a><a href="#permissions">Permissions</a><a href="#verify">Verify</a></nav>
           <div class="install-content">
-            <section class="install-block" id="install">
-              <p class="eyebrow">Step one</p>
-              <h2>Install the app</h2>
-              <p>DeskUtils is distributed as a standard macOS disk image. Download it only from the official DeskUtils distribution repository.</p>
-              <ol class="step-list">
-                <li><strong>Download DeskUtils.dmg</strong><span>Use the download button above to get the latest beta release.</span></li>
-                <li><strong>Open the disk image</strong><span>Double-click DeskUtils.dmg in your Downloads folder.</span></li>
-                <li><strong>Move DeskUtils to Applications</strong><span>Drag DeskUtils into the Applications folder shown in the installer window.</span></li>
-                <li><strong>Launch from Applications</strong><span>Open Finder → Applications, then double-click DeskUtils.</span></li>
-              </ol>
-            </section>
+            <section class="install-block" id="requirements"><p class="eyebrow">Before you begin</p><h2>System requirements</h2><p>DeskUtils Beta is a Universal app for Apple Silicon and Intel Macs running macOS 26 or later. It is early software and may change as it approaches its first paid release.</p><ul class="requirement-list"><li>macOS 26 or later</li><li>Apple Silicon and Intel</li><li>Beta release</li></ul></section>
 
-            <section class="install-block" id="gatekeeper">
-              <p class="eyebrow">First launch</p>
-              <h2>If macOS blocks DeskUtils</h2>
-              <p>Because this beta is not notarized, macOS may say it cannot verify the developer. If you downloaded DeskUtils from the official release page and want to continue:</p>
-              <ol class="step-list">
-                <li><strong>Try opening DeskUtils once</strong><span>Dismiss the warning after it appears. This makes the override available in System Settings.</span></li>
-                <li><strong>Open Privacy &amp; Security</strong><span>Go to System Settings → Privacy &amp; Security and scroll down to Security.</span></li>
-                <li><strong>Click Open Anyway</strong><span>The button is available for a limited time after the blocked launch attempt.</span></li>
-                <li><strong>Confirm Open</strong><span>Enter your Mac password if requested. DeskUtils is then saved as an exception.</span></li>
-              </ol>
-              <p>For more context, read <a class="inline-link" href="https://support.apple.com/en-us/102445" rel="noopener">Apple's official guide to opening apps safely</a>.</p>
-            </section>
+            <section class="install-block" id="install"><p class="eyebrow">Step one</p><h2>Install the app</h2><p>DeskUtils is distributed as a standard macOS disk image. Download it only from the official DeskUtils distribution repository.</p><ol class="step-list"><li><strong>Download DeskUtils.dmg</strong><span>Use the download button above to get the latest beta release.</span></li><li><strong>Open the disk image</strong><span>Double-click DeskUtils.dmg in your Downloads folder.</span></li><li><strong>Move DeskUtils to Applications</strong><span>Drag DeskUtils into the Applications folder shown in the installer window.</span></li><li><strong>Launch from Applications</strong><span>Open Finder → Applications, then double-click DeskUtils.</span></li></ol></section>
 
-            <section class="install-block" id="permissions">
-              <p class="eyebrow">Feature permissions</p>
-              <h2>Grant only what you use</h2>
-              <p>DeskUtils requests system access when a feature needs it. You can keep using the remaining utilities if you decline an optional permission.</p>
-              <div class="permission-table" role="table" aria-label="DeskUtils system permissions">
-                <div class="permission-row" role="row"><strong role="cell">Accessibility</strong><span role="cell">Lets Clean Keyboard block input and lets Clipboard Manager paste directly into the previous app.</span></div>
-                <div class="permission-row" role="row"><strong role="cell">Screen Recording</strong><span role="cell">Lets Color Picker read the pixel under your pointer. DeskUtils does not record or upload your screen.</span></div>
-                <div class="permission-row" role="row"><strong role="cell">Network access</strong><span role="cell">Used by Sparkle to check the official signed update feed. Clipboard content is never included.</span></div>
-                <div class="permission-row" role="row"><strong role="cell">No extra access</strong><span role="cell">Clipboard monitoring and Prevent Sleep do not require a separate macOS privacy permission.</span></div>
-              </div>
-            </section>
+            <section class="install-block" id="gatekeeper"><p class="eyebrow">First launch</p><h2>If macOS blocks DeskUtils</h2><p>Because this beta is not notarized, macOS may say it cannot verify the developer. If you downloaded DeskUtils from the official release page and want to continue:</p><ol class="step-list"><li><strong>Try opening DeskUtils once</strong><span>Dismiss the warning after it appears. This makes the override available in System Settings.</span></li><li><strong>Open Privacy &amp; Security</strong><span>Go to System Settings → Privacy &amp; Security and scroll down to Security.</span></li><li><strong>Click Open Anyway</strong><span>The button is available for a limited time after the blocked launch attempt.</span></li><li><strong>Confirm Open</strong><span>Enter your Mac password if requested. DeskUtils is then saved as an exception.</span></li></ol><p>For more context, read <a class="inline-link" href="https://support.apple.com/en-us/102445" rel="noopener">Apple’s official guide to opening apps safely</a>.</p></section>
 
-            <section class="install-block" id="verify">
-              <p class="eyebrow">Optional integrity check</p>
-              <h2>Verify your download</h2>
-              <p>Each release includes a SHA256SUMS.txt file. Compare its DeskUtils.dmg value with the result of this Terminal command:</p>
-              <div class="code-block">shasum -a 256 ~/Downloads/DeskUtils.dmg</div>
-              <p>The two hashes must match exactly. If they do not, delete the DMG and download it again from the <a class="inline-link" href="https://github.com/vutrngkien/deskutils-distribution/releases">official release page</a>.</p>
-            </section>
+            <section class="install-block" id="permissions"><p class="eyebrow">Feature permissions</p><h2>Grant only what you use</h2><p>DeskUtils requests system access when a feature needs it. You can keep using the remaining utilities if you decline an optional permission.</p><div class="permission-table" role="table" aria-label="DeskUtils system permissions"><div class="permission-row" role="row"><strong role="cell">Accessibility</strong><span role="cell">Lets Clean Keyboard block input and lets Clipboard Manager paste directly into the previous app.</span></div><div class="permission-row" role="row"><strong role="cell">Screen Recording</strong><span role="cell">Lets Color Picker read the pixel under your pointer. DeskUtils does not record or upload your screen.</span></div><div class="permission-row" role="row"><strong role="cell">Network access</strong><span role="cell">Used by Sparkle to check the official signed update feed. Clipboard content is never included.</span></div><div class="permission-row" role="row"><strong role="cell">No extra access</strong><span role="cell">Clipboard monitoring does not require a separate macOS privacy permission.</span></div></div></section>
+
+            <section class="install-block" id="verify"><p class="eyebrow">Optional integrity check</p><h2>Verify your download</h2><p>Each release includes a SHA256SUMS.txt file. Compare its DeskUtils.dmg value with the result of this Terminal command:</p><div class="code-block">shasum -a 256 ~/Downloads/DeskUtils.dmg</div><p>The two hashes must match exactly. If they do not, delete the DMG and download it again from the <a class="inline-link" href="https://github.com/vutrngkien/deskutils-distribution/releases">official release page</a>.</p></section>
           </div>
         </div>
       </div>
     </main>
 
-    <footer class="site-footer">
-      <div class="shell footer-grid">
-        <a class="brand" href="../"><span class="app-icon app-icon--small" aria-hidden="true"><img src="../assets/images/deskutils-icon.png" alt=""></span><span>DeskUtils</span></a>
-        <nav aria-label="Footer navigation"><a href="../#features">Features</a><a href="../#privacy">Privacy</a><a href="https://github.com/vutrngkien/deskutils-distribution/releases">Release notes</a></nav>
-        <p>© 2026 DeskUtils. All rights reserved.</p>
-      </div>
-    </footer>
+    <footer class="site-footer"><div class="shell footer-top"><a class="brand" href="../"><span class="app-icon app-icon--small" aria-hidden="true"><img src="../assets/images/deskutils-icon.png" alt="" width="30" height="30"></span><span>DeskUtils</span></a><nav aria-label="Footer navigation"><a href="../#features">Features</a><a href="../#pricing">Pricing</a><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms</a><a href="mailto:deskutils.app@gmail.com">Support</a><a href="https://github.com/vutrngkien/deskutils-distribution">GitHub</a></nav></div><div class="shell footer-bottom"><p>Independent macOS software by Vu Trung Kien.</p><p>© 2026 DeskUtils. All rights reserved.</p></div></footer>
     <script src="../assets/js/site.js" defer></script>
   </body>
 </html>

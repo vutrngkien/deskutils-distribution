@@ -30,6 +30,9 @@ jobs:
         run: |
           test -f site/index.html
           test -f site/install/index.html
+          test -f site/privacy/index.html
+          test -f site/terms/index.html
+          test -f site/CNAME
           test -f site/appcast.xml
           test -f site/assets/css/site.css
           test -f site/assets/js/site.js

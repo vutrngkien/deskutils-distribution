@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vutrngkien.github.io/deskutils-distribution/sitemap.xml
+Sitemap: https://deskutils.app/sitemap.xml

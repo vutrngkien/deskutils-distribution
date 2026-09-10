@@ -2,6 +2,7 @@ import { Shell, Button } from '@/components/Site';
 import { SiteFrame } from '@/components/SiteFrame';
 import { DemoMedia } from '@/components/DemoMedia';
 import { DimmingControl } from '@/components/DimmingControl';
+import { StructuredData } from '@/components/StructuredData';
 import { ToolIcon } from '@/components/ToolIcon';
 import {
   product,
@@ -17,6 +18,7 @@ import {
 import { translate } from '@/content/i18n';
 import { localePath } from '@/content/locales';
 import { pageMetadata } from '@/content/metadata';
+import { homeStructuredData } from '@/content/structured-data';
 import s from '@/app/page.module.css';
 
 export const metadata = pageMetadata('en', 'home', '/');
@@ -26,6 +28,7 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
 
   return (
     <SiteFrame locale={locale}>
+      <StructuredData data={homeStructuredData(locale)} />
       <main id="main" lang={locale}>
         <Shell>
           <section className={s.hero} aria-labelledby="hero-title">

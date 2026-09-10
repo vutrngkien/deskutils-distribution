@@ -14,6 +14,10 @@ const contentRoutes = languages.flatMap((locale) => {
   ];
 });
 const routes = [...contentRoutes, '404.html'];
+const homeRoutes = new Set([
+  'index.html',
+  ...languages.filter((locale) => locale !== 'en').map((locale) => `${locale}/index.html`),
+]);
 for (const route of routes) {
   const html = await readFile(new URL(route, out), 'utf8');
   const firstSegment = route.split('/')[0];
@@ -34,12 +38,18 @@ for (const route of routes) {
     );
     assert.match(html, /property="og:image"/, `${route}: social metadata missing`);
   }
+  if (homeRoutes.has(route)) {
+    assert.match(html, /application\/ld\+json/, 'homepage: structured data missing');
+    assert.match(html, /SoftwareApplication/, 'homepage: app schema missing');
+  }
   for (const [, value] of html.matchAll(/(?:href|src)="(\/[^"?#]*)/g)) {
     // Check local files and internal page destinations, including Next.js bundles.
     if (!value || value === '/' || value.includes('_not-found')) continue;
     await access(new URL(`.${value.endsWith('/') ? `${value}index.html` : value}`, out));
   }
 }
+const notFound = await readFile(new URL('404.html', out), 'utf8');
+assert.match(notFound, /name="robots" content="noindex, nofollow"/, '404: must not be indexed');
 for (const name of ['quickpreview-demo.webp', 'search-demo.webp']) {
   assert.ok(
     (await stat(new URL(`assets/images/${name}`, out))).size < 350 * 1024,

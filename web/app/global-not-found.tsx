@@ -1,5 +1,11 @@
 import '@/app/globals.css';
+import type { Metadata } from 'next';
 import { Button, Shell } from '@/components/Site';
+
+export const metadata: Metadata = {
+  title: 'Page not found — DeskUtils',
+  robots: { index: false, follow: false },
+};
 
 export default function GlobalNotFound() {
   return (

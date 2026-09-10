@@ -17,6 +17,16 @@ for (const width of [375, 768, 1440]) {
     ).toBeVisible();
     await expect(page.getByText('Pro is coming soon', { exact: true })).toBeVisible();
     await expect(page.getByText('$7.99', { exact: true })).toBeVisible();
+    const structuredData = page.locator('script[type="application/ld+json"]');
+    await expect(structuredData).toHaveCount(1);
+    expect(
+      await structuredData.evaluate((element) => {
+        const graph = JSON.parse(element.textContent ?? '{"@graph":[]}') as {
+          '@graph': { '@type': string }[];
+        };
+        return graph['@graph'].some((item) => item['@type'] === 'SoftwareApplication');
+      }),
+    ).toBe(true);
     const toolLinks = page.getByRole('navigation', { name: 'Explore utilities' }).getByRole('link');
     for (const link of await toolLinks.all()) {
       const target = await link.getAttribute('href');

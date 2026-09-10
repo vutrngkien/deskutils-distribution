@@ -8,12 +8,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     paths.map((path) => ({
       url: `${product.origin}${localePath(code, path)}`,
       alternates: {
-        languages: Object.fromEntries(
-          languages.map(({ code: locale }) => [
+        languages: Object.fromEntries([
+          ...languages.map(({ code: locale }) => [
             locale,
             `${product.origin}${localePath(locale, path)}`,
           ]),
-        ),
+          ['x-default', `${product.origin}${path}`],
+        ]),
       },
     })),
   );

@@ -4,6 +4,16 @@ import { languages, localePath, type Locale } from './locales';
 import { product } from './product';
 
 type Page = 'home' | 'install' | 'privacy' | 'terms';
+const openGraphLocales: Record<Locale, string> = {
+  en: 'en_US',
+  vi: 'vi_VN',
+  'zh-CN': 'zh_CN',
+  'zh-TW': 'zh_TW',
+  ja: 'ja_JP',
+  ko: 'ko_KR',
+  ru: 'ru_RU',
+};
+
 export function pageMetadata(locale: Locale, page: Page, path: string): Metadata {
   const title = translate(locale, `meta.${page}.title`);
   const description = translate(locale, `meta.${page}.description`);
@@ -30,8 +40,16 @@ export function pageMetadata(locale: Locale, page: Page, path: string): Metadata
       description,
       url,
       images: [image],
-      locale,
+      locale: openGraphLocales[locale],
+      alternateLocale: languages
+        .filter(({ code }) => code !== locale)
+        .map(({ code }) => openGraphLocales[code]),
     },
-    twitter: { card: 'summary_large_image', title, description, images: [image.url] },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [{ url: image.url, alt: image.alt }],
+    },
   };
 }

@@ -22,9 +22,9 @@ export const en = {
   'nav.privacy': 'Privacy',
   'nav.terms': 'Terms',
   'language.suggested': 'Suggested',
-  'meta.home.title': 'DeskUtils — Everyday tools for your Mac',
+  'meta.home.title': 'DeskUtils — Clipboard Manager & Screenshot Tools for Mac',
   'meta.home.description':
-    'Clipboard history, screenshots, color tools and everyday utilities. One native macOS app, right in your menu bar.',
+    'A native macOS clipboard manager with screenshots, OCR, Color Picker, display dimming and everyday menu bar tools.',
   'meta.install.title': 'Install DeskUtils for macOS',
   'meta.install.description':
     'Download DeskUtils, move it to Applications, and grant only the permissions needed by the tools you use.',

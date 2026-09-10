@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { notFound } from 'next/navigation';
+import { Analytics } from '@vercel/analytics/next';
 import { isLocale } from '@/content/locales';
 import { product } from '@/content/product';
 import '@/app/globals.css';
@@ -17,7 +18,10 @@ export default async function LocalizedRootLayout({
   if (!isLocale(locale) || locale === 'en') notFound();
   return (
     <html lang={locale}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

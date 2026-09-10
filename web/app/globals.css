@@ -11,7 +11,10 @@
   --line: #e1e3e8;
   --surface: #eef0f4;
   --white: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+  --font-mono: 'SF Mono', ui-monospace, 'Cascadia Code', Menlo, monospace;
+  font-family: var(--font-sans);
   color-scheme: light;
   background: var(--canvas);
   color: var(--ink);
@@ -37,6 +40,12 @@ a {
 button,
 input {
   font: inherit;
+}
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--font-mono);
 }
 button,
 summary,

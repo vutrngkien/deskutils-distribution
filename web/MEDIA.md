@@ -53,10 +53,10 @@ information. If adding narration later, add a caption track and transcript first
 - Playback failure: poster/placeholder plus a short error message.
 - Replacing a source needs a rebuild, but no component or CSS changes.
 
-The Preview and Search stills are generated from their PNG source captures at
-build time as top-aligned 1094×771 WebP files, each capped at 350 KB. The
-build also generates the small WebP app icon used in the interface; keep the
-PNG source in `site/assets/images/` for release assets and social media.
+The Preview and Search stills live in `site/assets/images/` as top-aligned
+1094×771 WebP files, each capped at 350 KB. The build generates the small
+WebP app icon used in the interface; keep its PNG source in
+`site/assets/images/` for release assets and social media.
 
 Before release, refresh the older menu-bar screenshot so the visible app matches
 the newly released screenshot tools and dimming behavior. Do not present an older

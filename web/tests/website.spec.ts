@@ -103,6 +103,14 @@ test('keyboard, mobile menu and internal routes work', async ({ page }) => {
   await expect(page.locator('#install a')).toHaveAttribute('href', '/vi/install/');
 });
 
+test('localized header uses the translated download label', async ({ page }) => {
+  await page.setViewportSize({ width: 1024, height: 768 });
+  await page.goto('/de/');
+  await expect(
+    page.locator('header').first().getByRole('link', { name: 'Herunterladen', exact: true }),
+  ).toBeVisible();
+});
+
 test('content and native controls work without JavaScript', async ({ browser, baseURL }) => {
   const context = await browser.newContext({
     javaScriptEnabled: false,

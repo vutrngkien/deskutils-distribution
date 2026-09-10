@@ -16,7 +16,7 @@ export const de = {
   'nav.features': 'Funktionen',
   'nav.pricing': 'Preise',
   'nav.help': 'Hilfe',
-  'nav.download': 'Download',
+  'nav.download': 'Herunterladen',
   'nav.menu': 'Menü',
   'nav.changelog': 'Änderungen',
   'nav.install': 'Installation',

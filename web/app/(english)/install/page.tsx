@@ -20,7 +20,9 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
         label="install.label"
       >
         <div className={s.actions}>
-          <Button>{t('install.download')} ↓</Button>
+          <Button locale={locale} placement="install_page">
+            {t('install.download')} ↓
+          </Button>
           <Button href={product.releasesURL} secondary>
             {t('install.releaseNotes')}
           </Button>

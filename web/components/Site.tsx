@@ -6,6 +6,7 @@ import styles from './Site.module.css';
 import { MobileNavigation } from './MobileNavigation';
 import { ScrollHeader } from './ScrollHeader';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { DownloadLink } from './DownloadLink';
 export function Shell({ children, className = '' }: { children: ReactNode; className?: string }) {
   return <div className={`${styles.shell} ${className}`}>{children}</div>;
 }
@@ -25,17 +26,25 @@ export function Button({
   children,
   href = product.downloadURL,
   secondary = false,
+  locale = 'en',
+  placement = 'hero',
 }: {
   children: ReactNode;
   href?: string;
   secondary?: boolean;
+  locale?: Locale;
+  placement?: 'header' | 'header_compact' | 'hero' | 'pricing_free' | 'install_page';
 }) {
+  const className = `${styles.button} ${secondary ? styles.buttonSecondary : ''}`;
+  if (href === product.downloadURL) {
+    return (
+      <DownloadLink className={className} locale={locale} placement={placement}>
+        {children}
+      </DownloadLink>
+    );
+  }
   return (
-    <a
-      className={`${styles.button} ${secondary ? styles.buttonSecondary : ''}`}
-      data-button
-      href={href}
-    >
+    <a className={className} data-button href={href}>
       {children}
     </a>
   );
@@ -70,7 +79,7 @@ function HeaderContent({ compact = false, locale }: { compact?: boolean; locale:
           </a>
         ))}
         <LanguageSwitcher compact={compact} locale={locale} />
-        <Button>
+        <Button locale={locale} placement={compact ? 'header_compact' : 'header'}>
           {t('nav.download')} <span aria-hidden="true">↓</span>
         </Button>
       </nav>

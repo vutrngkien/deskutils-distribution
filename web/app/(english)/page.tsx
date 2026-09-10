@@ -47,7 +47,7 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
               </h1>
             </div>
             <p className={s.lede}>{t('hero.description')}</p>
-            <Button>
+            <Button locale={locale} placement="hero">
               {t('hero.downloadFree')} <span aria-hidden="true">↓</span>
             </Button>
             <p className={s.requirement}>
@@ -215,7 +215,7 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
                   {plan.id === 'pro' ? (
                     <p className={s.comingSoon}>{t('pricing.comingSoon')}</p>
                   ) : (
-                    <Button>
+                    <Button locale={locale} placement="pricing_free">
                       {t('hero.downloadFree')} <span aria-hidden="true">↓</span>
                     </Button>
                   )}

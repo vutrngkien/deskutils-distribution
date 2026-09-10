@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { build } from 'esbuild';
 
-for (const width of [375, 768, 1440]) {
+for (const width of [375, 640, 768, 1440]) {
   test(`homepage works at ${width}px`, async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));

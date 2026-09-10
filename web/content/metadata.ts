@@ -9,9 +9,12 @@ const openGraphLocales: Record<Locale, string> = {
   vi: 'vi_VN',
   'zh-CN': 'zh_CN',
   'zh-TW': 'zh_TW',
+  es: 'es_ES',
   ja: 'ja_JP',
   ko: 'ko_KR',
   ru: 'ru_RU',
+  fr: 'fr_FR',
+  de: 'de_DE',
 };
 
 export function pageMetadata(locale: Locale, page: Page, path: string): Metadata {

@@ -1,11 +1,14 @@
 export const languages = [
-  { code: 'en', label: 'English' },
-  { code: 'vi', label: 'Tiếng Việt' },
-  { code: 'zh-CN', label: '简体中文' },
-  { code: 'zh-TW', label: '繁體中文' },
-  { code: 'ja', label: '日本語' },
-  { code: 'ko', label: '한국어' },
-  { code: 'ru', label: 'Русский' },
+  { code: 'en', label: 'English', flag: '🇺🇸' },
+  { code: 'vi', label: 'Tiếng Việt', flag: '🇻🇳' },
+  { code: 'zh-CN', label: '简体中文', flag: '🇨🇳' },
+  { code: 'zh-TW', label: '繁體中文', flag: '🇹🇼' },
+  { code: 'es', label: 'Español', flag: '🇪🇸' },
+  { code: 'ja', label: '日本語', flag: '🇯🇵' },
+  { code: 'ko', label: '한국어', flag: '🇰🇷' },
+  { code: 'ru', label: 'Русский', flag: '🇷🇺' },
+  { code: 'fr', label: 'Français', flag: '🇫🇷' },
+  { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
 ] as const;
 
 export type Locale = (typeof languages)[number]['code'];

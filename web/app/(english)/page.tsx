@@ -4,6 +4,7 @@ import { DemoMedia } from '@/components/DemoMedia';
 import { DimmingControl } from '@/components/DimmingControl';
 import { StructuredData } from '@/components/StructuredData';
 import { ToolIcon } from '@/components/ToolIcon';
+import { Globe2 } from 'lucide-react';
 import {
   product,
   demos,
@@ -16,7 +17,7 @@ import {
   type Locale,
 } from '@/content/product';
 import { translate } from '@/content/i18n';
-import { localePath } from '@/content/locales';
+import { languages, localePath } from '@/content/locales';
 import { pageMetadata } from '@/content/metadata';
 import { homeStructuredData } from '@/content/structured-data';
 import s from '@/app/page.module.css';
@@ -171,6 +172,34 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
                   </div>
                 </article>
               ))}
+            </div>
+          </section>
+
+          <section
+            className={s.localization}
+            id="localization"
+            aria-labelledby="localization-title"
+          >
+            <div className={s.localizationHeading}>
+              <span className={s.localizationEyebrow}>
+                <Globe2 aria-hidden="true" size={15} />
+                {t('localization.eyebrow')}
+              </span>
+              <h2 id="localization-title">{t('localization.title')}</h2>
+              <p className={s.localizationDescription}>{t('localization.description')}</p>
+              <p className={s.localizationDetail}>{t('localization.detail')}</p>
+            </div>
+            <div className={s.localizationLanguages}>
+              <ul aria-label={t('localization.eyebrow')}>
+                {languages.map((language) => (
+                  <li key={language.code} lang={language.code}>
+                    <span className={s.localizationFlag} aria-hidden="true">
+                      {language.flag}
+                    </span>
+                    <span>{language.label}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </section>
 

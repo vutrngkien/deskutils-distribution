@@ -3,7 +3,7 @@ import { readFile, readdir, access, stat } from 'node:fs/promises';
 const web = new URL('../', import.meta.url);
 const out = new URL('out/', web);
 const origin = 'https://deskutils.app';
-const languages = ['en', 'vi', 'zh-CN', 'zh-TW', 'ja', 'ko', 'ru'];
+const languages = ['en', 'vi', 'zh-CN', 'zh-TW', 'es', 'ja', 'ko', 'ru', 'fr', 'de'];
 const contentRoutes = languages.flatMap((locale) => {
   const prefix = locale === 'en' ? '' : `${locale}/`;
   return [

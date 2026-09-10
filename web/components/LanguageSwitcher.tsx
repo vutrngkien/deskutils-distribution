@@ -1,29 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useSyncExternalStore } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Globe2 } from 'lucide-react';
 import { languages, localePath, type Locale } from '@/content/locales';
-import { translate } from '@/content/i18n';
 import styles from './LanguageSwitcher.module.css';
-
-function suggestedLocale(): Locale | undefined {
-  if (typeof navigator === 'undefined') return undefined;
-  for (const language of navigator.languages) {
-    const code = language.toLowerCase();
-    if (code.startsWith('vi')) return 'vi';
-    if (code.startsWith('ja')) return 'ja';
-    if (code.startsWith('ko')) return 'ko';
-    if (code.startsWith('ru')) return 'ru';
-    if (code.startsWith('zh-hk') || code.startsWith('zh-mo') || code.startsWith('zh-tw'))
-      return 'zh-TW';
-    if (code.startsWith('zh')) return 'zh-CN';
-  }
-  return undefined;
-}
-
-const subscribeToBrowserLanguage = () => () => {};
-const serverSuggestedLocale = () => undefined;
 
 export function LanguageSwitcher({
   locale,
@@ -36,11 +17,6 @@ export function LanguageSwitcher({
 }) {
   const details = useRef<HTMLDetailsElement>(null);
   const pathname = usePathname() ?? '/';
-  const suggested = useSyncExternalStore(
-    subscribeToBrowserLanguage,
-    () => (locale === 'en' ? suggestedLocale() : undefined),
-    serverSuggestedLocale,
-  );
   const activeLanguage = languages.find((language) => language.code === locale) ?? languages[0];
   const basePath =
     locale === 'en' ? pathname : pathname.replace(new RegExp(`^/${locale}(?=/|$)`), '') || '/';
@@ -79,9 +55,6 @@ export function LanguageSwitcher({
             aria-current={language.code === locale ? 'page' : undefined}
           >
             <span>{language.label}</span>
-            {locale === 'en' && language.code === suggested && language.code !== locale && (
-              <small>{translate(locale, 'language.suggested')}</small>
-            )}
           </a>
         ))}
       </div>

@@ -4,7 +4,6 @@ import { DemoMedia } from '@/components/DemoMedia';
 import { DimmingControl } from '@/components/DimmingControl';
 import { StructuredData } from '@/components/StructuredData';
 import { ToolIcon } from '@/components/ToolIcon';
-import { Globe2 } from 'lucide-react';
 import {
   product,
   demos,
@@ -124,7 +123,6 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
             </div>
             <div className={s.captureCapabilities} aria-labelledby="capture-capabilities-title">
               <div className={s.captureCapabilitiesIntro}>
-                <span>{t('capture.badge')}</span>
                 <h3 id="capture-capabilities-title">{t('capture.heading')}</h3>
                 <p>{t('capture.description')}</p>
               </div>
@@ -165,7 +163,9 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
                   key={tool.title}
                   id={tool.title === 'utilities.color.title' ? 'color' : undefined}
                 >
-                  <ToolIcon name={tool.icon} />
+                  <span className={s.utilityIcon}>
+                    <ToolIcon name={tool.icon} />
+                  </span>
                   <div>
                     <h3>{t(tool.title)}</h3>
                     <p>{t(tool.description)}</p>
@@ -181,10 +181,6 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
             aria-labelledby="localization-title"
           >
             <div className={s.localizationHeading}>
-              <span className={s.localizationEyebrow}>
-                <Globe2 aria-hidden="true" size={15} />
-                {t('localization.eyebrow')}
-              </span>
               <h2 id="localization-title">{t('localization.title')}</h2>
               <p className={s.localizationDescription}>{t('localization.description')}</p>
               <p className={s.localizationDetail}>{t('localization.detail')}</p>

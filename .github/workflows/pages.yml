@@ -1,51 +1,84 @@
-name: Deploy DeskUtils website
+name: Build and deploy DeskUtils website
 
 on:
   push:
     branches: [main]
     paths:
+      - "web/**"
+      - "site/**"
+      - ".github/workflows/pages.yml"
+  pull_request:
+    paths:
+      - "web/**"
       - "site/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run format:check
+      - run: npm test
+      - run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deskutils-website-preview
+          path: web/out
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: web/out
+
   deploy:
+    needs: build
+    # This redesign describes the next app release, not the currently published DMG.
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.DESKUTILS_WEBSITE_RELEASE_READY == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Verify required website files
-        run: |
-          test -f site/index.html
-          test -f site/install/index.html
-          test -f site/privacy/index.html
-          test -f site/terms/index.html
-          test -f site/CNAME
-          test -f site/appcast.xml
-          test -f site/assets/css/site.css
-          test -f site/assets/js/site.js
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify matching app release
+        run: node web/scripts/verify-release.mjs
+        env:
+          DESKUTILS_WEBSITE_RELEASE_TAG: ${{ vars.DESKUTILS_WEBSITE_RELEASE_TAG }}
       - name: Verify latest DMG is public
         run: >-
           curl --fail --silent --show-error --location --head --retry 3
           https://github.com/vutrngkien/deskutils-distribution/releases/latest/download/DeskUtils.dmg
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-      - name: Upload website artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: site
+      - uses: actions/configure-pages@v5
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

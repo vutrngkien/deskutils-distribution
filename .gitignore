@@ -6,3 +6,16 @@
 *.p12
 DeskUtilsIcon.icon/
 Codex Image *.png
+
+# React website build artifacts and copied distribution assets
+web/node_modules/
+web/.next/
+web/out/
+web/next-env.d.ts
+web/*.tsbuildinfo
+web/public/assets/
+web/public/appcast.xml
+web/public/CNAME
+web/private-media/
+web/test-results/
+web/playwright-report/

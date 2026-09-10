@@ -1,0 +1,91 @@
+.document {
+  max-width: 850px;
+  margin: 65px auto 0;
+}
+.back {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.back:hover {
+  color: var(--blue);
+}
+.heading {
+  padding: 50px 0;
+  border-bottom: 1px solid var(--line);
+}
+.label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--blue);
+  font-size: 0.75rem;
+  margin-bottom: 20px;
+}
+.heading h1 {
+  font-size: clamp(2.625rem, 6vw, 4.125rem);
+  font-weight: 570;
+  max-width: 720px;
+}
+.description {
+  margin-top: 25px;
+  max-width: 660px;
+  color: var(--muted);
+  font-size: 1.125rem;
+}
+.meta {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  margin-top: 18px;
+}
+.content {
+  max-width: 680px;
+  margin: 40px auto 0;
+}
+.content section {
+  margin-bottom: 40px;
+}
+.content h2 {
+  font-size: 1.5625rem;
+  font-weight: 560;
+  margin-bottom: 18px;
+}
+.content h3 {
+  font-size: 1.1875rem;
+  font-weight: 550;
+  margin: 24px 0 12px;
+}
+.content p,
+.content ul,
+.content ol {
+  margin: 0 0 17px;
+  color: var(--muted);
+}
+.content li {
+  padding-left: 6px;
+  margin: 10px 0;
+}
+.content a:not([data-button]) {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.content code {
+  display: block;
+  padding: 18px;
+  background: var(--surface);
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
+}
+.actions {
+  margin: 26px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+@media (max-width: 760px) {
+  .document {
+    margin-top: 35px;
+  }
+  .heading {
+    padding: 36px 0;
+  }
+}

@@ -1,0 +1,111 @@
+.switcher {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+.switcher summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  list-style: none;
+  color: var(--muted);
+  min-height: 40px;
+  padding: 8px 0;
+  font-size: 0.875rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+.switcher summary::-webkit-details-marker {
+  display: none;
+}
+.switcher summary svg:first-child {
+  width: 16px;
+  height: 16px;
+}
+.switcher summary svg:last-child {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.15s ease;
+}
+.switcher[open] summary {
+  color: var(--blue);
+}
+.switcher[open] summary svg:last-child {
+  transform: rotate(180deg);
+}
+.menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: -12px;
+  display: grid;
+  width: 184px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+  box-shadow: 0 16px 34px rgb(29 32 40 / 14%);
+}
+.menu a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+.menu small {
+  color: var(--blue);
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+.menu a:hover,
+.menu a:focus-visible {
+  background: var(--blue-soft);
+  color: var(--blue-hover);
+  outline: none;
+}
+.menu a[aria-current='page'] {
+  color: var(--blue);
+  background: #f3f6ff;
+}
+.mobileSwitcher {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  padding: 4px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.mobileSwitcher summary {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 9px 10px;
+  border-radius: 9px;
+}
+.compactSwitcher summary {
+  min-height: 36px;
+  padding-block: 7px;
+  font-size: 0.8125rem;
+}
+.mobileSwitcher .menu {
+  position: static;
+  display: grid;
+  width: 100%;
+  margin-top: 4px;
+  padding: 4px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--surface);
+  box-shadow: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .switcher summary svg:last-child {
+    transition: none;
+  }
+}

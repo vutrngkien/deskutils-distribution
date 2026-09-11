@@ -3,6 +3,16 @@
     <channel>
         <title>DeskUtils</title>
         <item>
+            <title>0.1.2</title>
+            <pubDate>Fri, 11 Sep 2026 13:47:36 +0700</pubDate>
+            <link>https://deskutils.app/</link>
+            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.2</sparkle:fullReleaseNotesLink>
+            <sparkle:version>5</sparkle:version>
+            <sparkle:shortVersionString>0.1.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.2/DeskUtils-0.1.2-5.zip" length="12429226" type="application/octet-stream" sparkle:edSignature="tHKKrmbRh06ux2o7KKQw+gv8U70OcefKRTTB6mPg6yzFKD198+gHMYB2sNHIYf9pGrzbpfNLxc6M1SiN4YUMBw=="/>
+        </item>
+        <item>
             <title>0.1.1</title>
             <pubDate>Sun, 23 Aug 2026 19:05:48 +0700</pubDate>
             <link>https://deskutils.app/</link>
@@ -22,19 +32,9 @@
             <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
             <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.0/DeskUtils-0.1.0.zip" length="5253811" type="application/octet-stream" sparkle:edSignature="O6u19B9cPGvVHe1EhcCc4ZGZDe/ZLCmAz07hEGh47uJSBJONkFIE0JwaVxeNMQKEyGzHobC5E63xgTVtPSqNAw=="/>
         </item>
-        <item>
-            <title>0.1.1</title>
-            <pubDate>Sun, 23 Aug 2026 18:56:46 +0700</pubDate>
-            <link>https://deskutils.app/</link>
-            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.1</sparkle:fullReleaseNotesLink>
-            <sparkle:version>1</sparkle:version>
-            <sparkle:shortVersionString>0.1.1</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.1/DeskUtils-0.1.1.zip" length="5550078" type="application/octet-stream" sparkle:edSignature="kPJYz5WK5S2YfsguIurwzIkLUuL9LlnaOvoaQ6ZYxOnLHbGGF9lXFou874K6D83jvMGWXuwV7vnC5EE3sEa3BQ=="/>
-        </item>
     </channel>
 </rss>
 <!-- sparkle-signatures:
-edSignature: zEyRZKnMSezGV9xB1eFkBKps/72vHoSbD5dcsEi2gkvlmDXmfal1KorTnNaUlSA5Iww7DCqiAoRgO2mhX/CFBQ==
-length: 2632
+edSignature: W5RxRMUqfeU5B8pP3V688m01DPdktMG937A2lbNOCvIMNcaOevpq0uuyCBe7v5kgEUzVIR5Gi62XxA/eTF2HCA==
+length: 2635
 -->

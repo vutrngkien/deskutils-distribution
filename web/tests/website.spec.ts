@@ -139,9 +139,11 @@ test('keyboard, mobile menu and internal routes work', async ({ page }) => {
       `https://deskutils.app${path}`,
     );
     if (path === '/install/') {
-      const download = page.getByRole('link', { name: 'Download DeskUtils ↓', exact: true });
+      const download = page.getByRole('link', { name: 'Download DeskUtils', exact: true });
       await expect(download).toBeVisible();
       await expect(download).toHaveCSS('color', 'rgb(255, 255, 255)');
+      await expect(page.getByRole('heading', { name: 'Open Privacy & Security' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Allow DeskUtils' })).toBeVisible();
     }
   }
   await page.goto('/404.html');
@@ -157,8 +159,26 @@ test('localized header uses the translated download label', async ({ page }) => 
   await page.goto('/de/');
   await expect(
     page.locator('header').first().getByRole('link', { name: 'Herunterladen', exact: true }),
-  ).toBeVisible();
+  ).toHaveAttribute('href', '/de/install/');
 });
+
+for (const width of [375, 1024]) {
+  test(`installation guide works at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto('/install/');
+
+    await expect(
+      page.getByRole('heading', { name: 'A few steps. Then you’re home.' }),
+    ).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Open Privacy & Security' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Allow DeskUtils' })).toBeVisible();
+    await expect(page.getByText('Verify the app before overriding macOS')).toHaveCount(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    await page.screenshot({ path: `test-results/install-${width}.png`, fullPage: true });
+  });
+}
 
 test('Umami tracks downloads and checkout only on the production domain', async ({ page }) => {
   await page.route('https://cloud.umami.is/script.js', (route) =>
@@ -178,7 +198,8 @@ test('Umami tracks downloads and checkout only on the production domain', async 
       links.every(
         (link) =>
           link.getAttribute('data-umami-event-locale') === 'en' &&
-          Boolean(link.getAttribute('data-umami-event-placement')),
+          Boolean(link.getAttribute('data-umami-event-placement')) &&
+          link.getAttribute('href') === '/install/',
       ),
     ),
   ).toBe(true);
@@ -247,8 +268,27 @@ test('content and native controls work without JavaScript', async ({ browser, ba
   await expect(page.getByText(/^No. Clipboard history stays on your Mac/)).toBeVisible();
   await expect(
     page.getByRole('link', { name: 'Download for free', exact: false }).first(),
-  ).toHaveAttribute('href', /releases\/latest\/download\/DeskUtils.dmg$/);
+  ).toHaveAttribute('href', '/install/');
   await context.close();
+});
+
+test('download opens the installation guide and starts the DMG request', async ({ page }) => {
+  const downloadURL =
+    'https://github.com/vutrngkien/deskutils-distribution/releases/latest/download/DeskUtils.dmg';
+  await page.route(downloadURL, (route) => route.abort());
+  const downloadRequest = page.context().waitForEvent('request', {
+    predicate: (request) => request.url() === downloadURL,
+  });
+
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Download for free', exact: true }).first().click();
+
+  await expect(page).toHaveURL(/\/install\/$/);
+  expect((await downloadRequest).url()).toBe(downloadURL);
+  await expect(page.getByRole('link', { name: 'Download DeskUtils', exact: true })).toHaveAttribute(
+    'href',
+    /releases\/latest\/download\/DeskUtils.dmg$/,
+  );
 });
 
 test('clipboard demo autoplays without media controls', async ({ page }) => {

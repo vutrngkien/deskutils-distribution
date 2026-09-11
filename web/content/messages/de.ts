@@ -183,6 +183,9 @@ export const de = {
   'install.before.body':
     'DeskUtils benötigt macOS {version} oder neuer. Prüfe in den Versionshinweisen die unterstützten Macs und bekannte Probleme des heruntergeladenen Builds.',
   'install.steps.title': 'App installieren',
+  'install.steps.install.title': 'App laden und verschieben',
+  'install.steps.install.body':
+    'Lade DeskUtils.dmg, öffne es und ziehe DeskUtils anschließend in den Programme-Ordner.',
   'install.steps.download':
     'Lade DeskUtils.dmg über die Schaltfläche oben oder die offizielle Release-Seite herunter.',
   'install.steps.open': 'Öffne das Disk-Image in deinem Downloads-Ordner.',
@@ -192,10 +195,20 @@ export const de = {
   'install.gatekeeper.title': 'Wenn macOS den ersten Start blockiert',
   'install.gatekeeper.body':
     'Lies den macOS-Hinweis und bestätige, dass der Download von der offiziellen DeskUtils-Release-Seite stammt. Folge Apples Anleitung für den angezeigten Hinweis. Gatekeeper musst du nicht deaktivieren.',
+  'install.gatekeeper.try.title': 'DeskUtils einmal öffnen',
+  'install.gatekeeper.try.body':
+    'Öffne DeskUtils aus Programme. Wenn macOS die Warnung anzeigt, wähle „Fertig“.',
+  'install.gatekeeper.settings.title': 'Datenschutz & Sicherheit öffnen',
+  'install.gatekeeper.settings.body':
+    'Öffne Systemeinstellungen → Datenschutz & Sicherheit und scrolle zu Sicherheit. Erledige dies innerhalb etwa einer Stunde.',
+  'install.gatekeeper.confirm.title': 'DeskUtils erlauben',
+  'install.gatekeeper.confirm.body':
+    'Klicke auf „Dennoch öffnen“, authentifiziere dich und klicke im letzten Hinweis auf „Öffnen“. Dies ist nur einmal nötig.',
   'install.gatekeeper.apple': 'Apples Anleitung zum sicheren Öffnen von Apps',
   'install.gatekeeper.support':
     'Wenn DeskUtils weiterhin nicht startet, schreibe an {email} und nenne deine macOS-Version sowie den genauen Hinweis.',
   'install.permissions.title': 'Erteile nur benötigte Zugriffe',
+  'install.permissions.heading': 'Du behältst die Kontrolle',
   'install.permissions.body':
     'DeskUtils fragt nach Zugriff, sobald eine Funktion ihn benötigt. Du kannst eine optionale Berechtigung ablehnen und Werkzeuge verwenden, die sie nicht brauchen.',
   'permission.screen.title': 'Bildschirmaufnahme',
@@ -208,6 +221,7 @@ export const de = {
   'permission.network.description':
     'Für Update-Prüfungen und, sobald Pro verfügbar ist, Lizenzaktivierung und -prüfung. Zwischenablageinhalte werden nicht übertragen.',
   'install.verify.title': 'Download prüfen',
+  'install.verify.heading': 'Datei vor dem Öffnen prüfen',
   'install.verify.body':
     'Jede Version enthält SHA256SUMS.txt. Vergleiche den DeskUtils.dmg-Wert mit dem Ergebnis dieses Terminal-Befehls:',
   'install.verify.failure':

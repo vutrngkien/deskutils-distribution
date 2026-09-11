@@ -179,6 +179,9 @@ export const vi = {
   'install.before.body':
     'DeskUtils yêu cầu macOS {version} trở lên. Hãy xem ghi chú phát hành để biết máy được hỗ trợ và các vấn đề đã biết của bản bạn tải.',
   'install.steps.title': 'Cài đặt ứng dụng',
+  'install.steps.install.title': 'Tải và chuyển ứng dụng',
+  'install.steps.install.body':
+    'Tải DeskUtils.dmg, mở tệp rồi kéo DeskUtils vào thư mục Applications.',
   'install.steps.download':
     'Tải DeskUtils.dmg bằng nút phía trên hoặc từ trang phát hành chính thức.',
   'install.steps.open': 'Mở disk image trong thư mục Downloads.',
@@ -187,10 +190,20 @@ export const vi = {
   'install.gatekeeper.title': 'Nếu macOS chặn lần mở đầu tiên',
   'install.gatekeeper.body':
     'Đọc cảnh báo của macOS và xác nhận tệp tải xuống đến từ trang phát hành DeskUtils chính thức. Làm theo hướng dẫn của Apple cho cảnh báo bạn thấy. Bạn không cần tắt Gatekeeper.',
+  'install.gatekeeper.try.title': 'Thử mở DeskUtils một lần',
+  'install.gatekeeper.try.body':
+    'Mở DeskUtils từ Applications. Khi macOS hiện cảnh báo, chọn Xong (Done).',
+  'install.gatekeeper.settings.title': 'Mở Quyền riêng tư & Bảo mật',
+  'install.gatekeeper.settings.body':
+    'Mở Cài đặt hệ thống → Quyền riêng tư & Bảo mật, rồi cuộn đến Bảo mật. Hãy làm bước này trong khoảng một giờ.',
+  'install.gatekeeper.confirm.title': 'Cho phép DeskUtils',
+  'install.gatekeeper.confirm.body':
+    'Nhấn Vẫn mở (Open Anyway), xác thực, rồi nhấn Mở (Open) ở hộp thoại cuối. Bạn chỉ cần làm một lần.',
   'install.gatekeeper.apple': 'Hướng dẫn mở ứng dụng an toàn của Apple',
   'install.gatekeeper.support':
     'Nếu vẫn không mở được DeskUtils, hãy gửi email đến {email} kèm phiên bản macOS và nội dung cảnh báo chính xác.',
   'install.permissions.title': 'Chỉ cấp quyền bạn sử dụng',
+  'install.permissions.heading': 'Bạn luôn có quyền kiểm soát',
   'install.permissions.body':
     'DeskUtils yêu cầu quyền khi một tính năng cần đến. Bạn có thể từ chối quyền tùy chọn và tiếp tục dùng các công cụ không cần quyền đó.',
   'permission.screen.title': 'Ghi màn hình',
@@ -203,6 +216,7 @@ export const vi = {
   'permission.network.description':
     'Dùng để kiểm tra cập nhật và, khi Pro ra mắt, kích hoạt và xác thực giấy phép. Nội dung clipboard không được gửi đi.',
   'install.verify.title': 'Xác minh tệp tải xuống',
+  'install.verify.heading': 'Kiểm tra tệp trước khi mở',
   'install.verify.body':
     'Mỗi bản phát hành có tệp SHA256SUMS.txt. So sánh giá trị DeskUtils.dmg trong đó với kết quả lệnh Terminal sau:',
   'install.verify.failure':

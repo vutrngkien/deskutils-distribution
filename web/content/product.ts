@@ -49,7 +49,7 @@ export const product = {
 export const navigation = [
   { label: 'nav.features', href: '/#features' },
   { label: 'nav.pricing', href: '/#pricing' },
-  { label: 'nav.help', href: '/install/' },
+  { label: 'nav.install', href: '/install/' },
 ] satisfies { label: MessageKey; href: string }[];
 
 export type Demo = {

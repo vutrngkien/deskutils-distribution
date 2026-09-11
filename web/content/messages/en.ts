@@ -175,6 +175,9 @@ export const en = {
   'install.before.body':
     'DeskUtils requires macOS {version} or later. Check the release notes for supported Macs and any known issues in the build you download.',
   'install.steps.title': 'Install the app',
+  'install.steps.install.title': 'Download and move the app',
+  'install.steps.install.body':
+    'Download DeskUtils.dmg, open it, then drag DeskUtils into Applications.',
   'install.steps.download':
     'Download DeskUtils.dmg from the button above or the official release page.',
   'install.steps.open': 'Open the disk image in your Downloads folder.',
@@ -183,10 +186,20 @@ export const en = {
   'install.gatekeeper.title': 'If macOS blocks the first launch',
   'install.gatekeeper.body':
     'Read the macOS warning and confirm that the download came from the official DeskUtils release page. Follow Apple’s guide for the warning you see. You do not need to disable Gatekeeper.',
+  'install.gatekeeper.try.title': 'Try to open DeskUtils once',
+  'install.gatekeeper.try.body':
+    'Open DeskUtils from Applications. When macOS displays the warning, choose Done.',
+  'install.gatekeeper.settings.title': 'Open Privacy & Security',
+  'install.gatekeeper.settings.body':
+    'Open System Settings → Privacy & Security, then scroll to Security. Do this within about an hour.',
+  'install.gatekeeper.confirm.title': 'Allow DeskUtils',
+  'install.gatekeeper.confirm.body':
+    'Click Open Anyway, authenticate, then click Open in the final prompt. You only need to do this once.',
   'install.gatekeeper.apple': 'Apple’s guide to opening apps safely',
   'install.gatekeeper.support':
     'If you still cannot open DeskUtils, email {email} with your macOS version and the exact warning.',
   'install.permissions.title': 'Grant only what you use',
+  'install.permissions.heading': 'You stay in control',
   'install.permissions.body':
     'DeskUtils requests access when a feature needs it. You can decline an optional permission and use the tools that do not require it.',
   'permission.screen.title': 'Screen Recording',
@@ -199,6 +212,7 @@ export const en = {
   'permission.network.description':
     'Used for update checks and, when Pro is available, license activation and validation. Clipboard content is not included.',
   'install.verify.title': 'Verify your download',
+  'install.verify.heading': 'Check the file before opening',
   'install.verify.body':
     'Each release includes SHA256SUMS.txt. Compare its DeskUtils.dmg value with the result of this Terminal command:',
   'install.verify.failure':

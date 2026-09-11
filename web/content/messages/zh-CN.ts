@@ -167,6 +167,8 @@ export const zhCN = {
   'install.before.body':
     'DeskUtils 需要 macOS {version} 或更高版本。请查看发行说明，确认支持的 Mac 和当前版本的已知问题。',
   'install.steps.title': '安装应用',
+  'install.steps.install.title': '下载并移动应用',
+  'install.steps.install.body': '下载并打开 DeskUtils.dmg，然后将 DeskUtils 拖入“应用程序”。',
   'install.steps.download': '通过上方按钮或官方发行页面下载 DeskUtils.dmg。',
   'install.steps.open': '在“下载”文件夹中打开磁盘映像。',
   'install.steps.drag': '将 DeskUtils 拖入“应用程序”文件夹。',
@@ -174,10 +176,19 @@ export const zhCN = {
   'install.gatekeeper.title': '如果 macOS 阻止首次启动',
   'install.gatekeeper.body':
     '阅读 macOS 警告并确认文件来自 DeskUtils 官方发行页面。根据所见警告查阅 Apple 指南。无需关闭 Gatekeeper。',
+  'install.gatekeeper.try.title': '先尝试打开一次 DeskUtils',
+  'install.gatekeeper.try.body': '从“应用程序”打开 DeskUtils。macOS 显示警告时，点按“完成”。',
+  'install.gatekeeper.settings.title': '打开“隐私与安全性”',
+  'install.gatekeeper.settings.body':
+    '打开“系统设置”→“隐私与安全性”，然后滚动到“安全性”。请在约一小时内完成。',
+  'install.gatekeeper.confirm.title': '允许 DeskUtils',
+  'install.gatekeeper.confirm.body':
+    '点按“仍要打开”，完成认证，再在最后的提示中点按“打开”。此操作只需一次。',
   'install.gatekeeper.apple': 'Apple 安全打开应用指南',
   'install.gatekeeper.support':
     '如果仍无法打开 DeskUtils，请发送邮件至 {email}，并附上 macOS 版本和完整警告内容。',
   'install.permissions.title': '只授予需要的权限',
+  'install.permissions.heading': '权限由你掌控',
   'install.permissions.body':
     'DeskUtils 会在功能需要时请求权限。你可以拒绝可选权限，并继续使用不依赖该权限的工具。',
   'permission.screen.title': '屏幕录制',
@@ -188,6 +199,7 @@ export const zhCN = {
   'permission.network.description':
     '用于检查更新，以及 Pro 推出后的许可证激活和验证。不包含剪贴板内容。',
   'install.verify.title': '验证下载文件',
+  'install.verify.heading': '打开前检查文件',
   'install.verify.body':
     '每个版本都包含 SHA256SUMS.txt。请将其中 DeskUtils.dmg 的值与以下终端命令结果比较：',
   'install.verify.failure': '如果数值不一致，请删除下载文件并从官方发行页面重新获取。',

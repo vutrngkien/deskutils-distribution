@@ -186,6 +186,9 @@ export const fr = {
   'install.before.body':
     'DeskUtils nécessite macOS {version} ou une version ultérieure. Consultez les notes de version pour vérifier les Mac compatibles et les problèmes connus de la version téléchargée.',
   'install.steps.title': 'Installer l’app',
+  'install.steps.install.title': 'Télécharger et déplacer l’app',
+  'install.steps.install.body':
+    'Téléchargez DeskUtils.dmg, ouvrez-le, puis faites glisser DeskUtils dans Applications.',
   'install.steps.download':
     'Téléchargez DeskUtils.dmg depuis le bouton ci-dessus ou la page officielle des versions.',
   'install.steps.open': 'Ouvrez l’image disque dans votre dossier Téléchargements.',
@@ -195,10 +198,20 @@ export const fr = {
   'install.gatekeeper.title': 'Si macOS bloque le premier lancement',
   'install.gatekeeper.body':
     'Lisez l’avertissement de macOS et vérifiez que le téléchargement vient de la page officielle des versions DeskUtils. Suivez le guide Apple correspondant à l’avertissement affiché. Il n’est pas nécessaire de désactiver Gatekeeper.',
+  'install.gatekeeper.try.title': 'Essayer d’ouvrir DeskUtils une fois',
+  'install.gatekeeper.try.body':
+    'Ouvrez DeskUtils depuis Applications. Lorsque macOS affiche l’avertissement, choisissez OK.',
+  'install.gatekeeper.settings.title': 'Ouvrir Confidentialité et sécurité',
+  'install.gatekeeper.settings.body':
+    'Ouvrez Réglages Système → Confidentialité et sécurité, puis faites défiler jusqu’à Sécurité. Faites-le dans un délai d’environ une heure.',
+  'install.gatekeeper.confirm.title': 'Autoriser DeskUtils',
+  'install.gatekeeper.confirm.body':
+    'Cliquez sur Ouvrir quand même, authentifiez-vous, puis cliquez sur Ouvrir dans le dernier message. Cette opération n’est nécessaire qu’une fois.',
   'install.gatekeeper.apple': 'Le guide Apple pour ouvrir les apps en toute sécurité',
   'install.gatekeeper.support':
     'Si DeskUtils ne s’ouvre toujours pas, écrivez à {email} en indiquant votre version de macOS et le texte exact de l’avertissement.',
   'install.permissions.title': 'N’accordez que ce que vous utilisez',
+  'install.permissions.heading': 'Vous gardez le contrôle',
   'install.permissions.body':
     'DeskUtils demande un accès lorsqu’une fonction en a besoin. Vous pouvez refuser une autorisation facultative et utiliser les outils qui ne l’exigent pas.',
   'permission.screen.title': 'Enregistrement de l’écran',
@@ -211,6 +224,7 @@ export const fr = {
   'permission.network.description':
     'Utilisé pour vérifier les mises à jour et, lorsque Pro sera disponible, activer et valider la licence. Le contenu du presse-papiers n’est jamais inclus.',
   'install.verify.title': 'Vérifier votre téléchargement',
+  'install.verify.heading': 'Vérifier le fichier avant de l’ouvrir',
   'install.verify.body':
     'Chaque version inclut SHA256SUMS.txt. Comparez la valeur de DeskUtils.dmg avec le résultat de cette commande Terminal :',
   'install.verify.failure':

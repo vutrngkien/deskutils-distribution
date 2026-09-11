@@ -176,6 +176,9 @@ export const ja = {
   'install.before.body':
     'DeskUtils には macOS {version} 以降が必要です。対応 Mac とダウンロードするビルドの既知の問題はリリースノートで確認してください。',
   'install.steps.title': 'アプリをインストール',
+  'install.steps.install.title': 'ダウンロードして移動',
+  'install.steps.install.body':
+    'DeskUtils.dmg をダウンロードして開き、DeskUtils を Applications にドラッグします。',
   'install.steps.download':
     '上のボタンまたは公式リリースページから DeskUtils.dmg をダウンロードします。',
   'install.steps.open': 'ダウンロードフォルダでディスクイメージを開きます。',
@@ -185,10 +188,20 @@ export const ja = {
   'install.gatekeeper.title': 'macOS が初回起動を止めた場合',
   'install.gatekeeper.body':
     'macOS の警告を読み、公式 DeskUtils リリースページからのダウンロードであることを確認してください。表示された警告に応じて Apple のガイドに従います。Gatekeeper を無効にする必要はありません。',
+  'install.gatekeeper.try.title': 'DeskUtils を一度開く',
+  'install.gatekeeper.try.body':
+    'Applications から DeskUtils を開きます。macOS の警告が表示されたら「完了」を選びます。',
+  'install.gatekeeper.settings.title': 'プライバシーとセキュリティを開く',
+  'install.gatekeeper.settings.body':
+    'システム設定 → プライバシーとセキュリティを開き、セキュリティまでスクロールします。約1時間以内に行ってください。',
+  'install.gatekeeper.confirm.title': 'DeskUtils を許可する',
+  'install.gatekeeper.confirm.body':
+    '「このまま開く」をクリックして認証し、最後の確認で「開く」をクリックします。必要なのは初回だけです。',
   'install.gatekeeper.apple': 'アプリを安全に開くための Apple ガイド',
   'install.gatekeeper.support':
     '開けない場合は、macOS のバージョンと警告全文を添えて {email} までメールしてください。',
   'install.permissions.title': '使う機能に必要な権限だけを許可',
+  'install.permissions.heading': '権限は自分で管理できます',
   'install.permissions.body':
     'DeskUtils は機能が必要とするときに権限を求めます。任意の権限を拒否しても、それを必要としないツールは利用できます。',
   'permission.screen.title': '画面収録',
@@ -201,6 +214,7 @@ export const ja = {
   'permission.network.description':
     '更新確認と、Pro 提供後のライセンス認証・検証に使用します。クリップボードの内容は含まれません。',
   'install.verify.title': 'ダウンロードを検証',
+  'install.verify.heading': '開く前にファイルを確認',
   'install.verify.body':
     '各リリースには SHA256SUMS.txt が含まれます。DeskUtils.dmg の値を次のターミナルコマンドの結果と比較してください。',
   'install.verify.failure':

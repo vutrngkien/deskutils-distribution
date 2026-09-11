@@ -180,6 +180,9 @@ export const es = {
   'install.before.body':
     'DeskUtils requiere macOS {version} o posterior. Consulta las notas de la versión para comprobar los Mac compatibles y los problemas conocidos de la versión que descargues.',
   'install.steps.title': 'Instala la aplicación',
+  'install.steps.install.title': 'Descarga y mueve la aplicación',
+  'install.steps.install.body':
+    'Descarga DeskUtils.dmg, ábrelo y arrastra DeskUtils a la carpeta Aplicaciones.',
   'install.steps.download':
     'Descarga DeskUtils.dmg desde el botón superior o la página oficial de versiones.',
   'install.steps.open': 'Abre la imagen de disco en tu carpeta Descargas.',
@@ -188,10 +191,20 @@ export const es = {
   'install.gatekeeper.title': 'Si macOS bloquea el primer inicio',
   'install.gatekeeper.body':
     'Lee el aviso de macOS y confirma que la descarga procede de la página oficial de versiones de DeskUtils. Sigue la guía de Apple para el aviso que veas. No necesitas desactivar Gatekeeper.',
+  'install.gatekeeper.try.title': 'Intenta abrir DeskUtils una vez',
+  'install.gatekeeper.try.body':
+    'Abre DeskUtils desde Aplicaciones. Cuando macOS muestre el aviso, selecciona Aceptar.',
+  'install.gatekeeper.settings.title': 'Abre Privacidad y seguridad',
+  'install.gatekeeper.settings.body':
+    'Abre Ajustes del Sistema → Privacidad y seguridad y desplázate hasta Seguridad. Hazlo en el plazo aproximado de una hora.',
+  'install.gatekeeper.confirm.title': 'Permite DeskUtils',
+  'install.gatekeeper.confirm.body':
+    'Pulsa Abrir igualmente, autentícate y luego pulsa Abrir en el último aviso. Solo tendrás que hacerlo una vez.',
   'install.gatekeeper.apple': 'Guía de Apple para abrir apps de forma segura',
   'install.gatekeeper.support':
     'Si aún no puedes abrir DeskUtils, escribe a {email} con tu versión de macOS y el aviso exacto.',
   'install.permissions.title': 'Concede solo lo que uses',
+  'install.permissions.heading': 'Tú mantienes el control',
   'install.permissions.body':
     'DeskUtils solicita acceso cuando una función lo necesita. Puedes rechazar un permiso opcional y usar las herramientas que no lo requieren.',
   'permission.screen.title': 'Grabación de pantalla',
@@ -204,6 +217,7 @@ export const es = {
   'permission.network.description':
     'Se usa para buscar actualizaciones y, cuando Pro esté disponible, activar y validar la licencia. No incluye contenido del portapapeles.',
   'install.verify.title': 'Verifica tu descarga',
+  'install.verify.heading': 'Comprueba el archivo antes de abrirlo',
   'install.verify.body':
     'Cada versión incluye SHA256SUMS.txt. Compara el valor de DeskUtils.dmg con el resultado de este comando de Terminal:',
   'install.verify.failure':

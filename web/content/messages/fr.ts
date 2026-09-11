@@ -177,7 +177,7 @@ export const fr = {
   'pricing.ocr': 'OCR',
   'document.back': 'Retour à DeskUtils',
   'document.updated': 'Dernière mise à jour : {date}',
-  'document.date': '9 septembre 2026',
+  'document.date': '11 septembre 2026',
   'install.label': 'Guide d’installation',
   'install.title': 'Quelques étapes, puis vous êtes chez vous.',
   'install.download': 'Télécharger DeskUtils',
@@ -233,7 +233,7 @@ export const fr = {
     'DeskUtils utilise Sparkle pour vérifier le flux officiel de mises à jour. Ces requêtes peuvent transmettre au fournisseur d’hébergement des informations techniques standard comme votre adresse IP, la version de l’app et le système d’exploitation. Le contenu du presse-papiers n’est jamais inclus.',
   'privacy.website.title': 'Ce site web',
   'privacy.website.body':
-    'Ce site n’utilise ni analytique, ni pixels de suivi, ni cookies publicitaires, ni comptes utilisateur. Les vidéos de démonstration sont servies comme des fichiers du site, sans lecteur vidéo tiers. L’hébergeur peut traiter des journaux serveur standard pour la sécurité et la fiabilité de la diffusion.',
+    'Ce site utilise Umami, un service d’analyse respectueux de la vie privée, pour recueillir de façon anonyme les pages vues, les sites référents, le navigateur, le système d’exploitation, le type d’appareil, le pays et des interactions telles que les sections et démonstrations consultées, les questions fréquentes ouvertes, les réglages de luminosité, les changements de langue et les clics de navigation, téléchargement, paiement, assistance et liens externes. Umami n’utilise pas de cookies et ne collecte aucune information permettant d’identifier une personne. DeskUtils n’envoie au service d’analyse aucun contenu du presse-papiers, capture d’écran, adresse e-mail, clé de licence ou détail de paiement. Les vidéos de démonstration sont servies comme des fichiers du site, sans lecteur vidéo tiers. L’hébergeur peut traiter des journaux serveur standard pour la sécurité et la fiabilité de la diffusion.',
   'privacy.purchase.title': 'Achats et activation de licence',
   'privacy.purchase.body1':
     'Les paiements Pro sont traités par Lemon Squeezy selon ses propres pratiques de confidentialité. DeskUtils reçoit les informations de commande et de licence nécessaires pour fournir et prendre en charge votre licence.',

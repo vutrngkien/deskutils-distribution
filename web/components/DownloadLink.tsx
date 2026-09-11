@@ -1,7 +1,4 @@
-'use client';
-
 import type { ReactNode } from 'react';
-import { track } from '@vercel/analytics';
 import { product } from '@/content/product';
 import type { Locale } from '@/content/locales';
 
@@ -12,7 +9,8 @@ type DownloadPlacement =
   | 'mobile_menu'
   | 'pricing_free'
   | 'pricing_pro'
-  | 'install_page';
+  | 'install_page'
+  | 'not_found';
 
 export function DownloadLink({
   children,
@@ -29,8 +27,10 @@ export function DownloadLink({
     <a
       className={className}
       data-button={className ? true : undefined}
+      data-umami-event="download"
+      data-umami-event-locale={locale}
+      data-umami-event-placement={placement}
       href={product.downloadURL}
-      onClick={() => track('Download', { locale, placement })}
     >
       {children}
     </a>

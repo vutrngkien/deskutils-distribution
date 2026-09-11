@@ -108,9 +108,7 @@ test('pricing anchor keeps both plans and the Pro checkout action in view on a l
   await expect(
     pricing.getByRole('heading', { name: 'Use it free. Go Pro when you need more.' }),
   ).toBeInViewport();
-  await expect(
-    page.getByRole('link', { name: 'Get DeskUtils Pro', exact: true }),
-  ).toBeInViewport();
+  await expect(page.getByRole('link', { name: 'Get DeskUtils Pro', exact: true })).toBeInViewport();
 
   await expect(pricing.locator('article')).toHaveCount(2);
   for (const plan of await pricing.locator('article').all()) {
@@ -160,6 +158,77 @@ test('localized header uses the translated download label', async ({ page }) => 
   await expect(
     page.locator('header').first().getByRole('link', { name: 'Herunterladen', exact: true }),
   ).toBeVisible();
+});
+
+test('Umami tracks downloads and checkout only on the production domain', async ({ page }) => {
+  await page.route('https://cloud.umami.is/script.js', (route) =>
+    route.fulfill({ body: '', contentType: 'application/javascript' }),
+  );
+  await page.goto('/');
+
+  const tracker = page.locator('script#umami-analytics');
+  await expect(tracker).toHaveAttribute('data-website-id', '18c36bcd-0a9d-40a9-afb2-e95d9ca972af');
+  await expect(tracker).toHaveAttribute('data-domains', 'deskutils.app');
+  await expect(tracker).not.toHaveAttribute('data-do-not-track');
+
+  const downloads = page.locator('[data-umami-event="download"]');
+  await expect(downloads).toHaveCount(6);
+  expect(
+    await downloads.evaluateAll((links) =>
+      links.every(
+        (link) =>
+          link.getAttribute('data-umami-event-locale') === 'en' &&
+          Boolean(link.getAttribute('data-umami-event-placement')),
+      ),
+    ),
+  ).toBe(true);
+
+  const checkout = page.locator('[data-umami-event="checkout"]');
+  await expect(checkout).toHaveCount(1);
+  await expect(checkout).toHaveAttribute('data-umami-event-locale', 'en');
+  await expect(checkout).toHaveAttribute('data-umami-event-placement', 'pricing_pro');
+
+  await page.goto('/privacy/');
+  await expect(page.getByText(/uses Umami, a privacy-focused analytics service/)).toBeVisible();
+});
+
+test('Umami records meaningful engagement signals', async ({ page }) => {
+  await page.addInitScript(() => {
+    const events: { event: string; data?: Record<string, unknown> }[] = [];
+    Object.assign(window, {
+      __umamiEvents: events,
+      umami: {
+        track: (event: string, data?: Record<string, unknown>) => events.push({ event, data }),
+      },
+    });
+  });
+  await page.route('https://cloud.umami.is/script.js', (route) =>
+    route.fulfill({ body: '', contentType: 'application/javascript' }),
+  );
+  await page.goto('/');
+
+  await expect(page.locator('[data-umami-section]')).toHaveCount(8);
+  await expect(
+    page.locator('[data-umami-event="nav_click"][data-umami-event-target="features"]'),
+  ).toHaveCount(1);
+  await expect(page.locator('[data-umami-event="language_change"]')).toHaveCount(40);
+
+  await page.locator('#faq').scrollIntoViewIfNeeded();
+  await page.locator('#faq summary').first().click();
+  await page.locator('#dimming').scrollIntoViewIfNeeded();
+  await page.locator('#dimming-level').press('ArrowLeft');
+
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        (
+          window as typeof window & {
+            __umamiEvents: { event: string; data?: Record<string, unknown> }[];
+          }
+        ).__umamiEvents.map(({ event }) => event),
+      ),
+    )
+    .toEqual(expect.arrayContaining(['section_view', 'faq_open', 'dimming_interact']));
 });
 
 test('content and native controls work without JavaScript', async ({ browser, baseURL }) => {

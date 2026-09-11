@@ -158,7 +158,7 @@ export const zhCN = {
   'footer.independent': 'Vu Trung Kien 独立开发的 macOS 软件。',
   'document.back': '返回 DeskUtils',
   'document.updated': '最后更新：{date}',
-  'document.date': '2026年9月9日',
+  'document.date': '2026年9月11日',
   'install.label': '安装指南',
   'install.title': '几步即可开始。',
   'install.download': '下载 DeskUtils',
@@ -206,7 +206,7 @@ export const zhCN = {
     'DeskUtils 使用 Sparkle 检查官方更新源。更新请求可能向托管服务商提供 IP 地址、应用版本和操作系统信息等标准技术数据。更新请求绝不会包含剪贴板内容。',
   'privacy.website.title': '本网站',
   'privacy.website.body':
-    '本网站不使用分析工具、跟踪像素、广告 Cookie 或用户账户。演示视频由本站直接提供，不嵌入第三方播放器。托管服务商可能为安全和稳定交付处理标准服务器日志。',
+    '本网站使用注重隐私的 Umami 分析服务，以匿名方式收集页面浏览量、来源页面、浏览器、操作系统、设备类型、国家或地区，以及已查看的内容区块和演示、已打开的常见问题、调暗控件调整、语言切换，以及导航、下载、结账、支持和外部链接点击等互动。Umami 不使用 Cookie，也不收集可识别个人身份的信息。DeskUtils 不会向分析服务发送剪贴板内容、截图、电子邮件地址、许可证密钥或付款详情。演示视频由本站直接提供，不嵌入第三方播放器。托管服务商可能为安全和稳定交付处理标准服务器日志。',
   'privacy.purchase.title': '购买与许可证激活',
   'privacy.purchase.body1':
     'Pro 付款由 Lemon Squeezy 按其隐私政策处理。DeskUtils 将接收提供和支持许可证所需的订单与许可证信息。',

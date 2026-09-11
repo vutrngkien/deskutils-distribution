@@ -37,12 +37,22 @@ for (const route of routes) {
       `${route}: canonical missing`,
     );
     assert.match(html, /property="og:image"/, `${route}: social metadata missing`);
+    assert.ok(
+      html.includes('https://cloud.umami.is/script.js') &&
+        html.includes('18c36bcd-0a9d-40a9-afb2-e95d9ca972af'),
+      `${route}: Umami analytics missing`,
+    );
   }
   if (homeRoutes.has(route)) {
     assert.match(html, /application\/ld\+json/, 'homepage: structured data missing');
     assert.match(html, /SoftwareApplication/, 'homepage: app schema missing');
     assert.match(html, /\$7\.99/, `${route}: launch price missing`);
     assert.match(html, /\$14\.99/, `${route}: regular price missing`);
+    assert.match(html, /data-umami-event="download"/, `${route}: download event missing`);
+    assert.match(html, /data-umami-event="checkout"/, `${route}: checkout event missing`);
+  }
+  if (route.endsWith('privacy/index.html')) {
+    assert.match(html, /Umami/, `${route}: analytics privacy disclosure missing`);
   }
   for (const [, value] of html.matchAll(/(?:href|src)="(\/[^"?#]*)/g)) {
     // Check local files and internal page destinations, including Next.js bundles.

@@ -4,6 +4,7 @@ import type { Demo, Locale } from '@/content/product';
 import { translate } from '@/content/i18n';
 import styles from './DemoMedia.module.css';
 import { ToolIcon } from './ToolIcon';
+import { trackUmamiEvent } from '@/lib/umami';
 export function DemoMedia({
   demo,
   caption = true,
@@ -18,6 +19,7 @@ export function DemoMedia({
   const [shouldAutoplay, setShouldAutoplay] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
+  const hasTrackedView = useRef(false);
   const sourceKey = JSON.stringify(demo.sources ?? []);
   const failed = failedSource === sourceKey;
   const hasVideo = Boolean(demo.sources?.length);
@@ -51,6 +53,20 @@ export function DemoMedia({
     observer.observe(frameRef.current);
     return () => observer.disconnect();
   }, [demo.autoplay]);
+
+  useEffect(() => {
+    if (!frameRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasTrackedView.current) return;
+        if (trackUmamiEvent('demo_view', { demo: demo.title, locale }))
+          hasTrackedView.current = true;
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(frameRef.current);
+    return () => observer.disconnect();
+  }, [demo.title, locale]);
 
   const content =
     hasVideo && !failed && (!demo.autoplay || isNearViewport) ? (

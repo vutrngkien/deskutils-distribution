@@ -53,6 +53,12 @@ export function LanguageSwitcher({
             href={localePath(language.code, basePath)}
             lang={language.code}
             aria-current={language.code === locale ? 'page' : undefined}
+            data-umami-event="language_change"
+            data-umami-event-from={locale}
+            data-umami-event-to={language.code}
+            data-umami-event-placement={
+              mobile ? 'mobile_menu' : compact ? 'header_compact' : 'header'
+            }
           >
             <span>{language.label}</span>
           </a>

@@ -4,6 +4,7 @@ import { DemoMedia } from '@/components/DemoMedia';
 import { DimmingControl } from '@/components/DimmingControl';
 import { StructuredData } from '@/components/StructuredData';
 import { ToolIcon } from '@/components/ToolIcon';
+import { TrackedFaq } from '@/components/TrackedFaq';
 import {
   product,
   demos,
@@ -54,26 +55,51 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
               macOS {product.minimumMacOS}+ <span aria-hidden="true">·</span> {t('hero.noAccount')}
             </p>
             <nav className={s.toolIndex} aria-label={t('hero.explore')}>
-              <a href="#features">
+              <a
+                href="#features"
+                data-umami-event="nav_click"
+                data-umami-event-placement="hero"
+                data-umami-event-target="features"
+              >
                 <ToolIcon name="clipboard" />
                 <span>{t('hero.clipboard')}</span>
               </a>
-              <a href="#screenshots">
+              <a
+                href="#screenshots"
+                data-umami-event="nav_click"
+                data-umami-event-placement="hero"
+                data-umami-event-target="screenshots"
+              >
                 <ToolIcon name="capture" />
                 <span>{t('hero.captureOcr')}</span>
               </a>
-              <a href="#dimming">
+              <a
+                href="#dimming"
+                data-umami-event="nav_click"
+                data-umami-event-placement="hero"
+                data-umami-event-target="dimming"
+              >
                 <ToolIcon name="display" />
                 <span>{t('hero.brightness')}</span>
               </a>
-              <a href="#utilities">
+              <a
+                href="#utilities"
+                data-umami-event="nav_click"
+                data-umami-event-placement="hero"
+                data-umami-event-target="utilities"
+              >
                 <ToolIcon name="tools" />
                 <span>{t('hero.more')}</span>
               </a>
             </nav>
           </section>
 
-          <section className={s.clipboard} id="features" aria-labelledby="clipboard-title">
+          <section
+            className={s.clipboard}
+            id="features"
+            aria-labelledby="clipboard-title"
+            data-umami-section="features"
+          >
             <div className={`${s.sectionHeading} ${s.showcaseHeading}`}>
               <h2 id="clipboard-title">{t('clipboard.title')}</h2>
               <p>{t('clipboard.subtitle')}</p>
@@ -113,7 +139,12 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
             </div>
           </section>
 
-          <section className={s.capture} id="screenshots" aria-labelledby="capture-title">
+          <section
+            className={s.capture}
+            id="screenshots"
+            aria-labelledby="capture-title"
+            data-umami-section="screenshots"
+          >
             <div className={s.showcaseHeading}>
               <h2 id="capture-title">{t('capture.title')}</h2>
               <p>{t('capture.subtitle')}</p>
@@ -142,7 +173,12 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
             </div>
           </section>
 
-          <section className={s.dimming} id="dimming" aria-labelledby="dimming-title">
+          <section
+            className={s.dimming}
+            id="dimming"
+            aria-labelledby="dimming-title"
+            data-umami-section="dimming"
+          >
             <div className={s.dimmingInner}>
               <h2 id="dimming-title">{t('dimming.title')}</h2>
               <div className={s.dimmingSlider}>
@@ -152,7 +188,12 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
             </div>
           </section>
 
-          <section className={s.utilities} id="utilities" aria-labelledby="utilities-title">
+          <section
+            className={s.utilities}
+            id="utilities"
+            aria-labelledby="utilities-title"
+            data-umami-section="utilities"
+          >
             <div className={s.utilityIntro}>
               <h2 id="utilities-title">{t('utilities.title')}</h2>
               <p>{t('utilities.subtitle')}</p>
@@ -179,6 +220,7 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
             className={s.localization}
             id="localization"
             aria-labelledby="localization-title"
+            data-umami-section="localization"
           >
             <div className={s.localizationHeading}>
               <h2 id="localization-title">{t('localization.title')}</h2>
@@ -199,7 +241,12 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
             </div>
           </section>
 
-          <section className={s.pricing} id="pricing" aria-labelledby="pricing-title">
+          <section
+            className={s.pricing}
+            id="pricing"
+            aria-labelledby="pricing-title"
+            data-umami-section="pricing"
+          >
             <div className={s.sectionHeading}>
               <h2 id="pricing-title">{t('pricing.title')}</h2>
               <p>{t('pricing.subtitle')}</p>
@@ -271,29 +318,46 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
             </p>
           </section>
 
-          <section className={s.faq} id="faq" aria-labelledby="faq-title">
+          <section className={s.faq} id="faq" aria-labelledby="faq-title" data-umami-section="faq">
             <div className={s.faqHeading}>
               <h2 id="faq-title">{t('faq.title')}</h2>
-              <a href={`mailto:${product.supportEmail}`}>
+              <a
+                href={`mailto:${product.supportEmail}`}
+                data-umami-event="support_click"
+                data-umami-event-placement="faq"
+              >
                 {t('faq.contact')} <span aria-hidden="true">↗</span>
               </a>
             </div>
             <div>
               {faqs.map((faq) => (
-                <details key={faq.question}>
-                  <summary>{t(faq.question, faq.values)}</summary>
-                  <p>{t(faq.answer, faq.values)}</p>
-                </details>
+                <TrackedFaq
+                  key={faq.question}
+                  id={faq.question.replace('faq.', '').replace('.question', '')}
+                  question={t(faq.question, faq.values)}
+                  answer={t(faq.answer, faq.values)}
+                  locale={locale}
+                />
               ))}
             </div>
           </section>
 
-          <section className={s.install} id="install" aria-labelledby="install-title">
+          <section
+            className={s.install}
+            id="install"
+            aria-labelledby="install-title"
+            data-umami-section="install"
+          >
             <div>
               <h2 id="install-title">{t('installCta.title')}</h2>
               <p>{t('installCta.description')}</p>
             </div>
-            <a href={localePath(locale, '/install/')}>
+            <a
+              href={localePath(locale, '/install/')}
+              data-umami-event="nav_click"
+              data-umami-event-placement="install_cta"
+              data-umami-event-target="install"
+            >
               {t('installCta.link')} <span aria-hidden="true">↗</span>
             </a>
           </section>

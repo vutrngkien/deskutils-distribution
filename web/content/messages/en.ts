@@ -166,7 +166,7 @@ export const en = {
   'footer.independent': 'Independent macOS software by Vu Trung Kien.',
   'document.back': 'Back to DeskUtils',
   'document.updated': 'Last updated: {date}',
-  'document.date': 'September 9, 2026',
+  'document.date': 'September 11, 2026',
   'install.label': 'Installation guide',
   'install.title': 'A few steps. Then you’re home.',
   'install.download': 'Download DeskUtils',
@@ -220,7 +220,7 @@ export const en = {
     'DeskUtils uses Sparkle to check the official update feed. Update requests may expose standard technical information such as your IP address, app version and operating system information to the hosting provider. Clipboard content is never included in an update request.',
   'privacy.website.title': 'This website',
   'privacy.website.body':
-    'This website does not use analytics, tracking pixels, advertising cookies or user accounts. Demo videos are served as website files without third-party video embeds. The hosting provider may process standard server logs for security and reliable delivery.',
+    'This website uses Umami, a privacy-focused analytics service, to collect anonymous page views, referrers, browser, operating system, device type, country, and interactions such as viewed sections and demos, opened FAQ items, dimming control adjustments, language changes, and navigation, download, checkout, support and external-link clicks. Umami does not use cookies or collect personally identifiable information. DeskUtils does not send clipboard contents, screenshots, email addresses, license keys or payment details to analytics. Demo videos are served as website files without third-party video embeds. The hosting provider may process standard server logs for security and reliable delivery.',
   'privacy.purchase.title': 'Purchases and license activation',
   'privacy.purchase.body1':
     'Pro payments are processed by Lemon Squeezy under its own privacy practices. DeskUtils receives the order and license information needed to provide and support your license.',

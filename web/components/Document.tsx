@@ -23,7 +23,13 @@ export function Document({
     <main id="main" lang={locale}>
       <Shell>
         <div className={s.document}>
-          <a href={localePath(locale, '/')} className={s.back}>
+          <a
+            href={localePath(locale, '/')}
+            className={s.back}
+            data-umami-event="nav_click"
+            data-umami-event-placement="document"
+            data-umami-event-target="home"
+          >
             ← {t('document.back')}
           </a>
           <header className={s.heading}>

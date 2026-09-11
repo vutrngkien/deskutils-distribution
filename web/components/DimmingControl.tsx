@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { Locale } from '@/content/locales';
 import { translate } from '@/content/i18n';
+import { trackUmamiEvent } from '@/lib/umami';
 import styles from './DimmingControl.module.css';
 
 export function DimmingControl({
@@ -13,6 +14,7 @@ export function DimmingControl({
   showLabel?: boolean;
 }) {
   const [brightness, setBrightness] = useState(100);
+  const hasTrackedInteraction = useRef(false);
 
   return (
     <>
@@ -35,7 +37,17 @@ export function DimmingControl({
           max="100"
           step="1"
           value={brightness}
-          onChange={(event) => setBrightness(Number(event.target.value))}
+          onChange={(event) => {
+            const nextBrightness = Number(event.target.value);
+            setBrightness(nextBrightness);
+            if (!hasTrackedInteraction.current && nextBrightness !== 100) {
+              hasTrackedInteraction.current = true;
+              trackUmamiEvent('dimming_interact', {
+                level: nextBrightness > 60 ? 'dimmed' : 'very_dim',
+                locale,
+              });
+            }
+          }}
           aria-label={translate(locale, 'a11y.brightness')}
           aria-valuetext={
             brightness === 100

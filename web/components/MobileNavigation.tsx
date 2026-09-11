@@ -6,6 +6,7 @@ import { translate } from '@/content/i18n';
 import styles from './Site.module.css';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { DownloadLink } from './DownloadLink';
+import { trackUmamiEvent } from '@/lib/umami';
 export function MobileNavigation({ locale }: { locale: Locale }) {
   const details = useRef<HTMLDetailsElement>(null);
   const t = translate.bind(null, locale);
@@ -22,6 +23,9 @@ export function MobileNavigation({ locale }: { locale: Locale }) {
           details.current?.querySelector('summary')?.focus();
         }
       }}
+      onToggle={() => {
+        if (details.current?.open) trackUmamiEvent('mobile_menu_open', { locale });
+      }}
     >
       <summary>{t('nav.menu')}</summary>
       <nav
@@ -32,7 +36,13 @@ export function MobileNavigation({ locale }: { locale: Locale }) {
         }}
       >
         {navigation.map((link) => (
-          <a key={link.label} href={localePath(locale, link.href)}>
+          <a
+            key={link.label}
+            href={localePath(locale, link.href)}
+            data-umami-event="nav_click"
+            data-umami-event-placement="mobile_menu"
+            data-umami-event-target={link.label}
+          >
             {t(link.label)}
           </a>
         ))}

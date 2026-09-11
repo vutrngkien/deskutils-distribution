@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { UmamiAnalytics } from '@/components/UmamiAnalytics';
 import { product } from '@/content/product';
 import '@/app/globals.css';
 
@@ -14,7 +14,7 @@ export default function EnglishRootLayout({ children }: Readonly<{ children: Rea
     <html lang="en">
       <body>
         {children}
-        <Analytics />
+        <UmamiAnalytics />
         <SpeedInsights />
       </body>
     </html>

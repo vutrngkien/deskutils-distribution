@@ -170,7 +170,7 @@ export const vi = {
   'footer.independent': 'Phần mềm macOS độc lập của Vũ Trung Kiên.',
   'document.back': 'Quay lại DeskUtils',
   'document.updated': 'Cập nhật lần cuối: {date}',
-  'document.date': '9 tháng 9, 2026',
+  'document.date': '11 tháng 9, 2026',
   'install.label': 'Hướng dẫn cài đặt',
   'install.title': 'Vài bước là xong.',
   'install.download': 'Tải DeskUtils',
@@ -224,7 +224,7 @@ export const vi = {
     'DeskUtils dùng Sparkle để kiểm tra nguồn cập nhật chính thức. Yêu cầu cập nhật có thể để lộ thông tin kỹ thuật tiêu chuẩn như địa chỉ IP, phiên bản ứng dụng và thông tin hệ điều hành cho nhà cung cấp dịch vụ lưu trữ. Nội dung clipboard không bao giờ được gửi trong yêu cầu cập nhật.',
   'privacy.website.title': 'Trang web này',
   'privacy.website.body':
-    'Trang web không dùng analytics, tracking pixel, cookie quảng cáo hay tài khoản người dùng. Video demo được phục vụ dưới dạng tệp của website, không nhúng trình phát bên thứ ba. Nhà cung cấp dịch vụ lưu trữ có thể xử lý log máy chủ tiêu chuẩn để bảo mật và phân phối ổn định.',
+    'Trang web này dùng Umami, một dịch vụ phân tích chú trọng quyền riêng tư, để thu thập ẩn danh lượt xem trang, nguồn giới thiệu, trình duyệt, hệ điều hành, loại thiết bị, quốc gia và các tương tác như phần nội dung hoặc demo đã xem, mục FAQ đã mở, điều chỉnh độ mờ, đổi ngôn ngữ, cùng lượt nhấp điều hướng, tải xuống, thanh toán, hỗ trợ và liên kết ngoài. Umami không dùng cookie hay thu thập thông tin nhận dạng cá nhân. DeskUtils không gửi nội dung clipboard, ảnh chụp màn hình, địa chỉ email, khóa bản quyền hoặc thông tin thanh toán cho dịch vụ phân tích. Video demo được phục vụ dưới dạng tệp của website, không nhúng trình phát bên thứ ba. Nhà cung cấp dịch vụ lưu trữ có thể xử lý log máy chủ tiêu chuẩn để bảo mật và phân phối ổn định.',
   'privacy.purchase.title': 'Mua hàng và kích hoạt giấy phép',
   'privacy.purchase.body1':
     'Thanh toán Pro do Lemon Squeezy xử lý theo chính sách quyền riêng tư của họ. DeskUtils nhận thông tin đơn hàng và giấy phép cần thiết để cung cấp và hỗ trợ giấy phép của bạn.',

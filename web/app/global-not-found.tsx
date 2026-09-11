@@ -17,7 +17,9 @@ export default function GlobalNotFound() {
               <p>404 / Page not found</p>
               <h1>This one got away.</h1>
               <p>The page you’re looking for isn’t here. Your everyday tools are one click back.</p>
-              <Button href="/">Back to DeskUtils →</Button>
+              <Button href="/" placement="not_found">
+                Back to DeskUtils →
+              </Button>
             </section>
           </Shell>
         </main>

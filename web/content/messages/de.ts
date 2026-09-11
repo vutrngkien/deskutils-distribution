@@ -174,7 +174,7 @@ export const de = {
   'pricing.ocr': 'OCR',
   'document.back': 'Zurück zu DeskUtils',
   'document.updated': 'Zuletzt aktualisiert: {date}',
-  'document.date': '9. September 2026',
+  'document.date': '11. September 2026',
   'install.label': 'Installationsanleitung',
   'install.title': 'Ein paar Schritte, dann bist du daheim.',
   'install.download': 'DeskUtils herunterladen',
@@ -230,7 +230,7 @@ export const de = {
     'DeskUtils verwendet Sparkle, um den offiziellen Update-Feed zu prüfen. Update-Anfragen können Standardinformationen wie IP-Adresse, App-Version und Betriebssystem an den Hosting-Anbieter übermitteln. Zwischenablageinhalte sind niemals enthalten.',
   'privacy.website.title': 'Diese Website',
   'privacy.website.body':
-    'Diese Website verwendet keine Analyse, Tracking-Pixel, Werbe-Cookies oder Benutzerkonten. Demo-Videos werden als Website-Dateien ohne Videoeinbettungen von Drittanbietern ausgeliefert. Der Hosting-Anbieter kann Standard-Serverprotokolle für Sicherheit und zuverlässige Bereitstellung verarbeiten.',
+    'Diese Website verwendet Umami, einen datenschutzorientierten Analysedienst, um Seitenaufrufe, Verweise, Browser, Betriebssystem, Gerätetyp, Land sowie Interaktionen wie angesehene Bereiche und Demos, geöffnete FAQ, Anpassungen der Abdunkelung, Sprachwechsel und Klicks auf Navigation, Downloads, Bezahlung, Support und externe Links anonym zu erfassen. Umami verwendet keine Cookies und erfasst keine personenbezogenen Daten. DeskUtils übermittelt weder Inhalte der Zwischenablage noch Bildschirmaufnahmen, E-Mail-Adressen, Lizenzschlüssel oder Zahlungsdaten an den Analysedienst. Demo-Videos werden als Website-Dateien ohne Videoeinbettungen von Drittanbietern ausgeliefert. Der Hosting-Anbieter kann Standard-Serverprotokolle für Sicherheit und zuverlässige Bereitstellung verarbeiten.',
   'privacy.purchase.title': 'Käufe und Lizenzaktivierung',
   'privacy.purchase.body1':
     'Pro-Zahlungen werden von Lemon Squeezy nach dessen eigenen Datenschutzpraktiken verarbeitet. DeskUtils erhält die für Bereitstellung und Support deiner Lizenz nötigen Bestell- und Lizenzinformationen.',

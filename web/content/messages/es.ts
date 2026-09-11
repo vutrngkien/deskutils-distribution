@@ -171,7 +171,7 @@ export const es = {
   'pricing.pro': 'DeskUtils Pro',
   'document.back': 'Volver a DeskUtils',
   'document.updated': 'Última actualización: {date}',
-  'document.date': '9 de septiembre de 2026',
+  'document.date': '11 de septiembre de 2026',
   'install.label': 'Guía de instalación',
   'install.title': 'Unos pasos y estarás en casa.',
   'install.download': 'Descargar DeskUtils',
@@ -225,7 +225,7 @@ export const es = {
     'DeskUtils usa Sparkle para consultar el canal oficial de actualizaciones. Las solicitudes pueden exponer información técnica estándar, como tu dirección IP, versión de la app y sistema operativo, al proveedor de alojamiento. Nunca incluyen el contenido del portapapeles.',
   'privacy.website.title': 'Este sitio web',
   'privacy.website.body':
-    'Este sitio no usa analítica, píxeles de seguimiento, cookies publicitarias ni cuentas de usuario. Los vídeos de demostración se sirven como archivos del sitio, sin reproductores de terceros. El proveedor de alojamiento puede procesar registros del servidor para ofrecer seguridad y una entrega fiable.',
+    'Este sitio usa Umami, un servicio de analítica centrado en la privacidad, para recopilar de forma anónima visitas de página, referencias, navegador, sistema operativo, tipo de dispositivo, país e interacciones como secciones y demostraciones vistas, preguntas frecuentes abiertas, ajustes del control de atenuación, cambios de idioma y clics en navegación, descarga, pago, soporte y enlaces externos. Umami no usa cookies ni recopila información de identificación personal. DeskUtils no envía a la analítica contenido del portapapeles, capturas de pantalla, direcciones de correo electrónico, claves de licencia ni datos de pago. Los vídeos de demostración se sirven como archivos del sitio, sin reproductores de terceros. El proveedor de alojamiento puede procesar registros del servidor para ofrecer seguridad y una entrega fiable.',
   'privacy.purchase.title': 'Compras y activación de licencias',
   'privacy.purchase.body1':
     'Los pagos de Pro son procesados por Lemon Squeezy conforme a sus propias prácticas de privacidad. DeskUtils recibe la información del pedido y la licencia necesaria para ofrecer y mantener tu licencia.',

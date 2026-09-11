@@ -166,5 +166,7 @@ export const ko = {
   'footer.independent': 'Vu Trung Kien이 만드는 독립 macOS 소프트웨어.',
   'document.back': 'DeskUtils로 돌아가기',
   'document.updated': '최종 업데이트: {date}',
-  'document.date': '2026년 9월 9일',
+  'privacy.website.body':
+    '이 웹사이트는 개인정보 보호 중심의 분석 서비스인 Umami를 사용하여 페이지 조회, 유입 경로, 브라우저, 운영 체제, 기기 유형, 국가와 조회한 섹션 및 데모, 연 FAQ, 화면 밝기 조절, 언어 변경, 탐색·다운로드·결제·지원·외부 링크 클릭과 같은 상호작용을 익명으로 수집합니다. Umami는 쿠키를 사용하거나 개인 식별 정보를 수집하지 않습니다. DeskUtils는 클립보드 내용, 스크린샷, 이메일 주소, 라이선스 키 또는 결제 정보를 분석 서비스로 보내지 않습니다. 데모 영상은 타사 동영상 삽입 없이 웹사이트 파일로 제공됩니다. 호스팅 제공업체는 보안과 안정적인 전송을 위해 표준 서버 로그를 처리할 수 있습니다.',
+  'document.date': '2026년 9월 11일',
 } satisfies Messages;

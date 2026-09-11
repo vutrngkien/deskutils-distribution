@@ -53,4 +53,7 @@ export const zhTW = {
   'faq.launchPrice.answer': '${amount} 是前 {customers} 位客戶的首發價，原價為 ${original}。',
   'install.label': '安裝指南',
   'privacy.label': '隱私權政策',
+  'privacy.website.body':
+    '本網站使用重視隱私的 Umami 分析服務，以匿名方式收集頁面瀏覽量、來源頁面、瀏覽器、作業系統、裝置類型、國家或地區，以及已查看的內容區塊和示範、已開啟的常見問題、調暗控制項調整、語言切換，以及導覽、下載、結帳、支援和外部連結點擊等互動。Umami 不使用 Cookie，也不收集可識別個人身分的資訊。DeskUtils 不會將剪貼簿內容、螢幕截圖、電子郵件地址、授權金鑰或付款資料傳送至分析服務。示範影片由本站直接提供，不嵌入第三方播放器。託管服務商可能為安全與穩定傳遞處理標準伺服器記錄。',
+  'document.date': '2026年9月11日',
 } satisfies Messages;

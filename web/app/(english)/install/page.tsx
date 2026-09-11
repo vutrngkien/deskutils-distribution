@@ -23,7 +23,7 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
           <Button locale={locale} placement="install_page">
             {t('install.download')} ↓
           </Button>
-          <Button href={product.releasesURL} secondary>
+          <Button href={product.releasesURL} locale={locale} placement="install_page" secondary>
             {t('install.releaseNotes')}
           </Button>
         </div>
@@ -44,7 +44,14 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
           <h2>{t('install.gatekeeper.title')}</h2>
           <p>{t('install.gatekeeper.body')}</p>
           <p>
-            <a href="https://support.apple.com/en-us/102445">{t('install.gatekeeper.apple')}</a>
+            <a
+              href="https://support.apple.com/en-us/102445"
+              data-umami-event="external_link"
+              data-umami-event-placement="install"
+              data-umami-event-target="apple_gatekeeper_help"
+            >
+              {t('install.gatekeeper.apple')}
+            </a>
           </p>
           <p>{t('install.gatekeeper.support', { email: product.supportEmail })}</p>
         </section>
@@ -66,7 +73,15 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
           <code>shasum -a 256 ~/Downloads/DeskUtils.dmg</code>
           <p>
             {t('install.verify.failure')}{' '}
-            <a href={product.releasesURL}>{t('install.verify.release')}</a>.
+            <a
+              href={product.releasesURL}
+              data-umami-event="external_link"
+              data-umami-event-placement="install"
+              data-umami-event-target="release_verification"
+            >
+              {t('install.verify.release')}
+            </a>
+            .
           </p>
         </section>
       </Document>

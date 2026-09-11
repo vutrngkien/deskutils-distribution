@@ -451,7 +451,10 @@
   line-height: 1;
 }
 .pricing {
-  padding: 80px 0;
+  padding: 36px 0 72px;
+}
+.pricing .sectionHeading {
+  margin-bottom: 24px;
 }
 .plans {
   display: grid;
@@ -470,9 +473,9 @@
 .proPlan {
   position: relative;
   order: 1;
-  padding: 48px 42px 40px;
+  padding: 30px 30px 26px;
   border: 1px solid rgb(255 255 255 / 8%);
-  border-radius: 38px;
+  border-radius: 32px;
   background: #0d0e10;
   color: white;
   text-align: center;
@@ -508,17 +511,17 @@
 }
 .proPlan .planTop {
   position: relative;
-  flex-direction: column;
+  flex-wrap: nowrap;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
 }
 .launchBadge {
-  padding: 7px 12px;
+  padding: 5px 9px;
   border: 1px solid rgb(158 184 255 / 24%);
   border-radius: 999px;
   background: rgb(76 103 174 / 18%);
   color: #d9e2ff;
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -534,8 +537,8 @@
 .proPlan .planPitch {
   position: relative;
   margin-inline: auto;
-  margin-top: 26px;
-  font-size: 2rem;
+  margin-top: 18px;
+  font-size: 1.75rem;
 }
 .planDescription {
   margin-top: 10px;
@@ -546,9 +549,9 @@
   position: relative;
   max-width: 290px;
   margin-inline: auto;
-  margin-top: 12px;
+  margin-top: 8px;
   color: #aeb3bd;
-  line-height: 1.55;
+  line-height: 1.45;
 }
 .price {
   display: flex;
@@ -569,10 +572,10 @@
   align-items: baseline;
   justify-content: center;
   gap: 12px;
-  margin: 28px 0 6px;
+  margin: 20px 0 4px;
 }
 .proPlan .price strong {
-  font-size: 4.5rem;
+  font-size: 3.75rem;
   font-weight: 650;
 }
 .price span {
@@ -597,7 +600,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin: 0 0 28px;
+  margin: 0 0 18px;
   color: #9399a4;
   font-size: 0.75rem;
 }
@@ -613,9 +616,9 @@
 }
 .plan ul {
   padding: 0;
-  margin: 0 0 28px;
+  margin: 0 0 20px;
   display: grid;
-  gap: 10px;
+  gap: 7px;
   list-style: none;
   font-size: 0.875rem;
 }
@@ -623,7 +626,7 @@
   position: relative;
   width: min(290px, 100%);
   margin-inline: auto;
-  margin-bottom: 32px;
+  margin-bottom: 22px;
   text-align: left;
 }
 .plan li {
@@ -645,7 +648,7 @@
 }
 .proPlan > a {
   position: relative;
-  min-height: 50px;
+  min-height: 46px;
   border-color: #f4f6fb;
   background: #f4f6fb;
   color: #17191e;
@@ -684,7 +687,7 @@
 }
 .proPlan .planFootnote {
   position: relative;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 .pricingDeviceNote {
   margin-top: 24px;
@@ -964,7 +967,7 @@
     font-size: 0.8125rem;
   }
   .pricing {
-    padding: 48px 0;
+    padding: 36px 0 48px;
   }
   .plans {
     grid-template-columns: 1fr;
@@ -974,7 +977,7 @@
     padding: 26px;
   }
   .proPlan {
-    padding: 40px 26px 32px;
+    padding: 30px 26px 26px;
     border-radius: 32px;
   }
   .freePlan {

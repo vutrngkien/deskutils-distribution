@@ -24,7 +24,6 @@
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 96px;
 }
 body {
   margin: 0;
@@ -85,7 +84,7 @@ button {
   color: var(--ink);
 }
 section[id] {
-  scroll-margin-top: 96px;
+  scroll-margin-top: 88px;
 }
 .skip-link {
   position: absolute;

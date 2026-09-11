@@ -93,6 +93,34 @@ for (const width of [375, 640, 768, 1440]) {
   });
 }
 
+test('pricing anchor keeps both plans and the Pro checkout action in view on a laptop', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1024, height: 900 });
+  await page.goto('/');
+  await page
+    .getByRole('navigation', { name: 'Primary navigation' })
+    .getByRole('link', { name: 'Pricing', exact: true })
+    .click();
+  await expect(page).toHaveURL(/#pricing$/);
+
+  const pricing = page.locator('#pricing');
+  await expect(
+    pricing.getByRole('heading', { name: 'Use it free. Go Pro when you need more.' }),
+  ).toBeInViewport();
+  await expect(
+    page.getByRole('link', { name: 'Get DeskUtils Pro', exact: true }),
+  ).toBeInViewport();
+
+  await expect(pricing.locator('article')).toHaveCount(2);
+  for (const plan of await pricing.locator('article').all()) {
+    const box = await plan.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.y).toBeGreaterThanOrEqual(76);
+    expect(box!.y + box!.height).toBeLessThanOrEqual(900);
+  }
+});
+
 test('keyboard, mobile menu and internal routes work', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto('/');

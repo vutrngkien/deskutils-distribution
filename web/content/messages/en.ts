@@ -33,7 +33,7 @@ export const en = {
     'How DeskUtils handles clipboard content, screen captures, licenses and support information.',
   'meta.terms.title': 'Terms of Use — DeskUtils',
   'meta.terms.description':
-    'Terms for downloading and using DeskUtils, including the upcoming annual Pro license.',
+    'Terms for downloading and using DeskUtils, including the lifetime Pro license.',
   'meta.ogAlt': 'DeskUtils — essential macOS utilities in one app.',
   'hero.smallTools': 'Small tools',
   'hero.rightWhere': 'Right where you need them',
@@ -110,11 +110,18 @@ export const en = {
   'pricing.free.description': 'For everyday copying and capturing.',
   'pricing.pro.pitch': 'More room for your clipboard.',
   'pricing.pro.description': 'More history. A few extra capture tools.',
+  'pricing.launchOffer': '🚀 Launch Offer',
+  'pricing.lifetime': 'Lifetime license',
+  'pricing.oneTime': 'One-time payment. No subscription.',
+  'pricing.devices': 'Use on up to {count} devices',
+  'pricing.promoLabel': 'Launch code',
+  'pricing.cta': 'Get DeskUtils Pro',
+  'pricing.deviceNote': 'One license key activates DeskUtils Pro on up to {count} devices.',
   'pricing.usdYear': 'USD / year',
   'pricing.noLicense': 'No license needed',
   'pricing.everythingFree': 'Everything in Free',
   'pricing.freeItems': '{count} clipboard items',
-  'pricing.proItems': '{count} clipboard items',
+  'pricing.proItems': 'Extended clipboard history',
   'pricing.screenshots': 'Screenshots & annotation',
   'pricing.color': 'Color Picker',
   'pricing.cleanSleep': 'Clean Keyboard & Prevent Sleep',
@@ -122,13 +129,23 @@ export const en = {
   'pricing.ocr': 'OCR',
   'pricing.scrolling': 'Scrolling Capture',
   'pricing.subject': 'Capture Subject',
-  'pricing.persistentDimming': 'Persistent display dimming',
+  'pricing.persistentDimming': 'Monitor dimming',
   'pricing.updates': 'Updates during your license period',
   'pricing.comingSoon': 'Pro is coming soon',
-  'pricing.proFootnote': 'Introductory price · {macs} Mac · Annual license',
+  'pricing.proFootnote': 'First {customers} customers · Then ${original}',
   'pricing.freeFootnote': 'No account. No payment details.',
   'faq.title': 'Questions?',
   'faq.contact': 'Get in touch',
+  'faq.subscription.question': 'Is DeskUtils a subscription?',
+  'faq.subscription.answer':
+    'No. DeskUtils Pro is a one-time purchase. Pay once and keep your license.',
+  'faq.devices.question': 'How many Macs can I use DeskUtils on?',
+  'faq.devices.answer': 'Each DeskUtils Pro license can be activated on up to {count} devices.',
+  'faq.lifetime.question': 'How long does the license last?',
+  'faq.lifetime.answer': 'Your DeskUtils Pro license does not expire.',
+  'faq.launchPrice.question': 'Why is DeskUtils ${amount}?',
+  'faq.launchPrice.answer':
+    '${amount} is our launch price for the first {customers} customers. The regular price is ${original}.',
   'faq.macos.question': 'Which version of macOS do I need?',
   'faq.macos.answer':
     'DeskUtils requires macOS {version} or later. Check the release notes for the supported Macs before downloading.',
@@ -206,7 +223,7 @@ export const en = {
     'This website does not use analytics, tracking pixels, advertising cookies or user accounts. Demo videos are served as website files without third-party video embeds. The hosting provider may process standard server logs for security and reliable delivery.',
   'privacy.purchase.title': 'Purchases and license activation',
   'privacy.purchase.body1':
-    'Pro sales are not open yet. When available, payments will be processed by Lemon Squeezy under its own privacy practices. DeskUtils will receive the order and license information needed to provide and support your license.',
+    'Pro payments are processed by Lemon Squeezy under its own privacy practices. DeskUtils receives the order and license information needed to provide and support your license.',
   'privacy.purchase.body2':
     'Activating and validating Pro requires communicating with the license service. Your license key and activation information are used to verify access and enforce the device limit. Clipboard content and screenshots are not sent with these requests.',
   'privacy.support.title': 'Support messages',
@@ -224,18 +241,18 @@ export const en = {
     'You may not sell, sublicense, redistribute or provide your license key to another person, bypass license limits, or use DeskUtils in a way that violates applicable law.',
   'terms.plans.title': 'Free and Pro',
   'terms.plans.body1':
-    'The free version may be used without payment or a DeskUtils account. Pro sales are not open yet. The planned Pro license covers {macs} Mac and includes Pro features and updates during the active annual license period.',
+    'The free version may be used without payment or a DeskUtils account. A Pro purchase provides a lifetime license for up to {macs} devices and includes the DeskUtils Pro features.',
   'terms.plans.body2':
-    'The introductory price is ${amount} USD per year; the regular price is ${original} USD per year. No offer expiry or renewal-price guarantee is announced on this website. Applicable taxes and the final purchase terms will be shown at checkout when sales open.',
-  'terms.renewal.title': 'Annual renewal and cancellation',
+    'The launch price is ${amount} USD for the first {customers} customers; the regular price is ${original} USD. Applicable taxes and the final purchase terms are shown at checkout.',
+  'terms.renewal.title': 'One-time purchase',
   'terms.renewal.body':
-    'Pro is an annual license. When sales open, annual licenses will be billed yearly and renew automatically until cancelled. You may cancel future renewal using the purchase-management tools provided with your order. Cancellation stops the next renewal and does not retroactively refund the current license period.',
+    'Pro is a one-time purchase, not a subscription. The lifetime license does not expire and there are no recurring license fees.',
   'terms.payment.title': 'Payments and license delivery',
   'terms.payment.body':
-    'When available, payments will be processed by Lemon Squeezy, acting as Merchant of Record. Lemon Squeezy handles payment processing, applicable taxes, receipts and payment-related refunds. A license key will be delivered after purchase for activation in DeskUtils.',
+    'Payments are processed by Lemon Squeezy, acting as Merchant of Record. Lemon Squeezy handles payment processing, applicable taxes, receipts and payment-related refunds. A license key is delivered after purchase for activation in DeskUtils.',
   'terms.refunds.title': 'Refunds',
   'terms.refunds.body':
-    'When Pro sales open, you may request a refund within 14 days of the original purchase or annual renewal by emailing {email} with enough order information to identify the transaction. Approved refunds are processed through Lemon Squeezy and may revoke the associated license.',
+    'You may request a refund within 14 days of the original purchase by emailing {email} with enough order information to identify the transaction. Approved refunds are processed through Lemon Squeezy and may revoke the associated license.',
   'terms.beta.title': 'Beta software',
   'terms.beta.body':
     'Beta builds may contain defects, change without notice, require additional macOS confirmation during installation, or behave differently from a stable release. Back up important data and do not rely on DeskUtils as its sole copy.',

@@ -35,7 +35,7 @@ export const vi = {
     'Cách DeskUtils xử lý nội dung clipboard, ảnh chụp màn hình, giấy phép và thông tin hỗ trợ.',
   'meta.terms.title': 'Điều khoản sử dụng — DeskUtils',
   'meta.terms.description':
-    'Điều khoản tải xuống và sử dụng DeskUtils, bao gồm gói Pro hằng năm sắp ra mắt.',
+    'Điều khoản tải xuống và sử dụng DeskUtils, bao gồm giấy phép Pro trọn đời.',
   'meta.ogAlt': 'DeskUtils — các tiện ích macOS thiết yếu trong một ứng dụng.',
   'hero.smallTools': 'Công cụ nhỏ',
   'hero.rightWhere': 'Ngay nơi bạn cần',
@@ -113,11 +113,18 @@ export const vi = {
   'pricing.free.description': 'Cho việc sao chép và chụp màn hình hằng ngày.',
   'pricing.pro.pitch': 'Thêm không gian cho clipboard.',
   'pricing.pro.description': 'Nhiều lịch sử hơn và thêm một số công cụ chụp.',
+  'pricing.launchOffer': '🚀 Ưu đãi ra mắt',
+  'pricing.lifetime': 'Giấy phép trọn đời',
+  'pricing.oneTime': 'Thanh toán một lần. Không thuê bao.',
+  'pricing.devices': 'Dùng trên tối đa {count} thiết bị',
+  'pricing.promoLabel': 'Mã ra mắt',
+  'pricing.cta': 'Mua DeskUtils Pro',
+  'pricing.deviceNote': 'Một khóa giấy phép kích hoạt DeskUtils Pro trên tối đa {count} thiết bị.',
   'pricing.usdYear': 'USD / năm',
   'pricing.noLicense': 'Không cần giấy phép',
   'pricing.everythingFree': 'Tất cả tính năng của gói Miễn phí',
   'pricing.freeItems': '{count} mục clipboard',
-  'pricing.proItems': '{count} mục clipboard',
+  'pricing.proItems': 'Lịch sử clipboard mở rộng',
   'pricing.screenshots': 'Chụp màn hình và chú thích',
   'pricing.color': 'Chọn màu',
   'pricing.cleanSleep': 'Vệ sinh bàn phím & Ngăn Mac ngủ',
@@ -125,13 +132,24 @@ export const vi = {
   'pricing.ocr': 'OCR',
   'pricing.scrolling': 'Chụp màn hình cuộn',
   'pricing.subject': 'Tách chủ thể',
-  'pricing.persistentDimming': 'Lưu trạng thái giảm độ sáng',
+  'pricing.persistentDimming': 'Giảm độ sáng màn hình',
   'pricing.updates': 'Cập nhật trong thời hạn giấy phép',
   'pricing.comingSoon': 'Pro sắp ra mắt',
-  'pricing.proFootnote': 'Giá ra mắt · {macs} máy Mac · Giấy phép hằng năm',
+  'pricing.proFootnote': '{customers} khách hàng đầu tiên · Sau đó ${original}',
   'pricing.freeFootnote': 'Không cần tài khoản hay thông tin thanh toán.',
   'faq.title': 'Câu hỏi?',
   'faq.contact': 'Liên hệ',
+  'faq.subscription.question': 'DeskUtils có phải là gói thuê bao không?',
+  'faq.subscription.answer':
+    'Không. DeskUtils Pro chỉ cần thanh toán một lần. Trả tiền một lần và giữ giấy phép của bạn.',
+  'faq.devices.question': 'Tôi có thể dùng DeskUtils trên bao nhiêu máy Mac?',
+  'faq.devices.answer':
+    'Mỗi giấy phép DeskUtils Pro có thể kích hoạt trên tối đa {count} thiết bị.',
+  'faq.lifetime.question': 'Giấy phép có hiệu lực trong bao lâu?',
+  'faq.lifetime.answer': 'Giấy phép DeskUtils Pro của bạn không hết hạn.',
+  'faq.launchPrice.question': 'Tại sao DeskUtils có giá ${amount}?',
+  'faq.launchPrice.answer':
+    '${amount} là giá ra mắt dành cho {customers} khách hàng đầu tiên. Giá thông thường là ${original}.',
   'faq.macos.question': 'DeskUtils yêu cầu phiên bản macOS nào?',
   'faq.macos.answer':
     'DeskUtils yêu cầu macOS {version} trở lên. Hãy xem ghi chú phát hành để kiểm tra máy được hỗ trợ trước khi tải xuống.',
@@ -209,7 +227,7 @@ export const vi = {
     'Trang web không dùng analytics, tracking pixel, cookie quảng cáo hay tài khoản người dùng. Video demo được phục vụ dưới dạng tệp của website, không nhúng trình phát bên thứ ba. Nhà cung cấp dịch vụ lưu trữ có thể xử lý log máy chủ tiêu chuẩn để bảo mật và phân phối ổn định.',
   'privacy.purchase.title': 'Mua hàng và kích hoạt giấy phép',
   'privacy.purchase.body1':
-    'Gói Pro chưa mở bán. Khi có, thanh toán sẽ do Lemon Squeezy xử lý theo chính sách quyền riêng tư của họ. DeskUtils sẽ nhận thông tin đơn hàng và giấy phép cần thiết để cung cấp và hỗ trợ giấy phép của bạn.',
+    'Thanh toán Pro do Lemon Squeezy xử lý theo chính sách quyền riêng tư của họ. DeskUtils nhận thông tin đơn hàng và giấy phép cần thiết để cung cấp và hỗ trợ giấy phép của bạn.',
   'privacy.purchase.body2':
     'Việc kích hoạt và xác thực Pro cần liên lạc với dịch vụ giấy phép. Khóa giấy phép và thông tin kích hoạt được dùng để xác minh quyền truy cập và giới hạn thiết bị. Nội dung clipboard và ảnh chụp màn hình không được gửi trong các yêu cầu này.',
   'privacy.support.title': 'Tin nhắn hỗ trợ',
@@ -227,18 +245,18 @@ export const vi = {
     'Bạn không được bán, cấp phép lại, phân phối lại hoặc đưa khóa giấy phép cho người khác, vượt qua giới hạn giấy phép hay sử dụng DeskUtils theo cách vi phạm pháp luật hiện hành.',
   'terms.plans.title': 'Miễn phí và Pro',
   'terms.plans.body1':
-    'Bản miễn phí có thể được sử dụng mà không cần thanh toán hay tài khoản DeskUtils. Gói Pro chưa mở bán. Giấy phép Pro dự kiến áp dụng cho {macs} máy Mac và gồm các tính năng Pro cùng cập nhật trong thời hạn giấy phép hằng năm còn hiệu lực.',
+    'Bản miễn phí có thể được sử dụng mà không cần thanh toán hay tài khoản DeskUtils. Một lần mua Pro cung cấp giấy phép trọn đời cho tối đa {macs} thiết bị và bao gồm các tính năng DeskUtils Pro.',
   'terms.plans.body2':
-    'Giá ra mắt là ${amount} USD mỗi năm; giá thông thường là ${original} USD mỗi năm. Website chưa công bố thời hạn ưu đãi hoặc bảo đảm giá gia hạn. Thuế áp dụng và điều khoản mua cuối cùng sẽ được hiển thị khi thanh toán lúc mở bán.',
-  'terms.renewal.title': 'Gia hạn hằng năm và hủy',
+    'Giá ra mắt là ${amount} USD cho {customers} khách hàng đầu tiên; giá thông thường là ${original} USD. Thuế áp dụng và điều khoản mua cuối cùng được hiển thị khi thanh toán.',
+  'terms.renewal.title': 'Mua một lần',
   'terms.renewal.body':
-    'Pro là giấy phép hằng năm. Khi mở bán, giấy phép được tính phí mỗi năm và tự động gia hạn cho đến khi bị hủy. Bạn có thể hủy lần gia hạn tiếp theo bằng công cụ quản lý mua hàng đi kèm đơn hàng. Việc hủy ngăn lần gia hạn kế tiếp và không hoàn tiền hồi tố cho thời hạn giấy phép hiện tại.',
+    'Pro là khoản mua một lần, không phải thuê bao. Giấy phép trọn đời không hết hạn và không có phí giấy phép định kỳ.',
   'terms.payment.title': 'Thanh toán và cấp giấy phép',
   'terms.payment.body':
-    'Khi có, thanh toán sẽ do Lemon Squeezy xử lý với vai trò Merchant of Record. Lemon Squeezy phụ trách xử lý thanh toán, thuế áp dụng, hóa đơn và hoàn tiền liên quan đến thanh toán. Khóa giấy phép sẽ được gửi sau khi mua để kích hoạt trong DeskUtils.',
+    'Thanh toán do Lemon Squeezy xử lý với vai trò Merchant of Record. Lemon Squeezy phụ trách xử lý thanh toán, thuế áp dụng, hóa đơn và hoàn tiền liên quan đến thanh toán. Khóa giấy phép được gửi sau khi mua để kích hoạt trong DeskUtils.',
   'terms.refunds.title': 'Hoàn tiền',
   'terms.refunds.body':
-    'Khi Pro mở bán, bạn có thể yêu cầu hoàn tiền trong vòng 14 ngày kể từ lần mua ban đầu hoặc gia hạn hằng năm bằng cách gửi email đến {email} cùng đủ thông tin để xác định giao dịch. Khoản hoàn tiền được chấp thuận sẽ được xử lý qua Lemon Squeezy và có thể thu hồi giấy phép liên quan.',
+    'Bạn có thể yêu cầu hoàn tiền trong vòng 14 ngày kể từ lần mua ban đầu bằng cách gửi email đến {email} cùng đủ thông tin để xác định giao dịch. Khoản hoàn tiền được chấp thuận được xử lý qua Lemon Squeezy và có thể thu hồi giấy phép liên quan.',
   'terms.beta.title': 'Phần mềm beta',
   'terms.beta.body':
     'Bản beta có thể có lỗi, thay đổi mà không báo trước, yêu cầu thêm xác nhận của macOS khi cài đặt hoặc hoạt động khác bản ổn định. Hãy sao lưu dữ liệu quan trọng và không dùng DeskUtils làm bản sao duy nhất.',

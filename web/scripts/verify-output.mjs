@@ -27,7 +27,7 @@ for (const route of routes) {
   assert.match(html, /<h1[\s>]/, `${route}: missing rendered heading`);
   assert.doesNotMatch(
     html,
-    /\$19\.99|\$29\.99|Multi-Mac|lifetime|macOS 26|Notarized by Apple/i,
+    /\$19\.99|\$29\.99|Multi-Mac|annual license|USD \/ year|Pro is coming soon|macOS 26|Notarized by Apple/i,
     `${route}: outdated product copy`,
   );
   if (route !== '404.html') {
@@ -41,6 +41,8 @@ for (const route of routes) {
   if (homeRoutes.has(route)) {
     assert.match(html, /application\/ld\+json/, 'homepage: structured data missing');
     assert.match(html, /SoftwareApplication/, 'homepage: app schema missing');
+    assert.match(html, /\$7\.99/, `${route}: launch price missing`);
+    assert.match(html, /\$14\.99/, `${route}: regular price missing`);
   }
   for (const [, value] of html.matchAll(/(?:href|src)="(\/[^"?#]*)/g)) {
     // Check local files and internal page destinations, including Next.js bundles.

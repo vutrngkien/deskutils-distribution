@@ -22,6 +22,7 @@ export function TermsPage({ locale = 'en' }: { locale?: Locale }) {
     macs: product.pricing.macs,
     amount: product.pricing.amount,
     original: product.pricing.originalAmount,
+    customers: product.pricing.customerLimit,
     version: product.minimumMacOS,
     email: product.supportEmail,
   };

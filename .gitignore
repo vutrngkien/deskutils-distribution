@@ -19,3 +19,6 @@ web/public/CNAME
 web/private-media/
 web/test-results/
 web/playwright-report/
+
+# Local website environment settings
+web/.env*.local

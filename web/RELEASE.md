@@ -9,8 +9,11 @@ Before enabling deployment:
 1. Check the released DMG on supported Macs: macOS 15.2 minimum, supported CPU
    architectures, screenshot/annotation, clipboard 50 Free / 500 Pro, OCR,
    Scrolling Capture, Capture Subject and persistent display dimming gates.
-2. Confirm the actual license behavior is annual access for one Mac. Keep website
-   Pro sales **Coming soon**. This change does not configure Lemon Squeezy.
+2. Confirm the actual license behavior is lifetime access for up to two devices.
+   Set `NEXT_PUBLIC_DESKUTILS_CHECKOUT_URL` to the Lemon Squeezy shareable
+   checkout URL (the `/checkout/buy/` URL) and
+   `NEXT_PUBLIC_DESKUTILS_DISCOUNT_CODE` to the active discount code. The site
+   applies that code automatically when a customer selects Pro.
 3. Verify signing/notarization on the artifact before adding any notarization claim.
 4. Publish the matching app release and update `site/appcast.xml` using the existing
    signing scripts in the private app repository. Never hand-edit the signed feed.

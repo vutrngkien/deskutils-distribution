@@ -2,6 +2,18 @@ import type { ToolIconName } from '@/components/ToolIcon';
 import type { MessageKey, MessageValues } from './i18n';
 export { languages, type Locale } from './locales';
 
+const fallbackDiscountCode = 'LAUNCH799';
+const fallbackCheckoutURL =
+  'https://deskutils.lemonsqueezy.com/checkout/buy/c9fb0feb-6305-4361-9f15-10c1ff9f15f6';
+const discountCode =
+  process.env.NEXT_PUBLIC_DESKUTILS_DISCOUNT_CODE?.trim() || fallbackDiscountCode;
+
+function checkoutURLWithDiscountCode(checkoutURL: string) {
+  const url = new URL(checkoutURL);
+  url.searchParams.set('checkout[discount_code]', discountCode);
+  return url.toString();
+}
+
 export const product = {
   name: 'DeskUtils',
   origin: 'https://deskutils.app',
@@ -19,9 +31,14 @@ export const product = {
     amount: '7.99',
     originalAmount: '14.99',
     currency: 'USD',
-    period: 'year',
-    macs: 1,
-    status: 'coming-soon',
+    period: 'lifetime',
+    macs: 2,
+    customerLimit: 100,
+    discountCode,
+    status: 'launch-offer',
+    purchaseURL: checkoutURLWithDiscountCode(
+      process.env.NEXT_PUBLIC_DESKUTILS_CHECKOUT_URL?.trim() || fallbackCheckoutURL,
+    ),
   },
 } as const;
 
@@ -207,21 +224,21 @@ export const plans = [
       { key: 'pricing.screenshots' },
       { key: 'pricing.color' },
       { key: 'pricing.cleanSleep' },
-      { key: 'pricing.dimmingPreview' },
     ],
   },
   {
     id: 'pro',
-    pitch: 'pricing.pro.pitch',
-    description: 'pricing.pro.description',
+    pitch: 'pricing.lifetime',
+    description: 'pricing.oneTime',
     features: [
+      { key: 'pricing.lifetime' },
+      { key: 'pricing.devices', values: { count: product.pricing.macs } },
       { key: 'pricing.everythingFree' },
-      { key: 'pricing.proItems', values: { count: product.proHistory } },
+      { key: 'pricing.proItems' },
       { key: 'pricing.ocr' },
       { key: 'pricing.scrolling' },
       { key: 'pricing.subject' },
       { key: 'pricing.persistentDimming' },
-      { key: 'pricing.updates' },
     ],
   },
 ] satisfies {
@@ -230,7 +247,29 @@ export const plans = [
   description: MessageKey;
   features: CopyRef[];
 }[];
-export const faqs = [
+export const faqs: { question: MessageKey; answer: MessageKey; values?: MessageValues }[] = [
+  {
+    question: 'faq.subscription.question',
+    answer: 'faq.subscription.answer',
+  },
+  {
+    question: 'faq.devices.question',
+    answer: 'faq.devices.answer',
+    values: { count: product.pricing.macs },
+  },
+  {
+    question: 'faq.lifetime.question',
+    answer: 'faq.lifetime.answer',
+  },
+  {
+    question: 'faq.launchPrice.question',
+    answer: 'faq.launchPrice.answer',
+    values: {
+      amount: product.pricing.amount,
+      original: product.pricing.originalAmount,
+      customers: product.pricing.customerLimit,
+    },
+  },
   {
     question: 'faq.macos.question',
     answer: 'faq.macos.answer',
@@ -252,4 +291,4 @@ export const faqs = [
     question: 'faq.store.question',
     answer: 'faq.store.answer',
   },
-] satisfies { question: MessageKey; answer: MessageKey; values?: MessageValues }[];
+];

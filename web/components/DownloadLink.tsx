@@ -6,7 +6,13 @@ import { product } from '@/content/product';
 import type { Locale } from '@/content/locales';
 
 type DownloadPlacement =
-  'header' | 'header_compact' | 'hero' | 'mobile_menu' | 'pricing_free' | 'install_page';
+  | 'header'
+  | 'header_compact'
+  | 'hero'
+  | 'mobile_menu'
+  | 'pricing_free'
+  | 'pricing_pro'
+  | 'install_page';
 
 export function DownloadLink({
   children,

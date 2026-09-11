@@ -35,7 +35,7 @@ export const es = {
     'Cómo gestiona DeskUtils el portapapeles, las capturas, las licencias y el soporte.',
   'meta.terms.title': 'Términos de uso — DeskUtils',
   'meta.terms.description':
-    'Términos para descargar y usar DeskUtils, incluida la próxima licencia Pro anual.',
+    'Términos para descargar y usar DeskUtils, incluida la licencia Pro de por vida.',
   'meta.ogAlt': 'DeskUtils — herramientas esenciales de macOS en una sola app.',
   'hero.smallTools': 'Herramientas pequeñas',
   'hero.rightWhere': 'Justo donde las necesitas',
@@ -113,11 +113,18 @@ export const es = {
   'pricing.free.description': 'Para copiar y capturar a diario.',
   'pricing.pro.pitch': 'Más espacio para tu portapapeles.',
   'pricing.pro.description': 'Más historial y algunas herramientas de captura extra.',
+  'pricing.launchOffer': '🚀 Oferta de lanzamiento',
+  'pricing.lifetime': 'Licencia de por vida',
+  'pricing.oneTime': 'Un solo pago. Sin suscripción.',
+  'pricing.devices': 'Úsalo hasta en {count} dispositivos',
+  'pricing.promoLabel': 'Código de lanzamiento',
+  'pricing.cta': 'Obtener DeskUtils Pro',
+  'pricing.deviceNote': 'Una clave de licencia activa DeskUtils Pro hasta en {count} dispositivos.',
   'pricing.usdYear': 'USD / año',
   'pricing.noLicense': 'Sin licencia',
   'pricing.everythingFree': 'Todo lo incluido en Gratis',
   'pricing.freeItems': '{count} elementos del portapapeles',
-  'pricing.proItems': '{count} elementos del portapapeles',
+  'pricing.proItems': 'Historial ampliado del portapapeles',
   'pricing.screenshots': 'Capturas y anotaciones',
   'pricing.color': 'Selector de color',
   'pricing.cleanSleep': 'Limpiar teclado y evitar reposo',
@@ -125,13 +132,24 @@ export const es = {
   'pricing.ocr': 'OCR',
   'pricing.scrolling': 'Captura con desplazamiento',
   'pricing.subject': 'Capturar sujeto',
-  'pricing.persistentDimming': 'Atenuación persistente',
+  'pricing.persistentDimming': 'Atenuación de pantalla',
   'pricing.updates': 'Actualizaciones durante tu licencia',
   'pricing.comingSoon': 'Pro llegará próximamente',
-  'pricing.proFootnote': 'Precio de lanzamiento · {macs} Mac · Licencia anual',
+  'pricing.proFootnote': 'Primeros {customers} clientes · Después ${original}',
   'pricing.freeFootnote': 'Sin cuenta ni datos de pago.',
   'faq.title': '¿Preguntas?',
   'faq.contact': 'Contactar',
+  'faq.subscription.question': '¿DeskUtils es una suscripción?',
+  'faq.subscription.answer':
+    'No. DeskUtils Pro es una compra única. Paga una vez y conserva tu licencia.',
+  'faq.devices.question': '¿En cuántos Mac puedo usar DeskUtils?',
+  'faq.devices.answer':
+    'Cada licencia de DeskUtils Pro puede activarse hasta en {count} dispositivos.',
+  'faq.lifetime.question': '¿Cuánto dura la licencia?',
+  'faq.lifetime.answer': 'Tu licencia de DeskUtils Pro no caduca.',
+  'faq.launchPrice.question': '¿Por qué DeskUtils cuesta ${amount}?',
+  'faq.launchPrice.answer':
+    '${amount} es el precio de lanzamiento para los primeros {customers} clientes. El precio normal es ${original}.',
   'faq.macos.question': '¿Qué versión de macOS necesito?',
   'faq.macos.answer':
     'DeskUtils requiere macOS {version} o posterior. Consulta las notas de la versión para comprobar los Mac compatibles antes de descargarlo.',
@@ -210,7 +228,7 @@ export const es = {
     'Este sitio no usa analítica, píxeles de seguimiento, cookies publicitarias ni cuentas de usuario. Los vídeos de demostración se sirven como archivos del sitio, sin reproductores de terceros. El proveedor de alojamiento puede procesar registros del servidor para ofrecer seguridad y una entrega fiable.',
   'privacy.purchase.title': 'Compras y activación de licencias',
   'privacy.purchase.body1':
-    'Las ventas Pro aún no están abiertas. Cuando lo estén, los pagos serán procesados por Lemon Squeezy conforme a sus propias prácticas de privacidad. DeskUtils recibirá la información del pedido y la licencia necesaria para ofrecer y mantener tu licencia.',
+    'Los pagos de Pro son procesados por Lemon Squeezy conforme a sus propias prácticas de privacidad. DeskUtils recibe la información del pedido y la licencia necesaria para ofrecer y mantener tu licencia.',
   'privacy.purchase.body2':
     'Activar y validar Pro requiere comunicarse con el servicio de licencias. Tu clave e información de activación se usan para verificar el acceso y aplicar el límite de dispositivos. No se envían contenidos del portapapeles ni capturas.',
   'privacy.support.title': 'Mensajes de soporte',
@@ -228,18 +246,18 @@ export const es = {
     'No puedes vender, sublicenciar, redistribuir ni proporcionar tu clave a otra persona, eludir los límites de licencia ni usar DeskUtils de forma contraria a la ley aplicable.',
   'terms.plans.title': 'Gratis y Pro',
   'terms.plans.body1':
-    'La versión gratuita puede usarse sin pagar ni tener una cuenta DeskUtils. Las ventas Pro aún no están abiertas. La licencia Pro prevista cubre {macs} Mac e incluye funciones Pro y actualizaciones durante el periodo anual activo.',
+    'La versión gratuita puede usarse sin pagar ni tener una cuenta DeskUtils. La compra de Pro ofrece una licencia de por vida para hasta {macs} dispositivos e incluye las funciones de DeskUtils Pro.',
   'terms.plans.body2':
-    'El precio introductorio es de ${amount} USD al año; el precio habitual es de ${original} USD al año. Este sitio no anuncia una fecha de caducidad de la oferta ni garantiza el precio de renovación. Los impuestos y las condiciones finales se mostrarán al pagar.',
-  'terms.renewal.title': 'Renovación y cancelación anual',
+    'El precio de lanzamiento es de ${amount} USD para los primeros {customers} clientes; el precio habitual es de ${original} USD. Los impuestos y las condiciones finales se muestran al pagar.',
+  'terms.renewal.title': 'Compra única',
   'terms.renewal.body':
-    'Pro es una licencia anual. Cuando se abran las ventas, las licencias se cobrarán cada año y se renovarán automáticamente hasta que las canceles. Puedes cancelar la próxima renovación con las herramientas de gestión de tu pedido. La cancelación detiene la siguiente renovación y no reembolsa retroactivamente el periodo actual.',
+    'Pro es una compra única, no una suscripción. La licencia de por vida no caduca y no tiene cargos recurrentes.',
   'terms.payment.title': 'Pagos y entrega de la licencia',
   'terms.payment.body':
     'Cuando esté disponible, Lemon Squeezy procesará los pagos como vendedor registrado. Gestionará pagos, impuestos, recibos y reembolsos relacionados. Tras la compra recibirás una clave para activar DeskUtils.',
   'terms.refunds.title': 'Reembolsos',
   'terms.refunds.body':
-    'Cuando se abran las ventas Pro, puedes solicitar un reembolso dentro de los 14 días posteriores a la compra original o renovación anual escribiendo a {email} con datos suficientes del pedido. Los reembolsos aprobados se procesan mediante Lemon Squeezy y pueden revocar la licencia asociada.',
+    'Puedes solicitar un reembolso dentro de los 14 días posteriores a la compra original escribiendo a {email} con datos suficientes del pedido. Los reembolsos aprobados se procesan mediante Lemon Squeezy y pueden revocar la licencia asociada.',
   'terms.beta.title': 'Software beta',
   'terms.beta.body':
     'Las versiones beta pueden contener errores, cambiar sin aviso, requerir confirmaciones adicionales de macOS durante la instalación o comportarse de forma distinta a una versión estable. Haz copias de seguridad de los datos importantes y no dependas de DeskUtils como única copia.',

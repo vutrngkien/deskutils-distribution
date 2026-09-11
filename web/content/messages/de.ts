@@ -34,7 +34,7 @@ export const de = {
     'So verarbeitet DeskUtils Zwischenablage, Bildschirmaufnahmen, Lizenzen und Supportinformationen.',
   'meta.terms.title': 'Nutzungsbedingungen — DeskUtils',
   'meta.terms.description':
-    'Bedingungen für Download und Nutzung von DeskUtils einschließlich der geplanten Jahreslizenz Pro.',
+    'Bedingungen für Download und Nutzung von DeskUtils einschließlich der lebenslangen Pro-Lizenz.',
   'meta.ogAlt': 'DeskUtils — wichtige macOS-Tools in einer App.',
   'hero.smallTools': 'Kleine Tools',
   'hero.rightWhere': 'Genau dort, wo du sie brauchst',
@@ -115,24 +115,42 @@ export const de = {
   'pricing.free.description': 'Für tägliches Kopieren und Aufnehmen.',
   'pricing.pro.pitch': 'Mehr Platz für deine Zwischenablage.',
   'pricing.pro.description': 'Mehr Verlauf und zusätzliche Aufnahme-Tools.',
+  'pricing.launchOffer': '🚀 Einführungsangebot',
+  'pricing.lifetime': 'Lebenslange Lizenz',
+  'pricing.oneTime': 'Einmalzahlung. Kein Abo.',
+  'pricing.devices': 'Auf bis zu {count} Geräten nutzen',
+  'pricing.promoLabel': 'Launch-Code',
+  'pricing.cta': 'DeskUtils Pro holen',
+  'pricing.deviceNote': 'Ein Lizenzschlüssel aktiviert DeskUtils Pro auf bis zu {count} Geräten.',
   'pricing.usdYear': 'USD / Jahr',
   'pricing.noLicense': 'Keine Lizenz nötig',
   'pricing.everythingFree': 'Alles aus Kostenlos',
   'pricing.freeItems': '{count} Zwischenablage-Einträge',
-  'pricing.proItems': '{count} Zwischenablage-Einträge',
+  'pricing.proItems': 'Erweiterter Zwischenablageverlauf',
   'pricing.screenshots': 'Screenshots & Annotationen',
   'pricing.color': 'Farbpipette',
   'pricing.cleanSleep': 'Tastatur reinigen & Ruhezustand verhindern',
   'pricing.dimmingPreview': 'Vorschau der Bildschirmdimmung',
   'pricing.scrolling': 'Scroll-Aufnahme',
   'pricing.subject': 'Motiv aufnehmen',
-  'pricing.persistentDimming': 'Dauerhafte Bildschirmdimmung',
+  'pricing.persistentDimming': 'Bildschirmdimmung',
   'pricing.updates': 'Updates während deiner Lizenzlaufzeit',
   'pricing.comingSoon': 'Pro kommt bald',
-  'pricing.proFootnote': 'Einführungspreis · {macs} Mac · Jahreslizenz',
+  'pricing.proFootnote': 'Erste {customers} Kunden · Danach ${original}',
   'pricing.freeFootnote': 'Kein Konto. Keine Zahlungsdaten.',
   'faq.title': 'Fragen?',
   'faq.contact': 'Kontakt aufnehmen',
+  'faq.subscription.question': 'Ist DeskUtils ein Abonnement?',
+  'faq.subscription.answer':
+    'Nein. DeskUtils Pro ist ein einmaliger Kauf. Einmal zahlen, Lizenz behalten.',
+  'faq.devices.question': 'Auf wie vielen Macs kann ich DeskUtils nutzen?',
+  'faq.devices.answer':
+    'Jede DeskUtils Pro-Lizenz kann auf bis zu {count} Geräten aktiviert werden.',
+  'faq.lifetime.question': 'Wie lange ist die Lizenz gültig?',
+  'faq.lifetime.answer': 'Deine DeskUtils Pro-Lizenz läuft nicht ab.',
+  'faq.launchPrice.question': 'Warum kostet DeskUtils ${amount}?',
+  'faq.launchPrice.answer':
+    '${amount} ist unser Einführungspreis für die ersten {customers} Kunden. Der reguläre Preis beträgt ${original}.',
   'faq.macos.question': 'Welche macOS-Version brauche ich?',
   'faq.macos.answer':
     'DeskUtils benötigt macOS {version} oder neuer. Prüfe vor dem Download die unterstützten Macs in den Versionshinweisen.',
@@ -215,7 +233,7 @@ export const de = {
     'Diese Website verwendet keine Analyse, Tracking-Pixel, Werbe-Cookies oder Benutzerkonten. Demo-Videos werden als Website-Dateien ohne Videoeinbettungen von Drittanbietern ausgeliefert. Der Hosting-Anbieter kann Standard-Serverprotokolle für Sicherheit und zuverlässige Bereitstellung verarbeiten.',
   'privacy.purchase.title': 'Käufe und Lizenzaktivierung',
   'privacy.purchase.body1':
-    'Pro-Verkäufe sind noch nicht geöffnet. Sobald sie starten, werden Zahlungen von Lemon Squeezy nach dessen eigenen Datenschutzpraktiken verarbeitet. DeskUtils erhält die für Bereitstellung und Support deiner Lizenz nötigen Bestell- und Lizenzinformationen.',
+    'Pro-Zahlungen werden von Lemon Squeezy nach dessen eigenen Datenschutzpraktiken verarbeitet. DeskUtils erhält die für Bereitstellung und Support deiner Lizenz nötigen Bestell- und Lizenzinformationen.',
   'privacy.purchase.body2':
     'Für Aktivierung und Prüfung von Pro muss der Lizenzdienst kontaktiert werden. Lizenzschlüssel und Aktivierungsdaten dienen zur Zugriffsprüfung und Durchsetzung des Gerätelimits. Zwischenablageinhalte und Screenshots werden nicht gesendet.',
   'privacy.support.title': 'Support-Nachrichten',
@@ -233,18 +251,18 @@ export const de = {
     'Du darfst DeskUtils nicht verkaufen, unterlizenzieren, weiterverbreiten oder deinen Lizenzschlüssel weitergeben, Lizenzlimits umgehen oder DeskUtils unter Verstoß gegen geltendes Recht verwenden.',
   'terms.plans.title': 'Kostenlos und Pro',
   'terms.plans.body1':
-    'Die kostenlose Version kann ohne Zahlung oder DeskUtils-Konto verwendet werden. Pro-Verkäufe sind noch nicht geöffnet. Die geplante Pro-Lizenz gilt für {macs} Mac und umfasst Pro-Funktionen sowie Updates während der aktiven Jahreslaufzeit.',
+    'Die kostenlose Version kann ohne Zahlung oder DeskUtils-Konto verwendet werden. Der Kauf von Pro umfasst eine lebenslange Lizenz für bis zu {macs} Geräte und die DeskUtils-Pro-Funktionen.',
   'terms.plans.body2':
-    'Der Einführungspreis beträgt ${amount} USD pro Jahr; der reguläre Preis ${original} USD pro Jahr. Diese Website nennt kein Ablaufdatum des Angebots und garantiert keinen Verlängerungspreis. Steuern und endgültige Kaufbedingungen werden beim Bezahlen angezeigt.',
-  'terms.renewal.title': 'Jährliche Verlängerung und Kündigung',
+    'Der Einführungspreis beträgt ${amount} USD für die ersten {customers} Kunden; der reguläre Preis ${original} USD. Steuern und endgültige Kaufbedingungen werden beim Bezahlen angezeigt.',
+  'terms.renewal.title': 'Einmaliger Kauf',
   'terms.renewal.body':
-    'Pro ist eine Jahreslizenz. Sobald der Verkauf startet, werden Jahreslizenzen jährlich abgerechnet und bis zur Kündigung automatisch verlängert. Die nächste Verlängerung kannst du mit den Verwaltungsfunktionen deiner Bestellung kündigen. Die Kündigung stoppt die nächste Verlängerung und erstattet den laufenden Zeitraum nicht rückwirkend.',
+    'Pro ist ein einmaliger Kauf und kein Abonnement. Die lebenslange Lizenz läuft nicht ab und es fallen keine wiederkehrenden Lizenzgebühren an.',
   'terms.payment.title': 'Zahlung und Lizenzbereitstellung',
   'terms.payment.body':
     'Sobald verfügbar, werden Zahlungen von Lemon Squeezy als Merchant of Record verarbeitet. Lemon Squeezy übernimmt Zahlungsabwicklung, Steuern, Belege und zahlungsbezogene Erstattungen. Nach dem Kauf erhältst du einen Lizenzschlüssel zur Aktivierung in DeskUtils.',
   'terms.refunds.title': 'Erstattungen',
   'terms.refunds.body':
-    'Nach Öffnung des Pro-Verkaufs kannst du innerhalb von 14 Tagen nach dem ursprünglichen Kauf oder der Jahresverlängerung eine Erstattung beantragen. Schreibe dazu an {email} und nenne ausreichende Bestelldaten. Genehmigte Erstattungen werden über Lemon Squeezy abgewickelt und können die zugehörige Lizenz widerrufen.',
+    'Du kannst innerhalb von 14 Tagen nach dem ursprünglichen Kauf eine Erstattung beantragen. Schreibe dazu an {email} und nenne ausreichende Bestelldaten. Genehmigte Erstattungen werden über Lemon Squeezy abgewickelt und können die zugehörige Lizenz widerrufen.',
   'terms.beta.title': 'Beta-Software',
   'terms.beta.body':
     'Beta-Versionen können Fehler enthalten, sich unangekündigt ändern, bei der Installation zusätzliche macOS-Bestätigungen erfordern oder sich anders als stabile Versionen verhalten. Sichere wichtige Daten und verlasse dich nicht auf DeskUtils als einzige Kopie.',

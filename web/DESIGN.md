@@ -22,9 +22,9 @@ customer claims.
   compact six-item screenshot grid that follows the annotate demo.
   No all-caps editorial eyebrows, numbered sections, glow, gradient text,
   repeating marketing cards, or separate native/privacy slogans.
-- Pricing keeps a quiet Free column beside a dark DeskUtils Pro upsell. The
-  Pro card is informational only: it says “Coming soon” and does not suggest a
-  checkout is open.
+- Pricing keeps a quiet Free column beside a dark DeskUtils Pro upsell. The Pro
+  card presents the $7.99 lifetime launch offer for the first 100 customers,
+  with the $14.99 regular price and two-device limit stated plainly.
 - Video slots remain ready for real recordings. Missing media uses an honest,
   compact placeholder with a tool icon; it is not a simulated app or fake player.
 
@@ -32,8 +32,8 @@ customer claims.
 
 - Feature availability, permissions and system requirements: the private
   DeskUtils source app and the verified release artifact.
-- Public pricing and license wording: `content/product.ts`, subject to the
-  Lemon Squeezy configuration and release checklist.
+- Public pricing, license wording and the verified Lemon Squeezy checkout URL:
+  `content/product.ts`.
 - Layout and visual styling: the implemented responsive components and the
   simple product-first direction above.
 - Media: existing DeskUtils captures plus recordings added through `MEDIA.md`.

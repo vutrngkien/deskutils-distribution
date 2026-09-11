@@ -33,7 +33,8 @@ export function Button({
   href?: string;
   secondary?: boolean;
   locale?: Locale;
-  placement?: 'header' | 'header_compact' | 'hero' | 'pricing_free' | 'install_page';
+  placement?:
+    'header' | 'header_compact' | 'hero' | 'pricing_free' | 'pricing_pro' | 'install_page';
 }) {
   const className = `${styles.button} ${secondary ? styles.buttonSecondary : ''}`;
   if (href === product.downloadURL) {

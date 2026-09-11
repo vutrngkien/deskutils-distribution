@@ -214,18 +214,23 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
                     <span className={s.planEyebrow}>
                       {plan.id === 'pro' ? t('pricing.pro') : t('pricing.free')}
                     </span>
+                    {plan.id === 'pro' ? (
+                      <span className={s.launchBadge}>{t('pricing.launchOffer')}</span>
+                    ) : null}
                   </div>
                   <h3 className={s.planPitch}>{t(plan.pitch)}</h3>
                   <p className={s.planDescription}>{t(plan.description)}</p>
                   {plan.id === 'pro' ? (
-                    <div className={s.price}>
-                      <strong>${product.pricing.amount}</strong>
-                      <span>
+                    <>
+                      <div className={s.price}>
                         <del>${product.pricing.originalAmount}</del>
-                        <br />
-                        {t('pricing.usdYear')}
-                      </span>
-                    </div>
+                        <strong>${product.pricing.amount}</strong>
+                      </div>
+                      <p className={s.promoCode}>
+                        <span>{t('pricing.promoLabel')}</span>
+                        <code>{product.pricing.discountCode}</code>
+                      </p>
+                    </>
                   ) : (
                     <div className={s.price}>
                       <strong>$0</strong>
@@ -238,7 +243,13 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
                     ))}
                   </ul>
                   {plan.id === 'pro' ? (
-                    <p className={s.comingSoon}>{t('pricing.comingSoon')}</p>
+                    <Button
+                      href={product.pricing.purchaseURL}
+                      locale={locale}
+                      placement="pricing_pro"
+                    >
+                      {t('pricing.cta')}
+                    </Button>
                   ) : (
                     <Button locale={locale} placement="pricing_free">
                       {t('hero.downloadFree')} <span aria-hidden="true">↓</span>
@@ -246,12 +257,18 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
                   )}
                   <p className={s.planFootnote}>
                     {plan.id === 'pro'
-                      ? t('pricing.proFootnote', { macs: product.pricing.macs })
+                      ? t('pricing.proFootnote', {
+                          customers: product.pricing.customerLimit,
+                          original: product.pricing.originalAmount,
+                        })
                       : t('pricing.freeFootnote')}
                   </p>
                 </article>
               ))}
             </div>
+            <p className={s.pricingDeviceNote}>
+              {t('pricing.deviceNote', { count: product.pricing.macs })}
+            </p>
           </section>
 
           <section className={s.faq} id="faq" aria-labelledby="faq-title">
@@ -264,7 +281,7 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
             <div>
               {faqs.map((faq) => (
                 <details key={faq.question}>
-                  <summary>{t(faq.question)}</summary>
+                  <summary>{t(faq.question, faq.values)}</summary>
                   <p>{t(faq.answer, faq.values)}</p>
                 </details>
               ))}

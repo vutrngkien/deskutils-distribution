@@ -34,8 +34,7 @@ export const ja = {
   'meta.privacy.description':
     'DeskUtils におけるクリップボード、画面キャプチャ、ライセンス、サポート情報の取り扱いについて。',
   'meta.terms.title': '利用規約 — DeskUtils',
-  'meta.terms.description':
-    'DeskUtils のダウンロードと利用、近日提供予定の年間 Pro ライセンスに関する規約です。',
+  'meta.terms.description': 'DeskUtils のダウンロードと利用、永続 Pro ライセンスに関する規約です。',
   'meta.ogAlt': 'DeskUtils — 必要な macOS ツールをひとつのアプリに。',
   'hero.smallTools': '小さなツール',
   'hero.rightWhere': '必要な場所に、すぐ',
@@ -111,11 +110,19 @@ export const ja = {
   'pricing.free.description': '日々のコピーとキャプチャに。',
   'pricing.pro.pitch': 'クリップボードをもっと広く。',
   'pricing.pro.description': '履歴を増やし、追加のキャプチャツールも利用できます。',
+  'pricing.launchOffer': '🚀 ローンチオファー',
+  'pricing.lifetime': '永続ライセンス',
+  'pricing.oneTime': '買い切り。サブスクリプションではありません。',
+  'pricing.devices': '最大 {count} 台のデバイスで利用可能',
+  'pricing.promoLabel': 'ローンチコード',
+  'pricing.cta': 'DeskUtils Pro を入手',
+  'pricing.deviceNote':
+    '1 つのライセンスキーで最大 {count} 台のデバイスの DeskUtils Pro を有効化できます。',
   'pricing.usdYear': 'USD / 年',
   'pricing.noLicense': 'ライセンス不要',
   'pricing.everythingFree': '無料版の全機能',
   'pricing.freeItems': 'クリップボード {count} 件',
-  'pricing.proItems': 'クリップボード {count} 件',
+  'pricing.proItems': '拡張クリップボード履歴',
   'pricing.screenshots': 'スクリーンショットと注釈',
   'pricing.color': 'カラーピッカー',
   'pricing.cleanSleep': 'キーボード清掃とスリープ防止',
@@ -123,13 +130,23 @@ export const ja = {
   'pricing.ocr': 'OCR',
   'pricing.scrolling': 'スクロールキャプチャ',
   'pricing.subject': '被写体をキャプチャ',
-  'pricing.persistentDimming': '画面の調光状態を保存',
+  'pricing.persistentDimming': '画面調光',
   'pricing.updates': 'ライセンス期間中のアップデート',
   'pricing.comingSoon': 'Pro は近日公開',
-  'pricing.proFootnote': '導入価格 · Mac {macs} 台 · 年間ライセンス',
+  'pricing.proFootnote': '先着 {customers} 名 · 以降は ${original}',
   'pricing.freeFootnote': 'アカウントも支払い情報も不要です。',
   'faq.title': 'よくある質問',
   'faq.contact': 'お問い合わせ',
+  'faq.subscription.question': 'DeskUtils はサブスクリプションですか？',
+  'faq.subscription.answer':
+    'いいえ。DeskUtils Pro は買い切りです。一度支払えばライセンスはそのまま使えます。',
+  'faq.devices.question': '何台の Mac で DeskUtils を使えますか？',
+  'faq.devices.answer': 'DeskUtils Pro ライセンスは最大 {count} 台のデバイスで有効化できます。',
+  'faq.lifetime.question': 'ライセンスの有効期限は？',
+  'faq.lifetime.answer': 'DeskUtils Pro ライセンスに有効期限はありません。',
+  'faq.launchPrice.question': 'DeskUtils が ${amount} なのはなぜですか？',
+  'faq.launchPrice.answer':
+    '${amount} は先着 {customers} 名限定のローンチ価格です。通常価格は ${original} です。',
   'faq.macos.question': '必要な macOS のバージョンは？',
   'faq.macos.answer':
     'DeskUtils には macOS {version} 以降が必要です。ダウンロード前にリリースノートで対応 Mac を確認してください。',
@@ -207,7 +224,7 @@ export const ja = {
     'このサイトは解析、トラッキングピクセル、広告 Cookie、ユーザーアカウントを使用しません。デモ動画は第三者プレーヤーを使わずサイトのファイルとして配信します。ホスティング事業者は安全で安定した配信のため標準的なサーバーログを処理する場合があります。',
   'privacy.purchase.title': '購入とライセンス認証',
   'privacy.purchase.body1':
-    'Pro はまだ販売していません。販売開始後の支払いは Lemon Squeezy が同社のプライバシー方針に従って処理します。DeskUtils はライセンスの提供とサポートに必要な注文・ライセンス情報を受け取ります。',
+    'Pro の支払いは Lemon Squeezy が同社のプライバシー方針に従って処理します。DeskUtils はライセンスの提供とサポートに必要な注文・ライセンス情報を受け取ります。',
   'privacy.purchase.body2':
     'Pro の認証と検証にはライセンスサービスとの通信が必要です。ライセンスキーと認証情報はアクセス確認とデバイス上限の適用に使われます。クリップボードの内容やスクリーンショットは送信されません。',
   'privacy.support.title': 'サポートへのメッセージ',
@@ -225,18 +242,18 @@ export const ja = {
     'ライセンスキーの販売、再許諾、再配布、第三者への提供、ライセンス制限の回避、適用法に反する方法での利用は禁止します。',
   'terms.plans.title': '無料版と Pro',
   'terms.plans.body1':
-    '無料版は支払いや DeskUtils アカウントなしで利用できます。Pro はまだ販売していません。予定されている Pro ライセンスは Mac {macs} 台を対象とし、有効な年間ライセンス期間中の Pro 機能と更新を含みます。',
+    '無料版は支払いや DeskUtils アカウントなしで利用できます。Pro の購入には最大 {macs} 台のデバイス向け永続ライセンスと DeskUtils Pro 機能が含まれます。',
   'terms.plans.body2':
-    '導入価格は年額 ${amount} USD、通常価格は年額 ${original} USD です。本サイトではキャンペーン終了日や更新価格の保証を公表していません。販売開始後、適用税と最終購入条件は決済時に表示されます。',
-  'terms.renewal.title': '年間更新と解約',
+    'ローンチ価格は先着 {customers} 名限定の ${amount} USD、通常価格は ${original} USD です。適用税と最終購入条件は決済時に表示されます。',
+  'terms.renewal.title': '買い切り',
   'terms.renewal.body':
-    'Pro は年間ライセンスです。販売開始後は年ごとに請求され、解約するまで自動更新されます。注文時に提供される購入管理ツールから次回更新を解約できます。解約は次回更新を停止しますが、現在のライセンス期間を遡って返金するものではありません。',
+    'Pro は買い切りで、サブスクリプションではありません。永続ライセンスに有効期限はなく、継続的なライセンス料金もありません。',
   'terms.payment.title': '支払いとライセンスの提供',
   'terms.payment.body':
     '販売開始後、支払いは Merchant of Record である Lemon Squeezy が処理します。支払い、適用税、領収書、支払い関連の返金を同社が扱います。購入後、DeskUtils で認証するためのライセンスキーが提供されます。',
   'terms.refunds.title': '返金',
   'terms.refunds.body':
-    'Pro 販売開始後、初回購入または年間更新から 14 日以内に、取引を特定できる注文情報を添えて {email} へ返金を申請できます。承認された返金は Lemon Squeezy が処理し、関連ライセンスが無効になる場合があります。',
+    '初回購入から 14 日以内に、取引を特定できる注文情報を添えて {email} へ返金を申請できます。承認された返金は Lemon Squeezy が処理し、関連ライセンスが無効になる場合があります。',
   'terms.beta.title': 'ベータ版ソフトウェア',
   'terms.beta.body':
     'ベータ版には不具合が含まれ、予告なく変更され、インストール時に追加の macOS 確認が必要になり、安定版と異なる動作をする場合があります。重要なデータをバックアップし、DeskUtils だけを唯一の保存先にしないでください。',

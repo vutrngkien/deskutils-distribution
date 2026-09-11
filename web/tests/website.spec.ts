@@ -15,8 +15,32 @@ for (const width of [375, 640, 768, 1440]) {
     await expect(
       page.getByRole('heading', { name: 'Capture, annotate, and keep moving.' }),
     ).toBeVisible();
-    await expect(page.getByText('Pro is coming soon', { exact: true })).toBeVisible();
+    await expect(page.getByText('🚀 Launch Offer', { exact: true })).toBeVisible();
     await expect(page.getByText('$7.99', { exact: true })).toBeVisible();
+    await expect(page.getByText('$14.99', { exact: true })).toHaveCSS(
+      'text-decoration-line',
+      'line-through',
+    );
+    await expect(page.getByText('Lifetime license', { exact: true }).first()).toBeVisible();
+    await expect(page.getByText('Use on up to 2 devices', { exact: true })).toBeVisible();
+    await expect(page.getByText('Everything in Free', { exact: true })).toBeVisible();
+    await expect(page.getByText('Extended clipboard history', { exact: true })).toBeVisible();
+    await expect(page.getByText('Scrolling Capture', { exact: true }).last()).toBeVisible();
+    await expect(page.getByText('Capture Subject', { exact: true }).last()).toBeVisible();
+    await expect(page.getByText('Monitor dimming', { exact: true })).toBeVisible();
+    await expect(page.getByText('Display dimming preview', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('All DeskUtils Pro utilities', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('License key delivered instantly', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('No recurring fees', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('500 clipboard items', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('Launch code', { exact: true })).toBeVisible();
+    await expect(page.getByText('LAUNCH799', { exact: true })).toBeVisible();
+    await expect(page.getByText('Why is DeskUtils $7.99?', { exact: true })).toBeVisible();
+    const proCheckout = page.getByRole('link', { name: 'Get DeskUtils Pro', exact: true });
+    const checkoutURL = new URL((await proCheckout.getAttribute('href')) ?? '');
+    expect(checkoutURL.origin).toBe('https://deskutils.lemonsqueezy.com');
+    expect(checkoutURL.pathname).toBe('/checkout/buy/c9fb0feb-6305-4361-9f15-10c1ff9f15f6');
+    expect(checkoutURL.searchParams.get('checkout[discount_code]')).toBe('LAUNCH799');
     const structuredData = page.locator('script[type="application/ld+json"]');
     await expect(structuredData).toHaveCount(1);
     expect(
@@ -63,7 +87,6 @@ for (const width of [375, 640, 768, 1440]) {
           ),
         ),
     ).toBe(true);
-    await expect(page.locator('a[href*="lemonsqueezy"]')).toHaveCount(0);
     await page.evaluate(() => scrollTo(0, 0));
     await page.screenshot({ path: `test-results/home-${width}.png`, fullPage: true });
     expect(errors).toEqual([]);

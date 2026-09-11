@@ -4,6 +4,16 @@
         <title>DeskUtils</title>
         <item>
             <title>0.1.2</title>
+            <pubDate>Fri, 11 Sep 2026 15:46:46 +0700</pubDate>
+            <link>https://deskutils.app/</link>
+            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.2</sparkle:fullReleaseNotesLink>
+            <sparkle:version>6</sparkle:version>
+            <sparkle:shortVersionString>0.1.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.2/DeskUtils-0.1.2-6.zip" length="12436516" type="application/octet-stream" sparkle:edSignature="M2b59bSMDYpyc7NTsh4JwOpzQEWL3V+t1RR3P+DNU2Xjdq93MTZTpIibu9YaPb0x7oTyaZL6oRUEYzRL6qhCCw=="/>
+        </item>
+        <item>
+            <title>0.1.2</title>
             <pubDate>Fri, 11 Sep 2026 13:47:36 +0700</pubDate>
             <link>https://deskutils.app/</link>
             <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.2</sparkle:fullReleaseNotesLink>
@@ -35,6 +45,6 @@
     </channel>
 </rss>
 <!-- sparkle-signatures:
-edSignature: W5RxRMUqfeU5B8pP3V688m01DPdktMG937A2lbNOCvIMNcaOevpq0uuyCBe7v5kgEUzVIR5Gi62XxA/eTF2HCA==
-length: 2635
+edSignature: CAO/6XWjJloVgOc+S+/msvvSgWcYJ1GM/DOI5OPUmYcv/p5pL8KgYUxAzW1/9Jn3ekj2JnXMhPZueDBQjBYADg==
+length: 3450
 -->

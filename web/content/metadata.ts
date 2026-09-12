@@ -3,7 +3,7 @@ import { translate } from './i18n';
 import { languages, localePath, type Locale } from './locales';
 import { product } from './product';
 
-type Page = 'home' | 'install' | 'privacy' | 'terms';
+type Page = 'home' | 'install' | 'privacy' | 'terms' | 'feedback';
 const openGraphLocales: Record<Locale, string> = {
   en: 'en_US',
   vi: 'vi_VN',

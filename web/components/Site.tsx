@@ -155,6 +155,14 @@ export function Footer({ locale = 'en' }: { locale?: Locale }) {
               {t('nav.support')}
             </a>
             <a
+              href={localePath(locale, '/feedback/')}
+              data-umami-event="nav_click"
+              data-umami-event-placement="footer"
+              data-umami-event-target="feedback"
+            >
+              {t('nav.feedback')}
+            </a>
+            <a
               href={localePath(locale, '/privacy/')}
               data-umami-event="nav_click"
               data-umami-event-placement="footer"

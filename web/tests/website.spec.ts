@@ -130,7 +130,7 @@ test('keyboard, mobile menu and internal routes work', async ({ page }) => {
   await mobile.getByRole('link', { name: 'Pricing', exact: true }).click();
   await expect(page).toHaveURL(/#pricing$/);
   await expect(mobile).not.toBeVisible();
-  for (const path of ['/install/', '/privacy/', '/terms/']) {
+  for (const path of ['/install/', '/privacy/', '/terms/', '/feedback/']) {
     const response = await page.goto(path);
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toBeVisible();
@@ -145,6 +145,13 @@ test('keyboard, mobile menu and internal routes work', async ({ page }) => {
       await expect(page.getByRole('heading', { name: 'Open Privacy & Security' })).toBeVisible();
       await expect(page.getByRole('heading', { name: 'Allow DeskUtils' })).toBeVisible();
     }
+    if (path === '/feedback/') {
+      await expect(page.getByRole('heading', { name: 'Found a bug? Have an idea?' })).toBeVisible();
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+        'content',
+        'noindex, nofollow',
+      );
+    }
   }
   await page.goto('/404.html');
   await page.getByRole('link', { name: 'Back to DeskUtils →', exact: true }).click();
@@ -152,6 +159,63 @@ test('keyboard, mobile menu and internal routes work', async ({ page }) => {
 
   await page.goto('/vi/');
   await expect(page.locator('#install a')).toHaveAttribute('href', '/vi/install/');
+  const localizedFeedback = await page.goto('/vi/feedback/');
+  expect(localizedFeedback?.status()).toBe(200);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    'href',
+    'https://deskutils.app/vi/feedback/',
+  );
+});
+
+test('feedback page validates fields and keeps a safe email fallback without an endpoint', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/feedback/');
+
+  await expect(page.getByRole('button', { name: 'Feedback', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await page.getByRole('button', { name: 'Bug', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Bug', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+
+  await page.getByLabel('Your feedback').fill('The clipboard filter could be easier to discover.');
+  await page.getByLabel('Email address').fill('person@example.com');
+  await page.setInputFiles('#feedback-attachment', {
+    name: 'not-an-image.txt',
+    mimeType: 'text/plain',
+    buffer: Buffer.from('not an image'),
+  });
+  await expect(page.getByText('Please choose an image file.', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Send feedback', exact: true })).toBeDisabled();
+  await expect(page.getByText('Feedback submissions are temporarily unavailable.')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'deskutils.app@gmail.com' })).toHaveAttribute(
+    'href',
+    'mailto:deskutils.app@gmail.com',
+  );
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('feedback is discoverable from the FAQ and footer while direct support remains available', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Get in touch', exact: true }).click();
+  await expect(page).toHaveURL(/\/feedback\/$/);
+  await page.goto('/feedback/');
+  const footer = page.getByRole('navigation', { name: 'Footer navigation' });
+  await expect(footer.getByRole('link', { name: 'Feedback', exact: true })).toHaveAttribute(
+    'href',
+    '/feedback/',
+  );
+  await expect(footer.getByRole('link', { name: 'Support', exact: true })).toHaveAttribute(
+    'href',
+    'mailto:deskutils.app@gmail.com',
+  );
 });
 
 test('localized header uses the translated download label', async ({ page }) => {

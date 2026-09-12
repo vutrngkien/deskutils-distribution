@@ -21,6 +21,7 @@ export const fr = {
   'nav.changelog': 'Nouveautés',
   'nav.install': 'Installer',
   'nav.support': 'Assistance',
+  'nav.feedback': 'Avis',
   'nav.privacy': 'Confidentialité',
   'nav.terms': 'Conditions',
   'meta.home.title': 'DeskUtils — Gestionnaire de presse-papiers et outils de capture pour Mac',
@@ -35,6 +36,9 @@ export const fr = {
   'meta.terms.title': 'Conditions d’utilisation — DeskUtils',
   'meta.terms.description':
     'Conditions de téléchargement et d’utilisation de DeskUtils, avec la licence Pro à vie.',
+  'meta.feedback.title': 'Avis — DeskUtils',
+  'meta.feedback.description':
+    'Signalez un bug, partagez un avis ou proposez une idée pour DeskUtils.',
   'meta.ogAlt': 'DeskUtils — les outils macOS essentiels dans une seule app.',
   'hero.smallTools': 'De petits outils',
   'hero.rightWhere': 'Là où vous en avez besoin',
@@ -143,6 +147,38 @@ export const fr = {
   'pricing.freeFootnote': 'Pas de compte ni de données de paiement.',
   'faq.title': 'Des questions ?',
   'faq.contact': 'Nous contacter',
+  'feedback.label': 'Avis sur DeskUtils',
+  'feedback.title.line1': 'Vous avez trouvé un bug ?',
+  'feedback.title.line2': 'Une nouvelle idée ?',
+  'feedback.description':
+    'Choisissez une touche. Écrivez quelques lignes. Envoyez-les à DeskUtils.',
+  'feedback.kind.label': 'Type de retour',
+  'feedback.kind.bug': 'Bug',
+  'feedback.kind.feedback': 'Avis',
+  'feedback.kind.idea': 'Idée',
+  'feedback.message.label': 'Votre avis',
+  'feedback.message.placeholder':
+    'Qu’est-ce qui fonctionne bien, pourrait être amélioré ou semble incorrect ?',
+  'feedback.email.label': 'Adresse e-mail',
+  'feedback.email.placeholder': 'Où pouvons-nous vous répondre ?',
+  'feedback.attachment.add': 'Joindre une image',
+  'feedback.attachment.change': 'Changer l’image',
+  'feedback.attachment.hint': 'Facultatif · Une image, jusqu’à 3 Mo',
+  'feedback.submit': 'Envoyer l’avis',
+  'feedback.submit.sending': 'Envoi…',
+  'feedback.privacy': 'Aucun compte DeskUtils requis. Votre e-mail n’est jamais partagé.',
+  'feedback.unavailable': 'Les envois sont temporairement indisponibles. Écrivez à',
+  'feedback.error.message': 'Décrivez votre avis avant de l’envoyer.',
+  'feedback.error.email': 'Saisissez une adresse e-mail valide afin que nous puissions répondre.',
+  'feedback.error.imageType': 'Choisissez un fichier image.',
+  'feedback.error.imageSize': 'Choisissez une image de moins de 3 Mo.',
+  'feedback.error.unavailable': 'Les envois sont temporairement indisponibles.',
+  'feedback.error.submit':
+    'Nous n’avons pas pu envoyer votre avis. Réessayez ou contactez le support.',
+  'feedback.success.title': 'Merci pour votre avis.',
+  'feedback.success.body':
+    'Il est en route vers DeskUtils. Nous vous répondrons si nous avons besoin de précisions.',
+  'feedback.success.again': 'Envoyer un autre avis',
   'faq.subscription.question': 'DeskUtils est-il un abonnement ?',
   'faq.subscription.answer':
     'Non. DeskUtils Pro est un achat unique. Payez une fois et conservez votre licence.',
@@ -255,7 +291,7 @@ export const fr = {
     'L’activation et la validation de Pro nécessitent une communication avec le service de licences. Votre clé et vos informations d’activation servent à vérifier l’accès et à appliquer la limite d’appareils. Aucun contenu du presse-papiers ni aucune capture n’est envoyé.',
   'privacy.support.title': 'Messages d’assistance',
   'privacy.support.body':
-    'Si vous écrivez à DeskUtils, les informations que vous fournissez volontairement, comme votre adresse e-mail, votre message, des éléments de diagnostic ou de commande, servent à répondre à votre demande et à vous aider. N’incluez pas de contenu sensible s’il n’est pas nécessaire.',
+    'Si vous écrivez à DeskUtils ou envoyez le formulaire d’avis, les informations fournies—adresse e-mail, type d’avis, message, image facultative et langue—sont traitées par Formspree et transmises à DeskUtils afin de répondre et d’améliorer l’app. N’incluez pas de contenu sensible sauf nécessité. DeskUtils ne transmet jamais ces informations à Umami Analytics.',
   'privacy.changes.title': 'Modifications et contact',
   'privacy.changes.body':
     'Les changements importants seront publiés ici avec une date révisée. Pour toute question relative à la confidentialité, contactez {email}.',

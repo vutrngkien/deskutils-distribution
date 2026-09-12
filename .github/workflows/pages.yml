@@ -42,6 +42,7 @@ jobs:
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: 1
+          NEXT_PUBLIC_DESKUTILS_FEEDBACK_FORM_ENDPOINT: ${{ vars.DESKUTILS_FEEDBACK_FORM_ENDPOINT }}
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
       - name: Upload preview artifact

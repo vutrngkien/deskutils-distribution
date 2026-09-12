@@ -21,6 +21,7 @@ export const de = {
   'nav.changelog': 'Änderungen',
   'nav.install': 'Installation',
   'nav.support': 'Support',
+  'nav.feedback': 'Feedback',
   'nav.privacy': 'Datenschutz',
   'nav.terms': 'Bedingungen',
   'meta.home.title': 'DeskUtils — Zwischenablage und Screenshot-Tools für Mac',
@@ -36,6 +37,9 @@ export const de = {
   'meta.terms.description':
     'Bedingungen für Download und Nutzung von DeskUtils einschließlich der lebenslangen Pro-Lizenz.',
   'meta.ogAlt': 'DeskUtils — wichtige macOS-Tools in einer App.',
+  'meta.feedback.title': 'Feedback — DeskUtils',
+  'meta.feedback.description':
+    'Melde einen Fehler, teile Feedback oder schlage eine Idee für DeskUtils vor.',
   'hero.smallTools': 'Kleine Tools',
   'hero.rightWhere': 'Genau dort, wo du sie brauchst',
   'hero.description':
@@ -140,6 +144,37 @@ export const de = {
   'pricing.freeFootnote': 'Kein Konto. Keine Zahlungsdaten.',
   'faq.title': 'Fragen?',
   'faq.contact': 'Kontakt aufnehmen',
+  'feedback.label': 'DeskUtils-Feedback',
+  'feedback.title.line1': 'Einen Fehler gefunden?',
+  'feedback.title.line2': 'Eine neue Idee?',
+  'feedback.description': 'Wähle eine Taste. Schreibe ein paar Zeilen. Sende sie an DeskUtils.',
+  'feedback.kind.label': 'Art des Feedbacks',
+  'feedback.kind.bug': 'Fehler',
+  'feedback.kind.feedback': 'Feedback',
+  'feedback.kind.idea': 'Idee',
+  'feedback.message.label': 'Dein Feedback',
+  'feedback.message.placeholder':
+    'Was funktioniert gut, was könnte besser sein oder was scheint nicht richtig?',
+  'feedback.email.label': 'E-Mail-Adresse',
+  'feedback.email.placeholder': 'Wo können wir antworten?',
+  'feedback.attachment.add': 'Bild anhängen',
+  'feedback.attachment.change': 'Bild ändern',
+  'feedback.attachment.hint': 'Optional · Ein Bild bis 3 MB',
+  'feedback.submit': 'Feedback senden',
+  'feedback.submit.sending': 'Wird gesendet…',
+  'feedback.privacy': 'Kein DeskUtils-Konto nötig. Deine E-Mail wird nie weitergegeben.',
+  'feedback.unavailable': 'Feedback ist vorübergehend nicht verfügbar. Bitte schreibe an',
+  'feedback.error.message': 'Beschreibe dein Feedback vor dem Senden.',
+  'feedback.error.email': 'Gib eine gültige E-Mail-Adresse ein, damit wir antworten können.',
+  'feedback.error.imageType': 'Wähle eine Bilddatei aus.',
+  'feedback.error.imageSize': 'Wähle ein Bild unter 3 MB aus.',
+  'feedback.error.unavailable': 'Feedback ist vorübergehend nicht verfügbar.',
+  'feedback.error.submit':
+    'Dein Feedback konnte nicht gesendet werden. Bitte versuche es erneut oder schreibe dem Support.',
+  'feedback.success.title': 'Danke für dein Feedback.',
+  'feedback.success.body':
+    'Es ist unterwegs zu DeskUtils. Wir melden uns, falls wir mehr Details brauchen.',
+  'feedback.success.again': 'Weiteres Feedback senden',
   'faq.subscription.question': 'Ist DeskUtils ein Abonnement?',
   'faq.subscription.answer':
     'Nein. DeskUtils Pro ist ein einmaliger Kauf. Einmal zahlen, Lizenz behalten.',
@@ -252,7 +287,7 @@ export const de = {
     'Für Aktivierung und Prüfung von Pro muss der Lizenzdienst kontaktiert werden. Lizenzschlüssel und Aktivierungsdaten dienen zur Zugriffsprüfung und Durchsetzung des Gerätelimits. Zwischenablageinhalte und Screenshots werden nicht gesendet.',
   'privacy.support.title': 'Support-Nachrichten',
   'privacy.support.body':
-    'Wenn du DeskUtils schreibst, werden freiwillig übermittelte Informationen wie E-Mail-Adresse, Nachricht, Diagnosedetails oder Bestellinformationen verwendet, um zu antworten und Support zu leisten. Füge sensible Inhalte nur bei Bedarf hinzu.',
+    'Wenn du DeskUtils schreibst oder das Feedbackformular absendest, verarbeitet Formspree die von dir übermittelten Daten—E-Mail-Adresse, Feedbackart, Nachricht, optionales Bild und Sprache—und leitet sie an DeskUtils weiter, damit wir antworten und die App verbessern können. Füge sensible Inhalte nur bei Bedarf hinzu. DeskUtils sendet diese Daten nie an Umami Analytics.',
   'privacy.changes.title': 'Änderungen und Kontakt',
   'privacy.changes.body':
     'Wesentliche Änderungen werden hier mit einem aktualisierten Datum veröffentlicht. Bei Fragen zum Datenschutz kontaktiere {email}.',

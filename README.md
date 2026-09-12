@@ -50,6 +50,16 @@ npm run test:browser
 On macOS with Google Chrome already installed, use
 `PLAYWRIGHT_CHANNEL=chrome npm run test:browser` instead of installing Chromium.
 
+### Feedback form
+
+The feedback page posts directly to Formspree so it remains compatible with GitHub Pages.
+Create a Formspree form that delivers to `deskutils.app@gmail.com`, allow
+`deskutils.app` as an origin, then set its public endpoint (for example,
+`https://formspree.io/f/xxxxxx`) in the GitHub Actions repository variable
+`DESKUTILS_FEEDBACK_FORM_ENDPOINT`. The site exposes it to the static client
+only at build time. Without the variable, the page safely falls back to the
+support email address instead of accepting a submission.
+
 ## Downloads and updates
 
 The stable download URL remains:

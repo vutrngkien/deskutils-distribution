@@ -23,6 +23,7 @@ export const ru = {
   'nav.changelog': 'История изменений',
   'nav.install': 'Установка',
   'nav.support': 'Поддержка',
+  'nav.feedback': 'Отзыв',
   'nav.privacy': 'Конфиденциальность',
   'nav.terms': 'Условия',
   'language.suggested': 'Рекомендуется',
@@ -39,6 +40,9 @@ export const ru = {
   'meta.terms.description':
     'Условия загрузки и использования DeskUtils, включая бессрочную лицензию Pro.',
   'meta.ogAlt': 'DeskUtils — необходимые утилиты macOS в одном приложении.',
+  'meta.feedback.title': 'Отзыв — DeskUtils',
+  'meta.feedback.description':
+    'Сообщите об ошибке, поделитесь отзывом или предложите идею для DeskUtils.',
   'hero.smallTools': 'Небольшие инструменты',
   'hero.rightWhere': 'Там, где они нужны',
   'hero.description': 'История буфера, снимки экрана, выбор цвета и другое — в строке меню.',
@@ -137,6 +141,36 @@ export const ru = {
   'pricing.freeFootnote': 'Без аккаунта и платёжных данных.',
   'faq.title': 'Вопросы?',
   'faq.contact': 'Связаться',
+  'feedback.label': 'Отзыв о DeskUtils',
+  'feedback.title.line1': 'Нашли ошибку?',
+  'feedback.title.line2': 'Есть идея?',
+  'feedback.description': 'Выберите тип. Напишите несколько строк. Отправьте в DeskUtils.',
+  'feedback.kind.label': 'Тип отзыва',
+  'feedback.kind.bug': 'Ошибка',
+  'feedback.kind.feedback': 'Отзыв',
+  'feedback.kind.idea': 'Идея',
+  'feedback.message.label': 'Ваш отзыв',
+  'feedback.message.placeholder':
+    'Что работает хорошо, что можно улучшить или что кажется неправильным?',
+  'feedback.email.label': 'Адрес электронной почты',
+  'feedback.email.placeholder': 'Куда нам ответить?',
+  'feedback.attachment.add': 'Прикрепить изображение',
+  'feedback.attachment.change': 'Изменить изображение',
+  'feedback.attachment.hint': 'Необязательно · Одно изображение до 3 МБ',
+  'feedback.submit': 'Отправить отзыв',
+  'feedback.submit.sending': 'Отправка…',
+  'feedback.privacy': 'Учётная запись DeskUtils не нужна. Ваш e-mail не передаётся другим.',
+  'feedback.unavailable': 'Отправка отзывов временно недоступна. Напишите нам:',
+  'feedback.error.message': 'Опишите отзыв перед отправкой.',
+  'feedback.error.email': 'Укажите корректный e-mail, чтобы мы могли ответить.',
+  'feedback.error.imageType': 'Выберите файл изображения.',
+  'feedback.error.imageSize': 'Выберите изображение меньше 3 МБ.',
+  'feedback.error.unavailable': 'Отправка отзывов временно недоступна.',
+  'feedback.error.submit': 'Не удалось отправить отзыв. Попробуйте снова или напишите в поддержку.',
+  'feedback.success.title': 'Спасибо за отзыв.',
+  'feedback.success.body':
+    'Он отправлен в DeskUtils. Мы свяжемся с вами, если понадобятся подробности.',
+  'feedback.success.again': 'Отправить ещё один отзыв',
   'faq.subscription.question': 'DeskUtils — это подписка?',
   'faq.subscription.answer':
     'Нет. DeskUtils Pro покупается один раз. Заплатите один раз и сохраните лицензию.',
@@ -169,5 +203,7 @@ export const ru = {
   'document.updated': 'Последнее обновление: {date}',
   'privacy.website.body':
     'Этот сайт использует ориентированный на конфиденциальность сервис аналитики Umami для анонимного сбора просмотров страниц, источников перехода, данных о браузере, операционной системе, типе устройства и стране, а также взаимодействий: просмотренных разделов и демонстраций, открытых вопросов FAQ, настройки затемнения, смены языка и нажатий на навигацию, скачивание, оплату, поддержку и внешние ссылки. Umami не использует файлы cookie и не собирает персональные данные. DeskUtils не передаёт в аналитику содержимое буфера обмена, снимки экрана, адреса электронной почты, лицензионные ключи или платёжные данные. Демонстрационные видео размещаются как файлы сайта без сторонних видеоплееров. Хостинг-провайдер может обрабатывать стандартные серверные журналы для безопасности и надёжной доставки.',
+  'privacy.support.body':
+    'Если вы пишете в DeskUtils или отправляете форму отзыва, Formspree обрабатывает и передаёт DeskUtils ваш e-mail, тип отзыва, сообщение, необязательное изображение и язык, чтобы мы могли ответить и улучшить приложение. Не включайте конфиденциальные данные без необходимости. DeskUtils не передаёт эту информацию в Umami Analytics.',
   'document.date': '11 сентября 2026 г.',
 } satisfies Messages;

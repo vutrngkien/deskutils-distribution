@@ -322,9 +322,10 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
             <div className={s.faqHeading}>
               <h2 id="faq-title">{t('faq.title')}</h2>
               <a
-                href={`mailto:${product.supportEmail}`}
-                data-umami-event="support_click"
+                href={localePath(locale, '/feedback/')}
+                data-umami-event="nav_click"
                 data-umami-event-placement="faq"
+                data-umami-event-target="feedback"
               >
                 {t('faq.contact')} <span aria-hidden="true">↗</span>
               </a>

@@ -296,6 +296,9 @@ test('Umami records meaningful engagement signals', async ({ page }) => {
   await expect(
     page.locator('[data-umami-event="nav_click"][data-umami-event-target="features"]'),
   ).toHaveCount(1);
+  await expect(
+    page.locator('[data-umami-event="nav_click"][data-umami-event-target="nav.feedback"]'),
+  ).toHaveCount(4);
   await expect(page.locator('[data-umami-event="language_change"]')).toHaveCount(40);
 
   await page.locator('#faq').scrollIntoViewIfNeeded();

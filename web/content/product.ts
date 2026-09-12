@@ -50,6 +50,7 @@ export const navigation = [
   { label: 'nav.features', href: '/#features' },
   { label: 'nav.pricing', href: '/#pricing' },
   { label: 'nav.install', href: '/install/' },
+  { label: 'nav.feedback', href: '/feedback/' },
 ] satisfies { label: MessageKey; href: string }[];
 
 export type Demo = {

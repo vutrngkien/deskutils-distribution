@@ -3,6 +3,43 @@
     <channel>
         <title>DeskUtils</title>
         <item>
+            <title>0.1.7</title>
+            <pubDate>Sun, 20 Sep 2026 14:04:40 +0700</pubDate>
+            <link>https://deskutils.app/</link>
+            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.7</sparkle:fullReleaseNotesLink>
+            <sparkle:version>11</sparkle:version>
+            <sparkle:shortVersionString>0.1.7</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# DeskUtils 0.1.7
+
+DeskUtils 0.1.7 introduces Quick Ring for fast access to your tools, improves clipboard navigation and search, and makes screenshot copying work better with web apps.
+
+## What's New
+
+- **Quick Ring** — press Command twice to open a radial menu with eight tool slots. Click an action, or hold the second Command press, move toward an action, and release to run it.
+- Configure Quick Ring in **Settings → Quick Ring**, including an alternate shortcut, placement at the pointer or screen center, and haptic feedback. DeskUtils Pro lets you rearrange slots and change their actions.
+- **Launch at Login** is now available during onboarding, so you can choose to start DeskUtils automatically when you log in.
+
+## Improvements
+
+- Smoother keyboard navigation and more responsive search in Clipboard Manager, especially with larger histories.
+- Screenshot History now offers explicit **Copy Image** and **Copy File** actions. Copy a single screenshot as an image for pasting into apps, or copy files for Finder and attachment fields. Multiple screenshots can be copied together as files.
+- More balanced spacing for the CPU, memory, and disk gauges in the menu bar popover.
+
+## Fixes
+
+- Screenshots copied from Quick Access and Screenshot History now use image clipboard formats that web apps such as Excel Online can accept.
+- Fixed typing from the clipboard list being incorrectly handled as a filter search action.
+
+## Notes
+
+- Build 11.
+- Quick Ring requires Accessibility permission. Individual actions retain their existing permission and Pro requirements.
+- Requires macOS 15.2 or later.
+]]></description>
+            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.7/DeskUtils-0.1.7-11.zip" length="20533279" type="application/octet-stream" sparkle:edSignature="Edvuy0MP6BVg4s32losMkTFCvNlH+g25B4T68y0V7ajoNYZpKDNJ6CWXypkgetExpstfJDDnN1PgaJobhE/lCg=="/>
+        </item>
+        <item>
             <title>0.1.6</title>
             <pubDate>Thu, 17 Sep 2026 14:15:20 +0700</pubDate>
             <link>https://deskutils.app/</link>
@@ -21,16 +58,6 @@
             <sparkle:shortVersionString>0.1.5</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
             <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.5/DeskUtils-0.1.5-9.zip" length="19847310" type="application/octet-stream" sparkle:edSignature="n8eXkEr6kytIoYtX8Avppl0GKNeMkJDuP4+siafBmo8A2+jvZg1DlTSd6rJtfOUijroylaZoTKSBujnZS/jjCA=="/>
-        </item>
-        <item>
-            <title>0.1.4</title>
-            <pubDate>Tue, 15 Sep 2026 23:18:11 +0700</pubDate>
-            <link>https://deskutils.app/</link>
-            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.4</sparkle:fullReleaseNotesLink>
-            <sparkle:version>8</sparkle:version>
-            <sparkle:shortVersionString>0.1.4</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.4/DeskUtils-0.1.4-8.zip" length="19290907" type="application/octet-stream" sparkle:edSignature="NgVhyA7HQWfqeqNoX2x7FLzlZw/fmqXfxayYrySqvW4z1DJu2r3i1Je/RRLWyGnZ8t3wBgd847A8MHD5GPu0Aw=="/>
         </item>
         <item>
             <title>0.1.1</title>
@@ -55,6 +82,6 @@
     </channel>
 </rss>
 <!-- sparkle-signatures:
-edSignature: BAYjGR9N5zMf5/YSvJZBH7shqm0iACJ1gPeJJbT7kWXzqbMsjUMRMxGNwbOh7ZqVUIqP3DrjAvDRnI+9Lt27Cw==
-length: 4267
+edSignature: 7gvqoGmKjseabkbKN2CyvUxafJ7Yy/WYKd+1hDEjldEl3UVUw444rdtmbUULkUfYz9dr19X7FHdwOCtcQ/UfBg==
+length: 5959
 -->

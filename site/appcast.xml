@@ -3,6 +3,49 @@
     <channel>
         <title>DeskUtils</title>
         <item>
+            <title>0.1.8</title>
+            <pubDate>Fri, 25 Sep 2026 18:35:47 +0700</pubDate>
+            <link>https://deskutils.app/</link>
+            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.8</sparkle:fullReleaseNotesLink>
+            <sparkle:version>12</sparkle:version>
+            <sparkle:shortVersionString>0.1.8</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# DeskUtils 0.1.8
+
+DeskUtils 0.1.8 rebuilds onboarding around guided feature demos, replaces the inert Pro locks with one shared upgrade panel, and gives Full Annotate backgrounds and pinned screenshots a significant upgrade.
+
+## What's New
+
+- **New onboarding** — a seven-page flow with looping, muted video demos for Quick Ring, Screenshot, Clipboard, Capture Text, and more. Every feature page has an animated fallback when a demo is unavailable, **Skip** jumps to the end, and the final page offers Accessibility and Screen Recording access without making them mandatory. Launch at Login is set on the last page. Replay it from **Settings → General → Help → Restart**.
+- **Shared Pro upgrade panel** — every Pro-gated action (menu bar, Settings, Quick Ring, global shortcuts) now opens one consistent panel that names the feature being used, lists the Pro benefits, and offers a single **Get DeskUtils Pro** button. Locked items stay clickable instead of showing a static lock badge.
+- **Annotate background sidebar** — open it with the toolbar `rectangle.on.rectangle` button or ⌘B to style the canvas behind your screenshot. Choose gradients, five bundled wallpapers plus your own, blurred backgrounds, or solid colors, then tune padding, shadow, corners, aspect ratio, and alignment. Backgrounds are saved with the document and restored when you reopen it.
+- **Pinned screenshot windows** — pinned images now show **Close**, **Edit**, **Zoom**, **Lock**, and a drag handle on hover. Zoom with the percentage pill, scroll wheel, or pinch; lock the window to click through to apps underneath; drag the pin into another app as a file; and jump straight to Full Annotate with edits reflected in place.
+
+## Improvements
+
+- The curved arrow tool now has a control handle, so you can adjust its curvature after drawing.
+- Refined the Quick Ring radial menu: a softer glass background with a gradient rim, subtler slot fills, and active tools marked by a green icon instead of a small dot. The live panel and Settings preview share the same rendering.
+- External Display Only now appears in the menu as a session section with an inline on/off toggle, and keeps its explicit retry action when recovery fails.
+
+## Fixes
+
+- Corrected canvas background rendering and constrained backgrounds to the annotation canvas.
+- Annotation selection chrome is now shape-specific and matches the selected tool.
+- Fixed pinned screenshot windows drifting out of sync: source URLs stay current, Quick Access preview updates are gated by the editor's render generation, and focus and save state stay consistent.
+- Aligned and centered the Pro upgrade benefits with the panel subtitle, and fixed a race that could dismiss the panel right after it opened.
+- Onboarding now shows the display dimming tool.
+
+## Notes
+
+- Build 12.
+- The annotate wallpaper library ships five default wallpapers; custom wallpapers you add are stored as bookmarks and stay on your Mac.
+- Pinned windows and Full Annotate follow your system Reduce Motion setting.
+- Onboarding and upgrade interactions are covered by the existing opt-out anonymous analytics, configurable in **About → Privacy**.
+- Requires macOS 15.2 or later.
+]]></description>
+            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.8/DeskUtils-0.1.8-12.zip" length="58408294" type="application/octet-stream" sparkle:edSignature="QVB7aM0DBn+jNWtlGgOGullkZ+GUFVE48k92SzPzH10O5amDMzbGW3c1GG7MBBU1C5b8vGS9jSvFrbE9tn4LBw=="/>
+        </item>
+        <item>
             <title>0.1.7</title>
             <pubDate>Sun, 20 Sep 2026 14:04:40 +0700</pubDate>
             <link>https://deskutils.app/</link>
@@ -50,16 +93,6 @@ DeskUtils 0.1.7 introduces Quick Ring for fast access to your tools, improves cl
             <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.6/DeskUtils-0.1.6-10.zip" length="20017051" type="application/octet-stream" sparkle:edSignature="htXt3OZ+jovOdeRkM5dS6Cvem4SBRHuJlWKIrbtkG5IEYInV4LdXhUniOfjKAWYlFOyf5adK3S5Mw1rv/55ADQ=="/>
         </item>
         <item>
-            <title>0.1.5</title>
-            <pubDate>Thu, 17 Sep 2026 00:10:10 +0700</pubDate>
-            <link>https://deskutils.app/</link>
-            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.5</sparkle:fullReleaseNotesLink>
-            <sparkle:version>9</sparkle:version>
-            <sparkle:shortVersionString>0.1.5</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.5/DeskUtils-0.1.5-9.zip" length="19847310" type="application/octet-stream" sparkle:edSignature="n8eXkEr6kytIoYtX8Avppl0GKNeMkJDuP4+siafBmo8A2+jvZg1DlTSd6rJtfOUijroylaZoTKSBujnZS/jjCA=="/>
-        </item>
-        <item>
             <title>0.1.1</title>
             <pubDate>Sun, 23 Aug 2026 19:05:48 +0700</pubDate>
             <link>https://deskutils.app/</link>
@@ -82,6 +115,6 @@ DeskUtils 0.1.7 introduces Quick Ring for fast access to your tools, improves cl
     </channel>
 </rss>
 <!-- sparkle-signatures:
-edSignature: 7gvqoGmKjseabkbKN2CyvUxafJ7Yy/WYKd+1hDEjldEl3UVUw444rdtmbUULkUfYz9dr19X7FHdwOCtcQ/UfBg==
-length: 5959
+edSignature: 5G4CDc926J4vOxvh+XIL/Yahgf2DEPyLixuTBR1QcDLcX2v7lS78JLXhjpT0cB0Rmna8O3g8KNwO2QPp8i2oBA==
+length: 9241
 -->

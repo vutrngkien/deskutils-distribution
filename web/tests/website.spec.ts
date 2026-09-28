@@ -8,7 +8,7 @@ for (const width of [375, 640, 768, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto('/');
     await expect(
-      page.getByRole('heading', { name: /Small tools Right where you need them/ }),
+      page.getByRole('heading', { name: /Everyday Mac utilities One menu bar app/ }),
     ).toBeVisible();
     await expect(page.getByRole('heading', { name: 'See it before you paste' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Find it with a few letters' })).toBeVisible();
@@ -105,6 +105,9 @@ test('pricing anchor keeps both plans and the Pro checkout action in view on a l
   await expect(page).toHaveURL(/#pricing$/);
 
   const pricing = page.locator('#pricing');
+  await expect
+    .poll(() => pricing.evaluate((element) => Math.round(element.getBoundingClientRect().top)))
+    .toBeLessThanOrEqual(120);
   await expect(
     pricing.getByRole('heading', { name: 'Use it free. Go Pro when you need more.' }),
   ).toBeInViewport();
@@ -158,7 +161,7 @@ test('keyboard, mobile menu and internal routes work', async ({ page }) => {
   await expect(page).toHaveURL(/\/$/);
 
   await page.goto('/vi/');
-  await expect(page.locator('#install a')).toHaveAttribute('href', '/vi/install/');
+  await expect(page.locator('#install a').first()).toHaveAttribute('href', '/vi/install/');
   const localizedFeedback = await page.goto('/vi/feedback/');
   expect(localizedFeedback?.status()).toBe(200);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
@@ -256,7 +259,7 @@ test('Umami tracks downloads and checkout only on the production domain', async 
   await expect(tracker).not.toHaveAttribute('data-do-not-track');
 
   const downloads = page.locator('[data-umami-event="download"]');
-  await expect(downloads).toHaveCount(6);
+  await expect(downloads).toHaveCount(7);
   expect(
     await downloads.evaluateAll((links) =>
       links.every(
@@ -292,7 +295,7 @@ test('Umami records meaningful engagement signals', async ({ page }) => {
   );
   await page.goto('/');
 
-  await expect(page.locator('[data-umami-section]')).toHaveCount(8);
+  await expect(page.locator('[data-umami-section]')).toHaveCount(10);
   await expect(
     page.locator('[data-umami-event="nav_click"][data-umami-event-target="features"]'),
   ).toHaveCount(1);
@@ -362,7 +365,7 @@ test('clipboard demo autoplays without media controls', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/');
 
-  const video = page.locator('#features video');
+  const video = page.locator('#product-demo video');
   await expect(video).toHaveAttribute('autoplay', '');
   await expect(video).toHaveAttribute('loop', '');
   await expect(video).not.toHaveAttribute('controls', '');

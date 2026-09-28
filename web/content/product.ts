@@ -117,7 +117,57 @@ export const demos = {
     aspectRatio: '16 / 10',
     inset: true,
   },
+  quickRing: {
+    title: 'quickRing.demoTitle',
+    description: 'quickRing.demoDescription',
+    aspectRatio: '16 / 10',
+    icon: 'tools',
+  },
 } satisfies Record<string, Demo>;
+
+export const toolOverview = [
+  {
+    icon: 'clipboard',
+    title: 'hero.clipboard',
+    description: 'overview.clipboard',
+    href: '#clipboard',
+  },
+  {
+    icon: 'capture',
+    title: 'capture.title',
+    description: 'overview.capture',
+    href: '#screenshots',
+  },
+  {
+    icon: 'text',
+    title: 'capture.ocr.title',
+    description: 'overview.ocr',
+    href: '#screenshots',
+  },
+  {
+    icon: 'tools',
+    title: 'hero.quickRing',
+    description: 'overview.quickRing',
+    href: '#quick-ring',
+  },
+  {
+    icon: 'color',
+    title: 'utilities.color.title',
+    description: 'overview.color',
+    href: '#color',
+  },
+  {
+    icon: 'display',
+    title: 'utilities.system.title',
+    description: 'overview.monitoring',
+    href: '#utilities',
+  },
+] satisfies {
+  icon: ToolIconName;
+  title: MessageKey;
+  description: MessageKey;
+  href: `#${string}`;
+}[];
 
 export const clipboardFeatures = [
   {
@@ -185,6 +235,9 @@ export const screenshotFeatures = [
     title: 'capture.subject.title',
     description: 'capture.subject.description',
   },
+  { icon: 'capture', title: 'capture.window.title', description: 'capture.window.description' },
+  { icon: 'capture', title: 'capture.smart.title', description: 'capture.smart.description' },
+  { icon: 'text', title: 'capture.qr.title', description: 'capture.qr.description' },
 ] satisfies { icon: ToolIconName; title: MessageKey; description: MessageKey }[];
 
 export const utilities = [
@@ -202,6 +255,11 @@ export const utilities = [
     icon: 'moon',
     title: 'utilities.sleep.title',
     description: 'utilities.sleep.description',
+  },
+  {
+    icon: 'display',
+    title: 'utilities.system.title',
+    description: 'utilities.system.description',
   },
 ] satisfies { icon: ToolIconName; title: MessageKey; description: MessageKey }[];
 export const permissions = [
@@ -225,6 +283,8 @@ export const plans = [
       { key: 'pricing.screenshots' },
       { key: 'pricing.color' },
       { key: 'pricing.cleanSleep' },
+      { key: 'pricing.systemMonitoring' },
+      { key: 'pricing.quickRing' },
     ],
   },
   {

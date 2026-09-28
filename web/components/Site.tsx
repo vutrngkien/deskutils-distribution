@@ -56,6 +56,7 @@ export function Button({
   const isCheckout = href === product.pricing.purchaseURL;
   const isReleaseNotes = href === product.releasesURL;
   const isHome = href === '/';
+  const isPageAnchor = href.startsWith('#');
   return (
     <a
       className={className}
@@ -65,13 +66,25 @@ export function Button({
           ? 'checkout'
           : isReleaseNotes
             ? 'external_link'
-            : isHome
+            : isHome || isPageAnchor
               ? 'nav_click'
               : undefined
       }
-      data-umami-event-locale={isCheckout || isReleaseNotes || isHome ? locale : undefined}
-      data-umami-event-placement={isCheckout || isReleaseNotes || isHome ? placement : undefined}
-      data-umami-event-target={isReleaseNotes ? 'release_notes' : isHome ? 'home' : undefined}
+      data-umami-event-locale={
+        isCheckout || isReleaseNotes || isHome || isPageAnchor ? locale : undefined
+      }
+      data-umami-event-placement={
+        isCheckout || isReleaseNotes || isHome || isPageAnchor ? placement : undefined
+      }
+      data-umami-event-target={
+        isReleaseNotes
+          ? 'release_notes'
+          : isHome
+            ? 'home'
+            : isPageAnchor
+              ? href.slice(1)
+              : undefined
+      }
       href={href}
     >
       {children}

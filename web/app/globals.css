@@ -1,109 +1,265 @@
-:root {
-  --canvas: #f6f6f7;
-  --paper: #ffffff;
-  --ink: #1d2028;
-  --muted: #626977;
-  --blue: #235bea;
-  --blue-hover: #174bc9;
-  --blue-pressed: #103da8;
-  --blue-soft: #edf3ff;
-  --blue-line: #cfdcff;
-  --line: #e1e3e8;
-  --surface: #eef0f4;
-  --white: #fff;
+@import 'tailwindcss';
+
+@plugin "daisyui" {
+  themes: false;
+}
+
+@plugin "daisyui/theme" {
+  name: 'deskutils';
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #ffffff;
+  --color-base-200: #f6f6f7;
+  --color-base-300: #eef0f4;
+  --color-base-content: #1d2028;
+
+  --color-primary: #235bea;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #edf3ff;
+  --color-secondary-content: #103da8;
+
+  --color-accent: #cfdcff;
+  --color-accent-content: #103da8;
+
+  --color-neutral: #1d2028;
+  --color-neutral-content: #ffffff;
+
+  --color-info: #235bea;
+  --color-info-content: #ffffff;
+  --color-success: #1a8a5a;
+  --color-success-content: #ffffff;
+  --color-warning: #d98b1a;
+  --color-warning-content: #1d2028;
+  --color-error: #d14343;
+  --color-error-content: #ffffff;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme {
   --font-sans:
     -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
   --font-mono: 'SF Mono', ui-monospace, 'Cascadia Code', Menlo, monospace;
-  font-family: var(--font-sans);
-  color-scheme: light;
-  background: var(--canvas);
-  color: var(--ink);
+  --color-muted: #626977;
+  --color-line: #e1e3e8;
 }
-* {
-  box-sizing: border-box;
+
+/*
+ * Shared landing-page type and rhythm. One heading scale and one section
+ * padding keep every section consistent; see DESIGN.md before adding more.
+ */
+@layer components {
+  .section {
+    padding-block: 112px;
+  }
+  .section-tint {
+    background: var(--color-base-200);
+  }
+  .h-display {
+    font-size: clamp(2.625rem, 5.6vw, 4.25rem);
+    line-height: 1.03;
+    letter-spacing: -0.042em;
+    font-weight: 640;
+  }
+  .h-section {
+    font-size: clamp(1.875rem, 3.4vw, 2.625rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    font-weight: 620;
+    text-wrap: balance;
+  }
+  .h-feature {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.022em;
+    font-weight: 600;
+  }
+  .lede {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+  /* A macOS-style key combination, e.g. ⇧⌘V. */
+  .keys {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
+    padding-inline: 0.4rem;
+    border: 1px solid var(--color-line);
+    border-bottom-width: 2px;
+    border-radius: 6px;
+    background: var(--color-base-100);
+    color: var(--color-base-content);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .pro-mark {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 6px;
+    border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+    border-radius: 5px;
+    color: var(--color-primary);
+    font-size: 0.6875rem;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+  @media (max-width: 600px) {
+    .section {
+      padding-block: 72px;
+    }
+    .lede {
+      font-size: 1rem;
+    }
+  }
 }
-html {
-  scroll-behavior: smooth;
-}
-body {
-  margin: 0;
-  background: var(--canvas);
-  font-size: 1rem;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-button,
-input {
-  font: inherit;
-}
-code,
-kbd,
-pre,
-samp {
-  font-family: var(--font-mono);
-}
-button,
-summary,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-img,
-video {
-  display: block;
-  max-width: 100%;
-}
-h1,
-h2,
-h3,
-p,
-figure {
-  margin: 0;
-}
-h1,
-h2,
-h3 {
-  line-height: 1.1;
-  letter-spacing: -0.035em;
-}
-p {
-  text-wrap: pretty;
-}
-button {
-  cursor: pointer;
-}
-:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 5px;
-}
-::selection {
-  background: #dce5ff;
-  color: var(--ink);
-}
-section[id] {
-  scroll-margin-top: 88px;
-}
-.skip-link {
-  position: absolute;
-  left: 12px;
-  top: -100px;
-  z-index: 50;
-  padding: 10px 18px;
-  background: var(--ink);
-  color: white;
-}
-.skip-link:focus {
-  top: 10px;
-}
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
+
+/*
+ * Legacy design tokens kept as a compatibility bridge for the two remaining
+ * CSS Modules (components/DemoMedia.module.css and
+ * components/ScreenshotFeatureRail.module.css). New UI should use Tailwind
+ * utilities and the daisyUI `deskutils` theme colors instead.
+ */
+@layer base {
+  :root {
+    --canvas: #f6f6f7;
+    --paper: #ffffff;
+    --ink: #1d2028;
+    --muted: #626977;
+    --blue: #235bea;
+    --blue-hover: #174bc9;
+    --blue-pressed: #103da8;
+    --blue-soft: #edf3ff;
+    --blue-line: #cfdcff;
+    --line: #e1e3e8;
+    --surface: #eef0f4;
+    --white: #fff;
+    font-family: var(--font-sans);
+    color-scheme: light;
+    background: var(--canvas);
+    color: var(--ink);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background: var(--canvas);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button,
+  input {
+    font: inherit;
+  }
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-mono);
+  }
+  button,
+  summary,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+  h1,
+  h2,
+  h3,
+  p,
+  figure {
+    margin: 0;
+  }
+  /*
+ * Restore user-agent heading sizing that Tailwind Preflight resets to inherit.
+ * Component styles override these where explicit sizes are declared.
+ */
+  h1 {
+    font-size: 2em;
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 1.17em;
+    font-weight: 700;
+  }
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+  }
+  h1,
+  h2,
+  h3 {
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  button {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 5px;
+  }
+  ::selection {
+    background: #dce5ff;
+    color: var(--ink);
+  }
+  section[id] {
+    scroll-margin-top: 88px;
+  }
+  .skip-link {
+    position: absolute;
+    left: 12px;
+    top: -100px;
+    z-index: 50;
+    padding: 10px 18px;
+    background: var(--ink);
+    color: white;
+  }
+  .skip-link:focus {
+    top: 10px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

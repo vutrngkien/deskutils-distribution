@@ -1787,7 +1787,7 @@ test('monitoring gauges match the app and reveal percentages on hover, focus and
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/');
+  await page.goto('/system-monitoring/');
   const gauges = page.locator('.home-system-visual .du-metric-gauge');
   await expect(gauges).toHaveCount(3);
   await gauges.first().scrollIntoViewIfNeeded();
@@ -1883,6 +1883,58 @@ test.describe('tracking across the expanded website', () => {
       element.addEventListener('click', (event) => event.preventDefault(), { once: true }),
     );
     await link.click();
+  }
+
+  for (const { path, prefix, width } of [
+    { path: '/', prefix: '', width: 1440 },
+    { path: '/vi/', prefix: '/vi', width: 390 },
+  ]) {
+    test(`utility cards open localized pages and track whole-card clicks at ${path}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 1000 });
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await page.goto(path);
+      const grid = page.getByTestId('utility-grid');
+      if (width < 768) await page.locator('.home-utility-toggle').click();
+      const cards = grid.getByRole('link');
+      const ids = [
+        'prevent-sleep',
+        'mouse-jiggler',
+        'clean-keyboard',
+        'display-dimming',
+        'external-display-only',
+        'system-monitoring',
+      ];
+      await expect(cards).toHaveCount(ids.length);
+      await expect(grid.locator('a button, a a')).toHaveCount(0);
+      for (const [index, id] of ids.entries()) {
+        const card = cards.nth(index);
+        await expect(card).toHaveAttribute('href', `${prefix}/${id}/`);
+        await card.evaluate((element) =>
+          element.addEventListener('click', (event) => event.preventDefault(), { once: true }),
+        );
+        // Empty padding is clickable too, not only the heading or illustration.
+        await card.click({ position: { x: 12, y: 12 } });
+      }
+      expect(
+        (await events(page, 'nav_click'))
+          .filter((item) => item.data.placement === 'utilities')
+          .map((item) => item.data.target),
+      ).toEqual(ids.map((id) => `${prefix}/${id}/`));
+      expect(await events(page, 'duplicate_sdk_click')).toHaveLength(0);
+      // Clicking the gauge itself must follow the card, not toggle a nested control.
+      await grid.locator('.du-metric-gauge').first().click();
+      await expect(page).toHaveURL(`${prefix}/system-monitoring/`);
+      await page.goto(path);
+      if (width < 768) await page.locator('.home-utility-toggle').click();
+      await page.keyboard.press('Tab');
+      await cards.first().focus();
+      await expect(cards.first()).toBeFocused();
+      await expect(cards.first()).toHaveCSS('outline-style', 'solid');
+      await page.keyboard.press('Enter');
+      await expect(page).toHaveURL(`${prefix}/prevent-sleep/`);
+    });
   }
 
   test('long sections record a view on mobile and do not repeat after resize or revisiting', async ({

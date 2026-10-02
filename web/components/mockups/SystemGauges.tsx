@@ -104,9 +104,11 @@ function Gauge({
 export function SystemGauges({
   decorative = false,
   animated = false,
+  interactive = true,
 }: {
   decorative?: boolean;
   animated?: boolean;
+  interactive?: boolean;
 }) {
   const { ref, tick, motionAllowed } = useIllustrationClock(0, animated);
   const values = samples[motionAllowed ? Math.floor(tick / 3) % samples.length : 0];
@@ -117,7 +119,12 @@ export function SystemGauges({
       data-motion={animated ? 'system-monitor' : undefined}
     >
       {metrics.map((metric, i) => (
-        <Gauge key={metric.name} metric={metric} value={values[i]} decorative={decorative} />
+        <Gauge
+          key={metric.name}
+          metric={metric}
+          value={values[i]}
+          decorative={decorative || !interactive}
+        />
       ))}
     </div>
   );

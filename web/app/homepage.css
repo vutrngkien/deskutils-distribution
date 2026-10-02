@@ -1239,7 +1239,7 @@
     font-weight: 600;
     cursor: pointer;
   }
-  .home-utilities-grid article {
+  .home-utilities-grid .home-utility-card {
     padding: 16px;
     border-radius: 20px;
     display: flex;
@@ -1248,13 +1248,13 @@
     gap: 12px;
     min-width: 0;
   }
-  .home-utilities-grid article h3 {
+  .home-utilities-grid .home-utility-card h3 {
     font-size: 15px;
     line-height: 1.25;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
-  .home-utilities-grid article p {
+  .home-utilities-grid .home-utility-card p {
     display: none;
   }
   .home-utility-wide {
@@ -1376,12 +1376,12 @@
     .home-utility-toggle {
       display: none;
     }
-    .home-utilities-grid article {
+    .home-utilities-grid .home-utility-card {
       padding: 28px;
       border-radius: 28px;
       min-height: 280px;
     }
-    .home-utilities-grid article p {
+    .home-utilities-grid .home-utility-card p {
       display: block;
     }
     .home-utility-preview > div {
@@ -1765,21 +1765,21 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
       grid-auto-rows: 310px;
     }
-    .home-utilities-grid article {
+    .home-utilities-grid .home-utility-card {
       min-height: 0;
     }
-    .home-utilities-grid article h3 {
+    .home-utilities-grid .home-utility-card h3 {
       font-size: 19px;
     }
-    .home-utilities-grid article:nth-child(2) h3 {
+    .home-utilities-grid .home-utility-card:nth-child(2) h3 {
       font-size: 17px;
     }
-    .home-utilities-grid article p {
+    .home-utilities-grid .home-utility-card p {
       font-size: 14px;
       line-height: 1.45;
       color: #4a5672;
     }
-    .home-utilities-grid article.home-utility-wide {
+    .home-utilities-grid .home-utility-card.home-utility-wide {
       padding: 36px;
     }
     .home-utility-wide > div {
@@ -1850,11 +1850,11 @@
   .home-ocr-card .home-focused-copy p {
     max-width: 440px;
   }
-  .home-utilities-grid article:nth-child(2) p {
+  .home-utilities-grid .home-utility-card:nth-child(2) p {
     font-size: 13.5px;
   }
   @media (min-width: 75rem) {
-    .home-utilities-grid article:nth-child(2) h3 {
+    .home-utilities-grid .home-utility-card:nth-child(2) h3 {
       font-size: 17px;
     }
   }

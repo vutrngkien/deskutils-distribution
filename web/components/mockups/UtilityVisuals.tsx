@@ -166,10 +166,10 @@ export function ExternalDisplayOnlyVisual() {
 }
 
 /** Actual app gauge design, with keyboard and touch equivalents to hover. */
-export function SystemMonitoringVisual() {
+export function SystemMonitoringVisual({ interactive = true }: { interactive?: boolean }) {
   return (
     <div className="home-system-visual">
-      <SystemGauges animated />
+      <SystemGauges animated interactive={interactive} />
     </div>
   );
 }

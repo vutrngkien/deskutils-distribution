@@ -303,7 +303,11 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
             showLabel={t('home.utilities.show')}
             hideLabel={t('home.utilities.hide')}
           >
-            <article className="home-utility-wide home-utility-dark">
+            <a
+              href={routeHref(locale, 'prevent-sleep', '/#tools')}
+              aria-label={t('tool.prevent-sleep.name')}
+              className="card home-utility-card home-utility-wide home-utility-dark"
+            >
               <div>
                 <div className="home-utility-copy">
                   <span className="text-[#9fbaff]">{t('tool.prevent-sleep.name')} · ⇧⌘P</span>
@@ -312,8 +316,12 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
                 </div>
                 <PreventSleepVisual />
               </div>
-            </article>
-            <article className="bg-[#efeaff]">
+            </a>
+            <a
+              href={routeHref(locale, 'mouse-jiggler', '/#tools')}
+              aria-label={t('tool.mouse-jiggler.name')}
+              className="card home-utility-card bg-[#efeaff]"
+            >
               <MockupCanvas width={234} height={130} className="home-utility-preview">
                 <MouseJigglerVisual />
               </MockupCanvas>
@@ -321,8 +329,12 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
                 <h3>{t('home.util.jiggler.title')}</h3>
                 <p>{t('home.util.jiggler.body')}</p>
               </div>
-            </article>
-            <article className="bg-base-200">
+            </a>
+            <a
+              href={routeHref(locale, 'clean-keyboard', '/#tools')}
+              aria-label={t('tool.clean-keyboard.name')}
+              className="card home-utility-card bg-base-200"
+            >
               <MockupCanvas width={234} height={130} className="home-utility-preview">
                 <CleanKeyboardVisual />
               </MockupCanvas>
@@ -330,8 +342,12 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
                 <h3>{t('home.util.keyboard.title')}</h3>
                 <p>{t('home.util.keyboard.body')}</p>
               </div>
-            </article>
-            <article className="bg-[#e8efff]">
+            </a>
+            <a
+              href={routeHref(locale, 'display-dimming', '/#tools')}
+              aria-label={t('tool.display-dimming.name')}
+              className="card home-utility-card bg-[#e8efff]"
+            >
               <MockupCanvas width={234} height={130} className="home-utility-preview">
                 <DisplayDimmingVisual />
               </MockupCanvas>
@@ -339,8 +355,12 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
                 <h3>{t('home.util.dimming.title')}</h3>
                 <p>{t('home.util.dimming.body')}</p>
               </div>
-            </article>
-            <article className="bg-base-200">
+            </a>
+            <a
+              href={routeHref(locale, 'external-display-only', '/#tools')}
+              aria-label={t('tool.external-display-only.name')}
+              className="card home-utility-card bg-base-200"
+            >
               <MockupCanvas width={234} height={130} className="home-utility-preview">
                 <ExternalDisplayOnlyVisual />
               </MockupCanvas>
@@ -349,17 +369,21 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
                 <p>{t('home.util.external.body')}</p>
                 <span className="home-utility-compatibility">{t('home.util.external.badge')}</span>
               </div>
-            </article>
-            <article className="home-utility-wide home-monitor-card">
+            </a>
+            <a
+              href={routeHref(locale, 'system-monitoring', '/#tools')}
+              aria-label={t('tool.system-monitoring.name')}
+              className="card home-utility-card home-utility-wide home-monitor-card"
+            >
               <div>
                 <div className="home-utility-copy">
                   <span className="text-primary">{t('home.util.monitor.eyebrow')}</span>
                   <h3>{t('home.util.monitor.title')}</h3>
                   <p>{t('home.util.monitor.body')}</p>
                 </div>
-                <SystemMonitoringVisual />
+                <SystemMonitoringVisual interactive={false} />
               </div>
-            </article>
+            </a>
           </UtilitiesDisclosure>
         </section>
         {/* ================= Pricing ================= */}

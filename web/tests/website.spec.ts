@@ -127,18 +127,50 @@ test('unknown routes serve the exported 404 with a real 404 status', async ({ pa
   await expect(page).toHaveURL(/\/$/);
 });
 
-test('desktop Features disclosure closes on Escape and restores focus', async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto('/');
-  const nav = page.getByRole('navigation', { name: 'Primary navigation' });
-  const trigger = nav.locator('summary', { hasText: 'Features' });
-  await trigger.click();
-  await expect(trigger).toHaveAttribute('aria-expanded', 'true');
-  await expect(nav.getByRole('link', { name: /All features/ })).toBeVisible();
-  await page.keyboard.press('Escape');
-  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-  await expect(trigger).toBeFocused();
-});
+for (const width of [1200, 1440]) {
+  test(`Features shows its open state and anchors the panel below its trigger at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    const nav = page.getByRole('navigation', { name: 'Primary navigation' });
+    const trigger = nav.locator('summary', { hasText: 'Features' });
+    const panel = nav.locator('.home-features-panel');
+    const chevron = trigger.locator('svg');
+    await expect(panel).toBeHidden();
+    await expect(trigger).toHaveCSS('color', 'rgb(43, 53, 80)');
+    await expect(chevron).toHaveCSS('transform', 'none');
+    await trigger.click();
+    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    await expect(trigger).toHaveCSS('color', 'rgb(20, 80, 245)');
+    await expect(chevron).toHaveCSS('transform', 'matrix(-1, 0, 0, -1, 0, 0)');
+    await expect(panel).toBeVisible();
+    const triggerBox = (await trigger.boundingBox())!;
+    const panelBox = (await panel.boundingBox())!;
+    const header = page.locator('body > header');
+    const headerBox = (await header.boundingBox())!;
+    const border = await header.evaluate((el) =>
+      parseFloat(getComputedStyle(el).borderBottomWidth),
+    );
+    expect(Math.abs(panelBox.x - triggerBox.x)).toBeLessThan(1);
+    expect(Math.abs(panelBox.y - (headerBox.y + headerBox.height - border + 8))).toBeLessThan(1);
+    expect(panelBox.x + panelBox.width).toBeLessThanOrEqual(width - 20);
+    if (width === 1440)
+      await page.screenshot({ path: test.info().outputPath('features-open.png') });
+    await trigger.click();
+    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await expect(panel).toBeHidden();
+    await page.keyboard.press('Enter');
+    await expect(panel).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await expect(trigger).toBeFocused();
+    await trigger.click();
+    await page.getByRole('heading', { name: 'Everyday Mac tools, always within reach.' }).click();
+    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await expect(panel).toBeHidden();
+  });
+}
 
 test('mobile navigation traps focus, closes on Escape and restores focus', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
@@ -329,6 +361,14 @@ test('content and native controls work without JavaScript', async ({ browser, ba
   await expect(
     page.getByRole('link', { name: 'Download for Mac', exact: false }).first(),
   ).toHaveAttribute('href', '/install/');
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const features = page.locator('.home-features-disclosure');
+  await features.locator('summary').click();
+  await expect(features).toHaveAttribute('open', '');
+  await expect(features.locator('summary')).toHaveCSS('color', 'rgb(20, 80, 245)');
+  await expect(features.locator('.home-features-panel')).toBeVisible();
+  await features.locator('summary').click();
+  await expect(features.locator('.home-features-panel')).toBeHidden();
   await context.close();
 });
 

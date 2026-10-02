@@ -18,6 +18,30 @@
     color: #2b3550;
     cursor: pointer;
   }
+  .home-features-disclosure {
+    position: relative;
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+  .home-nav-link:hover,
+  .home-features-disclosure[open] > .home-nav-link {
+    color: var(--color-primary);
+  }
+  .home-nav-chevron {
+    flex-shrink: 0;
+  }
+  .home-features-disclosure[open] > summary .home-nav-chevron {
+    transform: rotate(180deg);
+  }
+  .home-features-disclosure:not([open]) > .home-features-panel {
+    display: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .home-nav-chevron {
+      transition: transform 0.15s ease;
+    }
+  }
   .home-nav-actions .btn[data-button] {
     min-height: 44px;
     font-size: 15px;
@@ -1328,6 +1352,7 @@
     }
     .home-nav-center {
       display: flex;
+      height: 100%;
       align-items: center;
       gap: 34px;
     }

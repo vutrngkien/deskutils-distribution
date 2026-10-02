@@ -1,3 +1,4 @@
+import { ChevronDown } from 'lucide-react';
 import { localePath, type Locale } from '@/content/locales';
 import { translate } from '@/content/i18n';
 import { productMenu, toolHref } from '@/content/features';
@@ -29,16 +30,15 @@ export function Nav({ locale }: { locale: Locale }) {
         <nav className="home-nav-desktop" aria-label={t('a11y.primaryNav')}>
           <div className="home-nav-center">
             <NavDisclosure
+              className="home-features-disclosure"
               summary={
                 <>
                   {t('nav.features')}
-                  <span aria-hidden="true" className="text-xs">
-                    ▾
-                  </span>
+                  <ChevronDown className="home-nav-chevron" size={16} aria-hidden="true" />
                 </>
               }
               summaryClassName="home-nav-link list-none"
-              panelClassName="card-surface absolute left-0 top-full z-50 mt-2 grid w-[560px] grid-cols-2 gap-1 p-2 shadow-xl"
+              panelClassName="home-features-panel card-surface absolute left-0 top-full z-50 mt-2 grid w-[560px] grid-cols-2 gap-1 p-2 shadow-xl"
               panelLabel={t('nav.features')}
             >
               {productMenu.map((tool) => (

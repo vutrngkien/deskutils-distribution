@@ -29,6 +29,7 @@ function isReachable(node: HTMLElement, root: HTMLElement) {
  */
 export function NavDisclosure({
   summary,
+  className,
   summaryAriaLabel,
   summaryClassName,
   panelClassName,
@@ -37,6 +38,7 @@ export function NavDisclosure({
   children,
 }: {
   summary: ReactNode;
+  className?: string;
   summaryAriaLabel?: string;
   summaryClassName: string;
   panelClassName: string;
@@ -106,7 +108,13 @@ export function NavDisclosure({
   }
 
   return (
-    <details ref={ref} onToggle={handleToggle} onKeyDown={handleKeyDown} onClick={handleClick}>
+    <details
+      ref={ref}
+      className={className}
+      onToggle={handleToggle}
+      onKeyDown={handleKeyDown}
+      onClick={handleClick}
+    >
       <summary
         id={triggerId}
         aria-label={summaryAriaLabel}

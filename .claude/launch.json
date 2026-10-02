@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "deskutils-web",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "cd web && exec node scripts/serve-out.mjs \"$PORT\""
+      ],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}

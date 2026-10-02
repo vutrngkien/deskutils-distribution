@@ -9,8 +9,8 @@ for (const name of ['assets/images', 'assets/icons', 'appcast.xml', 'CNAME']) {
   await cp(new URL(`../site/${name}`, root), new URL(name, target), { recursive: true });
 }
 const images = new URL('assets/images/', target);
-await sharp(new URL('deskutils-icon.png', images).pathname)
+await sharp(fileURLToPath(new URL('deskutils-icon.png', images)))
   .resize(176, 176)
   .webp({ quality: 90, effort: 6 })
-  .toFile(new URL('deskutils-icon.webp', images).pathname);
+  .toFile(fileURLToPath(new URL('deskutils-icon.webp', images)));
 console.log(`Prepared distribution assets in ${fileURLToPath(target)}`);

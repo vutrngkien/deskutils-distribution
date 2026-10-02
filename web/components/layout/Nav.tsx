@@ -3,7 +3,6 @@ import { localePath, type Locale } from '@/content/locales';
 import { translate } from '@/content/i18n';
 import { productMenu, toolHref } from '@/content/features';
 import { routeHref } from '@/content/routes';
-import { product } from '@/content/product';
 import { Button } from '@/components/ui/Button';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ToolIcon } from '@/components/ToolIcon';
@@ -72,7 +71,7 @@ export function Nav({ locale }: { locale: Locale }) {
             <a className="home-nav-link" href={localePath(locale, '/feedback/')}>
               {t('nav.feedback')}
             </a>
-            <a className="home-nav-link" href={product.releasesURL}>
+            <a className="home-nav-link" href={routeHref(locale, 'changelog', '/changelog/')}>
               {t('nav.changelog')}
             </a>
           </div>
@@ -146,7 +145,7 @@ export function Nav({ locale }: { locale: Locale }) {
               {t('nav.feedback')}
             </a>
             <a
-              href={product.releasesURL}
+              href={routeHref(locale, 'changelog', '/changelog/')}
               className="block rounded-field px-2 py-2 text-sm font-medium hover:bg-base-200"
             >
               {t('nav.changelog')}

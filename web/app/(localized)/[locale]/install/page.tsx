@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { InstallPage } from '@/app/(english)/install/page';
+import { InstallPage } from '@/components/pages/InstallPage';
 import { isLocale, type Locale } from '@/content/locales';
 import { routeMetadata } from '@/content/metadata';
 

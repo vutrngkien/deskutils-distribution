@@ -9,18 +9,20 @@ export function TrackedFaq({
   question,
   answer,
   locale,
+  name = 'homepage-faq',
 }: {
   id: string;
   question: string;
   answer: string;
   locale: string;
+  name?: string;
 }) {
   const details = useRef<HTMLDetailsElement>(null);
   return (
     <details
       ref={details}
       className="home-faq-item"
-      name="homepage-faq"
+      name={name}
       onToggle={() => {
         if (details.current?.open) trackUmamiEvent('faq_open', { faq: id, locale });
       }}

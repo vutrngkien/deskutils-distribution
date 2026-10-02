@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import { notFound } from 'next/navigation';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { UmamiAnalytics } from '@/components/UmamiAnalytics';
 import { RootShell } from '@/components/layout/RootShell';
 import { fontVariables } from '@/components/fonts';
@@ -32,7 +31,6 @@ export default async function LocalizedRootLayout({
       <body>
         <RootShell locale={locale}>{children}</RootShell>
         <UmamiAnalytics />
-        <SpeedInsights />
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { FeedbackPage } from '@/app/(english)/feedback/page';
+import { FeedbackPage } from '@/components/pages/FeedbackPage';
 import { isLocale, type Locale } from '@/content/locales';
 import { routeMetadata } from '@/content/metadata';
 

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { TermsPage } from '@/app/(english)/terms/page';
+import { TermsPage } from '@/components/pages/TermsPage';
 import { isLocale, type Locale } from '@/content/locales';
 import { routeMetadata } from '@/content/metadata';
 

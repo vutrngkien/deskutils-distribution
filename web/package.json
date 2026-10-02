@@ -5,6 +5,7 @@
   "scripts": {
     "prepare:assets": "node scripts/prepare-assets.mjs",
     "prepare:media": "node scripts/media.mjs",
+    "sync:releases": "node scripts/sync-releases.mjs",
     "dev": "npm run prepare:assets && npm run prepare:media && next dev --hostname 127.0.0.1",
     "build": "npm run prepare:assets && npm run prepare:media && next build && node scripts/verify-output.mjs",
     "preview": "python3 -m http.server 3000 --bind 127.0.0.1 --directory out",
@@ -17,7 +18,6 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@vercel/speed-insights": "^2.0.0",
     "lucide-react": "^1.43.0",
     "next": "16.3.4",
     "react": "19.2.8",

@@ -25,6 +25,17 @@ const regions: [name: string, selector: string][] = [
   ['final-cta', '[data-testid="final-cta"]'],
 ];
 
+const screenshotRegions: [name: string, selector: string][] = [
+  ['hero', 'main > header'],
+  ['modes', '[data-umami-section="screenshot-modes"]'],
+  ['annotate', '[data-umami-section="screenshot-annotate"]'],
+  ['quick-access', '[data-umami-section="quick-access"]'],
+  ['scrolling', '[data-umami-section="screenshot-scrolling"]'],
+  ['cards', '[data-umami-section="screenshot-cards"]'],
+  ['faq', '#faq'],
+  ['final-cta', '[data-testid="final-cta"]'],
+];
+
 for (const width of [1440, 390]) {
   test(`homepage regions at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
@@ -42,5 +53,90 @@ for (const width of [1440, 390]) {
     const faq = page.locator('#faq');
     await faq.locator('summary').first().click();
     await expect(faq).toHaveScreenshot(`home-faq-open-${width}.png`);
+  });
+}
+
+const p4Pages = [
+  '/support/',
+  '/install/',
+  '/feedback/',
+  '/pricing/',
+  '/changelog/',
+  '/privacy/',
+  '/terms/',
+];
+
+for (const path of p4Pages) {
+  for (const width of [1440, 390]) {
+    test(`${path} at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await page.goto(path);
+      await page.evaluate(() => document.fonts.ready);
+      await page.addStyleTag({ content: 'header { position: static !important; }' });
+      const slug = path.replaceAll('/', '');
+      await expect(page.locator('main header').first()).toHaveScreenshot(
+        `${slug}-hero-${width}.png`,
+      );
+    });
+  }
+}
+
+for (const width of [1440, 390]) {
+  test(`404 page at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/unknown-route/');
+    await page.evaluate(() => document.fonts.ready);
+    await page.addStyleTag({ content: 'header { position: static !important; }' });
+    await expect(page.locator('main')).toHaveScreenshot(`not-found-${width}.png`);
+  });
+}
+
+const featurePagePaths = [
+  '/features/',
+  '/clipboard-manager/',
+  '/quick-ring/',
+  '/capture-text/',
+  '/color-picker/',
+  '/window-switcher/',
+  '/prevent-sleep/',
+  '/mouse-jiggler/',
+  '/clean-keyboard/',
+  '/display-dimming/',
+  '/external-display-only/',
+  '/system-monitoring/',
+];
+
+for (const path of featurePagePaths) {
+  for (const width of [1440, 390]) {
+    test(`${path} at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await page.goto(path);
+      await page.evaluate(() => document.fonts.ready);
+      await page.addStyleTag({ content: 'header { position: static !important; }' });
+      const slug = path.replaceAll('/', '');
+      await expect(page.locator('main > header')).toHaveScreenshot(`${slug}-hero-${width}.png`);
+      if ((await page.locator('#faq').count()) > 0) {
+        await page.locator('#faq').scrollIntoViewIfNeeded();
+        await expect(page.locator('#faq')).toHaveScreenshot(`${slug}-faq-${width}.png`);
+      }
+    });
+  }
+}
+
+for (const width of [1440, 390]) {
+  test(`screenshot page regions at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/screenshot/');
+    await page.evaluate(() => document.fonts.ready);
+    await page.addStyleTag({ content: 'header { position: static !important; }' });
+
+    for (const [name, selector] of screenshotRegions) {
+      const region = page.locator(selector);
+      await region.scrollIntoViewIfNeeded();
+      await expect(region).toHaveScreenshot(`screenshot-${name}-${width}.png`);
+    }
   });
 }

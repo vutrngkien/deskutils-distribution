@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { PrivacyPage } from '@/app/(english)/privacy/page';
+import { PrivacyPage } from '@/components/pages/PrivacyPage';
 import { isLocale, type Locale } from '@/content/locales';
 import { routeMetadata } from '@/content/metadata';
 

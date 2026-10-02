@@ -4,7 +4,17 @@ import { product } from '@/content/product';
 import { routeHref } from '@/content/routes';
 import { Button } from '@/components/ui/Button';
 
-export function FinalCta({ locale, title }: { locale: Locale; title?: string }) {
+export function FinalCta({
+  locale,
+  title,
+  secondaryLabel,
+  secondaryHref,
+}: {
+  locale: Locale;
+  title?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}) {
   const t = translate.bind(null, locale);
 
   return (
@@ -30,9 +40,9 @@ export function FinalCta({ locale, title }: { locale: Locale; title?: string }) 
           </Button>
           <a
             className="text-[17px] font-semibold text-white hover:text-[#dfe7ff]"
-            href={routeHref(locale, 'pricing', '/#pricing')}
+            href={secondaryHref ?? routeHref(locale, 'pricing', '/#pricing')}
           >
-            {t('nav.pricing')} →
+            {secondaryLabel ?? t('nav.pricing')} →
           </a>
         </div>
         <p className="home-cta-note">{t('footer.requires', { version: product.minimumMacOS })}</p>

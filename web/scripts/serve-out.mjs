@@ -2,12 +2,13 @@ import { createServer } from 'node:http';
 import { createReadStream } from 'node:fs';
 import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 /**
  * Minimal static file server for `out/`, used by Playwright. More reliable than
  * python's http.server under parallel workers (correct MIME types, keep-alive).
  */
-const root = new URL('../out/', import.meta.url).pathname;
+const root = fileURLToPath(new URL('../out/', import.meta.url));
 const port = Number(process.argv[2] ?? 3100);
 
 const types = {

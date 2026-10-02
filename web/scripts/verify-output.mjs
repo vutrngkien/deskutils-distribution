@@ -28,11 +28,16 @@ try {
       assert.match(html, new RegExp(`<html lang="${locale}"`), `${file}: document language`);
       assert.match(html, /<main\b[^>]*id="main"/, `${file}: main landmark`);
       assert.match(html, /<h1[\s>]/, `${file}: heading`);
-      assert.doesNotMatch(
-        html,
-        /\$19\.99|\$29\.99|Multi-Mac|annual license|USD \/ year|Pro is coming soon|macOS 26|Notarized by Apple/i,
-        `${file}: outdated product copy`,
-      );
+      // The changelog mirrors GitHub release notes verbatim, including
+      // historical wording (older macOS names, notarization). It is the only
+      // page exempt from the outdated-marketing-copy guard.
+      if (route.id !== 'changelog') {
+        assert.doesNotMatch(
+          html,
+          /\$19\.99|\$29\.99|Multi-Mac|annual license|USD \/ year|Pro is coming soon|macOS 26|Notarized by Apple/i,
+          `${file}: outdated product copy`,
+        );
+      }
 
       const canonical = `${origin}${localePath(locale, route.path)}`;
       assert.ok(
@@ -72,11 +77,13 @@ try {
   const notFound = await readFile(new URL('404.html', out), 'utf8');
   assert.match(notFound, /name="robots" content="noindex, nofollow"/, '404: must not be indexed');
 
-  // Sitemap: home is English-only; translated routes include every locale.
+  // Sitemap: every complete route is listed per locale. The homepage is now
+  // localized too; feedback stays excluded by design (index: false).
   const sitemap = await readFile(new URL('sitemap.xml', out), 'utf8');
   assert.ok(sitemap.includes(`${origin}/</loc>`), 'sitemap: home missing');
-  assert.ok(!sitemap.includes(`${origin}/de/</loc>`), 'sitemap: home must not include de');
+  assert.ok(sitemap.includes(`${origin}/de/</loc>`), 'sitemap: localized home missing');
   assert.ok(sitemap.includes(`${origin}/de/install/`), 'sitemap: localized install missing');
+  assert.ok(sitemap.includes(`${origin}/ja/pricing/`), 'sitemap: localized pricing missing');
   assert.ok(!sitemap.includes('/feedback/'), 'sitemap: feedback must be excluded');
 
   // Every local link/asset must resolve inside out/.

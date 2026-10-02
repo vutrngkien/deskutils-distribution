@@ -28,6 +28,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   render the shared `components/layout/RootShell.tsx`; pages provide their own
   `<main id="main">`. Never add `app/layout.tsx` or page-level
   `generateStaticParams` for `[locale]`.
+- Route `page.tsx` files export only their default component and supported Next.js
+  route exports. Shared page components live under `components/pages/`; English
+  and localized wrappers import them there, never from another route file.
 - CSS Modules are being retired page by page. Migrate a page, verify visuals,
   then delete that page's module; final removal happens in the cleanup phase.
 - Localization: missing keys fall back to English (`content/i18n.ts`).

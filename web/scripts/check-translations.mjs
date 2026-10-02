@@ -1,7 +1,7 @@
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 
 /**
@@ -43,7 +43,7 @@ export async function checkTranslations() {
   const outfile = join(dir, 'translations.mjs');
   try {
     await build({
-      entryPoints: [new URL('../content/translations.ts', import.meta.url).pathname],
+      entryPoints: [fileURLToPath(new URL('../content/translations.ts', import.meta.url))],
       bundle: true,
       platform: 'node',
       format: 'esm',

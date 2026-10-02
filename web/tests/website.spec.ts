@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { build } from 'esbuild';
 import { routes } from '../content/routes';
+import releaseSnapshot from '../content/releases.json';
 
 const internalRoutes = routes
   .filter((route) => route.publish && !route.guide && route.path !== '/')
@@ -54,12 +55,14 @@ for (const width of [390, 768, 1200, 1440]) {
     // stand in until generated media is supplied.
     await expect(page.locator('[data-media-slot]')).toHaveCount(5);
     await expect(page.locator('[data-media-state="placeholder"]')).toHaveCount(0);
-    await expect(page.locator('[data-media-state="ready"]')).toHaveCount(0);
-    await expect(page.locator('[data-media-state="mockup"]')).toHaveCount(5);
+    await expect(
+      page.locator('[data-media-state="ready"], [data-media-state="mockup"]'),
+    ).toHaveCount(5);
     for (const id of ['screenshot', 'clipboard', 'quickring']) {
-      await expect(
-        page.locator(`[data-media-slot="${id}"][data-media-state="mockup"]`),
-      ).toHaveCount(1);
+      await expect(page.locator(`[data-media-slot="${id}"]`)).toHaveAttribute(
+        'data-media-state',
+        /^(mockup|ready)$/,
+      );
     }
 
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
@@ -122,8 +125,16 @@ test('unknown routes serve the exported 404 with a real 404 status', async ({ pa
   const response = await page.goto('/unknown-route/');
   expect(response?.status()).toBe(404);
   await expect(page.locator('meta[name="robots"][content="noindex, nofollow"]')).toHaveCount(1);
-  await expect(page.getByRole('heading', { name: 'This one got away.' })).toBeVisible();
-  await page.getByRole('link', { name: 'Back to DeskUtils →', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'We couldn’t find that page' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'All features' })).toHaveAttribute(
+    'href',
+    '/features/',
+  );
+  await expect(page.getByRole('link', { name: 'Support', exact: true })).toHaveAttribute(
+    'href',
+    '/support/',
+  );
+  await page.getByRole('link', { name: 'Go to homepage' }).click();
   await expect(page).toHaveURL(/\/$/);
 });
 
@@ -196,25 +207,29 @@ test('mobile navigation traps focus, closes on Escape and restores focus', async
   await expect(trigger).toBeFocused();
 });
 
-test('incomplete locales are noindex while translated routes stay indexable', async ({ page }) => {
-  await page.goto('/de/');
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
-  await page.goto('/de/install/');
-  await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+test('all published locales are indexable while feedback stays noindex', async ({ page }) => {
+  for (const locale of ['de', 'ko', 'zh-TW']) {
+    await page.goto(`/${locale}/`);
+    await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+    await page.goto(`/${locale}/install/`);
+    await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+  }
+  await page.goto('/de/feedback/');
+  await expect(page.locator('meta[name="robots"][content="noindex, nofollow"]')).toHaveCount(1);
 });
 
-test('sitemap reflects route-aware completeness', async ({ request }) => {
+test('sitemap lists every localized published route and excludes feedback', async ({ request }) => {
   const response = await request.get('/sitemap.xml');
   const xml = await response.text();
   expect(xml).toContain('https://deskutils.app/</loc>');
-  expect(xml).not.toContain('https://deskutils.app/de/</loc>');
+  expect(xml).toContain('https://deskutils.app/de/</loc>');
   expect(xml).toContain('https://deskutils.app/de/install/');
+  expect(xml).toContain('https://deskutils.app/ja/pricing/');
+  expect(xml).toContain('https://deskutils.app/zh-TW/changelog/');
   expect(xml).not.toContain('/feedback/');
 });
 
-test('feedback page validates fields and keeps a safe email fallback without an endpoint', async ({
-  page,
-}) => {
+test('feedback page validates attachments and keeps email support available', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto('/feedback/');
 
@@ -228,7 +243,9 @@ test('feedback page validates fields and keeps a safe email fallback without an 
     'true',
   );
 
-  await page.getByLabel('Your feedback').fill('The clipboard filter could be easier to discover.');
+  await page
+    .getByLabel('What went wrong?')
+    .fill('The clipboard filter could be easier to discover.');
   await page.getByLabel('Email address').fill('person@example.com');
   await page.setInputFiles('#feedback-attachment', {
     name: 'not-an-image.txt',
@@ -237,12 +254,152 @@ test('feedback page validates fields and keeps a safe email fallback without an 
   });
   await expect(page.getByText('Please choose an image file.', { exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Send feedback', exact: true })).toBeDisabled();
-  await expect(page.getByText('Feedback submissions are temporarily unavailable.')).toBeVisible();
   await expect(page.getByRole('link', { name: 'deskutils.app@gmail.com' }).first()).toHaveAttribute(
     'href',
     'mailto:deskutils.app@gmail.com',
   );
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test.describe('feedback submission against a mock endpoint', () => {
+  let js = '';
+  let fallbackJs = '';
+  const endpoint = 'https://feedback.test/submit';
+  test.beforeAll(async () => {
+    const options = {
+      entryPoints: ['tests/fixtures/feedback.tsx'],
+      bundle: true,
+      write: false as const,
+      outdir: '/private/tmp/deskutils-feedback-test',
+      format: 'iife' as const,
+      jsx: 'automatic' as const,
+      // content/product.ts reads several env vars at import time.
+      banner: { js: 'var process = globalThis.process || { env: {} };' },
+      define: {
+        'process.env.NODE_ENV': '"production"',
+        'process.env.NEXT_PUBLIC_DESKUTILS_FEEDBACK_FORM_ENDPOINT': `"${endpoint}"`,
+      },
+    };
+    const result = await build(options);
+    js = result.outputFiles.find((file) => file.path.endsWith('.js'))!.text;
+    const fallbackResult = await build({
+      ...options,
+      define: {
+        ...options.define,
+        'process.env.NEXT_PUBLIC_DESKUTILS_FEEDBACK_FORM_ENDPOINT': '""',
+      },
+    });
+    fallbackJs = fallbackResult.outputFiles.find((file) => file.path.endsWith('.js'))!.text;
+  });
+
+  async function mount(page: import('@playwright/test').Page) {
+    await page.setContent('<div id="root"></div>');
+    await page.addScriptTag({ content: js });
+  }
+
+  test('keeps the email fallback and disables submission without an endpoint', async ({ page }) => {
+    await page.goto('/');
+    await page.setContent('<div id="root"></div>');
+    await page.addScriptTag({ content: fallbackJs });
+    await expect(page.getByText('Feedback submissions are temporarily unavailable.')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Send feedback', exact: true })).toBeDisabled();
+    await expect(page.getByRole('link', { name: 'deskutils.app@gmail.com' })).toHaveAttribute(
+      'href',
+      'mailto:deskutils.app@gmail.com',
+    );
+  });
+
+  test('blocks an empty message before any request is sent', async ({ page }) => {
+    let requests = 0;
+    await page.route(endpoint, (route) => {
+      requests += 1;
+      route.fulfill({ status: 200, body: '{}' });
+    });
+    await page.goto('/');
+    await mount(page);
+
+    await page.getByRole('button', { name: 'Send feedback', exact: true }).click();
+    await expect(page.getByText('Please describe your feedback before sending.')).toBeVisible();
+    expect(requests).toBe(0);
+  });
+
+  test('rejects an invalid email', async ({ page }) => {
+    let requests = 0;
+    await page.route(endpoint, (route) => {
+      requests += 1;
+      route.fulfill({ status: 200, body: '{}' });
+    });
+    await page.goto('/');
+    await mount(page);
+
+    await page.getByLabel('Your feedback').fill('The clipboard filter is hard to find.');
+    await page.getByLabel('Email address').fill('not-an-email');
+    await page.getByRole('button', { name: 'Send feedback', exact: true }).click();
+    await expect(page.getByText('Enter a valid email address so we can reply.')).toBeVisible();
+    expect(requests).toBe(0);
+  });
+
+  test('posts the real payload and shows the success state', async ({ page }) => {
+    const captured: { method: string; body: string }[] = [];
+    await page.route(endpoint, (route) => {
+      captured.push({ method: route.request().method(), body: route.request().postData() ?? '' });
+      route.fulfill({ status: 200, body: '{"ok":true}', contentType: 'application/json' });
+    });
+    await page.goto('/');
+    await mount(page);
+
+    await page.getByRole('button', { name: 'Bug', exact: true }).click();
+    await page.getByLabel('What went wrong?').fill('Saving a capture closes the window.');
+    await page.getByLabel('Email address').fill('person@example.com');
+    await page.getByRole('button', { name: 'Send feedback', exact: true }).click();
+
+    await expect(page.getByText('Thank you for the feedback.')).toBeVisible();
+    expect(captured).toHaveLength(1);
+    expect(captured[0].method).toBe('POST');
+    expect(captured[0].body).toContain('name="feedback_type"');
+    expect(captured[0].body).toContain('bug');
+    expect(captured[0].body).toContain('Saving a capture closes the window.');
+    expect(captured[0].body).toContain('name="email"');
+    expect(captured[0].body).toContain('person@example.com');
+    expect(captured[0].body).toContain('DeskUtils website');
+  });
+
+  test('resets the form and tips to Feedback after sending another', async ({ page }) => {
+    await page.route(endpoint, (route) =>
+      route.fulfill({ status: 200, body: '{"ok":true}', contentType: 'application/json' }),
+    );
+    await page.goto('/');
+    await mount(page);
+
+    await page.getByRole('button', { name: 'Idea', exact: true }).click();
+    await expect(
+      page.getByRole('heading', { name: 'What helps us understand an idea' }),
+    ).toBeVisible();
+    await page.getByLabel('Your idea').fill('A menu bar timer.');
+    await page.getByLabel('Email address').fill('person@example.com');
+    await page.getByRole('button', { name: 'Send feedback', exact: true }).click();
+    await expect(page.getByText('Thank you for the feedback.')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Send another response' }).click();
+    await expect(page.getByRole('button', { name: 'Feedback', exact: true })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    await expect(page.getByRole('heading', { name: 'What makes feedback useful' })).toBeVisible();
+  });
+
+  test('surfaces a failure banner when the endpoint errors', async ({ page }) => {
+    await page.route(endpoint, (route) => route.fulfill({ status: 500, body: 'nope' }));
+    await page.goto('/');
+    await mount(page);
+
+    await page.getByLabel('Your feedback').fill('Something broke.');
+    await page.getByLabel('Email address').fill('person@example.com');
+    await page.getByRole('button', { name: 'Send feedback', exact: true }).click();
+    await expect(
+      page.getByText('We could not send your feedback. Please try again or email support.'),
+    ).toBeVisible();
+  });
 });
 
 test('feedback is discoverable from the FAQ and footer while direct support remains available', async ({
@@ -259,8 +416,16 @@ test('feedback is discoverable from the FAQ and footer while direct support rema
   );
   await expect(footer.getByRole('link', { name: 'Support', exact: true })).toHaveAttribute(
     'href',
+    '/support/',
+  );
+  await expect(footer.getByRole('link', { name: 'deskutils.app@gmail.com' })).toHaveAttribute(
+    'href',
     'mailto:deskutils.app@gmail.com',
   );
+  await page.goto('/vi/feedback/');
+  await expect(
+    page.locator('footer').getByRole('link', { name: 'Hỗ trợ', exact: true }),
+  ).toHaveAttribute('href', '/vi/support/');
 });
 
 test('localized header uses the translated download label', async ({ page }) => {
@@ -269,6 +434,64 @@ test('localized header uses the translated download label', async ({ page }) => 
   await expect(
     page.locator('header').first().getByRole('link', { name: 'Herunterladen', exact: true }),
   ).toHaveAttribute('href', '/de/install/');
+});
+
+for (const locale of ['de', 'fr', 'ru', 'ja', 'ko', 'zh-CN', 'zh-TW', 'vi']) {
+  test(`${locale} homepage is localized, indexable and correctly canonical`, async ({ page }) => {
+    await page.goto(`/${locale}/`);
+    await expect(page.locator('html')).toHaveAttribute('lang', locale);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      `https://deskutils.app/${locale}/`,
+    );
+    await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+    const hreflang = await page
+      .locator('link[rel="alternate"]')
+      .evaluateAll((els) => els.map((el) => el.getAttribute('hreflang')));
+    expect(hreflang).toContain('en');
+    expect(hreflang).toContain(locale);
+    expect(hreflang).toContain('x-default');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+  });
+}
+
+test('Traditional Chinese is distinct from Simplified Chinese', async ({ page }) => {
+  await page.goto('/zh-CN/privacy/');
+  const simplified = await page.locator('main').innerText();
+  await page.goto('/zh-TW/privacy/');
+  const traditional = await page.locator('main').innerText();
+  expect(simplified).not.toBe(traditional);
+  expect(traditional).toContain('隱私');
+  expect(traditional).not.toContain('隐私');
+});
+
+test('switching language keeps the current page', async ({ page }) => {
+  await page.goto('/screenshot/');
+  const switcher = page.locator('header details').filter({ hasText: 'English' }).first();
+  await switcher.locator('summary').click();
+  await Promise.all([
+    page.waitForURL('**/de/screenshot/'),
+    switcher.getByRole('link', { name: 'Deutsch' }).click(),
+  ]);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    'href',
+    'https://deskutils.app/de/screenshot/',
+  );
+});
+
+test('localized comparison links keep the current language', async ({ page }) => {
+  for (const path of ['/vi/features/', '/vi/quick-ring/']) {
+    await page.goto(path);
+    await expect(page.locator('main a[href="/"]')).toHaveCount(0);
+    await expect(page.locator('main a[href="/vi/"]')).toHaveCount(2);
+  }
+});
+
+test('localized feedback stays noindex', async ({ page }) => {
+  await page.goto('/de/feedback/');
+  await expect(page.locator('meta[name="robots"][content="noindex, nofollow"]')).toHaveCount(1);
 });
 
 for (const width of [375, 1024]) {
@@ -286,6 +509,547 @@ for (const width of [375, 1024]) {
     );
   });
 }
+
+for (const width of [390, 768, 1200, 1440]) {
+  test(`screenshot feature page works at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto('/screenshot/');
+
+    await expect(
+      page.getByRole('heading', { name: 'Take and annotate screenshots on your Mac', level: 1 }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'Capture modes and screenshot actions' }),
+    ).toBeVisible();
+    await expect(page.locator('#faq details')).toHaveCount(5);
+
+    // Every demo slot has real media or its approved mockup, never an empty placeholder.
+    await expect(page.locator('[data-media-state="placeholder"]')).toHaveCount(0);
+    await expect(
+      page.locator(
+        '[data-media-slot][data-media-state="mockup"], [data-media-slot][data-media-state="ready"]',
+      ),
+    ).toHaveCount(6);
+
+    const schemaTypes = await page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((elements) =>
+        elements.map((element) => JSON.parse(element.textContent ?? '{}')['@type']),
+      );
+    expect(schemaTypes).toContain('BreadcrumbList');
+    expect(schemaTypes).toContain('FAQPage');
+
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+  });
+}
+
+test('screenshot FAQ keeps one answer open at a time', async ({ page }) => {
+  await page.goto('/screenshot/');
+  const items = page.locator('#faq details');
+  await items.nth(0).locator('summary').click();
+  await expect(items.nth(0)).toHaveAttribute('open', '');
+  await items.nth(1).locator('summary').click();
+  await expect(items.nth(0)).not.toHaveAttribute('open', '');
+  await expect(items.nth(1)).toHaveAttribute('open', '');
+});
+
+test('feature media frames keep their mobile crop and desktop scale', async ({ page }) => {
+  // The mockup child and the generated-media <img> are both placed inside the
+  // shared crop positioner (ProductVisual.cropClassName / MediaSlot), so the
+  // crop survives a real master replacing the mockup. Mobile crops to a fixed
+  // height; desktop is unconstrained.
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.goto('/screenshot/');
+  const shotMobile = await page.locator('[data-media-slot="screenshot-hero"]').boundingBox();
+  expect(shotMobile?.height).toBeCloseTo(352, 0);
+  // The crop is an inner positioner wider than the frame, offset to the left
+  // (the approved mobile crop). It must exist in the mockup state too.
+  const crop = await page.locator('[data-media-slot="screenshot-hero"] > *').evaluate((el) => ({
+    width: el.getBoundingClientRect().width,
+    left: el.getBoundingClientRect().left,
+  }));
+  expect(crop.width).toBeGreaterThan(shotMobile!.width);
+  expect(crop.left).toBeLessThan(shotMobile!.x);
+  await expect(
+    page.locator('[data-umami-section="screenshot-annotate"] [data-media-slot]'),
+  ).toBeHidden();
+
+  await page.goto('/window-switcher/');
+  const dockMobile = await page.locator('[data-media-slot="window-switcher-hero"]').boundingBox();
+  expect(dockMobile?.height).toBeCloseTo(150, 0);
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/screenshot/');
+  const shotDesktop = await page.locator('[data-media-slot="screenshot-hero"]').boundingBox();
+  expect(shotDesktop?.height).toBeGreaterThan(600);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('each utility page owns a distinct media slot', async ({ page }) => {
+  const expected = [
+    ['/prevent-sleep/', 'utility-prevent-sleep'],
+    ['/mouse-jiggler/', 'utility-mouse-jiggler'],
+    ['/clean-keyboard/', 'utility-clean-keyboard'],
+    ['/display-dimming/', 'utility-display-dimming'],
+    ['/external-display-only/', 'utility-external-display-only'],
+    ['/system-monitoring/', 'utility-system-monitoring'],
+  ] as const;
+  const seen = new Set<string>();
+  for (const [path, slot] of expected) {
+    await page.goto(path);
+    await expect(page.locator(`[data-media-slot="${slot}"]`)).toHaveCount(1);
+    seen.add(slot);
+  }
+  // A shared slot would collapse the set; six distinct slots must remain.
+  expect(seen.size).toBe(expected.length);
+});
+
+test('support hub links every topic to a real destination', async ({ page }) => {
+  await page.setViewportSize({ width: 1024, height: 1000 });
+  await page.goto('/support/');
+  await expect(page.getByRole('heading', { name: 'How can we help?', level: 1 })).toBeVisible();
+
+  const expected = [
+    ['Installation', '/install/'],
+    ['Permissions', '/install/#permissions'],
+    ['Screenshot help', '/screenshot/'],
+    ['Clipboard help', '/clipboard-manager/'],
+    ['Feedback and bug reports', '/feedback/'],
+  ] as const;
+  for (const [name, href] of expected) {
+    await expect(page.getByRole('link', { name: new RegExp(name) }).first()).toHaveAttribute(
+      'href',
+      href,
+    );
+  }
+  await expect(page.getByRole('link', { name: /Release notes/ })).toHaveAttribute(
+    'href',
+    '/changelog/',
+  );
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('install page keeps the verified download facts and adds troubleshooting', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1024, height: 1000 });
+  await page.goto('/install/');
+  await expect(page.getByText('shasum -a 256 ~/Downloads/DeskUtils.dmg')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'You’re home.', exact: true })).toBeVisible();
+  await expect(
+    page.locator('section', { hasText: 'Troubleshooting' }).locator('details'),
+  ).toHaveCount(4);
+  await expect(page.getByRole('link', { name: /Report a problem/ })).toHaveAttribute(
+    'href',
+    '/feedback/',
+  );
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('feedback tips follow the selected type', async ({ page }) => {
+  await page.goto('/feedback/');
+  await expect(page.getByRole('heading', { name: 'What makes feedback useful' })).toBeVisible();
+  await page.getByRole('button', { name: 'Bug', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'What helps with a bug report' })).toBeVisible();
+  await page.getByRole('button', { name: 'Idea', exact: true }).click();
+  await expect(
+    page.getByRole('heading', { name: 'What helps us understand an idea' }),
+  ).toBeVisible();
+});
+
+for (const width of [390, 1440]) {
+  test(`pricing page renders plans, checkout and schema at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto('/pricing/');
+
+    await expect(
+      page.getByRole('heading', { name: 'Free to start. Pro when you need more.', level: 1 }),
+    ).toBeVisible();
+    await expect(page.locator('article')).toHaveCount(2);
+
+    // Pro checkout uses the real Lemon Squeezy URL with the launch discount.
+    const proCheckout = page.getByRole('link', { name: 'Get DeskUtils Pro', exact: true });
+    const checkoutURL = new URL((await proCheckout.getAttribute('href')) ?? '');
+    expect(checkoutURL.origin).toBe('https://deskutils.lemonsqueezy.com');
+    expect(checkoutURL.searchParams.get('checkout[discount_code]')).toBe('LAUNCH799');
+
+    // Price, compare table and FAQ.
+    await expect(page.getByText('$7.99', { exact: true })).toBeVisible();
+    await expect(page.getByText('$14.99', { exact: true })).toHaveCSS(
+      'text-decoration-line',
+      'line-through',
+    );
+    await expect(
+      page.getByText('50 clipboard items').filter({ visible: true }).first(),
+    ).toBeVisible();
+    await expect(
+      page.getByText('500 clipboard items').filter({ visible: true }).first(),
+    ).toBeVisible();
+    // Pro card text must stay visible on its dark background, and compare
+    // labels must not leak `{count}` placeholders.
+    await expect(page.getByText('Extended clipboard history', { exact: true })).toBeVisible();
+    await expect(
+      page.getByText('Clipboard history', { exact: true }).filter({ visible: true }).first(),
+    ).toBeVisible();
+    await expect(
+      page.getByText('Macs per license', { exact: true }).filter({ visible: true }).first(),
+    ).toBeVisible();
+    await expect(page.getByText(/\{count\}/)).toHaveCount(0);
+
+    const schemaTypes = await page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((elements) =>
+        elements.map((element) => JSON.parse(element.textContent ?? '{}')['@type']),
+      );
+    expect(schemaTypes).toContain('BreadcrumbList');
+    expect(schemaTypes).toContain('FAQPage');
+    expect(schemaTypes).toContain('SoftwareApplication');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+  });
+}
+
+test.describe('pricing plans render for launch on and off', () => {
+  const bundles: Record<'on' | 'off', string> = { on: '', off: '' };
+  test.beforeAll(async () => {
+    for (const state of ['on', 'off'] as const) {
+      const result = await build({
+        entryPoints: ['tests/fixtures/pricing-plans.tsx'],
+        bundle: true,
+        write: false,
+        outdir: `/private/tmp/deskutils-pricing-${state}`,
+        format: 'iife',
+        jsx: 'automatic',
+        banner: { js: 'var process = globalThis.process || { env: {} };' },
+        define: {
+          'process.env.NODE_ENV': '"production"',
+          'process.env.NEXT_PUBLIC_DESKUTILS_LAUNCH_OFFER': JSON.stringify(
+            state === 'on' ? 'true' : 'false',
+          ),
+        },
+      });
+      bundles[state] = result.outputFiles.find((file) => file.path.endsWith('.js'))!.text;
+    }
+  });
+
+  async function mount(page: import('@playwright/test').Page, state: 'on' | 'off') {
+    await page.setContent('<div id="root"></div>');
+    await page.addScriptTag({ content: bundles[state] });
+  }
+
+  test('launch offer on shows the launch price, badge and discount checkout', async ({ page }) => {
+    await page.goto('/');
+    await mount(page, 'on');
+
+    await expect(page.getByText('$7.99', { exact: true })).toBeVisible();
+    await expect(page.getByText('$14.99', { exact: true })).toHaveCSS(
+      'text-decoration-line',
+      'line-through',
+    );
+    await expect(page.getByText('Launch Offer')).toBeVisible();
+    await expect(page.getByText('First 100 customers · Then $14.99')).toBeVisible();
+    const checkout = new URL(
+      (await page
+        .getByRole('link', { name: 'Get DeskUtils Pro', exact: true })
+        .getAttribute('href')) ?? '',
+    );
+    expect(checkout.searchParams.get('checkout[discount_code]')).toBe('LAUNCH799');
+  });
+
+  test('launch offer off shows the regular price with no discount', async ({ page }) => {
+    await page.goto('/');
+    await mount(page, 'off');
+
+    await expect(page.getByText('$14.99', { exact: true })).toBeVisible();
+    await expect(page.getByText('$7.99', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('Launch Offer')).toHaveCount(0);
+    await expect(page.getByText('$14.99', { exact: true })).not.toHaveCSS(
+      'text-decoration-line',
+      'line-through',
+    );
+    const checkout = new URL(
+      (await page
+        .getByRole('link', { name: 'Get DeskUtils Pro', exact: true })
+        .getAttribute('href')) ?? '',
+    );
+    expect(checkout.searchParams.get('checkout[discount_code]')).toBeNull();
+  });
+});
+
+for (const width of [390, 1440]) {
+  test(`changelog page renders every release at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto('/changelog/');
+
+    await expect(page.getByRole('heading', { name: 'Changelog', level: 1 })).toBeVisible();
+
+    const snapshot = releaseSnapshot as { tag_name: string; html_url: string }[];
+    const articles = page.locator('main article');
+    await expect(articles).toHaveCount(snapshot.length);
+
+    // Newest release first, with a stable shareable anchor (ids contain dots,
+    // so they are matched with an attribute selector).
+    const first = snapshot[0];
+    const firstArticle = page.locator(`[id="${first.tag_name}"]`);
+    await expect(firstArticle).toHaveCount(1);
+    await expect(firstArticle.getByRole('link', { name: 'View on GitHub' })).toHaveAttribute(
+      'href',
+      first.html_url,
+    );
+
+    // Dates are rendered for every release.
+    await expect(page.locator('main time')).toHaveCount(snapshot.length);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+  });
+}
+
+test('changelog shows version, date and link for a release without notes', async ({ page }) => {
+  await page.goto('/changelog/');
+  const empty = page.locator('[id="v0.1.2"]');
+  await expect(empty).toHaveCount(1);
+  await expect(empty).toContainText('DeskUtils');
+  await expect(empty.locator('time')).toHaveCount(1);
+  await expect(empty.getByRole('link', { name: 'View on GitHub' })).toHaveAttribute(
+    'href',
+    /releases\/tag\/v0\.1\.2$/,
+  );
+  // No fabricated notes paragraph when the body is empty.
+  await expect(empty.locator('p')).toHaveCount(0);
+});
+
+test('changelog markdown renders safely without executing or unsafe links', async ({ page }) => {
+  const result = await build({
+    entryPoints: ['tests/fixtures/markdown.tsx'],
+    bundle: true,
+    write: false,
+    outdir: '/private/tmp/deskutils-markdown-test',
+    format: 'iife',
+    jsx: 'automatic',
+    define: { 'process.env.NODE_ENV': '"production"' },
+  });
+  const js = result.outputFiles.find((file) => file.path.endsWith('.js'))!.text;
+  const markdown = [
+    '## Heading',
+    '',
+    '- item with **bold** and `code`',
+    '- [safe](https://example.com) and [unsafe](javascript:alert(1))',
+    '- Parent',
+    '  - Child',
+    '',
+    '<script>window.__pwned = true</script>',
+    'plain <b>tag</b> text',
+  ].join('\n');
+
+  await page.goto('/');
+  const data = JSON.stringify(markdown).replace(/</g, '\\u003c');
+  await page.setContent(
+    `<div id="root"></div><script id="md-data" type="application/json">${data}</script>`,
+  );
+  await page.addScriptTag({ content: js });
+
+  // A hang would block the page thread; the short timeout makes it fail fast.
+  await expect(page.getByRole('heading', { name: 'Heading' })).toBeVisible({ timeout: 5000 });
+  await expect(page.locator('li strong', { hasText: 'bold' })).toHaveCount(1);
+  await expect(page.locator('li code', { hasText: 'code' })).toHaveCount(1);
+  // Nested list items are flattened and rendered (regression: infinite loop).
+  await expect(page.locator('li', { hasText: 'Parent' })).toHaveCount(1);
+  await expect(page.locator('li', { hasText: 'Child' })).toHaveCount(1);
+  expect(await page.locator('a[href^="javascript:"]').count()).toBe(0);
+  expect(await page.locator('a[href="https://example.com"]').count()).toBe(1);
+  expect(await page.evaluate(() => (window as { __pwned?: boolean }).__pwned)).toBeUndefined();
+  // Raw HTML is shown as text, not parsed into elements.
+  expect(await page.locator('#root b').count()).toBe(0);
+});
+
+test('pricing page keeps the launch price and JSON-LD offer in sync', async ({ page }) => {
+  await page.goto('/pricing/');
+  const offer = await page
+    .locator('script[type="application/ld+json"]')
+    .evaluateAll((elements) =>
+      elements
+        .map((element) => JSON.parse(element.textContent ?? '{}'))
+        .find((data) => data['@type'] === 'SoftwareApplication'),
+    );
+  expect(offer.offers.price).toBe('7.99');
+  expect(offer.offers.priceCurrency).toBe('USD');
+  const checkout = new URL(offer.offers.url);
+  expect(checkout.origin).toBe('https://deskutils.lemonsqueezy.com');
+  expect(checkout.searchParams.get('checkout[discount_code]')).toBe('LAUNCH799');
+});
+
+test('install page exposes the permissions anchor used by feature pages', async ({ page }) => {
+  await page.goto('/install/#permissions');
+  await expect(page.locator('#permissions')).toBeVisible();
+  await expect(page.locator('#permissions')).toContainText('You stay in control');
+});
+
+test('related guides hides the browse link until Guides is published', async ({ page }) => {
+  await page.goto('/screenshot/');
+  const related = page.locator('[data-umami-section="screenshot-related"]');
+  await expect(related.getByRole('link', { name: 'Browse all guides →' })).toHaveCount(0);
+  await expect(related.getByRole('link', { name: /Install DeskUtils/ })).toHaveAttribute(
+    'href',
+    '/install/',
+  );
+});
+
+test('quick ring explains how to choose an action and the Accessibility permission', async ({
+  page,
+}) => {
+  await page.goto('/quick-ring/');
+  await expect(
+    page.getByText('Click an action, or hold and flick toward it. The tool opens, ready to use.'),
+  ).toBeVisible();
+  await expect(
+    page.getByText(/Accessibility permission is required so Quick Ring can detect/),
+  ).toBeVisible();
+});
+
+test('screenshot related links point to published feature routes', async ({ page }) => {
+  await page.goto('/screenshot/');
+  const related = page.locator('[data-umami-section="screenshot-related"]');
+  for (const path of ['/capture-text/', '/color-picker/', '/quick-ring/', '/clipboard-manager/']) {
+    await expect(related.locator(`a[href="${path}"]`)).toHaveCount(1);
+  }
+  // No related link still falls back to a homepage anchor now that features are published.
+  await expect(related.locator('a[href="/#tools"]')).toHaveCount(0);
+});
+
+const featurePages = [
+  { path: '/features/', h1: 'Every DeskUtils tool for your Mac', faq: 0 },
+  { path: '/screenshot/', h1: 'Take and annotate screenshots on your Mac', faq: 5 },
+  { path: '/clipboard-manager/', h1: 'Clipboard history for Mac you can search', faq: 5 },
+  { path: '/quick-ring/', h1: 'Open your go-to Mac actions by pressing ⌘ twice', faq: 4 },
+  { path: '/capture-text/', h1: 'Copy text from anything on your Mac screen', faq: 4 },
+  { path: '/color-picker/', h1: 'Pick any color on your Mac screen', faq: 4 },
+  { path: '/window-switcher/', h1: 'Switch between windows on your Mac, not just apps', faq: 4 },
+];
+
+for (const feature of featurePages) {
+  test(`${feature.path} renders hero, schema and no placeholder`, async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 1000 });
+    await page.goto(feature.path);
+
+    await expect(page.getByRole('heading', { name: feature.h1, level: 1 })).toBeVisible();
+    await expect(page.locator('[data-media-state="placeholder"]')).toHaveCount(0);
+
+    const schemaTypes = await page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((elements) =>
+        elements.map((element) => JSON.parse(element.textContent ?? '{}')['@type']),
+      );
+    expect(schemaTypes).toContain('BreadcrumbList');
+    if (feature.faq > 0) {
+      await expect(page.locator('#faq details')).toHaveCount(feature.faq);
+      expect(schemaTypes).toContain('FAQPage');
+    }
+
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+  });
+}
+
+const utilityPages = [
+  { path: '/prevent-sleep/', h1: 'Keep your Mac awake during long tasks', faq: 4 },
+  {
+    path: '/mouse-jiggler/',
+    h1: 'Prevent idle interruptions during presentations and long-running tasks',
+    faq: 4,
+  },
+  { path: '/clean-keyboard/', h1: 'Wipe your keyboard without typing anything', faq: 3 },
+  { path: '/display-dimming/', h1: 'Dim a bright external display', faq: 4 },
+  { path: '/external-display-only/', h1: 'Work on your external display only', faq: 3 },
+  {
+    path: '/system-monitoring/',
+    h1: 'See CPU, memory and disk storage at a glance.',
+    faq: 3,
+  },
+];
+
+for (const utility of utilityPages) {
+  test(`${utility.path} renders its verified content and schema`, async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 1000 });
+    await page.goto(utility.path);
+
+    await expect(page.getByRole('heading', { name: utility.h1, level: 1 })).toBeVisible();
+    await expect(page.locator('#faq details')).toHaveCount(utility.faq);
+    await expect(page.getByText('What macOS asks for')).toBeVisible();
+    await expect(page.locator('[data-media-state="placeholder"]')).toHaveCount(0);
+
+    const schemaTypes = await page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((elements) =>
+        elements.map((element) => JSON.parse(element.textContent ?? '{}')['@type']),
+      );
+    expect(schemaTypes).toContain('BreadcrumbList');
+    expect(schemaTypes).toContain('FAQPage');
+
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+  });
+}
+
+test('localized utility breadcrumb schema points at the localized URL', async ({ page }) => {
+  await page.goto('/de/prevent-sleep/');
+  const breadcrumb = await page
+    .locator('script[type="application/ld+json"]')
+    .evaluateAll((elements) => {
+      const graph = elements
+        .map((element) => JSON.parse(element.textContent ?? '{}'))
+        .find((data) => data['@type'] === 'BreadcrumbList');
+      return graph.itemListElement.map((item: { item: string }) => item.item);
+    });
+  expect(breadcrumb.at(-1)).toBe('https://deskutils.app/de/prevent-sleep/');
+});
+
+test('display dimming explains the Free preview versus Pro persistence', async ({ page }) => {
+  await page.goto('/display-dimming/');
+  await expect(page.getByText(/In the Free version the dimming is a live preview/)).toBeVisible();
+  await expect(page.locator('#faq details')).toHaveCount(4);
+});
+
+test('published utility routes are linked from the features catalog', async ({ page }) => {
+  await page.goto('/features/');
+  for (const [name, path] of [
+    ['Prevent Sleep', '/prevent-sleep/'],
+    ['Mouse Jiggler', '/mouse-jiggler/'],
+    ['Clean Keyboard', '/clean-keyboard/'],
+    ['Display Dimming', '/display-dimming/'],
+    ['External Display Only', '/external-display-only/'],
+    ['System Monitoring', '/system-monitoring/'],
+  ] as const) {
+    await expect(page.locator(`a[href="${path}"]`, { hasText: name }).first()).toBeVisible();
+  }
+});
+
+test('published feature routes are linked from the shared navigation', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('summary', { hasText: 'Features' }).first().click();
+  for (const [name, path] of [
+    ['Screenshot', '/screenshot/'],
+    ['Clipboard Manager', '/clipboard-manager/'],
+    ['Quick Ring', '/quick-ring/'],
+    ['Capture Text', '/capture-text/'],
+    ['Color Picker', '/color-picker/'],
+    ['Window Switcher', '/window-switcher/'],
+  ] as const) {
+    await expect(page.locator('.home-features-panel a', { hasText: name }).first()).toHaveAttribute(
+      'href',
+      path,
+    );
+  }
+  await expect(page.locator('.home-features-panel a', { hasText: 'All features' })).toHaveAttribute(
+    'href',
+    '/features/',
+  );
+});
 
 test('Umami tracks downloads and checkout only on the production domain', async ({ page }) => {
   await page.route('**/cloud.umami.is/**', (route) =>
@@ -414,10 +1178,11 @@ test.describe('media slot fixture', () => {
     js = result.outputFiles.find((file) => file.path.endsWith('.js'))!.text;
   });
 
-  async function mount(page: import('@playwright/test').Page, generated: boolean) {
+  async function mount(page: import('@playwright/test').Page, generated: boolean, crop = false) {
     await page.setContent(
       `<div id="root"></div><script id="slot-data" type="application/json">${JSON.stringify({
         generated,
+        crop,
       })}</script>`,
     );
     await page.addScriptTag({ content: js });
@@ -444,6 +1209,42 @@ test.describe('media slot fixture', () => {
     await expect(figure).toHaveAttribute('data-media-state', 'mockup');
     await expect(page.getByTestId('fixture-mockup')).toHaveCount(1);
     await expect(figure.locator('picture')).toHaveCount(0);
+  });
+
+  test('crop geometry is identical in the mockup and ready states', async ({ page }) => {
+    // Guards the Screenshot/Window Switcher crops: the same offset positioner
+    // must hold when generated media replaces the mockup.
+    const readGeometry = async () => {
+      const figure = page.locator('[data-media-slot="hero"]');
+      const inner = figure.locator(':scope > *').first();
+      const [frameBox, innerBox] = await Promise.all([figure.boundingBox(), inner.boundingBox()]);
+      return {
+        state: await figure.getAttribute('data-media-state'),
+        frameHeight: Math.round(frameBox!.height),
+        innerWidth: Math.round(innerBox!.width),
+        innerTop: Math.round(innerBox!.y - frameBox!.y),
+        innerLeft: Math.round(innerBox!.x - frameBox!.x),
+      };
+    };
+    await page.goto('/');
+    await mount(page, false, true);
+    const mockup = await readGeometry();
+
+    await mount(page, true, true);
+    const ready = await readGeometry();
+
+    expect(mockup.state).toBe('mockup');
+    expect(ready.state).toBe('ready');
+    // Same frame height and the same offset positioner in both states.
+    expect(ready.frameHeight).toBe(mockup.frameHeight);
+    expect(ready.frameHeight).toBe(352);
+    expect(ready.innerWidth).toBe(mockup.innerWidth);
+    expect(ready.innerWidth).toBe(550);
+    expect(ready.innerLeft).toBe(mockup.innerLeft);
+    expect(ready.innerLeft).toBeLessThan(0);
+    // The generated image fills the crop positioner and is told to cover it
+    // (the Tailwind class is verified against the real page where CSS loads).
+    await expect(page.locator('[data-media-slot="hero"] img')).toHaveClass(/object-cover/);
   });
 });
 
@@ -565,7 +1366,7 @@ test('navigation exposes Features, Pricing, Feedback and Changelog', async ({ pa
   await expect(nav.locator('summary', { hasText: 'Features' })).toBeVisible();
   await expect(nav.getByRole('link', { name: 'Pricing', exact: true })).toHaveAttribute(
     'href',
-    '/#pricing',
+    '/pricing/',
   );
   await expect(nav.getByRole('link', { name: 'Feedback', exact: true })).toHaveAttribute(
     'href',
@@ -573,7 +1374,7 @@ test('navigation exposes Features, Pricing, Feedback and Changelog', async ({ pa
   );
   await expect(nav.getByRole('link', { name: 'Changelog', exact: true })).toHaveAttribute(
     'href',
-    'https://github.com/vutrngkien/deskutils-distribution/releases',
+    '/changelog/',
   );
   await expect(page.locator('.home-trust')).toHaveCount(0);
   await page.setViewportSize({ width: 390, height: 844 });

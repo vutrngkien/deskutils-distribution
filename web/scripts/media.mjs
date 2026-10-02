@@ -1,21 +1,29 @@
 import { mkdir, readFile, readdir, rm, stat } from 'node:fs/promises';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 
 /**
  * Generate responsive AVIF/WebP/PNG variants for declared media slots.
  *
- * Safety: this script only ever removes `web/public/media/` (generated output).
- * It never touches the copied distribution assets, `appcast.xml` or `CNAME`,
- * which are owned by the release scripts and `prepare-assets.mjs`.
+ * Safety: this script only ever removes the generated output directory
+ * (`web/public/media/` by default). It never touches the copied distribution
+ * assets, `appcast.xml` or `CNAME`, which are owned by the release scripts and
+ * `prepare-assets.mjs`.
  *
  * Source of truth: `content/media.manifest.json`. Masters are read from
  * `web/media-src/<master>` (gitignored). Missing masters are skipped, so the
  * site builds with honest placeholders until final English captures arrive.
+ *
+ * `DESKUTILS_MEDIA_SRC` / `DESKUTILS_MEDIA_OUT` override those directories.
+ * Tests use them so a test run can never delete real masters or generated
+ * media.
  */
 const root = new URL('../', import.meta.url);
 const manifest = JSON.parse(await readFile(new URL('content/media.manifest.json', root), 'utf8'));
-const sourcesDir = new URL('media-src/', root);
-const outDir = new URL('public/media/', root);
+const dirUrl = (envValue, fallback) =>
+  envValue ? pathToFileURL(`${envValue.replace(/\/+$/, '')}/`) : fallback;
+const sourcesDir = dirUrl(process.env.DESKUTILS_MEDIA_SRC, new URL('media-src/', root));
+const outDir = dirUrl(process.env.DESKUTILS_MEDIA_OUT, new URL('public/media/', root));
 
 // Clean ONLY generated media output.
 await rm(outDir, { recursive: true, force: true });
@@ -32,7 +40,7 @@ const generated = [];
 for (const slot of manifest.slots) {
   if (!availableSources.includes(slot.master)) continue;
   const source = new URL(slot.master, sourcesDir);
-  const image = sharp(source.pathname);
+  const image = sharp(fileURLToPath(source));
   const metadata = await image.metadata();
   if (!metadata.width || !metadata.height) {
     throw new Error(`Unreadable master for slot "${slot.id}": ${slot.master}`);
@@ -62,18 +70,19 @@ for (const slot of manifest.slots) {
       .resize(width, height, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } });
     for (const ext of ['avif', 'webp', 'png']) {
       const outfile = new URL(`${slot.id}@${scale}x.${ext}`, outDir);
-      if (ext === 'avif') await resized.clone().avif({ quality: 50 }).toFile(outfile.pathname);
+      const outputPath = fileURLToPath(outfile);
+      if (ext === 'avif') await resized.clone().avif({ quality: 50 }).toFile(outputPath);
       else if (ext === 'webp')
-        await resized.clone().webp({ quality: 82, effort: 6 }).toFile(outfile.pathname);
-      else await resized.clone().png({ compressionLevel: 9 }).toFile(outfile.pathname);
+        await resized.clone().webp({ quality: 82, effort: 6 }).toFile(outputPath);
+      else await resized.clone().png({ compressionLevel: 9 }).toFile(outputPath);
 
-      const result = await sharp(outfile.pathname).metadata();
+      const result = await sharp(outputPath).metadata();
       if (result.width !== width || result.height !== height) {
         throw new Error(
           `Variant ${slot.id}@${scale}x.${ext} is ${result.width}×${result.height}, expected ${width}×${height}.`,
         );
       }
-      await stat(outfile.pathname);
+      await stat(outputPath);
     }
   }
   generated.push(slot.id);

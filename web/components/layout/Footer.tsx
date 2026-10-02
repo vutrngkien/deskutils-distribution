@@ -71,7 +71,7 @@ export function Footer({ locale }: { locale: Locale }) {
             </a>
           </li>
           <li>
-            <a className="hover:text-primary" href={product.releasesURL}>
+            <a className="hover:text-primary" href={routeHref(locale, 'changelog', '/changelog/')}>
               {t('nav.changelog')}
             </a>
           </li>
@@ -79,7 +79,7 @@ export function Footer({ locale }: { locale: Locale }) {
 
         <Column title={t('footer.support')}>
           <li>
-            <a className="hover:text-primary" href={`mailto:${product.supportEmail}`}>
+            <a className="hover:text-primary" href={routeHref(locale, 'support', '/#faq')}>
               {t('nav.support')}
             </a>
           </li>

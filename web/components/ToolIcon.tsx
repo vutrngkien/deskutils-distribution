@@ -5,8 +5,13 @@ import {
   CircleDot,
   ClipboardList,
   Crop,
+  Eye,
   EyeOff,
+  FileText,
+  Filter,
+  Focus,
   History,
+  Image,
   Keyboard,
   LayoutGrid,
   LockKeyhole,
@@ -14,10 +19,13 @@ import {
   MonitorSmartphone,
   Moon,
   MousePointer2,
+  MousePointerClick,
   PencilLine,
+  Pin,
   Pipette,
   ScanFace,
   ScanLine,
+  ScanSearch,
   ScanText,
   ScrollText,
   SunDim,
@@ -34,6 +42,14 @@ export type ToolIconName =
   | 'previous'
   | 'scroll'
   | 'subject'
+  | 'pointer'
+  | 'spotlight'
+  | 'search'
+  | 'pin'
+  | 'eye'
+  | 'filter'
+  | 'image'
+  | 'file'
   | 'color'
   | 'text'
   | 'tools'
@@ -58,6 +74,14 @@ const icons: Record<ToolIconName, LucideIcon> = {
   previous: History,
   scroll: ScrollText,
   subject: ScanFace,
+  pointer: MousePointerClick,
+  spotlight: Focus,
+  search: ScanSearch,
+  pin: Pin,
+  eye: Eye,
+  filter: Filter,
+  image: Image,
+  file: FileText,
   color: Pipette,
   text: ScanText,
   tools: LayoutGrid,

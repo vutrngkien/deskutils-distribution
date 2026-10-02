@@ -1,12 +1,20 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Bug, Lightbulb, MessageCircle, Paperclip, Send } from 'lucide-react';
+import {
+  AlertTriangle,
+  Bug,
+  Check,
+  ImagePlus,
+  Lightbulb,
+  MessageCircle,
+  Send,
+  X,
+} from 'lucide-react';
 import { product } from '@/content/product';
-import { translate } from '@/content/i18n';
+import { translate, type MessageKey } from '@/content/i18n';
 import type { Locale } from '@/content/locales';
 import { trackUmamiEvent } from '@/lib/umami';
-import s from './FeedbackForm.module.css';
 
 const maximumMessageLength = 4000;
 const maximumAttachmentSize = 3 * 1024 * 1024;
@@ -21,13 +29,30 @@ const feedbackKinds = [
   { id: 'idea', label: 'feedback.kind.idea', icon: Lightbulb },
 ] as const;
 
+const messageLabels: Record<FeedbackKind, MessageKey> = {
+  bug: 'feedback.message.label.bug',
+  feedback: 'feedback.message.label',
+  idea: 'feedback.message.label.idea',
+};
+
 function validEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export function FeedbackForm({ locale }: { locale: Locale }) {
+export function FeedbackForm({
+  locale,
+  onKindChange,
+}: {
+  locale: Locale;
+  onKindChange?: (kind: FeedbackKind) => void;
+}) {
   const t = translate.bind(null, locale);
   const [kind, setKind] = useState<FeedbackKind>('feedback');
+
+  function selectKind(next: FeedbackKind) {
+    setKind(next);
+    onKindChange?.(next);
+  }
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
   const [attachment, setAttachment] = useState<File | null>(null);
@@ -54,6 +79,7 @@ export function FeedbackForm({ locale }: { locale: Locale }) {
     setFormError('');
     setStatus('idle');
     started.current = false;
+    onKindChange?.('feedback');
     if (attachmentInput.current) attachmentInput.current.value = '';
   }
 
@@ -128,13 +154,20 @@ export function FeedbackForm({ locale }: { locale: Locale }) {
 
   if (status === 'success') {
     return (
-      <section className={s.success} aria-labelledby="feedback-success-title" role="status">
-        <span className={s.successMark} aria-hidden="true">
-          ✓
+      <section
+        className="flex flex-col items-start gap-4 rounded-[28px] bg-white p-10 shadow-[0_0_0_1px_#e6eaf2,0_30px_60px_-30px_rgba(10,30,110,0.25)]"
+        role="status"
+      >
+        <span className="grid h-14 w-14 place-items-center rounded-full bg-[#eaf7ee] text-success">
+          <Check size={30} aria-hidden="true" />
         </span>
-        <h2 id="feedback-success-title">{t('feedback.success.title')}</h2>
-        <p>{t('feedback.success.body')}</p>
-        <button type="button" className={s.secondaryButton} onClick={resetForm}>
+        <h2 className="text-[28px] font-bold">{t('feedback.success.title')}</h2>
+        <p className="text-[16px] leading-[1.55] text-muted">{t('feedback.success.body')}</p>
+        <button
+          type="button"
+          onClick={resetForm}
+          className="min-h-[44px] text-[15.5px] font-semibold text-primary hover:text-[#0b3bc0]"
+        >
           {t('feedback.success.again')}
         </button>
       </section>
@@ -143,14 +176,14 @@ export function FeedbackForm({ locale }: { locale: Locale }) {
 
   return (
     <form
-      className={s.form}
       onSubmit={submit}
       onFocus={trackStart}
       noValidate
       aria-busy={status === 'sending'}
+      className="flex flex-col gap-7 rounded-[28px] bg-white p-8 shadow-[0_0_0_1px_#e6eaf2,0_30px_60px_-30px_rgba(10,30,110,0.25)] dt:p-10"
     >
       <input
-        className={s.honeypot}
+        className="absolute h-px w-px overflow-hidden [clip-path:inset(50%)]"
         type="text"
         name="website"
         tabIndex={-1}
@@ -158,26 +191,40 @@ export function FeedbackForm({ locale }: { locale: Locale }) {
         aria-hidden="true"
       />
 
-      <fieldset className={s.kindPicker}>
-        <legend className={s.visuallyHidden}>{t('feedback.kind.label')}</legend>
-        {feedbackKinds.map(({ id, label, icon: Icon }) => (
-          <button
-            key={id}
-            type="button"
-            className={`${s.kind} ${kind === id ? s.kindActive : ''}`}
-            aria-pressed={kind === id}
-            onClick={() => setKind(id)}
-          >
-            <span className={s.keycap} aria-hidden="true">
-              <Icon />
-            </span>
-            <span>{t(label)}</span>
-          </button>
-        ))}
+      <fieldset className="flex flex-col gap-3">
+        <legend className="mb-3 text-[15px] font-semibold">{t('feedback.kind.label')}</legend>
+        <div role="group" className="flex gap-3">
+          {feedbackKinds.map(({ id, label, icon: Icon }) => {
+            const active = kind === id;
+            return (
+              <button
+                key={id}
+                type="button"
+                aria-pressed={active}
+                className={`flex h-[82px] flex-1 flex-col items-center justify-center gap-1 rounded-[16px] text-[15.5px] font-semibold transition-all ${
+                  active
+                    ? 'translate-y-[3px] bg-primary text-white shadow-[0_2px_0_#0b3bc0,0_10px_20px_-8px_rgba(20,80,245,0.6)]'
+                    : 'bg-white text-base-content shadow-[0_0_0_1px_#dfe4ee,0_4px_0_#dfe4ee] hover:shadow-[0_0_0_1px_#cfdcff,0_4px_0_#cfdcff]'
+                }`}
+                onClick={() => selectKind(id)}
+              >
+                <Icon size={24} strokeWidth={1.8} aria-hidden="true" />
+                <span>{t(label)}</span>
+              </button>
+            );
+          })}
+        </div>
       </fieldset>
 
-      <div className={s.field}>
-        <label htmlFor="feedback-message">{t('feedback.message.label')}</label>
+      <div className="flex flex-col gap-2">
+        <div className="flex items-baseline justify-between">
+          <label htmlFor="feedback-message" className="text-[15px] font-semibold">
+            {t(messageLabels[kind])}
+          </label>
+          <span className="text-[13px] text-muted">
+            {message.length}/{maximumMessageLength}
+          </span>
+        </div>
         <textarea
           id="feedback-message"
           name="message"
@@ -187,67 +234,128 @@ export function FeedbackForm({ locale }: { locale: Locale }) {
           placeholder={t('feedback.message.placeholder')}
           required
           aria-describedby="feedback-message-count"
+          className="min-h-[180px] resize-y rounded-[14px] border-[1.5px] border-[#d6dce8] p-4 text-[16px] leading-[1.5] outline-none focus:border-primary focus:shadow-[0_0_0_4px_rgba(20,80,245,0.15)]"
         />
-        <span id="feedback-message-count" className={s.counter}>
+        <span id="feedback-message-count" className="sr-only">
           {message.length}/{maximumMessageLength}
         </span>
       </div>
 
-      <div className={s.field}>
-        <label htmlFor="feedback-email">{t('feedback.email.label')}</label>
-        <input
-          id="feedback-email"
-          name="email"
-          type="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder={t('feedback.email.placeholder')}
-          autoComplete="email"
-          required
-        />
+      <div className="grid grid-cols-1 gap-5 dt:grid-cols-2">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="feedback-email" className="text-[15px] font-semibold">
+            {t('feedback.email.label')}
+          </label>
+          <input
+            id="feedback-email"
+            name="email"
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder="you@example.com"
+            autoComplete="email"
+            required
+            className="h-[50px] rounded-[12px] border-[1.5px] border-[#d6dce8] px-3.5 text-[16px] outline-none focus:border-primary focus:shadow-[0_0_0_4px_rgba(20,80,245,0.15)]"
+          />
+          <span className="text-[13.5px] leading-[1.45] text-muted">
+            {t('feedback.email.note')}
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <span className="text-[15px] font-semibold">{t('feedback.attachment.add')}</span>
+          <input
+            ref={attachmentInput}
+            id="feedback-attachment"
+            className="sr-only"
+            type="file"
+            name="attachment"
+            accept="image/*"
+            onChange={(event) => changeAttachment(event.target.files?.[0] ?? null)}
+          />
+          <label
+            htmlFor="feedback-attachment"
+            className={`flex h-[50px] cursor-pointer items-center gap-2.5 rounded-[12px] border-[1.5px] border-dashed px-3.5 text-[14.5px] ${
+              attachment
+                ? 'border-primary bg-[#f3f6ff] text-base-content'
+                : 'border-[#c3cde0] text-muted'
+            }`}
+          >
+            <ImagePlus size={20} aria-hidden="true" className="text-primary" />
+            <span className="flex-1 truncate">
+              {attachment ? attachment.name : t('feedback.attachment.choose')}
+            </span>
+            {attachment && (
+              <button
+                type="button"
+                className="flex items-center gap-1 text-[13px] font-semibold text-primary"
+                onClick={(event) => {
+                  event.preventDefault();
+                  changeAttachment(null);
+                  if (attachmentInput.current) attachmentInput.current.value = '';
+                }}
+              >
+                <X size={14} aria-hidden="true" />
+                {t('feedback.attachment.remove')}
+              </button>
+            )}
+          </label>
+          <span className="text-[13.5px] leading-[1.45] text-muted">
+            {t('feedback.attachment.dropHint')}
+          </span>
+        </div>
       </div>
 
-      <div className={s.attachment}>
-        <input
-          ref={attachmentInput}
-          id="feedback-attachment"
-          className={s.fileInput}
-          type="file"
-          name="attachment"
-          accept="image/*"
-          onChange={(event) => changeAttachment(event.target.files?.[0] ?? null)}
-        />
-        <label className={s.attachButton} htmlFor="feedback-attachment">
-          <Paperclip aria-hidden="true" size={16} />
-          {attachment ? t('feedback.attachment.change') : t('feedback.attachment.add')}
-        </label>
-        <span className={s.attachmentHint}>{t('feedback.attachment.hint')}</span>
-        {attachment && <span className={s.attachmentName}>{attachment.name}</span>}
-        {attachmentError && (
-          <p className={s.fieldError} role="alert">
-            {attachmentError}
-          </p>
-        )}
-      </div>
+      {attachmentError && (
+        <p role="alert" className="text-[14px] text-error">
+          {attachmentError}
+        </p>
+      )}
 
       {!formEndpoint && (
-        <p className={s.fallback}>
+        <p className="text-sm text-muted">
           {t('feedback.unavailable')}{' '}
-          <a href={`mailto:${product.supportEmail}`}>{product.supportEmail}</a>.
-        </p>
-      )}
-      {formError && (
-        <p className={s.formError} role="alert">
-          {formError}
+          <a
+            href={`mailto:${product.supportEmail}`}
+            className="text-primary underline underline-offset-[3px]"
+          >
+            {product.supportEmail}
+          </a>
+          .
         </p>
       )}
 
-      <div className={s.submitRow}>
-        <button className={s.submit} type="submit" disabled={!canSubmit}>
-          <Send aria-hidden="true" size={16} />
+      {formError && (
+        <div
+          role="alert"
+          className="flex items-start gap-2.5 rounded-[14px] bg-[#fdecec] px-4 py-3.5 text-[14.5px] leading-[1.5] text-[#8a1c1c]"
+        >
+          <AlertTriangle size={20} aria-hidden="true" className="mt-0.5 flex-none" />
+          <span>
+            {formError}{' '}
+            <a href={`mailto:${product.supportEmail}`} className="underline">
+              {product.supportEmail}
+            </a>
+          </span>
+        </div>
+      )}
+
+      <div className="flex flex-col gap-4 dt:flex-row dt:items-center">
+        <button
+          type="submit"
+          disabled={!canSubmit}
+          className="flex h-[54px] items-center justify-center gap-2.5 rounded-[13px] bg-primary px-7 text-[17px] font-semibold text-white shadow-[0_10px_24px_-8px_rgba(20,80,245,0.6)] transition-colors hover:bg-[#0b3bc0] disabled:cursor-not-allowed disabled:bg-[#6b8ef7]"
+        >
+          {status === 'sending' && (
+            <span
+              className="h-[18px] w-[18px] animate-spin rounded-full border-[2.5px] border-white/40 border-t-white"
+              aria-hidden="true"
+            />
+          )}
+          {status !== 'sending' && <Send size={17} aria-hidden="true" />}
           {status === 'sending' ? t('feedback.submit.sending') : t('feedback.submit')}
         </button>
-        <p>{t('feedback.privacy')}</p>
+        <span className="flex-1 text-[14px] text-muted">{t('feedback.privacy')}</span>
       </div>
     </form>
   );

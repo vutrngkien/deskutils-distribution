@@ -38,7 +38,11 @@ export function mediaVariant(id: string, ext: MediaExtension, scale: 1 | 2 = 1) 
 /**
  * Build-time check for whether the media pipeline generated variants for a
  * slot. Masters live outside the repo, so this is the only reliable signal.
+ * `DESKUTILS_MEDIA_OUT` lets tests point at a temporary directory.
  */
 export function hasGeneratedMedia(id: string, ext: MediaExtension = 'avif'): boolean {
-  return existsSync(path.join(process.cwd(), 'public', 'media', `${id}@1x.${ext}`));
+  const dir = process.env.DESKUTILS_MEDIA_OUT
+    ? path.resolve(process.env.DESKUTILS_MEDIA_OUT)
+    : path.join(process.cwd(), 'public', 'media');
+  return existsSync(path.join(dir, `${id}@1x.${ext}`));
 }

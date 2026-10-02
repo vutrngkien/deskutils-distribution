@@ -21,6 +21,156 @@
       "altKey": "media.screenshot.alt"
     },
     {
+      "id": "screenshot-hero",
+      "width": 2000,
+      "height": 1280,
+      "aspectRatio": "25 / 16",
+      "icon": "capture",
+      "kind": "product",
+      "master": "screenshot-hero.png",
+      "altKey": "media.screenshot.hero.alt"
+    },
+    {
+      "id": "screenshot-quick-access",
+      "width": 1200,
+      "height": 760,
+      "aspectRatio": "30 / 19",
+      "icon": "capture",
+      "kind": "product",
+      "master": "screenshot-quick-access.png",
+      "altKey": "media.screenshot.quickAccess.alt"
+    },
+    {
+      "id": "screenshot-scrolling",
+      "width": 1000,
+      "height": 1500,
+      "aspectRatio": "2 / 3",
+      "icon": "scroll",
+      "kind": "product",
+      "master": "screenshot-scrolling.png",
+      "altKey": "media.screenshot.scrolling.alt"
+    },
+    {
+      "id": "screenshot-history",
+      "width": 1200,
+      "height": 760,
+      "aspectRatio": "30 / 19",
+      "icon": "previous",
+      "kind": "product",
+      "master": "screenshot-history.png",
+      "altKey": "media.screenshot.history.alt"
+    },
+    {
+      "id": "screenshot-pin",
+      "width": 1200,
+      "height": 760,
+      "aspectRatio": "30 / 19",
+      "icon": "lock",
+      "kind": "product",
+      "master": "screenshot-pin.png",
+      "altKey": "media.screenshot.pin.alt"
+    },
+    {
+      "id": "utility-prevent-sleep",
+      "width": 1200,
+      "height": 600,
+      "aspectRatio": "2 / 1",
+      "icon": "moon",
+      "kind": "product",
+      "master": "utility-prevent-sleep.png",
+      "altKey": "media.utility.preventSleep.alt"
+    },
+    {
+      "id": "utility-mouse-jiggler",
+      "width": 1200,
+      "height": 600,
+      "aspectRatio": "2 / 1",
+      "icon": "jiggler",
+      "kind": "product",
+      "master": "utility-mouse-jiggler.png",
+      "altKey": "media.utility.mouseJiggler.alt"
+    },
+    {
+      "id": "utility-clean-keyboard",
+      "width": 1200,
+      "height": 600,
+      "aspectRatio": "2 / 1",
+      "icon": "keyboard",
+      "kind": "product",
+      "master": "utility-clean-keyboard.png",
+      "altKey": "media.utility.cleanKeyboard.alt"
+    },
+    {
+      "id": "utility-display-dimming",
+      "width": 1200,
+      "height": 600,
+      "aspectRatio": "2 / 1",
+      "icon": "dim",
+      "kind": "product",
+      "master": "utility-display-dimming.png",
+      "altKey": "media.utility.dimming.alt"
+    },
+    {
+      "id": "utility-external-display-only",
+      "width": 1200,
+      "height": 600,
+      "aspectRatio": "2 / 1",
+      "icon": "external",
+      "kind": "product",
+      "master": "utility-external-display-only.png",
+      "altKey": "media.utility.external.alt"
+    },
+    {
+      "id": "utility-system-monitoring",
+      "width": 1200,
+      "height": 600,
+      "aspectRatio": "2 / 1",
+      "icon": "gauge",
+      "kind": "product",
+      "master": "utility-system-monitoring.png",
+      "altKey": "media.utility.monitor.alt"
+    },
+    {
+      "id": "capture-text-scene",
+      "width": 1430,
+      "height": 612,
+      "aspectRatio": "715 / 306",
+      "icon": "text",
+      "kind": "product",
+      "master": "capture-text-scene.png",
+      "altKey": "media.captureText.alt"
+    },
+    {
+      "id": "color-picker-panel",
+      "width": 680,
+      "height": 660,
+      "aspectRatio": "34 / 33",
+      "icon": "color",
+      "kind": "product",
+      "master": "color-picker-panel.png",
+      "altKey": "media.colorPicker.alt"
+    },
+    {
+      "id": "window-switcher-hero",
+      "width": 1800,
+      "height": 380,
+      "aspectRatio": "90 / 19",
+      "icon": "window",
+      "kind": "product",
+      "master": "window-switcher-hero.png",
+      "altKey": "media.windowSwitcher.alt"
+    },
+    {
+      "id": "dock-preview",
+      "width": 1200,
+      "height": 720,
+      "aspectRatio": "5 / 3",
+      "icon": "external",
+      "kind": "product",
+      "master": "dock-preview.png",
+      "altKey": "media.dockPreview.alt"
+    },
+    {
       "id": "clipboard",
       "width": 1200,
       "height": 760,

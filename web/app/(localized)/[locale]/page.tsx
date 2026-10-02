@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import Home from '@/app/(english)/page';
+import { HomePage as Home } from '@/components/pages/HomePage';
 import { isLocale } from '@/content/locales';
 import { routeMetadata } from '@/content/metadata';
 import type { Metadata } from 'next';

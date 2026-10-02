@@ -131,7 +131,7 @@ export const fr = {
   'pricing.free': 'Gratuit',
   'pricing.free.pitch': 'Tout l’essentiel, gratuit pour toujours.',
   'pricing.free.description': 'Pour copier et capturer au quotidien.',
-  'pricing.pro.pitch': 'Plus de place pour votre presse-papiers.',
+  'pricing.pro.pitch': 'Débloquez plus d’outils.',
   'pricing.pro.description': 'Plus d’historique et quelques outils de capture supplémentaires.',
   'pricing.launchOffer': '🚀 Offre de lancement',
   'pricing.lifetime': 'Licence à vie',
@@ -151,7 +151,7 @@ export const fr = {
   'pricing.dimmingPreview': 'Aperçu de l’atténuation',
   'pricing.scrolling': 'Capture avec défilement',
   'pricing.subject': 'Capture du sujet',
-  'pricing.persistentDimming': 'Atténuation de l’écran',
+  'pricing.persistentDimming': 'Atténuation persistante de l’écran',
   'pricing.updates': 'Mises à jour pendant votre licence',
   'pricing.comingSoon': 'Pro arrive bientôt',
   'pricing.proFootnote': '{customers} premiers clients · Puis ${original}',
@@ -192,7 +192,7 @@ export const fr = {
   'feedback.success.again': 'Envoyer un autre avis',
   'faq.subscription.question': 'DeskUtils est-il un abonnement ?',
   'faq.subscription.answer':
-    'Non. DeskUtils Pro est un achat unique. Payez une fois et conservez votre licence.',
+    'Non. DeskUtils Pro se paie une seule fois. Votre licence n’expire jamais.',
   'faq.devices.question': 'Sur combien de Mac puis-je utiliser DeskUtils ?',
   'faq.devices.answer':
     'Chaque licence DeskUtils Pro peut être activée sur {count} appareils maximum.',
@@ -206,7 +206,7 @@ export const fr = {
     'DeskUtils nécessite macOS {version} ou une version ultérieure. Consultez les notes de version pour vérifier les Mac compatibles.',
   'faq.free.question': 'DeskUtils est-il gratuit ?',
   'faq.free.answer':
-    'Oui. DeskUtils inclut l’historique du presse-papiers, les captures annotées, la pipette, le nettoyage du clavier, la prévention de la veille et l’atténuation.',
+    'Oui. L’historique du presse-papiers, les captures annotées, la pipette, le nettoyage du clavier et la prévention de la veille sont gratuits.',
   'faq.account.question': 'Ai-je besoin d’un compte ?',
   'faq.account.answer': 'Aucun compte DeskUtils n’est nécessaire.',
   'faq.clipboard.question': 'Mon presse-papiers quitte-t-il mon Mac ?',

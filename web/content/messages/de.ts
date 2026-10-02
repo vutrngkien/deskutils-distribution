@@ -128,7 +128,7 @@ export const de = {
   'pricing.free': 'Kostenlos',
   'pricing.free.pitch': 'Alles Wesentliche, für immer kostenlos.',
   'pricing.free.description': 'Für tägliches Kopieren und Aufnehmen.',
-  'pricing.pro.pitch': 'Mehr Platz für deine Zwischenablage.',
+  'pricing.pro.pitch': 'Mehr Tools freischalten.',
   'pricing.pro.description': 'Mehr Verlauf und zusätzliche Aufnahme-Tools.',
   'pricing.launchOffer': '🚀 Einführungsangebot',
   'pricing.lifetime': 'Lebenslange Lizenz',
@@ -148,7 +148,7 @@ export const de = {
   'pricing.dimmingPreview': 'Vorschau der Bildschirmdimmung',
   'pricing.scrolling': 'Scroll-Aufnahme',
   'pricing.subject': 'Motiv aufnehmen',
-  'pricing.persistentDimming': 'Bildschirmdimmung',
+  'pricing.persistentDimming': 'Dauerhafte Bildschirmdimmung',
   'pricing.updates': 'Updates während deiner Lizenzlaufzeit',
   'pricing.comingSoon': 'Pro kommt bald',
   'pricing.proFootnote': 'Erste {customers} Kunden · Danach ${original}',
@@ -188,7 +188,7 @@ export const de = {
   'feedback.success.again': 'Weiteres Feedback senden',
   'faq.subscription.question': 'Ist DeskUtils ein Abonnement?',
   'faq.subscription.answer':
-    'Nein. DeskUtils Pro ist ein einmaliger Kauf. Einmal zahlen, Lizenz behalten.',
+    'Nein. DeskUtils Pro ist ein einmaliger Kauf. Deine Lizenz läuft nie ab.',
   'faq.devices.question': 'Auf wie vielen Macs kann ich DeskUtils nutzen?',
   'faq.devices.answer':
     'Jede DeskUtils Pro-Lizenz kann auf bis zu {count} Geräten aktiviert werden.',
@@ -202,7 +202,7 @@ export const de = {
     'DeskUtils benötigt macOS {version} oder neuer. Prüfe vor dem Download die unterstützten Macs in den Versionshinweisen.',
   'faq.free.question': 'Ist DeskUtils kostenlos?',
   'faq.free.answer':
-    'Ja. DeskUtils bietet Zwischenablageverlauf, Screenshots mit Annotation, Farbpipette, Tastaturreinigung, Ruhezustandsschutz und Bildschirmdimmung.',
+    'Ja. Zwischenablageverlauf, Screenshots mit Annotation, Farbpipette, Tastaturreinigung und Ruhezustandsschutz sind kostenlos.',
   'faq.account.question': 'Brauche ich ein Konto?',
   'faq.account.answer': 'Du brauchst kein DeskUtils-Konto.',
   'faq.clipboard.question': 'Verlässt meine Zwischenablage den Mac?',

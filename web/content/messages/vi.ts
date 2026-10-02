@@ -125,7 +125,7 @@ export const vi = {
   'pricing.pro': 'DeskUtils Pro',
   'pricing.free.pitch': 'Đủ mọi thứ cần thiết, miễn phí mãi mãi.',
   'pricing.free.description': 'Cho việc sao chép và chụp màn hình hằng ngày.',
-  'pricing.pro.pitch': 'Thêm không gian cho clipboard.',
+  'pricing.pro.pitch': 'Mở khóa thêm công cụ.',
   'pricing.pro.description': 'Nhiều lịch sử hơn và thêm một số công cụ chụp.',
   'pricing.launchOffer': '🚀 Ưu đãi ra mắt',
   'pricing.lifetime': 'Giấy phép trọn đời',
@@ -146,7 +146,7 @@ export const vi = {
   'pricing.ocr': 'OCR',
   'pricing.scrolling': 'Chụp màn hình cuộn',
   'pricing.subject': 'Tách chủ thể',
-  'pricing.persistentDimming': 'Giảm độ sáng màn hình',
+  'pricing.persistentDimming': 'Duy trì mức giảm độ sáng màn hình',
   'pricing.updates': 'Cập nhật trong thời hạn giấy phép',
   'pricing.comingSoon': 'Pro sắp ra mắt',
   'pricing.proFootnote': '{customers} khách hàng đầu tiên · Sau đó ${original}',
@@ -185,7 +185,7 @@ export const vi = {
   'feedback.success.again': 'Gửi phản hồi khác',
   'faq.subscription.question': 'DeskUtils có phải là gói thuê bao không?',
   'faq.subscription.answer':
-    'Không. DeskUtils Pro chỉ cần thanh toán một lần. Trả tiền một lần và giữ giấy phép của bạn.',
+    'Không. DeskUtils Pro chỉ cần thanh toán một lần. Giấy phép không hết hạn.',
   'faq.devices.question': 'Tôi có thể dùng DeskUtils trên bao nhiêu máy Mac?',
   'faq.devices.answer':
     'Mỗi giấy phép DeskUtils Pro có thể kích hoạt trên tối đa {count} thiết bị.',
@@ -199,7 +199,7 @@ export const vi = {
     'DeskUtils yêu cầu macOS {version} trở lên. Hãy xem ghi chú phát hành để kiểm tra máy được hỗ trợ trước khi tải xuống.',
   'faq.free.question': 'DeskUtils có miễn phí không?',
   'faq.free.answer':
-    'Có. DeskUtils gồm lịch sử clipboard, chụp màn hình kèm chú thích, Chọn màu, Vệ sinh bàn phím, Ngăn Mac ngủ và giảm độ sáng.',
+    'Có. Lịch sử clipboard, chụp màn hình kèm chú thích, Chọn màu, Vệ sinh bàn phím và Ngăn Mac ngủ đều miễn phí.',
   'faq.account.question': 'Tôi có cần tài khoản không?',
   'faq.account.answer': 'Bạn không cần tài khoản DeskUtils.',
   'faq.clipboard.question': 'Clipboard có rời khỏi máy Mac không?',

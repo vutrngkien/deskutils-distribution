@@ -1,17 +1,4 @@
-import {
-  ClipboardList,
-  ClipboardPaste,
-  History,
-  Keyboard,
-  Moon,
-  PencilLine,
-  Pin,
-  Pipette,
-  ScanLine,
-  ScanText,
-  Search,
-  ShieldCheck,
-} from 'lucide-react';
+import { ClipboardPaste, Pin, Search, ShieldCheck } from 'lucide-react';
 import { StructuredData } from '@/components/StructuredData';
 import { TrackedFaq } from '@/components/TrackedFaq';
 import { SocialProof } from '@/components/SocialProof';
@@ -46,7 +33,7 @@ import {
   launchOffer,
   type Locale,
 } from '@/content/product';
-import { allTools, quickRingActions } from '@/content/features';
+import { allTools } from '@/content/features';
 import { translate } from '@/content/i18n';
 import { localePath } from '@/content/locales';
 import { routeHref } from '@/content/routes';
@@ -64,16 +51,6 @@ const tabs = [
   { title: 'home.tab.annotate', body: 'home.tab.annotate.body' },
   { title: 'home.tab.save', body: 'home.tab.save.body' },
 ] as const;
-const actionIcons = [
-  ScanLine,
-  ScanText,
-  ClipboardList,
-  Moon,
-  History,
-  Keyboard,
-  PencilLine,
-  Pipette,
-];
 const benefitIcons = [Search, Pin, ClipboardPaste];
 
 function ArrowLink({
@@ -200,19 +177,15 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
             <div className="home-clip-copy">
               <p className="home-clip-eyebrow">{t('home.clipboard.eyebrow')} · ⇧⌘V</p>
               <h2 className="home-clip-title">{t('home.clipboard.title')}</h2>
-              <p className="home-clip-lead">{t('home.clipboard.lede')}</p>
               <div className="home-clip-benefits">
                 {clipboardFeatures.map((feature, i) => {
                   const Icon = benefitIcons[i];
                   return (
-                    <div key={feature.title}>
+                    <div key={feature.label}>
                       <span className="home-clip-icon">
                         <Icon size={20} strokeWidth={1.7} aria-hidden="true" />
                       </span>
-                      <div>
-                        <strong>{t(feature.title)}</strong>
-                        <p>{t(feature.detail)}</p>
-                      </div>
+                      <span>{t(feature.label)}</span>
                     </div>
                   );
                 })}
@@ -233,17 +206,6 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
               <p className="eyebrow">{t('home.quickring.eyebrow')}</p>
               <h2 className="home-ring-title">{t('home.quickring.title')}</h2>
               <p className="home-ring-lead">{t('home.quickring.lede')}</p>
-              <div className="home-ring-actions">
-                {quickRingActions.map((action, i) => {
-                  const Icon = actionIcons[i];
-                  return (
-                    <div key={action} className={i === 0 ? 'text-primary font-semibold' : ''}>
-                      <Icon size={20} strokeWidth={1.7} aria-hidden="true" />
-                      <span>{t(action)}</span>
-                    </div>
-                  );
-                })}
-              </div>
               <p className="home-ring-note">
                 {t('home.quickring.note')}{' '}
                 <ArrowLink href={routeHref(locale, 'quick-ring', '/#tools')}>
@@ -431,10 +393,10 @@ export default function Home({ locale = 'en' }: { locale?: Locale }) {
                     <div className="flex flex-wrap items-baseline gap-3">
                       {product.pricing.showOriginal && (
                         <del className="text-lg text-neutral-content/60">
-                          ${product.pricing.originalAmount}
+                          {`$${product.pricing.originalAmount}`}
                         </del>
                       )}
-                      <strong className="text-4xl font-bold">${product.pricing.amount}</strong>
+                      <strong className="text-4xl font-bold">{`$${product.pricing.amount}`}</strong>
                       <span className="text-sm text-neutral-content/80">
                         {t('pricing.lifetime')}
                       </span>

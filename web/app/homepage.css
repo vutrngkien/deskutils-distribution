@@ -752,14 +752,8 @@
     font-weight: 700;
     letter-spacing: -0.035em;
   }
-  .home-clip-lead {
-    grid-row: 3;
-    font-size: 16px;
-    line-height: 1.55;
-    color: #c9d6f5;
-  }
   .home-clip-visual {
-    grid-row: 4;
+    grid-row: 3;
     position: relative;
     height: 310px;
     overflow: hidden;
@@ -779,14 +773,14 @@
     width: 588px;
   }
   .home-clip-benefits {
-    grid-row: 5;
+    grid-row: 4;
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
   .home-clip-benefits > div {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
   }
   .home-clip-icon {
@@ -800,23 +794,18 @@
     background: rgba(255, 255, 255, 0.1);
     color: #9fbaff;
   }
-  .home-clip-benefits strong {
-    display: block;
+  .home-clip-benefits > div > span:last-child {
     font-size: 15px;
-    font-weight: 600;
-  }
-  .home-clip-benefits p {
-    font-size: 14px;
     line-height: 1.5;
     color: #c9d6f5;
   }
   .home-clip-link {
-    grid-row: 6;
+    grid-row: 5;
     background: white;
     color: #0b1f5c;
   }
   .home-clip-note {
-    grid-row: 7;
+    grid-row: 6;
     font-size: 13px;
     color: #a9badf;
   }
@@ -899,21 +888,8 @@
     line-height: 1.55;
     color: #4a5672;
   }
-  .home-ring-actions {
-    grid-row: 5;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px 12px;
-  }
-  .home-ring-actions > div {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 36px;
-    font-size: 14px;
-  }
   .home-ring-note {
-    grid-row: 6;
+    grid-row: 5;
     font-size: 14.5px;
     line-height: 1.5;
     color: #4a5672;
@@ -1376,13 +1352,13 @@
     }
     .home-hero-grid {
       grid-template-columns: 40fr 60fr;
-      gap: 52px;
+      gap: 48px;
     }
     .home-hero-copy {
       gap: 24px;
     }
     .home-hero h1 {
-      font-size: 68px;
+      font-size: clamp(54px, 4.5vw, 64px);
       line-height: 1.03;
     }
     .home-hero .lede {
@@ -1521,9 +1497,6 @@
       font-size: 46px;
       line-height: 1.04;
     }
-    .home-clip-lead {
-      font-size: 17px;
-    }
     .home-clip-visual {
       height: 520px;
       border-radius: 24px;
@@ -1543,11 +1516,8 @@
       width: 36px;
       height: 36px;
     }
-    .home-clip-benefits strong {
+    .home-clip-benefits > div > span:last-child {
       font-size: 16px;
-    }
-    .home-clip-benefits p {
-      font-size: 14.5px;
     }
     .home-clip-note {
       font-size: 13.5px;
@@ -1571,14 +1541,6 @@
     }
     .home-ring-lead {
       font-size: 17px;
-    }
-    .home-ring-actions {
-      gap: 4px 20px;
-    }
-    .home-ring-actions > div {
-      min-height: 34px;
-      gap: 10px;
-      font-size: 15px;
     }
     .home-ring-note a {
       display: inline;

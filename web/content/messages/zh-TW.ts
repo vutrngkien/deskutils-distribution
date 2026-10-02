@@ -5,6 +5,9 @@ import type { Messages } from './en';
 // independently from Simplified Chinese as the product copy evolves.
 export const zhTW = {
   ...zhCN,
+  'faq.free.answer': '是的。剪貼簿歷史、截圖與標註、取色器、鍵盤清潔和防止休眠均可免費使用。',
+  'pricing.persistentDimming': '持續調暗顯示器',
+  'pricing.pro.pitch': '解鎖更多工具。',
   'nav.pricing': '價格',
   'nav.changelog': '更新日誌',
   'nav.privacy': '隱私',
@@ -47,7 +50,7 @@ export const zhTW = {
   'pricing.screenshots': '截圖與標註',
   'pricing.scrolling': '捲動擷取',
   'faq.subscription.question': 'DeskUtils 是訂閱服務嗎？',
-  'faq.subscription.answer': '不是。DeskUtils Pro 只需一次購買，付款一次即可永久保留授權。',
+  'faq.subscription.answer': '不是。DeskUtils Pro 只需付款一次，授權永不過期。',
   'faq.devices.question': '我可以在多少台 Mac 上使用 DeskUtils？',
   'faq.devices.answer': '每組 DeskUtils Pro 授權最多可在 {count} 台裝置上啟用。',
   'faq.lifetime.question': '授權有效多久？',

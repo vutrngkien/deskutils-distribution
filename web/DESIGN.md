@@ -14,8 +14,8 @@ Review rendered regions against the approved Claude export at identical viewport
 
 ## Review adjustments
 
-- Homepage FAQ retains the nine real answers with Claude's divider rows and
-  plus/minus affordance. Native named details provide an exclusive accordion
+- Homepage FAQ retains seven real answers. Subscription and license duration
+  share one answer; rows keep Claude's dividers and plus/minus affordance. Native named details provide an exclusive accordion
   that also works without JavaScript.
 - The three trust cards below the hero are omitted: macOS/version and Free are
   already in the download copy and Pricing, while local OCR is stated in Capture
@@ -47,3 +47,16 @@ Review rendered regions against the approved Claude export at identical viewport
   menu mockup.
 - Mouse Jiggler uses the exact filled rounded arrow_selector_tool path from the
   Material Symbols asset used by the Claude export, rather than an approximation.
+
+## Approved homepage copy refinement
+
+- Retain all three Screenshot modes and keyboard shortcuts on the homepage.
+- Clipboard uses three concise benefit lines; Quick Ring uses one instruction
+  and its animated illustration instead of repeating eight action names.
+- Pricing states the lifetime license once beside the price. Display dimming
+  is a Free preview while the menu is open; persistent dimming requires Pro.
+- The launch-price FAQ is omitted because the pricing footnote already explains
+  the offer. Locale FAQ and plan copy follow the same product facts.
+- Historical macOS visual baselines predate this approved copy refinement.
+  Refresh visual references in the pinned Linux/Chromium environment described
+  in AGENTS.md; local macOS validation uses functional tests and manual screenshots.

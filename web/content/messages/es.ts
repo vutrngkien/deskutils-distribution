@@ -126,7 +126,7 @@ export const es = {
   'pricing.free': 'Gratis',
   'pricing.free.pitch': 'Todo lo esencial, gratis para siempre.',
   'pricing.free.description': 'Para copiar y capturar a diario.',
-  'pricing.pro.pitch': 'Más espacio para tu portapapeles.',
+  'pricing.pro.pitch': 'Desbloquea más herramientas.',
   'pricing.pro.description': 'Más historial y algunas herramientas de captura extra.',
   'pricing.launchOffer': '🚀 Oferta de lanzamiento',
   'pricing.lifetime': 'Licencia de por vida',
@@ -147,7 +147,7 @@ export const es = {
   'pricing.ocr': 'OCR',
   'pricing.scrolling': 'Captura con desplazamiento',
   'pricing.subject': 'Capturar sujeto',
-  'pricing.persistentDimming': 'Atenuación de pantalla',
+  'pricing.persistentDimming': 'Atenuación de pantalla persistente',
   'pricing.updates': 'Actualizaciones durante tu licencia',
   'pricing.comingSoon': 'Pro llegará próximamente',
   'pricing.proFootnote': 'Primeros {customers} clientes · Después ${original}',
@@ -185,8 +185,7 @@ export const es = {
     'Ya van camino a DeskUtils. Te responderemos si necesitamos más detalles.',
   'feedback.success.again': 'Enviar otro comentario',
   'faq.subscription.question': '¿DeskUtils es una suscripción?',
-  'faq.subscription.answer':
-    'No. DeskUtils Pro es una compra única. Paga una vez y conserva tu licencia.',
+  'faq.subscription.answer': 'No. DeskUtils Pro se paga una sola vez. Tu licencia no caduca.',
   'faq.devices.question': '¿En cuántos Mac puedo usar DeskUtils?',
   'faq.devices.answer':
     'Cada licencia de DeskUtils Pro puede activarse hasta en {count} dispositivos.',
@@ -200,7 +199,7 @@ export const es = {
     'DeskUtils requiere macOS {version} o posterior. Consulta las notas de la versión para comprobar los Mac compatibles antes de descargarlo.',
   'faq.free.question': '¿DeskUtils es gratis?',
   'faq.free.answer':
-    'Sí. DeskUtils incluye historial del portapapeles, capturas con anotaciones, selector de color, limpieza del teclado, prevención del reposo y atenuación.',
+    'Sí. El historial del portapapeles, las capturas con anotaciones, el selector de color, la limpieza del teclado y la prevención del reposo son gratuitos.',
   'faq.account.question': '¿Necesito una cuenta?',
   'faq.account.answer': 'No necesitas una cuenta de DeskUtils.',
   'faq.clipboard.question': '¿Mi portapapeles sale de mi Mac?',

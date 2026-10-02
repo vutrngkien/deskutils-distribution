@@ -144,16 +144,10 @@ export const demos = {
 } satisfies Record<string, Demo>;
 
 export const clipboardFeatures = [
-  {
-    title: 'clipboard.find.title',
-    detail: 'clipboard.find.description',
-  },
-  { title: 'clipboard.keep.title', detail: 'clipboard.keep.description' },
-  {
-    title: 'clipboard.back.title',
-    detail: 'clipboard.back.description',
-  },
-] satisfies { title: MessageKey; detail: MessageKey }[];
+  { label: 'home.clipboard.search' },
+  { label: 'home.clipboard.pin' },
+  { label: 'home.clipboard.paste' },
+] satisfies { label: MessageKey }[];
 
 export const clipboardDetails = [
   {
@@ -253,10 +247,9 @@ export const plans = [
   },
   {
     id: 'pro',
-    pitch: 'pricing.lifetime',
+    pitch: 'pricing.pro.pitch',
     description: 'pricing.oneTime',
     features: [
-      { key: 'pricing.lifetime' },
       { key: 'pricing.devices', values: { count: product.pricing.macs } },
       { key: 'pricing.everythingFree' },
       { key: 'pricing.proItems' },
@@ -281,19 +274,6 @@ export const faqs: { question: MessageKey; answer: MessageKey; values?: MessageV
     question: 'faq.devices.question',
     answer: 'faq.devices.answer',
     values: { count: product.pricing.macs },
-  },
-  {
-    question: 'faq.lifetime.question',
-    answer: 'faq.lifetime.answer',
-  },
-  {
-    question: 'faq.launchPrice.question',
-    answer: 'faq.launchPrice.answer',
-    values: {
-      amount: product.pricing.amount,
-      original: product.pricing.originalAmount,
-      customers: product.pricing.customerLimit,
-    },
   },
   {
     question: 'faq.macos.question',

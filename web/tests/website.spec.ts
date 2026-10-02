@@ -20,14 +20,14 @@ for (const width of [390, 768, 1200, 1440]) {
       page.getByRole('heading', { name: 'Copy now. Find it again later.' }),
     ).toBeVisible();
     await expect(
-      page.getByRole('heading', { name: 'Press ⌘ twice. Your go-to actions appear.' }),
+      page.getByRole('heading', { name: 'Your favorite tools. Two taps away.' }),
     ).toBeVisible();
     await expect(page.getByText('$7.99', { exact: true })).toBeVisible();
     await expect(page.getByText('$14.99', { exact: true })).toHaveCSS(
       'text-decoration-line',
       'line-through',
     );
-    await expect(page.getByText('Lifetime license', { exact: true }).first()).toBeVisible();
+    await expect(page.getByText('Lifetime license', { exact: true })).toBeVisible();
     await expect(page.getByText('Use on up to 2 devices', { exact: true })).toBeVisible();
 
     const proCheckout = page.getByRole('link', { name: 'Get DeskUtils Pro', exact: true });
@@ -48,7 +48,7 @@ for (const width of [390, 768, 1200, 1440]) {
       );
     expect(softwareNodes).toHaveLength(1);
 
-    await expect(page.locator('#faq details')).toHaveCount(9);
+    await expect(page.locator('#faq details')).toHaveCount(7);
 
     // Published homepage never shows an empty placeholder; temporary mockups
     // stand in until generated media is supplied.
@@ -356,7 +356,7 @@ test('content and native controls work without JavaScript', async ({ browser, ba
   });
   await page.locator('summary[aria-label="Mobile navigation"]').click();
   await expect(mobileDetails.getByRole('link', { name: 'All features' })).toBeVisible();
-  await expect(page.locator('#faq details')).toHaveCount(9);
+  await expect(page.locator('#faq details')).toHaveCount(7);
   await expect(page.getByText(/^No. Clipboard history stays on your Mac/)).toBeAttached();
   await expect(
     page.getByRole('link', { name: 'Download for Mac', exact: false }).first(),
@@ -547,7 +547,7 @@ test.describe('video component in an isolated test fixture', () => {
 test('homepage FAQ uses divided rows and one open answer at a time', async ({ page }) => {
   await page.goto('/');
   const rows = page.locator('#faq details');
-  await expect(rows).toHaveCount(9);
+  await expect(rows).toHaveCount(7);
   await rows.nth(0).locator('summary').click();
   await expect(rows.nth(0)).toHaveAttribute('open', '');
   await expect(rows.nth(0).locator('.home-faq-minus')).toBeVisible();

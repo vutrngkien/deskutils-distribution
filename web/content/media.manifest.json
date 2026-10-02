@@ -1,0 +1,44 @@
+{
+  "slots": [
+    {
+      "id": "hero",
+      "width": 1200,
+      "height": 700,
+      "aspectRatio": "12 / 7",
+      "icon": "tools",
+      "kind": "product",
+      "master": "hero.png",
+      "altKey": "media.hero.alt"
+    },
+    {
+      "id": "screenshot",
+      "width": 2000,
+      "height": 1280,
+      "aspectRatio": "25 / 16",
+      "icon": "capture",
+      "kind": "product",
+      "master": "screenshot.png",
+      "altKey": "media.screenshot.alt"
+    },
+    {
+      "id": "clipboard",
+      "width": 1200,
+      "height": 760,
+      "aspectRatio": "30 / 19",
+      "icon": "clipboard",
+      "kind": "product",
+      "master": "clipboard.png",
+      "altKey": "media.clipboard.alt"
+    },
+    {
+      "id": "quickring",
+      "width": 1200,
+      "height": 760,
+      "aspectRatio": "30 / 19",
+      "icon": "ring",
+      "kind": "product",
+      "master": "quickring.png",
+      "altKey": "media.quickring.alt"
+    }
+  ]
+}

@@ -1,43 +1,49 @@
 # DeskUtils website design direction
 
-`DeskUtils Landing Page.pdf` is a wireframe, not an approved visual design.
-It is background context for the product sections and media slots. The current
-page deliberately simplifies and reorders it; do not restore its section order,
-palette, headings or content density as a design requirement.
+The approved visual reference is `/Users/vukien/workspace/DeskUtils Homepage Concepts/DeskUtils Homepage v2.dc.html`, including its separate desktop 1440 and mobile 390 frames. Feature pages use the corresponding `Site v1 - *` exports.
 
-The primary reference is [OneMenu](https://coffeebreak.software/one-menu/):
-plain feature names, one useful sentence, a clear view of the product, then the
-next utility. Use that clarity without copying its brand, device mockups or
-customer claims.
+Use Tailwind v4 and daisyUI 5 with Geist and Lucide. Match the source composition, typography, spacing, colors, and visual scale; generic daisyUI defaults are not the design reference. Use `75rem` for the 1200px `dt` breakpoint so Tailwind sorts it consistently with its rem breakpoints.
 
-## DeskUtils visual identity
+Temporary Claude product mockups are explicitly approved until real captures are supplied. Components live under `components/mockups/`. `MockupCanvas` preserves native artboard dimensions and scales all text, icons, and geometry together. Mobile follows its own composition and deliberate crops from the source.
 
-- White canvas, charcoal text and buttons, cobalt utility icons drawn from the
-  existing app icon. Pale blue is reserved for media surfaces and interaction.
-- A compact icon-and-name hero with one literal explanation and a download.
-  The small utility index is functional navigation, like a Mac tool palette.
-- Clipboard leads because it has real media. Each image appears once; do not
-  assemble an invented desktop out of repeated screenshots.
-- Short alternating feature layouts, modest type sizes, quiet separators and a
-  compact six-item screenshot grid that follows the annotate demo.
-  No all-caps editorial eyebrows, numbered sections, glow, gradient text,
-  repeating marketing cards, or separate native/privacy slogans.
-- Pricing keeps a quiet Free column beside a dark DeskUtils Pro upsell. The Pro
-  card presents the $7.99 lifetime launch offer for the first 100 customers,
-  with the $14.99 regular price and two-device limit stated plainly.
-- Video slots remain ready for real recordings. Missing media uses an honest,
-  compact placeholder with a tool icon; it is not a simulated app or fake player.
+`ProductVisual` prefers generated media, then the approved mockup. Published homepage media must not be blank. See MEDIA.md for replacement instructions.
 
-## Source of truth
+Feature facts, permissions, and compatibility come from the DeskUtils app source. Pricing and checkout come from `content/product.ts`, including the confirmed $7.99 launch / $14.99 regular offer. Published routes come from `content/routes.ts`. SEO and locale completeness remain governed by their existing registries.
 
-- Feature availability, permissions and system requirements: the private
-  DeskUtils source app and the verified release artifact.
-- Public pricing, license wording and the verified Lemon Squeezy checkout URL:
-  `content/product.ts`.
-- Layout and visual styling: the implemented responsive components and the
-  simple product-first direction above.
-- Media: existing DeskUtils captures plus recordings added through `MEDIA.md`.
+Review rendered regions against the approved Claude export at identical viewport sizes before updating visual baselines. A passing regression comparison records stability, not design acceptance. Keep deliberate differences for real pricing, real FAQs, Lucide icons, and unpublished routes documented.
 
-If the wireframe and the shipped app disagree, update the website content to
-match the shipped app and preserve the wireframe's layout intent only when it
-still serves the user.
+## Review adjustments
+
+- Homepage FAQ retains the nine real answers with Claude's divider rows and
+  plus/minus affordance. Native named details provide an exclusive accordion
+  that also works without JavaScript.
+- The three trust cards below the hero are omitted: macOS/version and Free are
+  already in the download copy and Pricing, while local OCR is stated in Capture
+  Text. This keeps the first screen compact.
+- Navigation uses Features, Install, Pricing, Feedback and Changelog. Pricing
+  targets the homepage section while its route is gated; Changelog targets the
+  existing GitHub Releases URL.
+- Quick Ring and utility mockups repeat the Claude motion timing, pause outside
+  the viewport and honor Reduce Motion. Dimming uses a dark overlay on an opaque
+  display rather than lowering the display's opacity. The compatibility note
+  stays below the External Display Only description.
+
+## Social proof and app gauge refinement
+
+- The compact CSS marquee immediately after the hero uses four verbatim excerpts
+  verified in the owner's r/MacStack thread on 2026-10-02. `content/social-proof.ts`
+  stores each comment once with its exact comment permalink. Every card opens that
+  comment in a new tab with noopener/noreferrer. No ratings or review structured
+  data are inferred from these comments.
+- The equal-width duplicate group exists only for seamless looping. Its links
+  remain clickable but are hidden from accessibility APIs and keyboard tab order.
+  Hover pauses; visible keyboard focus and Reduce Motion switch to a static,
+  horizontally scrollable original group. Pointer focus must not hide a clicked
+  duplicate before the browser can open its link.
+- Gauge geometry follows `DeskUtils/Modules/SystemMonitoring/Menu/SystemMonitoringHeaderView.swift`:
+  60pt circle, 5pt rounded green stroke, icon above the small label inside the
+  ring. Hover replaces the icon with a 13pt rounded percentage. Keyboard focus
+  and touch can reveal the same value. Shared by the monitoring card and hero
+  menu mockup.
+- Mouse Jiggler uses the exact filled rounded arrow_selector_tool path from the
+  Material Symbols asset used by the Claude export, rather than an approximation.

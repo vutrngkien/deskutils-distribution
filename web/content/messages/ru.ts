@@ -206,4 +206,4 @@ export const ru = {
   'privacy.support.body':
     'Если вы пишете в DeskUtils или отправляете форму отзыва, Formspree обрабатывает и передаёт DeskUtils ваш e-mail, тип отзыва, сообщение, необязательное изображение и язык, чтобы мы могли ответить и улучшить приложение. Не включайте конфиденциальные данные без необходимости. DeskUtils не передаёт эту информацию в Umami Analytics.',
   'document.date': '11 сентября 2026 г.',
-} satisfies Messages;
+} satisfies Partial<Messages>;

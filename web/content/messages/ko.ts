@@ -203,4 +203,4 @@ export const ko = {
   'privacy.support.body':
     'DeskUtils에 이메일을 보내거나 피드백 양식을 제출하면 이메일 주소, 피드백 유형, 내용, 선택 이미지와 언어가 Formspree에서 처리되어 DeskUtils로 전달됩니다. 답변과 앱 개선에만 사용됩니다. 꼭 필요한 경우가 아니면 민감한 내용을 포함하지 마세요. DeskUtils는 이 정보를 Umami Analytics로 보내지 않습니다.',
   'document.date': '2026년 9월 11일',
-} satisfies Messages;
+} satisfies Partial<Messages>;

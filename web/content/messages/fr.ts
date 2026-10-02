@@ -1,6 +1,17 @@
 import type { Messages } from './en';
 
 export const fr = {
+  'nav.product': 'Produit',
+  'nav.allFeatures': 'Toutes les fonctionnalités',
+  'footer.product': 'Produit',
+  'footer.features': 'Fonctionnalités',
+  'footer.resources': 'Ressources',
+  'footer.support': 'Assistance',
+  'footer.legal': 'Mentions légales',
+  'footer.tagline': 'Des outils Mac du quotidien, toujours à portée de main.',
+  'footer.requires': 'Nécessite macOS {version} ou version ultérieure',
+  'cta.title': 'Gardez vos outils Mac du quotidien à portée de main.',
+  'cta.download': 'Télécharger pour Mac',
   'a11y.skip': 'Aller au contenu',
   'a11y.brandHome': 'Accueil DeskUtils',
   'a11y.primaryNav': 'Navigation principale',
@@ -330,4 +341,20 @@ export const fr = {
   'notFound.description':
     'La page que vous cherchez n’est pas ici. Vos outils du quotidien sont à un clic.',
   'notFound.back': 'Retour à DeskUtils',
-} satisfies Messages;
+  // Shared feature menu and footer.
+  'tool.screenshot.name': 'Capture d’écran',
+  'tool.screenshot.body':
+    'Capturez une zone, une fenêtre ou une page défilante et ajoutez des annotations.',
+  'tool.clipboard-manager.name': 'Gestionnaire du presse-papiers',
+  'tool.clipboard-manager.body':
+    'Recherchez, épinglez et prévisualisez les textes, images et fichiers copiés.',
+  'tool.quick-ring.name': 'Quick Ring',
+  'tool.quick-ring.body': 'Appuyez deux fois sur ⌘ pour ouvrir huit actions rapides.',
+  'tool.capture-text.name': 'Extraction de texte',
+  'tool.capture-text.body': 'Copiez du texte depuis votre écran et lisez des codes QR.',
+  'tool.color-picker.name': 'Sélecteur de couleurs',
+  'tool.color-picker.body': 'Sélectionnez un pixel et copiez sa couleur en HEX, RGB ou HSL.',
+  'tool.window-switcher.name': 'Sélecteur de fenêtres',
+  'tool.window-switcher.body':
+    'Affichez toutes les fenêtres avec ⌘Tab et prévisualisez-les depuis le Dock.',
+} satisfies Partial<Messages>;

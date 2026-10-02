@@ -89,4 +89,4 @@ export const zhTW = {
   'privacy.support.body':
     '如果你寄信給 DeskUtils 或送出意見回饋表單，Formspree 會處理並將你的電子郵件地址、回饋類型、內容、選填圖片和語言傳送給 DeskUtils，以便回覆並改善應用程式。除非必要，請勿包含敏感內容。DeskUtils 不會將此資訊傳送給 Umami Analytics。',
   'document.date': '2026年9月11日',
-} satisfies Messages;
+} satisfies Partial<Messages>;

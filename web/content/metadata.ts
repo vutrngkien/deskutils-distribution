@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
-import { translate } from './i18n';
-import { languages, localePath, type Locale } from './locales';
+import { translate, type MessageKey } from './i18n';
+import { localePath, type Locale } from './locales';
+import { translatedLocalesFor } from './translations';
+import { getRoute } from './routes';
 import { product } from './product';
 
-type Page = 'home' | 'install' | 'privacy' | 'terms' | 'feedback';
 const openGraphLocales: Record<Locale, string> = {
   en: 'en_US',
   vi: 'vi_VN',
@@ -17,24 +18,37 @@ const openGraphLocales: Record<Locale, string> = {
   de: 'de_DE',
 };
 
-export function pageMetadata(locale: Locale, page: Page, path: string): Metadata {
-  const title = translate(locale, `meta.${page}.title`);
-  const description = translate(locale, `meta.${page}.description`);
-  const canonicalPath = localePath(locale, path);
-  const url = new URL(canonicalPath, product.origin).href;
+/**
+ * Page metadata derived from the route registry: canonical path, index/noindex
+ * and hreflang alternates (only for locales where this route has a complete
+ * equivalent translation).
+ */
+export function routeMetadata(locale: Locale, id: string): Metadata {
+  const route = getRoute(id);
+  const title = translate(locale, `meta.${id}.title` as MessageKey);
+  const description = translate(locale, `meta.${id}.description` as MessageKey);
+  const url = new URL(localePath(locale, route.path), product.origin).href;
+
+  const translated = translatedLocalesFor(id);
   const languagesMap = Object.fromEntries(
-    languages.map(({ code }) => [code, localePath(code, path)]),
+    translated.map((code) => [code, localePath(code, route.path)]),
   );
-  languagesMap['x-default'] = path;
+  languagesMap['x-default'] = route.path;
+
+  const complete = translated.includes(locale);
+  const robots = !route.index || !complete ? { index: false, follow: false } : undefined;
+
   const image = {
     url: `${product.origin}/assets/images/og-deskutils.png`,
     width: 1200,
     height: 630,
     alt: translate(locale, 'meta.ogAlt'),
   };
+
   return {
     title,
     description,
+    robots,
     alternates: { canonical: url, languages: languagesMap },
     openGraph: {
       type: 'website',
@@ -44,9 +58,9 @@ export function pageMetadata(locale: Locale, page: Page, path: string): Metadata
       url,
       images: [image],
       locale: openGraphLocales[locale],
-      alternateLocale: languages
-        .filter(({ code }) => code !== locale)
-        .map(({ code }) => openGraphLocales[code]),
+      alternateLocale: translated
+        .filter((code) => code !== locale)
+        .map((code) => openGraphLocales[code]),
     },
     twitter: {
       card: 'summary_large_image',

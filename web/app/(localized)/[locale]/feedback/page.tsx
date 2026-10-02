@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { FeedbackPage } from '@/app/(english)/feedback/page';
-import { isLocale, languages, type Locale } from '@/content/locales';
-import { pageMetadata } from '@/content/metadata';
+import { isLocale, type Locale } from '@/content/locales';
+import { routeMetadata } from '@/content/metadata';
 
 export async function generateMetadata({
   params,
@@ -10,13 +10,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return isLocale(locale) && locale !== 'en'
-    ? { ...pageMetadata(locale, 'feedback', '/feedback/'), robots: { index: false, follow: false } }
-    : {};
-}
-
-export function generateStaticParams() {
-  return languages.filter(({ code }) => code !== 'en').map(({ code }) => ({ locale: code }));
+  return isLocale(locale) && locale !== 'en' ? routeMetadata(locale, 'feedback') : {};
 }
 
 export default async function LocalizedFeedback({

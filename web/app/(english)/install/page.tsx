@@ -8,15 +8,14 @@ import {
   Settings2,
   Wifi,
 } from 'lucide-react';
-import { SiteFrame } from '@/components/SiteFrame';
 import { Button, Shell } from '@/components/Site';
 import { product, permissions } from '@/content/product';
 import { translate } from '@/content/i18n';
 import { localePath, type Locale } from '@/content/locales';
-import { pageMetadata } from '@/content/metadata';
+import { routeMetadata } from '@/content/metadata';
 import s from './Install.module.css';
 
-export const metadata = pageMetadata('en', 'install', '/install/');
+export const metadata = routeMetadata('en', 'install');
 
 const gatekeeperSteps = [
   {
@@ -42,7 +41,7 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
   const t = translate.bind(null, locale);
 
   return (
-    <SiteFrame locale={locale}>
+    <>
       <main id="main" lang={locale} className={s.main}>
         <Shell>
           <div className={s.page}>
@@ -181,7 +180,7 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
           </div>
         </Shell>
       </main>
-    </SiteFrame>
+    </>
   );
 }
 

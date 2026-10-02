@@ -1,6 +1,17 @@
 import type { Messages } from './en';
 
 export const vi = {
+  'nav.product': 'Sản phẩm',
+  'nav.allFeatures': 'Tất cả tính năng',
+  'footer.product': 'Sản phẩm',
+  'footer.features': 'Tính năng',
+  'footer.resources': 'Tài nguyên',
+  'footer.support': 'Hỗ trợ',
+  'footer.legal': 'Pháp lý',
+  'footer.tagline': 'Công cụ Mac hằng ngày, luôn trong tầm tay.',
+  'footer.requires': 'Yêu cầu macOS {version} trở lên',
+  'cta.title': 'Đưa công cụ Mac hằng ngày của bạn vào tầm tay.',
+  'cta.download': 'Tải cho Mac',
   'a11y.skip': 'Bỏ qua để đến nội dung',
   'a11y.brandHome': 'Trang chủ DeskUtils',
   'a11y.primaryNav': 'Điều hướng chính',
@@ -318,4 +329,18 @@ export const vi = {
   'notFound.description':
     'Trang bạn tìm không có ở đây. Các tiện ích hằng ngày chỉ cách một cú nhấp.',
   'notFound.back': 'Quay lại DeskUtils',
-} satisfies Messages;
+  // Shared feature menu and footer.
+  'tool.screenshot.name': 'Chụp màn hình',
+  'tool.screenshot.body': 'Chụp vùng, cửa sổ hoặc trang cuộn rồi thêm chú thích.',
+  'tool.clipboard-manager.name': 'Quản lý clipboard',
+  'tool.clipboard-manager.body': 'Tìm kiếm, ghim và xem trước văn bản, hình ảnh, tệp đã sao chép.',
+  'tool.quick-ring.name': 'Quick Ring',
+  'tool.quick-ring.body': 'Nhấn ⌘ hai lần để mở tám thao tác nhanh.',
+  'tool.capture-text.name': 'Trích xuất văn bản',
+  'tool.capture-text.body': 'Sao chép văn bản trên màn hình và đọc mã QR.',
+  'tool.color-picker.name': 'Chọn màu',
+  'tool.color-picker.body':
+    'Chọn màu của bất kỳ điểm ảnh nào và sao chép dưới dạng HEX, RGB hoặc HSL.',
+  'tool.window-switcher.name': 'Chuyển cửa sổ',
+  'tool.window-switcher.body': 'Xem mọi cửa sổ bằng ⌘Tab và xem trước cửa sổ từ Dock.',
+} satisfies Partial<Messages>;

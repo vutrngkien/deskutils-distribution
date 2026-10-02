@@ -1,11 +1,10 @@
 import { Document } from '@/components/Document';
-import { SiteFrame } from '@/components/SiteFrame';
 import { product, permissions } from '@/content/product';
 import { translate } from '@/content/i18n';
 import type { Locale } from '@/content/locales';
-import { pageMetadata } from '@/content/metadata';
+import { routeMetadata } from '@/content/metadata';
 
-export const metadata = pageMetadata('en', 'privacy', '/privacy/');
+export const metadata = routeMetadata('en', 'privacy');
 const sections = [
   ['privacy.local.title', ['privacy.local.body1', 'privacy.local.body2']],
   ['privacy.network.title', ['privacy.network.body']],
@@ -17,7 +16,7 @@ const sections = [
 export function PrivacyPage({ locale = 'en' }: { locale?: Locale }) {
   const t = translate.bind(null, locale);
   return (
-    <SiteFrame locale={locale}>
+    <>
       <Document
         locale={locale}
         title="privacy.title"
@@ -51,7 +50,7 @@ export function PrivacyPage({ locale = 'en' }: { locale?: Locale }) {
           </section>
         ))}
       </Document>
-    </SiteFrame>
+    </>
   );
 }
 export default function Privacy() {

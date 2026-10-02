@@ -32,4 +32,6 @@ assert.ok(
   release.assets.some((asset) => asset.name === 'DeskUtils.dmg'),
   'The release has no DMG.',
 );
+const { checkTranslations } = await import('./check-translations.mjs');
+await checkTranslations();
 console.log(`Website release verified: ${tag}`);

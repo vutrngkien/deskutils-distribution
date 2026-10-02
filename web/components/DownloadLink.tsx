@@ -4,13 +4,15 @@ import type { MouseEvent, ReactNode } from 'react';
 import { product } from '@/content/product';
 import { localePath, type Locale } from '@/content/locales';
 
-type DownloadPlacement =
+export type DownloadPlacement =
   | 'header'
   | 'header_compact'
   | 'hero'
   | 'mobile_menu'
+  | 'nav'
   | 'pricing_free'
   | 'pricing_pro'
+  | 'cta'
   | 'install_page'
   | 'not_found';
 

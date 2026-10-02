@@ -8,7 +8,29 @@ const fallbackCheckoutURL =
 const discountCode =
   process.env.NEXT_PUBLIC_DESKUTILS_DISCOUNT_CODE?.trim() || fallbackDiscountCode;
 
+/**
+ * Operational switch for the first-100-customer launch promotion. Set
+ * `NEXT_PUBLIC_DESKUTILS_LAUNCH_OFFER=false` to end the promotion without
+ * redesigning the page: the active price becomes the regular price, the
+ * struck-through price and first-100 copy disappear, the discount code is no
+ * longer appended to the checkout URL, and metadata/structured data use the
+ * regular price.
+ */
+const launchOfferEnabled =
+  process.env.NEXT_PUBLIC_DESKUTILS_LAUNCH_OFFER?.trim().toLowerCase() !== 'false';
+
+export const launchOffer = {
+  enabled: launchOfferEnabled,
+  customerLimit: 100,
+  discountCode,
+  launchAmount: '7.99',
+  regularAmount: '14.99',
+} as const;
+
+const activeAmount = launchOfferEnabled ? launchOffer.launchAmount : launchOffer.regularAmount;
+
 function checkoutURLWithDiscountCode(checkoutURL: string) {
+  if (!launchOfferEnabled) return checkoutURL;
   const url = new URL(checkoutURL);
   url.searchParams.set('checkout[discount_code]', discountCode);
   return url.toString();
@@ -28,14 +50,16 @@ export const product = {
   description:
     'Clipboard history, screenshots, color tools and everyday utilities. One native macOS app, right in your menu bar.',
   pricing: {
-    amount: '7.99',
-    originalAmount: '14.99',
+    amount: activeAmount,
+    originalAmount: launchOffer.regularAmount,
+    launchAmount: launchOffer.launchAmount,
+    showOriginal: launchOfferEnabled,
     currency: 'USD',
     period: 'lifetime',
     macs: 2,
-    customerLimit: 100,
+    customerLimit: launchOffer.customerLimit,
     discountCode,
-    status: 'launch-offer',
+    status: launchOfferEnabled ? 'launch-offer' : 'regular',
     purchaseURL: checkoutURLWithDiscountCode(
       process.env.NEXT_PUBLIC_DESKUTILS_CHECKOUT_URL?.trim() || fallbackCheckoutURL,
     ),

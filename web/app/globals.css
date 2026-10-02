@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import './homepage.css';
 
 @plugin "daisyui" {
   themes: false;
@@ -11,34 +12,34 @@
   color-scheme: light;
 
   --color-base-100: #ffffff;
-  --color-base-200: #f6f6f7;
-  --color-base-300: #eef0f4;
-  --color-base-content: #1d2028;
+  --color-base-200: #f2f4f8;
+  --color-base-300: #ecebe5;
+  --color-base-content: #0a1530;
 
-  --color-primary: #235bea;
+  --color-primary: #1450f5;
   --color-primary-content: #ffffff;
 
-  --color-secondary: #edf3ff;
-  --color-secondary-content: #103da8;
+  --color-secondary: #eaf0ff;
+  --color-secondary-content: #1450f5;
 
-  --color-accent: #cfdcff;
-  --color-accent-content: #103da8;
+  --color-accent: #6d5df5;
+  --color-accent-content: #ffffff;
 
-  --color-neutral: #1d2028;
-  --color-neutral-content: #ffffff;
+  --color-neutral: #0b1f5c;
+  --color-neutral-content: #c9d6f5;
 
-  --color-info: #235bea;
+  --color-info: #2f6bff;
   --color-info-content: #ffffff;
-  --color-success: #1a8a5a;
+  --color-success: #1a7f37;
   --color-success-content: #ffffff;
   --color-warning: #d98b1a;
-  --color-warning-content: #1d2028;
-  --color-error: #d14343;
+  --color-warning-content: #0a1530;
+  --color-error: #c62828;
   --color-error-content: #ffffff;
 
-  --radius-selector: 0.5rem;
-  --radius-field: 0.5rem;
-  --radius-box: 0.75rem;
+  --radius-selector: 999px;
+  --radius-field: 0.75rem;
+  --radius-box: 1.25rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 1px;
@@ -47,11 +48,16 @@
 }
 
 @theme {
+  /* Geist is self-hosted through next/font; these vars are set on <html>. */
   --font-sans:
-    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
-  --font-mono: 'SF Mono', ui-monospace, 'Cascadia Code', Menlo, monospace;
-  --color-muted: #626977;
-  --color-line: #e1e3e8;
+    var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, 'SF Mono', Menlo, monospace;
+  --color-muted: #4a5672;
+  --color-ink-2: #2b3550;
+  --color-line: #e6eaf2;
+
+  /* Design breakpoint is 1200px; Tailwind's xl (1280px) is intentionally unused. */
+  --breakpoint-dt: 75rem;
 }
 
 /*
@@ -59,35 +65,76 @@
  * padding keep every section consistent; see DESIGN.md before adding more.
  */
 @layer components {
+  .container-page {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 40px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container-page {
+      padding-inline: 100px;
+    }
+  }
   .section {
-    padding-block: 112px;
+    padding-block: 56px;
+  }
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 128px;
+    }
   }
   .section-tint {
     background: var(--color-base-200);
   }
+  .section-dark {
+    background: var(--color-neutral);
+    color: var(--color-neutral-content);
+  }
+  .eyebrow {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--color-primary);
+  }
+  .section-dark .eyebrow {
+    color: #9fbaff;
+  }
   .h-display {
-    font-size: clamp(2.625rem, 5.6vw, 4.25rem);
+    font-size: clamp(2.5rem, 5.6vw, 4.25rem);
     line-height: 1.03;
     letter-spacing: -0.042em;
-    font-weight: 640;
+    font-weight: 750;
+    text-wrap: balance;
+    overflow-wrap: break-word;
   }
   .h-section {
-    font-size: clamp(1.875rem, 3.4vw, 2.625rem);
-    line-height: 1.08;
+    font-size: clamp(1.875rem, 3.4vw, 3rem);
+    line-height: 1.06;
     letter-spacing: -0.035em;
-    font-weight: 620;
+    font-weight: 700;
     text-wrap: balance;
+    overflow-wrap: break-word;
   }
   .h-feature {
     font-size: clamp(1.25rem, 2vw, 1.5rem);
     line-height: 1.2;
     letter-spacing: -0.022em;
-    font-weight: 600;
+    font-weight: 650;
   }
   .lede {
     font-size: 1.0625rem;
-    line-height: 1.6;
+    line-height: 1.55;
     color: var(--color-muted);
+    overflow-wrap: break-word;
+  }
+  .section-dark .lede {
+    color: #c9d6f5;
   }
   /* A macOS-style key combination, e.g. ⇧⌘V. */
   .keys {
@@ -100,10 +147,11 @@
     border-radius: 6px;
     background: var(--color-base-100);
     color: var(--color-base-content);
+    font-family: var(--font-mono);
     font-size: 0.8125rem;
     font-weight: 500;
     line-height: 1;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     white-space: nowrap;
   }
   .pro-mark {
@@ -111,27 +159,37 @@
     align-items: center;
     padding: 1px 6px;
     border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
-    border-radius: 5px;
+    border-radius: 999px;
     color: var(--color-primary);
     font-size: 0.6875rem;
     font-weight: 650;
     line-height: 1.4;
   }
-  @media (max-width: 600px) {
-    .section {
-      padding-block: 72px;
-    }
-    .lede {
-      font-size: 1rem;
+  .card-surface {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-box);
+    background: var(--color-base-100);
+  }
+  .cta-band {
+    border-radius: 2rem;
+    background:
+      radial-gradient(120% 140% at 15% 0%, #23307d 0%, transparent 55%),
+      radial-gradient(120% 140% at 100% 100%, #4b2fb8 0%, transparent 55%), var(--color-neutral);
+    color: var(--color-neutral-content);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .motion-rise {
+      transition:
+        transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.15),
+        opacity 0.3s ease;
     }
   }
 }
 
 /*
- * Legacy design tokens kept as a compatibility bridge for the two remaining
- * CSS Modules (components/DemoMedia.module.css and
- * components/ScreenshotFeatureRail.module.css). New UI should use Tailwind
- * utilities and the daisyUI `deskutils` theme colors instead.
+ * Legacy design tokens kept as a compatibility bridge while pages migrate from
+ * CSS Modules to Tailwind. New UI should use Tailwind utilities and the daisyUI
+ * `deskutils` theme colors instead. These are removed in the cleanup phase.
  */
 @layer base {
   :root {
@@ -147,10 +205,7 @@
     --line: #e1e3e8;
     --surface: #eef0f4;
     --white: #fff;
-    font-family: var(--font-sans);
     color-scheme: light;
-    background: var(--canvas);
-    color: var(--ink);
   }
 
   * {
@@ -158,12 +213,16 @@
   }
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
   body {
     margin: 0;
-    background: var(--canvas);
+    background: var(--color-base-100);
+    color: var(--color-base-content);
+    font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.6;
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
   }
   a {
@@ -231,12 +290,12 @@
     cursor: pointer;
   }
   :focus-visible {
-    outline: 3px solid var(--blue);
-    outline-offset: 5px;
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
   }
   ::selection {
     background: #dce5ff;
-    color: var(--ink);
+    color: var(--color-base-content);
   }
   section[id] {
     scroll-margin-top: 88px;
@@ -247,7 +306,7 @@
     top: -100px;
     z-index: 50;
     padding: 10px 18px;
-    background: var(--ink);
+    background: var(--color-neutral);
     color: white;
   }
   .skip-link:focus {

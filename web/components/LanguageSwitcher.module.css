@@ -35,6 +35,9 @@
 .switcher[open] summary svg:last-child {
   transform: rotate(180deg);
 }
+.switcher:not([open]) > .menu {
+  display: none;
+}
 .menu {
   position: absolute;
   top: calc(100% + 12px);

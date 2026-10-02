@@ -1,5 +1,8 @@
 import {
+  Activity,
+  AppWindow,
   ArrowUpRight,
+  CircleDot,
   ClipboardList,
   Crop,
   EyeOff,
@@ -8,13 +11,16 @@ import {
   LayoutGrid,
   LockKeyhole,
   Monitor,
+  MonitorSmartphone,
   Moon,
+  MousePointer2,
   PencilLine,
   Pipette,
   ScanFace,
   ScanLine,
   ScanText,
   ScrollText,
+  SunDim,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -34,7 +40,13 @@ export type ToolIconName =
   | 'keyboard'
   | 'moon'
   | 'display'
-  | 'lock';
+  | 'lock'
+  | 'ring'
+  | 'window'
+  | 'jiggler'
+  | 'dim'
+  | 'external'
+  | 'gauge';
 
 const icons: Record<ToolIconName, LucideIcon> = {
   clipboard: ClipboardList,
@@ -53,9 +65,15 @@ const icons: Record<ToolIconName, LucideIcon> = {
   moon: Moon,
   display: Monitor,
   lock: LockKeyhole,
+  ring: CircleDot,
+  window: AppWindow,
+  jiggler: MousePointer2,
+  dim: SunDim,
+  external: MonitorSmartphone,
+  gauge: Activity,
 };
 
-export function ToolIcon({ name }: { name: ToolIconName }) {
+export function ToolIcon({ name, size = 24 }: { name: ToolIconName; size?: number }) {
   const Icon = icons[name];
-  return <Icon aria-hidden="true" size={24} strokeWidth={1.7} />;
+  return <Icon aria-hidden="true" size={size} strokeWidth={1.7} />;
 }

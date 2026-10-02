@@ -1,6 +1,17 @@
 import type { Messages } from './en';
 
 export const ja = {
+  'nav.product': '製品',
+  'nav.allFeatures': 'すべての機能',
+  'footer.product': '製品',
+  'footer.features': '機能',
+  'footer.resources': 'リソース',
+  'footer.support': 'サポート',
+  'footer.legal': '法的情報',
+  'footer.tagline': '毎日のMacツールを、いつでも手の届くところに。',
+  'footer.requires': 'macOS {version} 以降が必要です',
+  'cta.title': '毎日のMacツールを、いつでも手の届くところに。',
+  'cta.download': 'Mac版をダウンロード',
   'a11y.skip': '本文へ移動',
   'a11y.brandHome': 'DeskUtils ホーム',
   'a11y.primaryNav': 'メインナビゲーション',
@@ -315,4 +326,18 @@ export const ja = {
   'notFound.title': 'このページは見つかりません。',
   'notFound.description': 'お探しのページはここにはありません。DeskUtils へ戻りましょう。',
   'notFound.back': 'DeskUtils に戻る',
-} satisfies Messages;
+  // Shared feature menu and footer.
+  'tool.screenshot.name': 'スクリーンショット',
+  'tool.screenshot.body': '範囲、ウィンドウ、スクロールするページを撮影して注釈を追加できます。',
+  'tool.clipboard-manager.name': 'クリップボード管理',
+  'tool.clipboard-manager.body':
+    'コピーしたテキスト、画像、ファイルを検索、ピン留め、プレビューできます。',
+  'tool.quick-ring.name': 'Quick Ring',
+  'tool.quick-ring.body': '⌘を2回押すと、8つのクイックアクションが開きます。',
+  'tool.capture-text.name': 'テキスト抽出',
+  'tool.capture-text.body': '画面上のテキストをコピーし、QRコードを読み取れます。',
+  'tool.color-picker.name': 'カラーピッカー',
+  'tool.color-picker.body': '画面上のピクセルの色を選び、HEX、RGB、HSLでコピーできます。',
+  'tool.window-switcher.name': 'ウィンドウ切り替え',
+  'tool.window-switcher.body': '⌘Tabですべてのウィンドウを表示し、Dockからプレビューできます。',
+} satisfies Partial<Messages>;

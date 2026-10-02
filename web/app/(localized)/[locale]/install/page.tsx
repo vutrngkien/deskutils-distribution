@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { InstallPage } from '@/app/(english)/install/page';
-import { isLocale, languages, type Locale } from '@/content/locales';
-import { pageMetadata } from '@/content/metadata';
+import { isLocale, type Locale } from '@/content/locales';
+import { routeMetadata } from '@/content/metadata';
 
 export async function generateMetadata({
   params,
@@ -10,10 +10,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return isLocale(locale) && locale !== 'en' ? pageMetadata(locale, 'install', '/install/') : {};
-}
-export function generateStaticParams() {
-  return languages.filter(({ code }) => code !== 'en').map(({ code }) => ({ locale: code }));
+  return isLocale(locale) && locale !== 'en' ? routeMetadata(locale, 'install') : {};
 }
 export default async function LocalizedInstall({
   params,

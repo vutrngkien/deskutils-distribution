@@ -30,6 +30,13 @@ export function homeStructuredData(locale: Locale): SchemaObject {
         applicationSubCategory: 'Clipboard Manager and Screenshot Tool',
         downloadUrl: product.downloadURL,
         isAccessibleForFree: true,
+        offers: {
+          '@type': 'Offer',
+          price: product.pricing.amount,
+          priceCurrency: product.pricing.currency,
+          availability: 'https://schema.org/InStock',
+          url: product.pricing.purchaseURL,
+        },
         inLanguage: locale,
         sameAs: [product.repositoryURL],
         featureList: [

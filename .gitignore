@@ -16,6 +16,8 @@ web/*.tsbuildinfo
 web/public/assets/
 web/public/appcast.xml
 web/public/CNAME
+web/public/media/
+web/media-src/
 web/private-media/
 web/test-results/
 web/playwright-report/

@@ -1,6 +1,17 @@
 import type { Messages } from './en';
 
 export const es = {
+  'nav.product': 'Producto',
+  'nav.allFeatures': 'Todas las funciones',
+  'footer.product': 'Producto',
+  'footer.features': 'Funciones',
+  'footer.resources': 'Recursos',
+  'footer.support': 'Soporte',
+  'footer.legal': 'Legal',
+  'footer.tagline': 'Herramientas Mac de cada día, siempre a mano.',
+  'footer.requires': 'Requiere macOS {version} o posterior',
+  'cta.title': 'Ten tus herramientas Mac de cada día a mano.',
+  'cta.download': 'Descargar para Mac',
   'a11y.skip': 'Saltar al contenido',
   'a11y.brandHome': 'Inicio de DeskUtils',
   'a11y.primaryNav': 'Navegación principal',
@@ -320,4 +331,19 @@ export const es = {
   'notFound.description':
     'La página que buscas no está aquí. Tus herramientas diarias están a un clic.',
   'notFound.back': 'Volver a DeskUtils',
-} satisfies Messages;
+  // Shared feature menu and footer.
+  'tool.screenshot.name': 'Captura de pantalla',
+  'tool.screenshot.body':
+    'Captura un área, una ventana o una página con desplazamiento y añade anotaciones.',
+  'tool.clipboard-manager.name': 'Gestor del portapapeles',
+  'tool.clipboard-manager.body':
+    'Busca, fija y previsualiza los textos, imágenes y archivos que copias.',
+  'tool.quick-ring.name': 'Quick Ring',
+  'tool.quick-ring.body': 'Pulsa ⌘ dos veces para abrir ocho acciones rápidas.',
+  'tool.capture-text.name': 'Capturar texto',
+  'tool.capture-text.body': 'Copia texto de cualquier parte de la pantalla y lee códigos QR.',
+  'tool.color-picker.name': 'Selector de color',
+  'tool.color-picker.body': 'Selecciona cualquier píxel y copia su color en HEX, RGB o HSL.',
+  'tool.window-switcher.name': 'Selector de ventanas',
+  'tool.window-switcher.body': 'Ve todas las ventanas con ⌘Tab y previsualízalas desde el Dock.',
+} satisfies Partial<Messages>;

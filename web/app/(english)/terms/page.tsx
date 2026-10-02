@@ -1,11 +1,10 @@
 import { Document } from '@/components/Document';
-import { SiteFrame } from '@/components/SiteFrame';
 import { product } from '@/content/product';
 import { translate } from '@/content/i18n';
 import type { Locale } from '@/content/locales';
-import { pageMetadata } from '@/content/metadata';
+import { routeMetadata } from '@/content/metadata';
 
-export const metadata = pageMetadata('en', 'terms', '/terms/');
+export const metadata = routeMetadata('en', 'terms');
 const sections = [
   ['terms.using.title', ['terms.using.body1', 'terms.using.body2']],
   ['terms.plans.title', ['terms.plans.body1', 'terms.plans.body2']],
@@ -27,7 +26,7 @@ export function TermsPage({ locale = 'en' }: { locale?: Locale }) {
     email: product.supportEmail,
   };
   return (
-    <SiteFrame locale={locale}>
+    <>
       <Document
         locale={locale}
         title="terms.title"
@@ -44,7 +43,7 @@ export function TermsPage({ locale = 'en' }: { locale?: Locale }) {
           </section>
         ))}
       </Document>
-    </SiteFrame>
+    </>
   );
 }
 export default function Terms() {

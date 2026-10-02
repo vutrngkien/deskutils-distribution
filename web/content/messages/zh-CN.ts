@@ -1,6 +1,17 @@
 import type { Messages } from './en';
 
 export const zhCN = {
+  'nav.product': '产品',
+  'nav.allFeatures': '全部功能',
+  'footer.product': '产品',
+  'footer.features': '功能',
+  'footer.resources': '资源',
+  'footer.support': '支持',
+  'footer.legal': '法律',
+  'footer.tagline': '日常 Mac 工具，触手可及。',
+  'footer.requires': '需要 macOS {version} 或更高版本',
+  'cta.title': '让日常 Mac 工具触手可及。',
+  'cta.download': '下载 Mac 版',
   'a11y.skip': '跳到主要内容',
   'a11y.brandHome': 'DeskUtils 首页',
   'a11y.primaryNav': '主导航',
@@ -293,4 +304,17 @@ export const zhCN = {
   'notFound.title': '这个页面不见了。',
   'notFound.description': '你要找的页面不在这里。返回 DeskUtils 只需一次点击。',
   'notFound.back': '返回 DeskUtils',
-} satisfies Messages;
+  // Shared feature menu and footer.
+  'tool.screenshot.name': '截屏',
+  'tool.screenshot.body': '截取区域、窗口或滚动页面，并添加标注。',
+  'tool.clipboard-manager.name': '剪贴板管理',
+  'tool.clipboard-manager.body': '搜索、置顶和预览复制的文本、图片和文件。',
+  'tool.quick-ring.name': 'Quick Ring',
+  'tool.quick-ring.body': '按两次 ⌘ 即可打开八个快捷操作。',
+  'tool.capture-text.name': '提取文本',
+  'tool.capture-text.body': '复制屏幕上的文本并读取二维码。',
+  'tool.color-picker.name': '取色器',
+  'tool.color-picker.body': '选取任意像素的颜色，并以 HEX、RGB 或 HSL 格式复制。',
+  'tool.window-switcher.name': '窗口切换',
+  'tool.window-switcher.body': '通过 ⌘Tab 查看所有窗口，并从 Dock 预览窗口。',
+} satisfies Partial<Messages>;

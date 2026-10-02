@@ -1,21 +1,22 @@
 import type { MetadataRoute } from 'next';
 import { product } from '@/content/product';
-import { languages, localePath } from '@/content/locales';
+import { localePath } from '@/content/locales';
+import { translatedLocalesFor } from '@/content/translations';
+import { sitemapRoutes } from '@/content/routes';
+
 export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = ['/', '/install/', '/privacy/', '/terms/'];
-  return languages.flatMap(({ code }) =>
-    paths.map((path) => ({
-      url: `${product.origin}${localePath(code, path)}`,
+  return sitemapRoutes().flatMap((route) => {
+    const locales = translatedLocalesFor(route.id);
+    return locales.map((locale) => ({
+      url: `${product.origin}${localePath(locale, route.path)}`,
       alternates: {
         languages: Object.fromEntries([
-          ...languages.map(({ code: locale }) => [
-            locale,
-            `${product.origin}${localePath(locale, path)}`,
-          ]),
-          ['x-default', `${product.origin}${path}`],
+          ...locales.map((code) => [code, `${product.origin}${localePath(code, route.path)}`]),
+          ['x-default', `${product.origin}${route.path}`],
         ]),
       },
-    })),
-  );
+    }));
+  });
 }

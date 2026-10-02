@@ -24,6 +24,8 @@ export function UtilitiesDisclosure({
         {children}
       </div>
       <button
+        data-track-event="utilities_toggle"
+        data-track-event-state={expanded ? 'collapsed' : 'expanded'}
         className="home-utility-toggle"
         type="button"
         aria-expanded={expanded}

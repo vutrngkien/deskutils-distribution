@@ -65,8 +65,8 @@ try {
           assert.match(html, /\$14\.99/, `${file}: regular price`);
           assert.doesNotMatch(html, /\$7\.99/, `${file}: launch price hidden`);
         }
-        assert.match(html, /data-umami-event="download"/, `${file}: download event`);
-        assert.match(html, /data-umami-event="checkout"/, `${file}: checkout event`);
+        assert.match(html, /data-track-event="download"/, `${file}: download event`);
+        assert.match(html, /data-track-event="checkout"/, `${file}: checkout event`);
       }
       if (route.id === 'privacy') {
         assert.match(html, /Umami/, `${file}: analytics disclosure`);

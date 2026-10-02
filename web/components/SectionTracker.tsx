@@ -1,51 +1,55 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { trackUmamiEvent } from '@/lib/umami';
 
 export function SectionTracker() {
+  const pathname = usePathname();
   useEffect(() => {
     const seen = new Set<string>();
-    const pending = new Set<string>();
     const locale = document.documentElement.lang;
-    let interval: number | undefined;
-    const flush = () => {
-      for (const section of pending) {
-        if (trackUmamiEvent('section_view', { section, locale })) {
-          pending.delete(section);
-          seen.add(section);
-        }
-      }
-      if (pending.size === 0 && interval !== undefined) {
-        window.clearInterval(interval);
-        interval = undefined;
-      }
-    };
-    const retryPending = () => {
-      if (pending.size > 0 && interval === undefined) {
-        interval = window.setInterval(flush, 300);
-      }
-    };
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const section = (entry.target as HTMLElement).dataset.umamiSection;
-          if (entry.isIntersecting && section && !seen.has(section)) pending.add(section);
-        }
-        flush();
-        retryPending();
-      },
-      { threshold: 0.5 },
-    );
-
-    document
-      .querySelectorAll('[data-umami-section]')
-      .forEach((section) => observer.observe(section));
+    const sections = document.querySelectorAll<HTMLElement>('[data-umami-section]');
+    const observers = new Map<HTMLElement, IntersectionObserver>();
+    function observe(element: HTMLElement) {
+      observers.get(element)?.disconnect();
+      observers.delete(element);
+      const section = element.dataset.umamiSection;
+      if (!section || seen.has(section)) return;
+      // A long section may never fit 15% of its height into the viewport.
+      const height = element.getBoundingClientRect().height;
+      const threshold = 0.15 * Math.min(1, window.innerHeight / Math.max(height, 1));
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (
+            entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= threshold) &&
+            !seen.has(section) &&
+            trackUmamiEvent('section_view', { section, locale })
+          ) {
+            seen.add(section);
+            observer.disconnect();
+          }
+        },
+        { threshold },
+      );
+      observers.set(element, observer);
+      observer.observe(element);
+    }
+    function refresh() {
+      sections.forEach(observe);
+    }
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => observe(entry.target as HTMLElement));
+    });
+    sections.forEach((section) => resizeObserver.observe(section));
+    refresh();
+    window.addEventListener('resize', refresh);
     return () => {
-      observer.disconnect();
-      if (interval !== undefined) window.clearInterval(interval);
+      observers.forEach((observer) => observer.disconnect());
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', refresh);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

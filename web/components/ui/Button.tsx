@@ -63,9 +63,9 @@ export function Button({
     <a
       className={classes}
       href={href}
-      data-umami-event={isCheckout ? 'checkout' : undefined}
-      data-umami-event-locale={isCheckout ? locale : undefined}
-      data-umami-event-placement={isCheckout ? placement : undefined}
+      data-track-event={isCheckout ? 'checkout' : undefined}
+      data-track-event-locale={isCheckout ? locale : undefined}
+      data-track-event-placement={isCheckout ? placement : undefined}
     >
       {children}
     </a>

@@ -1,6 +1,7 @@
 import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { SearchX } from 'lucide-react';
+import { UmamiAnalytics } from '@/components/UmamiAnalytics';
 import { Nav } from '@/components/layout/Nav';
 import { translate } from '@/content/i18n';
 
@@ -25,7 +26,7 @@ export default function GlobalNotFound() {
     <html lang="en">
       <body>
         <Nav locale="en" />
-        <main id="main">
+        <main id="main" data-track-placement="not_found" data-umami-section="not-found">
           <div className="container-page flex flex-col items-center gap-5 pt-20 text-center dt:pt-24">
             <SearchX size={54} strokeWidth={1.5} className="text-primary" aria-hidden="true" />
             <p className="text-[15px] font-semibold text-primary">{t('notFound.label')}</p>
@@ -48,6 +49,7 @@ export default function GlobalNotFound() {
             </div>
           </div>
         </main>
+        <UmamiAnalytics />
       </body>
     </html>
   );

@@ -15,7 +15,7 @@ export function RelatedTools({
   items: { id: string; icon: ToolIconName; href: string; name: MessageKey; body: MessageKey }[];
 }) {
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+    <div data-track-placement="related_tools" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
       {items.map((item) => (
         <a
           key={item.id}

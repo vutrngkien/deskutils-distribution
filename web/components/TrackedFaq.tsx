@@ -24,7 +24,7 @@ export function TrackedFaq({
       className="home-faq-item"
       name={name}
       onToggle={() => {
-        if (details.current?.open) trackUmamiEvent('faq_open', { faq: id, locale });
+        if (details.current?.open) trackUmamiEvent('faq_open', { faq: id, group: name, locale });
       }}
     >
       <summary>

@@ -103,12 +103,18 @@ export function CaptureTextPage({ locale = 'en' }: { locale?: Locale }) {
         </header>
 
         {/* Flows */}
-        <section className="container-page pt-16 dt:pt-[130px]">
+        <section
+          data-umami-section="capture-text-flow"
+          className="container-page pt-16 dt:pt-[130px]"
+        >
           <Flows locale={locale} items={captureTextFlows} />
         </section>
 
         {/* QR */}
-        <section className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[5fr_7fr] dt:items-center dt:gap-14 dt:pt-[130px]">
+        <section
+          data-umami-section="capture-text-qr"
+          className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[5fr_7fr] dt:items-center dt:gap-14 dt:pt-[130px]"
+        >
           <div className="flex flex-col gap-4">
             <p className="eyebrow">{t('capture-text.qr.eyebrow')}</p>
             <h2 className="h-section text-[26px] dt:text-[40px]">{t('capture-text.qr.title')}</h2>
@@ -131,7 +137,10 @@ export function CaptureTextPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Privacy + shortcuts */}
-        <section className="container-page grid grid-cols-1 gap-5 pt-16 dt:grid-cols-2 dt:pt-[130px]">
+        <section
+          data-umami-section="capture-text-permissions"
+          className="container-page grid grid-cols-1 gap-5 pt-16 dt:grid-cols-2 dt:pt-[130px]"
+        >
           <div className="flex flex-col gap-4 rounded-[28px] bg-neutral p-8 text-white dt:p-10">
             <p className="eyebrow">{t('capture-text.privacy.eyebrow')}</p>
             <h2 className="text-[26px] font-bold leading-tight dt:text-[32px]">
@@ -158,6 +167,7 @@ export function CaptureTextPage({ locale = 'en' }: { locale?: Locale }) {
 
         {/* FAQ */}
         <section
+          data-umami-section="capture-text-faq"
           className="container-page grid grid-cols-1 gap-8 pt-16 dt:grid-cols-[4fr_8fr] dt:gap-16 dt:pt-[130px]"
           id="faq"
           aria-labelledby="capture-text-faq"

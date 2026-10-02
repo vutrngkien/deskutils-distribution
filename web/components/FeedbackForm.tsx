@@ -50,6 +50,7 @@ export function FeedbackForm({
   const [kind, setKind] = useState<FeedbackKind>('feedback');
 
   function selectKind(next: FeedbackKind) {
+    if (next !== kind) trackUmamiEvent('feedback_kind_change', { kind: next, locale });
     setKind(next);
     onKindChange?.(next);
   }
@@ -71,6 +72,7 @@ export function FeedbackForm({
   }
 
   function resetForm() {
+    trackUmamiEvent('feedback_reset', { locale });
     setKind('feedback');
     setMessage('');
     setEmail('');
@@ -86,16 +88,22 @@ export function FeedbackForm({
   function changeAttachment(file: File | null) {
     setAttachment(null);
     setAttachmentError('');
-    if (!file) return;
+    if (!file) {
+      if (attachment) trackUmamiEvent('feedback_attachment_remove', { locale });
+      return;
+    }
     if (!file.type.startsWith('image/')) {
+      trackUmamiEvent('feedback_validation_error', { field: 'attachment', reason: 'type', locale });
       setAttachmentError(t('feedback.error.imageType'));
       return;
     }
     if (file.size > maximumAttachmentSize) {
+      trackUmamiEvent('feedback_validation_error', { field: 'attachment', reason: 'size', locale });
       setAttachmentError(t('feedback.error.imageSize'));
       return;
     }
     setAttachment(file);
+    trackUmamiEvent('feedback_attachment_add', { locale });
   }
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -114,11 +122,13 @@ export function FeedbackForm({
       return;
     }
     if (!message.trim()) {
+      trackUmamiEvent('feedback_validation_error', { field: 'message', reason: 'empty', locale });
       setFormError(t('feedback.error.message'));
       setStatus('error');
       return;
     }
     if (!validEmail(email.trim())) {
+      trackUmamiEvent('feedback_validation_error', { field: 'email', reason: 'invalid', locale });
       setFormError(t('feedback.error.email'));
       setStatus('error');
       return;

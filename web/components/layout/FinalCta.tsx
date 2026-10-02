@@ -18,7 +18,12 @@ export function FinalCta({
   const t = translate.bind(null, locale);
 
   return (
-    <section className="container-page home-final-cta" data-testid="final-cta">
+    <section
+      className="container-page home-final-cta"
+      data-testid="final-cta"
+      data-track-placement="cta"
+      data-umami-section="cta"
+    >
       <div
         className="cta-band flex flex-col items-center gap-6 px-6 py-20 text-center dt:px-10 dt:py-24"
         style={{

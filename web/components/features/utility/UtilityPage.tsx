@@ -119,7 +119,10 @@ export function UtilityPage({ locale = 'en', id }: { locale?: Locale; id: string
         </header>
 
         {/* How it works + permissions */}
-        <section className="container-page grid grid-cols-1 gap-5 pt-16 dt:grid-cols-2 dt:pt-[130px]">
+        <section
+          data-umami-section="utility-behavior"
+          className="container-page grid grid-cols-1 gap-5 pt-16 dt:grid-cols-2 dt:pt-[130px]"
+        >
           <div className="flex flex-col gap-3 rounded-[28px] bg-[#f3f6ff] p-8 dt:p-10">
             <p className="eyebrow">{t('utilities.how.eyebrow')}</p>
             <h2 className="text-[24px] font-bold leading-tight dt:text-[30px]">
@@ -142,6 +145,7 @@ export function UtilityPage({ locale = 'en', id }: { locale?: Locale; id: string
         {/* FAQ */}
         {page.faqs.length > 0 && (
           <section
+            data-umami-section="utility-faq"
             className="container-page grid grid-cols-1 gap-8 pt-16 dt:grid-cols-[4fr_8fr] dt:gap-16 dt:pt-[130px]"
             id="faq"
             aria-labelledby={`${page.id}-faq`}

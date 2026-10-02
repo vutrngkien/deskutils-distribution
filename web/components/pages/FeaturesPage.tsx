@@ -86,7 +86,10 @@ export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
         </header>
 
         {/* Featured */}
-        <section className="container-page flex flex-col gap-5 pt-12 dt:pt-20">
+        <section
+          data-umami-section="features-featured"
+          className="container-page flex flex-col gap-5 pt-12 dt:pt-20"
+        >
           <div className="flex flex-col gap-3">
             <p className="eyebrow">{t('features.featured.eyebrow')}</p>
             <h2 className="h-section text-[28px] dt:text-[40px]">{t('features.featured.title')}</h2>
@@ -94,6 +97,7 @@ export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
             <article
               className="flex flex-col gap-3 overflow-hidden rounded-[20px] bg-neutral p-5 text-white dt:p-6"
+              data-track-placement="featured_clipboard"
               data-testid="featured-clipboard"
             >
               <h3 className="text-[22px] font-bold leading-tight">
@@ -122,6 +126,7 @@ export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
                 background:
                   'radial-gradient(80% 90% at 80% 0%, #7cc4ff 0%, #2a6bff 40%, #2330c9 72%, #4b2fb8 100%)',
               }}
+              data-track-placement="featured_screenshot"
               data-testid="featured-screenshot"
             >
               <h3 className="text-[22px] font-bold">{t('tool.screenshot.name')}</h3>
@@ -142,6 +147,7 @@ export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
             </article>
             <article
               className="flex flex-col gap-3 overflow-hidden rounded-[20px] bg-[#eaf0ff] p-5 dt:p-6"
+              data-track-placement="featured_quickring"
               data-testid="featured-quick-ring"
             >
               <h3 className="text-[22px] font-bold">{t('tool.quick-ring.name')}</h3>
@@ -168,7 +174,10 @@ export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Groups */}
-        <section className="container-page flex flex-col gap-10 pt-16 dt:pt-[130px]">
+        <section
+          data-umami-section="features-groups"
+          className="container-page flex flex-col gap-10 pt-16 dt:pt-[130px]"
+        >
           <div className="flex flex-col gap-3">
             <p className="eyebrow">{t('features.groups.eyebrow')}</p>
             <h2 className="h-section text-[28px] dt:text-[40px]">{t('features.groups.title')}</h2>
@@ -177,6 +186,8 @@ export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
             {featureGroups.map((group) => (
               <section
                 key={group.id}
+                data-track-placement={`catalog_${group.id}`}
+                data-umami-section={`catalog-${group.id}`}
                 id={`group-${group.id}`}
                 className="grid grid-cols-1 gap-6 border-t border-line py-8 dt:grid-cols-[4fr_8fr] dt:gap-10"
               >
@@ -211,7 +222,10 @@ export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Compare */}
-        <section className="container-page flex flex-col gap-6 pt-16 dt:pt-[130px]">
+        <section
+          data-umami-section="features-compare"
+          className="container-page flex flex-col gap-6 pt-16 dt:pt-[130px]"
+        >
           <div className="flex flex-col gap-3">
             <h2 className="h-section text-[28px] dt:text-[40px]">{t('features.compare.title')}</h2>
             <p className="text-[17px] text-muted">{t('features.compare.body')}</p>
@@ -219,6 +233,7 @@ export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
           <div className="flex flex-col gap-5">
             {featureCompares.map((compare) => (
               <div
+                data-track-placement={`compare_${compare.id}`}
                 key={compare.id}
                 className="grid grid-cols-1 gap-4 rounded-[24px] bg-[#f3f6ff] p-6 dt:grid-cols-[260px_1fr_1fr] dt:items-center dt:gap-6"
               >

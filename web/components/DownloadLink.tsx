@@ -44,9 +44,9 @@ export function DownloadLink({
     <a
       className={className}
       data-button={className ? true : undefined}
-      data-umami-event="download"
-      data-umami-event-locale={locale}
-      data-umami-event-placement={placement}
+      data-track-event="download"
+      data-track-event-locale={locale}
+      data-track-event-placement={placement}
       href={href}
       onClick={handleClick}
     >

@@ -18,7 +18,7 @@ export function Footer({ locale }: { locale: Locale }) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line bg-base-100">
+    <footer data-track-placement="footer" className="border-t border-line bg-base-100">
       <nav
         aria-label={t('a11y.footerNav')}
         className="container-page grid grid-cols-[repeat(2,minmax(0,1fr))] gap-8 py-12 dt:grid-cols-[2fr_repeat(5,minmax(0,1fr))] dt:py-20"

@@ -108,7 +108,10 @@ export function ClipboardManagerPage({ locale = 'en' }: { locale?: Locale }) {
         </header>
 
         {/* Flows */}
-        <section className="container-page flex flex-col gap-8 pt-16 dt:pt-[130px]">
+        <section
+          data-umami-section="clipboard-flow"
+          className="container-page flex flex-col gap-8 pt-16 dt:pt-[130px]"
+        >
           <h2 className="h-section text-[28px] dt:text-[40px]">
             {t('clipboard-manager.flows.title')}
           </h2>
@@ -116,7 +119,10 @@ export function ClipboardManagerPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Search */}
-        <section className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[7fr_5fr] dt:items-center dt:gap-14 dt:pt-[130px]">
+        <section
+          data-umami-section="clipboard-search"
+          className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[7fr_5fr] dt:items-center dt:gap-14 dt:pt-[130px]"
+        >
           <div className="w-full">
             <DemoMedia
               demo={{
@@ -148,7 +154,10 @@ export function ClipboardManagerPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Pin & filter */}
-        <section className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[5fr_7fr] dt:items-center dt:gap-14 dt:pt-[130px]">
+        <section
+          data-umami-section="clipboard-pin-filter"
+          className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[5fr_7fr] dt:items-center dt:gap-14 dt:pt-[130px]"
+        >
           <div className="flex flex-col gap-4">
             <p className="eyebrow">{t('clipboard-manager.pin.eyebrow')}</p>
             <h2 className="h-section text-[26px] dt:text-[40px]">
@@ -193,7 +202,10 @@ export function ClipboardManagerPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Preview */}
-        <section className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[7fr_5fr] dt:items-center dt:gap-14 dt:pt-[130px]">
+        <section
+          data-umami-section="clipboard-preview"
+          className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[7fr_5fr] dt:items-center dt:gap-14 dt:pt-[130px]"
+        >
           <div className="w-full">
             <DemoMedia
               demo={{
@@ -220,7 +232,10 @@ export function ClipboardManagerPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Privacy + permissions */}
-        <section className="container-page grid grid-cols-1 gap-5 pt-16 dt:grid-cols-2 dt:pt-[130px]">
+        <section
+          data-umami-section="clipboard-permissions"
+          className="container-page grid grid-cols-1 gap-5 pt-16 dt:grid-cols-2 dt:pt-[130px]"
+        >
           <div className="flex flex-col gap-4 rounded-[28px] bg-neutral p-8 text-white dt:p-10">
             <p className="eyebrow">{t('clipboard-manager.privacy.eyebrow')}</p>
             <h2 className="text-[26px] font-bold leading-tight dt:text-[32px]">
@@ -258,6 +273,7 @@ export function ClipboardManagerPage({ locale = 'en' }: { locale?: Locale }) {
 
         {/* FAQ */}
         <section
+          data-umami-section="clipboard-faq"
           className="container-page grid grid-cols-1 gap-8 pt-16 dt:grid-cols-[4fr_8fr] dt:gap-16 dt:pt-[130px]"
           id="faq"
           aria-labelledby="clipboard-faq"

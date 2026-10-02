@@ -18,17 +18,22 @@ export function Nav({ locale }: { locale: Locale }) {
           href={localePath(locale, '/')}
           className="flex items-center gap-2 text-[1.0625rem] font-bold tracking-tight"
           aria-label={t('a11y.brandHome')}
-          data-umami-event="nav_click"
-          data-umami-event-placement="brand"
-          data-umami-event-target="home"
+          data-track-event="nav_click"
+          data-track-event-placement="brand"
+          data-track-event-target="home"
         >
           <img src="/assets/images/deskutils-icon.webp" alt="" width="28" height="28" />
           DeskUtils
         </a>
 
-        <nav className="home-nav-desktop" aria-label={t('a11y.primaryNav')}>
+        <nav
+          data-track-placement="header"
+          className="home-nav-desktop"
+          aria-label={t('a11y.primaryNav')}
+        >
           <div className="home-nav-center">
             <NavDisclosure
+              trackingName="features"
               className="home-features-disclosure"
               summary={
                 <>
@@ -89,11 +94,12 @@ export function Nav({ locale }: { locale: Locale }) {
           </div>
         </nav>
 
-        <div className="flex items-center gap-2 dt:hidden">
+        <div data-track-placement="mobile_menu" className="flex items-center gap-2 dt:hidden">
           <Button locale={locale} placement="header" size="sm" className="hidden md:inline-flex">
             {t('nav.download')}
           </Button>
           <NavDisclosure
+            trackingName="mobile_navigation"
             trapFocus
             summary={<span aria-hidden="true">☰</span>}
             summaryAriaLabel={t('a11y.mobileNav')}

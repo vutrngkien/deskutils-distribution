@@ -101,9 +101,9 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
         <a
           href={localePath(locale, '/')}
           className="inline-flex items-center gap-1.5 pt-10 text-sm text-muted transition-colors hover:text-primary"
-          data-umami-event="nav_click"
-          data-umami-event-placement="install"
-          data-umami-event-target="home"
+          data-track-event="nav_click"
+          data-track-event-placement="install"
+          data-track-event-target="home"
         >
           <span aria-hidden="true">←</span> {t('document.back')}
         </a>
@@ -116,7 +116,7 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
 
         <div className="grid grid-cols-1 gap-5 dt:grid-cols-[1fr_360px] dt:items-start">
           <div className="order-2 flex flex-col dt:order-1">
-            <Panel as="section" className="p-7 dt:p-9">
+            <Panel trackingSection="install-steps" as="section" className="p-7 dt:p-9">
               <div className="mb-3 flex items-center gap-2.5">
                 <span className="h-px w-5 bg-primary" aria-hidden="true" />
                 <h2 className="text-[12px] font-semibold uppercase tracking-[0.14em] text-primary">
@@ -142,7 +142,11 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
               </ol>
             </Panel>
 
-            <Panel as="section" className="mt-5 bg-[#eaf7ee] p-7 dt:p-9">
+            <Panel
+              trackingSection="install-home"
+              as="section"
+              className="mt-5 bg-[#eaf7ee] p-7 dt:p-9"
+            >
               <div className="flex items-start gap-4">
                 <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-white text-success">
                   <BadgeCheck size={22} aria-hidden="true" />
@@ -157,7 +161,12 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
             </Panel>
 
             <div className="mt-12 grid grid-cols-1 gap-5 dt:grid-cols-2">
-              <Panel as="section" className="p-8" id="permissions">
+              <Panel
+                trackingSection="install-permissions"
+                as="section"
+                className="p-8"
+                id="permissions"
+              >
                 <p className="text-[12px] font-semibold uppercase tracking-[0.13em] text-primary">
                   {t('install.permissions.title')}
                 </p>
@@ -191,7 +200,7 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
                 </div>
               </Panel>
 
-              <Panel as="section" className="flex flex-col p-8">
+              <Panel trackingSection="install-verify" as="section" className="flex flex-col p-8">
                 <p className="text-[12px] font-semibold uppercase tracking-[0.13em] text-primary">
                   {t('install.verify.title')}
                 </p>
@@ -205,9 +214,9 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
                   <a
                     href={product.releasesURL}
                     className="text-primary underline underline-offset-[3px]"
-                    data-umami-event="external_link"
-                    data-umami-event-placement="install"
-                    data-umami-event-target="release_verification"
+                    data-track-event="external_link"
+                    data-track-event-placement="install"
+                    data-track-event-target="release_verification"
                   >
                     {t('install.verify.release')}
                   </a>
@@ -227,12 +236,14 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
               </Panel>
             </div>
 
-            <Panel as="section" className="mt-12 p-8">
+            <Panel trackingSection="install-troubleshooting" as="section" className="mt-12 p-8">
               <h2 className="text-[18px] font-bold">{t('install.troubleshooting.title')}</h2>
               <div className="mt-4 flex flex-col">
                 {troubleshooting.map((item) => (
                   <details
                     key={item.question}
+                    data-track-faq={item.question}
+                    data-track-faq-group="install-troubleshooting"
                     className="group border-b border-line last:border-b-0"
                   >
                     <summary className="flex min-h-[52px] cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold">
@@ -254,6 +265,7 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
             </Panel>
 
             <Panel
+              trackingSection="install-support"
               as="section"
               className="mt-5 flex flex-col gap-4 p-8 dt:flex-row dt:items-center dt:justify-between"
             >
@@ -276,7 +288,10 @@ export function InstallPage({ locale = 'en' }: { locale?: Locale }) {
           </div>
 
           <aside className="order-1 dt:order-2 dt:sticky dt:top-24">
-            <Panel className="flex flex-col items-center p-7 text-center">
+            <Panel
+              trackingSection="install-download"
+              className="flex flex-col items-center p-7 text-center"
+            >
               <div className="mb-5 grid h-[104px] w-[104px] place-items-center rounded-full border border-[#cfdcff] bg-white shadow-[0_0_0_8px_rgba(237,243,255,0.68)]">
                 <img
                   src="/assets/images/deskutils-icon.webp"

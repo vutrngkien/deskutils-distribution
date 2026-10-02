@@ -45,7 +45,9 @@ export function SupportPage({ locale = 'en' }: { locale?: Locale }) {
         </header>
 
         <section
+          data-umami-section="support-topics"
           className="container-page grid grid-cols-1 gap-5 pt-14 sm:grid-cols-2 dt:grid-cols-3 dt:pt-[56px]"
+          data-track-placement="support_topics"
           aria-label={t('support.topics.title')}
         >
           {supportTopics.map((topic) => (
@@ -65,7 +67,11 @@ export function SupportPage({ locale = 'en' }: { locale?: Locale }) {
           ))}
         </section>
 
-        <section className="container-page pt-16 dt:pt-[100px]">
+        <section
+          data-umami-section="support-contact"
+          data-track-placement="support_contact"
+          className="container-page pt-16 dt:pt-[100px]"
+        >
           <div className="flex flex-col gap-5 rounded-[28px] bg-neutral p-7 text-white dt:flex-row dt:items-center dt:justify-between dt:gap-8 dt:p-12">
             <div className="flex flex-col gap-2">
               <h2 className="text-[24px] font-bold dt:text-[28px]">{t('support.stuck.title')}</h2>

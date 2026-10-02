@@ -62,6 +62,7 @@ export function FeedbackPage({ locale = 'en' }: { locale?: Locale }) {
   return (
     <main id="main" lang={locale}>
       <header
+        data-umami-section="hero"
         className="container-page flex flex-col gap-4 pt-10 dt:pt-14"
         style={{
           background: 'radial-gradient(50% 90% at 20% 0%, #e3ecff 0%, rgba(227,236,255,0) 70%)',
@@ -76,7 +77,11 @@ export function FeedbackPage({ locale = 'en' }: { locale?: Locale }) {
         <p className="lede max-w-[640px]">{t('feedback.description')}</p>
       </header>
 
-      <div className="container-page grid grid-cols-1 gap-10 pb-20 pt-8 dt:grid-cols-[7fr_4fr] dt:items-start dt:gap-14">
+      <div
+        data-umami-section="feedback-form"
+        data-track-placement="feedback"
+        className="container-page grid grid-cols-1 gap-10 pb-20 pt-8 dt:grid-cols-[7fr_4fr] dt:items-start dt:gap-14"
+      >
         <FeedbackExperience locale={locale} tipsByKind={tipsByKind} links={links} />
       </div>
     </main>

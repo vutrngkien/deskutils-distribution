@@ -30,7 +30,7 @@ export function FeedbackExperience({
   return (
     <>
       <FeedbackForm locale={locale} onKindChange={setKind} />
-      <aside className="flex flex-col gap-5">
+      <aside data-track-placement="feedback_links" className="flex flex-col gap-5">
         <div className="flex flex-col gap-3 rounded-[24px] bg-[#f3f6ff] p-7">
           <h2 className="text-[20px] font-bold">{t(tips.title)}</h2>
           {tips.items.map((item) => (

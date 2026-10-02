@@ -40,6 +40,8 @@ function CommentCard({
 export function SocialProof({ locale }: { locale: Locale }) {
   return (
     <section
+      data-umami-section="social-proof"
+      data-track-placement="social_proof"
       className="container-page home-social-proof"
       aria-label={translate(locale, 'home.social.label')}
     >

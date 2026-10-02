@@ -20,7 +20,7 @@ export function RelatedGuides({
   const guidesPublished = getRoute('guides').publish;
 
   return (
-    <div className="flex flex-col gap-3.5">
+    <div data-track-placement="related_guides" className="flex flex-col gap-3.5">
       <h2 className="text-[28px] font-bold tracking-[-0.03em]">
         {translate(locale, title ?? 'screenshot.guides.title')}
       </h2>

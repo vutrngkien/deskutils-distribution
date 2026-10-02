@@ -126,12 +126,18 @@ export function ColorPickerPage({ locale = 'en' }: { locale?: Locale }) {
         </header>
 
         {/* Flows */}
-        <section className="container-page pt-16 dt:pt-[130px]">
+        <section
+          data-umami-section="color-picker-flow"
+          className="container-page pt-16 dt:pt-[130px]"
+        >
           <Flows locale={locale} tone="lavender" items={colorPickerFlows} />
         </section>
 
         {/* Formats */}
-        <section className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[5fr_7fr] dt:items-center dt:gap-14 dt:pt-[130px]">
+        <section
+          data-umami-section="color-picker-formats"
+          className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[5fr_7fr] dt:items-center dt:gap-14 dt:pt-[130px]"
+        >
           <div className="flex flex-col gap-4">
             <h2 className="h-section text-[26px] dt:text-[40px]">
               {t('color-picker.formats.title')}
@@ -156,7 +162,10 @@ export function ColorPickerPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Recent colors */}
-        <section className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[7fr_5fr] dt:items-center dt:gap-14 dt:pt-[130px]">
+        <section
+          data-umami-section="color-picker-recent"
+          className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[7fr_5fr] dt:items-center dt:gap-14 dt:pt-[130px]"
+        >
           <div className="flex flex-wrap gap-4 rounded-[28px] bg-neutral p-8 dt:p-10">
             {colorPickerSwatches.map((swatch) => (
               <span key={swatch.hex} className="flex flex-col items-center gap-2">
@@ -178,7 +187,10 @@ export function ColorPickerPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Permissions + shortcuts */}
-        <section className="container-page grid grid-cols-1 gap-5 pt-16 dt:grid-cols-2 dt:pt-[130px]">
+        <section
+          data-umami-section="color-picker-permissions"
+          className="container-page grid grid-cols-1 gap-5 pt-16 dt:grid-cols-2 dt:pt-[130px]"
+        >
           <div className="flex flex-col gap-4 rounded-[28px] bg-[#eaf0ff] p-8 dt:p-10">
             <p className="eyebrow">{t('color-picker.permissions.eyebrow')}</p>
             <h2 className="text-[26px] font-bold leading-tight dt:text-[32px]">
@@ -201,6 +213,7 @@ export function ColorPickerPage({ locale = 'en' }: { locale?: Locale }) {
 
         {/* FAQ */}
         <section
+          data-umami-section="color-picker-faq"
           className="container-page grid grid-cols-1 gap-8 pt-16 dt:grid-cols-[4fr_8fr] dt:gap-16 dt:pt-[130px]"
           id="faq"
           aria-labelledby="color-picker-faq"

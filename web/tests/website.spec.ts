@@ -350,6 +350,58 @@ test.describe('feedback submission against a mock endpoint', () => {
     await page.addScriptTag({ content: js });
   }
 
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => {
+      const events: { event: string; data?: Record<string, unknown> }[] = [];
+      Object.assign(window, {
+        __feedbackEvents: events,
+        umami: {
+          track: (event: string, data?: Record<string, unknown>) => events.push({ event, data }),
+        },
+      });
+    });
+    await page.route('**/cloud.umami.is/**', (route) =>
+      route.fulfill({ body: '', contentType: 'application/javascript' }),
+    );
+  });
+  async function feedbackEvents(page: import('@playwright/test').Page) {
+    return page.evaluate(() =>
+      (
+        window as typeof window & {
+          __feedbackEvents: { event: string; data?: Record<string, unknown> }[];
+        }
+      ).__feedbackEvents.filter((item) => item.event.startsWith('feedback_')),
+    );
+  }
+
+  test('tracks attachment and validation actions without sending private inputs', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await mount(page);
+    await page.getByLabel('Your feedback').fill('PRIVATE MESSAGE');
+    await page.getByLabel('Email address').fill('PRIVATE@invalid');
+    await page.locator('#feedback-attachment').setInputFiles({
+      name: 'PRIVATE-filename.png',
+      mimeType: 'image/png',
+      buffer: Buffer.from('image'),
+    });
+    await page.getByRole('button', { name: 'Remove', exact: true }).click();
+    await page.getByRole('button', { name: 'Send feedback', exact: true }).click();
+    await expect(page.getByText('Enter a valid email address so we can reply.')).toBeVisible();
+    const tracked = await feedbackEvents(page);
+    expect(tracked.map((item) => item.event)).toEqual(
+      expect.arrayContaining([
+        'feedback_start',
+        'feedback_attachment_add',
+        'feedback_attachment_remove',
+        'feedback_validation_error',
+      ]),
+    );
+    expect(tracked.filter((item) => item.event === 'feedback_start')).toHaveLength(1);
+    expect(JSON.stringify(tracked)).not.toContain('PRIVATE');
+  });
+
   test('keeps the email fallback and disables submission without an endpoint', async ({ page }) => {
     await page.goto('/');
     await page.setContent('<div id="root"></div>');
@@ -415,6 +467,18 @@ test.describe('feedback submission against a mock endpoint', () => {
     expect(captured[0].body).toContain('name="email"');
     expect(captured[0].body).toContain('person@example.com');
     expect(captured[0].body).toContain('DeskUtils website');
+    const tracked = await feedbackEvents(page);
+    expect(tracked.map((item) => item.event)).toEqual(
+      expect.arrayContaining([
+        'feedback_start',
+        'feedback_kind_change',
+        'feedback_submit',
+        'feedback_success',
+      ]),
+    );
+    expect(tracked.filter((item) => item.event === 'feedback_submit')).toHaveLength(1);
+    expect(JSON.stringify(tracked)).not.toContain('person@example.com');
+    expect(JSON.stringify(tracked)).not.toContain('Saving a capture closes');
   });
 
   test('resets the form and tips to Feedback after sending another', async ({ page }) => {
@@ -439,6 +503,9 @@ test.describe('feedback submission against a mock endpoint', () => {
       'true',
     );
     await expect(page.getByRole('heading', { name: 'What makes feedback useful' })).toBeVisible();
+    expect(
+      (await feedbackEvents(page)).filter((item) => item.event === 'feedback_reset'),
+    ).toHaveLength(1);
   });
 
   test('surfaces a failure banner when the endpoint errors', async ({ page }) => {
@@ -1151,12 +1218,12 @@ test('Umami tracks downloads and checkout only on the production domain', async 
   await expect(tracker).toHaveAttribute('data-domains', 'deskutils.app');
   await expect(tracker).not.toHaveAttribute('data-do-not-track');
 
-  const downloads = page.locator('[data-umami-event="download"]');
+  const downloads = page.locator('[data-track-event="download"]');
   expect(await downloads.count()).toBeGreaterThanOrEqual(4);
 
-  const checkout = page.locator('[data-umami-event="checkout"]');
+  const checkout = page.locator('[data-track-event="checkout"]');
   await expect(checkout).toHaveCount(1);
-  await expect(checkout).toHaveAttribute('data-umami-event-placement', 'pricing_pro');
+  await expect(checkout).toHaveAttribute('data-track-event-placement', 'pricing_pro');
 
   await page.goto('/privacy/');
   await expect(page.getByText(/uses Umami, a privacy-focused analytics service/)).toBeVisible();
@@ -1177,8 +1244,8 @@ test('Umami records meaningful engagement signals', async ({ page }) => {
   );
   await page.goto('/');
 
-  await expect(page.locator('[data-umami-section]')).toHaveCount(8);
-  await expect(page.locator('[data-umami-event="language_change"]')).toHaveCount(20);
+  await expect(page.locator('[data-umami-section]')).toHaveCount(10);
+  await expect(page.locator('[data-track-event="language_change"]')).toHaveCount(20);
 
   await page.locator('#faq').scrollIntoViewIfNeeded();
   await page.locator('#faq summary').first().click();
@@ -1776,4 +1843,268 @@ test('original and looping Reddit cards open the exact comment in a new tab', as
     );
     await popup.close();
   }
+});
+
+test.describe('tracking across the expanded website', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => {
+      const events: { event: string; data?: Record<string, unknown> }[] = [];
+      Object.assign(window, {
+        __trackingEvents: events,
+        umami: {
+          track: (event: string, data?: Record<string, unknown>) => events.push({ event, data }),
+        },
+      });
+      // Simulate Umami's own declarative click listener to catch duplicate ownership.
+      document.addEventListener('click', (event) => {
+        const node =
+          event.target instanceof Element ? event.target.closest('[data-umami-event]') : null;
+        if (node) events.push({ event: 'duplicate_sdk_click' });
+      });
+    });
+    await page.route('**/cloud.umami.is/**', (route) =>
+      route.fulfill({ body: '', contentType: 'application/javascript' }),
+    );
+  });
+
+  async function events(page: import('@playwright/test').Page, name: string) {
+    return page.evaluate(
+      (name) =>
+        (
+          window as typeof window & {
+            __trackingEvents: { event: string; data: Record<string, unknown> }[];
+          }
+        ).__trackingEvents.filter((item) => item.event === name),
+      name,
+    );
+  }
+  async function clickWithoutLeaving(link: import('@playwright/test').Locator) {
+    await link.evaluate((element) =>
+      element.addEventListener('click', (event) => event.preventDefault(), { once: true }),
+    );
+    await link.click();
+  }
+
+  test('long sections record a view on mobile and do not repeat after resize or revisiting', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/changelog/');
+    const releases = page.locator('[data-umami-section="changelog-releases"]');
+    expect((await releases.boundingBox())!.height).toBeGreaterThan(844 / 0.15);
+    await releases.evaluate((element) => {
+      window.scrollTo(0, element.getBoundingClientRect().top + window.scrollY + 600);
+    });
+    const releaseViews = async () =>
+      (await events(page, 'section_view')).filter(
+        (item) => item.data.section === 'changelog-releases',
+      );
+    await expect.poll(releaseViews).toHaveLength(1);
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await releases.evaluate((element) => {
+      window.scrollTo(0, element.getBoundingClientRect().top + window.scrollY + 600);
+    });
+    await page.waitForTimeout(400);
+    expect(await releaseViews()).toHaveLength(1);
+  });
+
+  test('desktop/mobile navigation and footer record each click once', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.goto('/');
+    await clickWithoutLeaving(page.locator('.home-nav-desktop a[href="/pricing/"]'));
+    expect(
+      (await events(page, 'nav_click')).filter((item) => item.data.target === '/pricing/'),
+    ).toEqual([
+      expect.objectContaining({
+        data: expect.objectContaining({ placement: 'header', locale: 'en', path: '/' }),
+      }),
+    ]);
+    await clickWithoutLeaving(page.locator('footer a[href^="mailto:"]'));
+    expect(await events(page, 'support_click')).toEqual([
+      expect.objectContaining({
+        data: expect.objectContaining({ placement: 'footer', target: 'email' }),
+      }),
+    ]);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.locator('summary[aria-label="Mobile navigation"]').click();
+    await clickWithoutLeaving(page.locator('details[open] a[href="/support/"]').first());
+    expect(
+      (await events(page, 'nav_click')).find((item) => item.data.target === '/support/'),
+    ).toMatchObject({
+      data: { placement: 'mobile_menu' },
+    });
+    expect(await events(page, 'menu_open')).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ data: expect.objectContaining({ menu: 'mobile_navigation' }) }),
+      ]),
+    );
+    expect(await events(page, 'duplicate_sdk_click')).toHaveLength(0);
+  });
+
+  test('downloads, checkout and language retain named events without double counting', async ({
+    page,
+  }) => {
+    await page.goto('/pricing/');
+    // Dispatch the click through capture but stop React's download redirect.
+    await page
+      .locator('[data-track-event="download"]')
+      .first()
+      .evaluate((element) => {
+        element.addEventListener(
+          'click',
+          (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+          },
+          { once: true },
+        );
+        (element as HTMLElement).click();
+      });
+    expect(await events(page, 'download')).toHaveLength(1);
+    await clickWithoutLeaving(page.locator('[data-track-event="checkout"]'));
+    expect(await events(page, 'checkout')).toHaveLength(1);
+    expect(await events(page, 'checkout')).toEqual([
+      expect.objectContaining({ data: expect.objectContaining({ placement: 'pricing_pro' }) }),
+    ]);
+    await page
+      .locator('[data-track-event="language_change"][lang="vi"]')
+      .first()
+      .evaluate((element) => {
+        element.addEventListener('click', (event) => event.preventDefault(), { once: true });
+        (element as HTMLElement).click();
+      });
+    expect(await events(page, 'language_change')).toEqual([
+      expect.objectContaining({ data: expect.objectContaining({ from: 'en', to: 'vi' }) }),
+    ]);
+    expect(await events(page, 'duplicate_sdk_click')).toHaveLength(0);
+    expect(JSON.stringify(await events(page, 'checkout'))).not.toContain('discount_code');
+  });
+
+  test('permissions and related links include stable localized targets and placement', async ({
+    page,
+  }) => {
+    await page.goto('/vi/capture-text/');
+    await clickWithoutLeaving(page.locator('main a[href="/vi/install/#permissions"]').first());
+    expect(await events(page, 'permissions_click')).toEqual([
+      expect.objectContaining({
+        data: expect.objectContaining({
+          locale: 'vi',
+          path: '/vi/capture-text/',
+          target: '/vi/install/#permissions',
+        }),
+      }),
+    ]);
+    await clickWithoutLeaving(page.locator('[data-track-placement="related_tools"] a').first());
+    await clickWithoutLeaving(page.locator('[data-track-placement="related_guides"] a').first());
+    expect((await events(page, 'nav_click')).map((item) => item.data.placement)).toEqual(
+      expect.arrayContaining(['related_tools', 'related_guides']),
+    );
+  });
+
+  test('catalog, support and release links are covered', async ({ page }) => {
+    await page.goto('/features/');
+    await clickWithoutLeaving(page.locator('[data-track-placement="featured_clipboard"] a'));
+    expect((await events(page, 'nav_click')).at(-1)).toMatchObject({
+      data: { target: '/clipboard-manager/', placement: 'featured_clipboard' },
+    });
+    await page.goto('/support/');
+    await clickWithoutLeaving(page.locator('[data-track-placement="support_topics"] a').first());
+    expect((await events(page, 'nav_click')).at(-1)).toMatchObject({
+      data: { placement: 'support_topics' },
+    });
+    await clickWithoutLeaving(
+      page.locator('[data-track-placement="support_contact"] a[href^="mailto:"]'),
+    );
+    expect((await events(page, 'support_click')).at(-1)).toMatchObject({
+      data: { placement: 'support_contact', target: 'email' },
+    });
+    await page.goto('/changelog/');
+    await clickWithoutLeaving(page.locator('article [data-track-event="external_link"]').first());
+    expect(await events(page, 'external_link')).toHaveLength(1);
+    expect((await events(page, 'external_link'))[0].data.target).toBe(releaseSnapshot[0].tag_name);
+  });
+
+  test('Quick Ring views/playback are recorded once despite replay; poster does not claim playback', async ({
+    page,
+  }) => {
+    await page.goto('/quick-ring/');
+    await page.locator('[data-ring-recording]').scrollIntoViewIfNeeded();
+    await expect.poll(async () => (await events(page, 'demo_view')).length).toBe(1);
+    await expect.poll(async () => (await events(page, 'demo_play')).length).toBe(1);
+    await page.locator('[data-ring-recording] video').evaluate((element) => {
+      element.dispatchEvent(new Event('playing'));
+      element.dispatchEvent(new Event('playing'));
+    });
+    expect(await events(page, 'demo_play')).toHaveLength(1);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/quick-ring/');
+    await page.locator('[data-ring-recording]').scrollIntoViewIfNeeded();
+    await expect.poll(async () => (await events(page, 'demo_view')).length).toBe(1);
+    expect(await events(page, 'demo_play')).toHaveLength(0);
+  });
+
+  test('late tracker receives already visible demos and FAQ without duplicate views', async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      delete window.umami;
+    });
+    await page.goto('/quick-ring/');
+    await page.locator('[data-ring-recording]').scrollIntoViewIfNeeded();
+    await page.locator('#quick-ring-faq').scrollIntoViewIfNeeded();
+    await page.locator('[name="quick-ring-faq"] summary').first().click();
+    await page.evaluate(() => {
+      const events = (
+        window as typeof window & {
+          __trackingEvents: { event: string; data?: Record<string, unknown> }[];
+        }
+      ).__trackingEvents;
+      window.umami = {
+        track: (event, data) => {
+          events.push({ event, data });
+        },
+      };
+    });
+    await expect.poll(async () => (await events(page, 'demo_view')).length).toBe(1);
+    await expect.poll(async () => (await events(page, 'faq_open')).length).toBe(1);
+    await page.locator('[data-ring-recording]').scrollIntoViewIfNeeded();
+    expect(await events(page, 'demo_view')).toHaveLength(1);
+  });
+  test('utility disclosure and install troubleshooting/copy report real actions', async ({
+    page,
+    context,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+    await page.locator('.home-utility-toggle').click();
+    await page.locator('.home-utility-toggle').click();
+    expect((await events(page, 'utilities_toggle')).map((item) => item.data.state)).toEqual([
+      'expanded',
+      'collapsed',
+    ]);
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto('/install/');
+    await page.locator('[data-track-faq] summary').first().click();
+    await expect.poll(async () => (await events(page, 'faq_open')).length).toBe(1);
+    expect((await events(page, 'faq_open'))[0]).toMatchObject({
+      data: { group: 'install-troubleshooting' },
+    });
+    await page.getByRole('button', { name: 'Copy', exact: true }).click();
+    await expect.poll(async () => (await events(page, 'install_copy')).length).toBe(1);
+  });
+
+  test('video failure and 404 navigation use shared tracking', async ({ page }) => {
+    await page.goto('/quick-ring/');
+    await page
+      .locator('[data-ring-recording] video')
+      .evaluate((element) => element.dispatchEvent(new Event('error')));
+    await expect.poll(async () => (await events(page, 'demo_error')).length).toBe(1);
+    await expect(page.locator('[data-ring-recording] video')).toHaveCount(0);
+    await page.goto('/unknown-tracking-test/');
+    await clickWithoutLeaving(page.locator('main a[href="/features/"]'));
+    expect((await events(page, 'nav_click')).at(-1)).toMatchObject({
+      data: { placement: 'not_found', target: '/features/' },
+    });
+  });
 });

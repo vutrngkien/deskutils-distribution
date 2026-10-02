@@ -93,7 +93,10 @@ export function QuickRingPage({ locale = 'en' }: { locale?: Locale }) {
         </header>
 
         {/* Steps */}
-        <section className="container-page flex flex-col gap-8 pt-16 dt:pt-[130px]">
+        <section
+          data-umami-section="quick-ring-steps"
+          className="container-page flex flex-col gap-8 pt-16 dt:pt-[130px]"
+        >
           <h2 className="h-section text-[28px] dt:text-[40px]">{t('quick-ring.steps.title')}</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {quickRingSteps.map((step) => (
@@ -122,7 +125,10 @@ export function QuickRingPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Actions */}
-        <section className="container-page flex flex-col gap-8 pt-16 dt:pt-[130px]">
+        <section
+          data-umami-section="quick-ring-actions"
+          className="container-page flex flex-col gap-8 pt-16 dt:pt-[130px]"
+        >
           <div className="flex flex-col gap-3">
             <h2 className="h-section text-[28px] dt:text-[40px]">
               {t('quick-ring.actions.title')}
@@ -148,7 +154,10 @@ export function QuickRingPage({ locale = 'en' }: { locale?: Locale }) {
 
         {/* Compare */}
         {compare && (
-          <section className="container-page grid grid-cols-1 gap-4 pt-16 dt:grid-cols-[1fr_1fr] dt:gap-6 dt:pt-[130px]">
+          <section
+            data-umami-section="quick-ring-compare"
+            className="container-page grid grid-cols-1 gap-4 pt-16 dt:grid-cols-[1fr_1fr] dt:gap-6 dt:pt-[130px]"
+          >
             <h2 className="text-[24px] font-bold dt:col-span-2">{t(compare.title)}</h2>
             {[compare.a, compare.b].map((option) => (
               <a
@@ -168,6 +177,7 @@ export function QuickRingPage({ locale = 'en' }: { locale?: Locale }) {
 
         {/* FAQ */}
         <section
+          data-umami-section="quick-ring-faq"
           className="container-page grid grid-cols-1 gap-8 pt-16 dt:grid-cols-[4fr_8fr] dt:gap-16 dt:pt-[130px]"
           id="faq"
           aria-labelledby="quick-ring-faq"

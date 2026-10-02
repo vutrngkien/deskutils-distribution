@@ -20,7 +20,7 @@ export function Faq({
 }) {
   const group = `${id}-faq`;
   return (
-    <div className={`flex flex-col ${className}`}>
+    <div data-umami-section={`${id}-faq`} className={`flex flex-col ${className}`}>
       {items.map((item) => (
         <TrackedFaq
           key={item.id}

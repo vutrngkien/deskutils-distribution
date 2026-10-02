@@ -1,5 +1,6 @@
 'use client';
 
+import { trackUmamiEvent } from '@/lib/umami';
 import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from 'react';
 
 const focusableSelector =
@@ -34,6 +35,7 @@ export function NavDisclosure({
   summaryClassName,
   panelClassName,
   panelLabel,
+  trackingName,
   trapFocus = false,
   children,
 }: {
@@ -43,6 +45,7 @@ export function NavDisclosure({
   summaryClassName: string;
   panelClassName: string;
   panelLabel?: string;
+  trackingName?: string;
   trapFocus?: boolean;
   children: ReactNode;
 }) {
@@ -72,6 +75,7 @@ export function NavDisclosure({
 
   function handleToggle() {
     setOpen(Boolean(ref.current?.open));
+    if (ref.current?.open && trackingName) trackUmamiEvent('menu_open', { menu: trackingName });
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLDetailsElement>) {

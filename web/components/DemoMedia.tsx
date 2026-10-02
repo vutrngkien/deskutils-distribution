@@ -4,7 +4,7 @@ import type { Demo, Locale } from '@/content/product';
 import { translate } from '@/content/i18n';
 import styles from './DemoMedia.module.css';
 import { ToolIcon } from './ToolIcon';
-import { trackUmamiEvent } from '@/lib/umami';
+import { useDemoTracking } from '@/components/media/useDemoTracking';
 export function DemoMedia({
   demo,
   caption = true,
@@ -19,7 +19,7 @@ export function DemoMedia({
   const [shouldAutoplay, setShouldAutoplay] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
-  const hasTrackedView = useRef(false);
+  const tracking = useDemoTracking(frameRef, demo.title, locale);
   const sourceKey = JSON.stringify(demo.sources ?? []);
   const failed = failedSource === sourceKey;
   const hasVideo = Boolean(demo.sources?.length);
@@ -54,20 +54,6 @@ export function DemoMedia({
     return () => observer.disconnect();
   }, [demo.autoplay]);
 
-  useEffect(() => {
-    if (!frameRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || hasTrackedView.current) return;
-        if (trackUmamiEvent('demo_view', { demo: demo.title, locale }))
-          hasTrackedView.current = true;
-      },
-      { threshold: 0.5 },
-    );
-    observer.observe(frameRef.current);
-    return () => observer.disconnect();
-  }, [demo.title, locale]);
-
   const content =
     hasVideo && !failed && (!demo.autoplay || isNearViewport) ? (
       <video
@@ -81,7 +67,11 @@ export function DemoMedia({
         preload="none"
         poster={demo.poster}
         aria-label={title}
-        onError={() => setFailedSource(sourceKey)}
+        onPlaying={tracking.onPlaying}
+        onError={() => {
+          tracking.onError();
+          setFailedSource(sourceKey);
+        }}
       >
         {demo.sources!.map((source, index) => (
           <source
@@ -89,7 +79,10 @@ export function DemoMedia({
             src={source.src}
             type={source.type}
             onError={() => {
-              if (index === demo.sources!.length - 1) setFailedSource(sourceKey);
+              if (index === demo.sources!.length - 1) {
+                tracking.onError();
+                setFailedSource(sourceKey);
+              }
             }}
           />
         ))}

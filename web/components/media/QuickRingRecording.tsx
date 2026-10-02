@@ -8,6 +8,7 @@ import {
   type Locale,
 } from '@/content/product';
 import { translate } from '@/content/i18n';
+import { useDemoTracking } from './useDemoTracking';
 
 /** The key follows the recording's clock, including pauses, seeks and looping. */
 export function QuickRingRecording({ locale }: { locale: Locale }) {
@@ -18,6 +19,7 @@ export function QuickRingRecording({ locale }: { locale: Locale }) {
   const [motionAllowed, setMotionAllowed] = useState(true);
   const [pressed, setPressed] = useState(false);
   const demo = demos.quickring;
+  const tracking = useDemoTracking(host, demo.title, locale);
 
   useEffect(() => {
     const player = video.current;
@@ -111,11 +113,24 @@ export function QuickRingRecording({ locale }: { locale: Locale }) {
           poster={demo.poster}
           aria-label={translate(locale, demo.title)}
           onLoadedData={() => setReady(true)}
-          onPlaying={() => setReady(true)}
-          onError={() => setFailed(true)}
+          onPlaying={() => {
+            tracking.onPlaying();
+            setReady(true);
+          }}
+          onError={() => {
+            tracking.onError();
+            setFailed(true);
+          }}
         >
           {demo.sources.map((source) => (
-            <source key={source.src} {...source} onError={() => setFailed(true)} />
+            <source
+              key={source.src}
+              {...source}
+              onError={() => {
+                tracking.onError();
+                setFailed(true);
+              }}
+            />
           ))}
         </video>
       )}

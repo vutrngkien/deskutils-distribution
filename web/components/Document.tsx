@@ -33,7 +33,7 @@ export function Document({
             { label: t(label) },
           ]}
         />
-        <header className="mt-6 flex max-w-[760px] flex-col gap-3">
+        <header data-umami-section="hero" className="mt-6 flex max-w-[760px] flex-col gap-3">
           <h1 className="h-display text-[36px] dt:text-[44px]">{t(title)}</h1>
           <p className="text-[15px] text-muted">{t(description)}</p>
           {dated && (
@@ -43,6 +43,7 @@ export function Document({
           )}
         </header>
         <div
+          data-umami-section="legal-content"
           className="mt-8 flex max-w-[760px] flex-col gap-7 text-[16px] leading-[1.6] text-ink-2
             [&_h2]:text-[21px] [&_h2]:font-bold [&_h2]:text-base-content
             [&_section]:flex [&_section]:flex-col [&_section]:gap-2

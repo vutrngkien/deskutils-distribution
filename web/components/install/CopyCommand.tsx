@@ -18,6 +18,7 @@ export function CopyCommand({ command, locale }: { command: string; locale: Loca
       trackUmamiEvent('install_copy', { locale });
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
+      trackUmamiEvent('install_copy_error', { locale });
       setCopied(false);
     }
   }

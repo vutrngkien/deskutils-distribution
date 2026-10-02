@@ -59,9 +59,9 @@ export function ChangelogPage({ locale = 'en' }: { locale?: Locale }) {
           <a
             href={product.releasesURL}
             className="mt-1 flex min-h-[52px] w-fit items-center gap-2 rounded-[12px] bg-primary px-6 text-[15.5px] font-semibold text-white hover:bg-[#0b3bc0]"
-            data-umami-event="external_link"
-            data-umami-event-placement="changelog"
-            data-umami-event-target="all_releases"
+            data-track-event="external_link"
+            data-track-event-placement="changelog"
+            data-track-event-target="all_releases"
           >
             {t('changelog.viewAll')}
             <ExternalLink size={16} aria-hidden="true" />
@@ -69,6 +69,7 @@ export function ChangelogPage({ locale = 'en' }: { locale?: Locale }) {
         </header>
 
         <section
+          data-umami-section="changelog-releases"
           className="container-page flex flex-col gap-6 pt-12 dt:pt-16"
           aria-label={t('changelog.hero.title')}
         >
@@ -109,9 +110,9 @@ export function ChangelogPage({ locale = 'en' }: { locale?: Locale }) {
                 <a
                   href={release.html_url}
                   className="mt-5 inline-flex items-center gap-2 text-[15px] font-semibold text-primary hover:text-[#0b3bc0]"
-                  data-umami-event="external_link"
-                  data-umami-event-placement="changelog"
-                  data-umami-event-target={release.tag_name}
+                  data-track-event="external_link"
+                  data-track-event-placement="changelog"
+                  data-track-event-target={release.tag_name}
                 >
                   {t('changelog.viewOnGitHub')}
                   <ExternalLink size={15} aria-hidden="true" />

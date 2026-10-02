@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { trackUmamiEvent } from '@/lib/umami';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Globe2 } from 'lucide-react';
 import { languages, localePath, type Locale } from '@/content/locales';
@@ -33,6 +34,9 @@ export function LanguageSwitcher({
   return (
     <details
       ref={details}
+      onToggle={() => {
+        if (details.current?.open) trackUmamiEvent('menu_open', { menu: 'language', locale });
+      }}
       className={`${styles.switcher} ${mobile ? styles.mobileSwitcher : ''} ${compact ? styles.compactSwitcher : ''}`}
       onKeyDown={(event) => {
         if (event.key === 'Escape') {
@@ -53,10 +57,10 @@ export function LanguageSwitcher({
             href={localePath(language.code, basePath)}
             lang={language.code}
             aria-current={language.code === locale ? 'page' : undefined}
-            data-umami-event="language_change"
-            data-umami-event-from={locale}
-            data-umami-event-to={language.code}
-            data-umami-event-placement={
+            data-track-event="language_change"
+            data-track-event-from={locale}
+            data-track-event-to={language.code}
+            data-track-event-placement={
               mobile ? 'mobile_menu' : compact ? 'header_compact' : 'header'
             }
           >

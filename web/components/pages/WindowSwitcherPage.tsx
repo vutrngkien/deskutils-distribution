@@ -111,12 +111,18 @@ export function WindowSwitcherPage({ locale = 'en' }: { locale?: Locale }) {
         </header>
 
         {/* Flows */}
-        <section className="container-page pt-16 dt:pt-[130px]">
+        <section
+          data-umami-section="window-switcher-flow"
+          className="container-page pt-16 dt:pt-[130px]"
+        >
           <Flows locale={locale} items={windowSwitcherFlows} />
         </section>
 
         {/* Dock preview */}
-        <section className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[7fr_5fr] dt:items-center dt:gap-14 dt:pt-[130px]">
+        <section
+          data-umami-section="window-switcher-dock"
+          className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[7fr_5fr] dt:items-center dt:gap-14 dt:pt-[130px]"
+        >
           <ProductVisual id="dock-preview" locale={locale} className="w-full">
             <MockupCanvas width={600} height={360}>
               <div
@@ -139,7 +145,10 @@ export function WindowSwitcherPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Cases */}
-        <section className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[5fr_7fr] dt:items-center dt:gap-14 dt:pt-[130px]">
+        <section
+          data-umami-section="window-switcher-shortcuts"
+          className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[5fr_7fr] dt:items-center dt:gap-14 dt:pt-[130px]"
+        >
           <h2 className="h-section text-[26px] dt:text-[40px]">
             {t('window-switcher.cases.title')}
           </h2>
@@ -157,7 +166,10 @@ export function WindowSwitcherPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Shortcuts + permissions */}
-        <section className="container-page grid grid-cols-1 gap-5 pt-16 dt:grid-cols-2 dt:pt-[130px]">
+        <section
+          data-umami-section="window-switcher-permissions"
+          className="container-page grid grid-cols-1 gap-5 pt-16 dt:grid-cols-2 dt:pt-[130px]"
+        >
           <ShortcutsCard
             locale={locale}
             eyebrow="window-switcher.shortcuts.eyebrow"
@@ -180,6 +192,7 @@ export function WindowSwitcherPage({ locale = 'en' }: { locale?: Locale }) {
 
         {/* FAQ */}
         <section
+          data-umami-section="window-switcher-faq"
           className="container-page grid grid-cols-1 gap-8 pt-16 dt:grid-cols-[4fr_8fr] dt:gap-16 dt:pt-[130px]"
           id="faq"
           aria-labelledby="window-switcher-faq"

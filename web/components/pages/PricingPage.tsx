@@ -71,6 +71,7 @@ export function PricingPage({ locale = 'en' }: { locale?: Locale }) {
         </header>
 
         <section
+          data-umami-section="pricing-plans"
           className="home-pricing-original pricing-page-plans"
           aria-label={t('pricing.page.eyebrow')}
         >
@@ -80,7 +81,11 @@ export function PricingPage({ locale = 'en' }: { locale?: Locale }) {
         </section>
 
         {/* Compare */}
-        <section className="container-page pt-16 dt:pt-[130px]" aria-labelledby="pricing-compare">
+        <section
+          data-umami-section="pricing-compare"
+          className="container-page pt-16 dt:pt-[130px]"
+          aria-labelledby="pricing-compare"
+        >
           <h2 id="pricing-compare" className="h-section text-[28px] dt:text-[40px]">
             {t('pricing.compare.title')}
           </h2>
@@ -133,6 +138,7 @@ export function PricingPage({ locale = 'en' }: { locale?: Locale }) {
 
         {/* FAQ */}
         <section
+          data-umami-section="pricing-faq"
           className="container-page grid grid-cols-1 gap-8 pt-16 dt:grid-cols-[4fr_8fr] dt:gap-16 dt:pt-[130px]"
           id="faq"
           aria-labelledby="pricing-faq"
@@ -152,7 +158,10 @@ export function PricingPage({ locale = 'en' }: { locale?: Locale }) {
           />
         </section>
 
-        <section className="container-page flex flex-wrap items-center gap-6 pt-12">
+        <section
+          data-umami-section="pricing-links"
+          className="container-page flex flex-wrap items-center gap-6 pt-12"
+        >
           <Button href={installHref} locale={locale} placement="pricing_free">
             {t('home.download')} <span aria-hidden="true">↓</span>
           </Button>

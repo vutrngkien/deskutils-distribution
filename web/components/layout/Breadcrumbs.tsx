@@ -7,6 +7,7 @@ export type Crumb = { label: string; href?: string };
 export function Breadcrumbs({ items, tone = 'dark' }: { items: Crumb[]; tone?: 'dark' | 'light' }) {
   return (
     <nav
+      data-track-placement="breadcrumb"
       aria-label="Breadcrumb"
       className={`flex flex-wrap items-center gap-2 text-[14px] ${
         tone === 'light' ? 'text-white/70' : 'text-muted'

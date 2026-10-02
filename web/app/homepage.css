@@ -51,7 +51,60 @@
   }
   .home-hero {
     padding-top: 20px;
-    background: radial-gradient(55% 75% at 78% 40%, #e3ecff 0%, rgba(227, 236, 255, 0) 70%);
+  }
+  .home-hero-photo[data-media-state='ready'] {
+    border-radius: 0 12px 0 0;
+  }
+  .home-hero-photo[data-media-state='ready']::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .home-hero-photo[data-media-state='ready']::after {
+    background:
+      linear-gradient(to right, var(--color-base-100), transparent var(--hero-fade-left, 12%)),
+      linear-gradient(to top, var(--color-base-100), transparent var(--hero-fade-bottom, 6%));
+  }
+  .home-hero-photo-shell {
+    position: relative;
+    isolation: isolate;
+  }
+  .home-hero-photo-shell::before,
+  .home-hero-photo-shell::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+  .home-hero-photo-shell::before {
+    z-index: -1;
+    top: -14px;
+    right: 18px;
+    left: 18px;
+    height: 14px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(18, 42, 76, 0.14) 16%,
+      rgba(18, 42, 76, 0.14) 84%,
+      transparent
+    );
+    filter: blur(18px);
+  }
+  .home-hero-photo-shell::after {
+    z-index: -1;
+    top: 18px;
+    right: -14px;
+    bottom: 18px;
+    width: 14px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(18, 42, 76, 0.14) 16%,
+      rgba(18, 42, 76, 0.14) 84%,
+      transparent
+    );
+    filter: blur(18px);
   }
   .home-hero-grid {
     display: grid;
@@ -772,6 +825,13 @@
     top: 16px;
     width: 588px;
   }
+  .home-clip-recording {
+    position: absolute;
+    width: 1000px;
+    left: 50%;
+    top: -65px;
+    transform: translateX(-50%);
+  }
   .home-clip-benefits {
     grid-row: 4;
     display: flex;
@@ -966,7 +1026,7 @@
     position: absolute;
     right: 18px;
     bottom: 18px;
-    width: 238px;
+    width: min(264px, calc(100% - 48px));
   }
   .home-color-copy-link {
     display: none;
@@ -988,6 +1048,17 @@
   }
   .home-ocr-desktop {
     display: none;
+  }
+  .home-ocr-recording {
+    width: 100%;
+    aspect-ratio: 8 / 5;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  .home-ocr-recording video,
+  .home-ocr-recording img {
+    transform: scale(1.42);
+    transform-origin: 64% 60%;
   }
   .home-ocr-scene {
     position: relative;
@@ -1387,6 +1458,10 @@
     .home-hero-desktop {
       display: block;
     }
+    .home-hero-photo {
+      --hero-fade-left: 34%;
+      --hero-fade-bottom: 7%;
+    }
     .home-hero-mobile {
       display: none;
     }
@@ -1509,6 +1584,12 @@
       top: 57px;
       width: 655.2px;
     }
+    .home-clip-recording {
+      width: 146%;
+      left: -2%;
+      top: -8%;
+      transform: none;
+    }
     .home-clip-benefits {
       margin: 4px 0;
     }
@@ -1610,14 +1691,14 @@
     }
     .home-color-loupe {
       left: 34px;
-      top: 230px;
+      top: 190px;
       width: 150px;
       height: 150px;
     }
     .home-color-art {
-      right: 28px;
-      bottom: 28px;
-      width: 306px;
+      right: 24px;
+      bottom: 24px;
+      width: min(360px, calc(100% - 64px));
     }
     .home-ocr-card {
       grid-column: span 7;
@@ -1625,7 +1706,9 @@
       overflow: hidden;
       border-radius: 28px;
       padding: 0;
-      display: block;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
     .home-ocr-card .home-focused-copy {
       padding: 36px 36px 0;
@@ -1636,6 +1719,13 @@
       top: 210px;
       left: 0;
       width: 100%;
+    }
+    .home-ocr-recording {
+      width: calc(100% - 40px);
+      min-height: 0;
+      flex: 1;
+      margin: 0 20px 20px;
+      aspect-ratio: auto;
     }
     .home-ocr-mobile {
       display: none;
@@ -1795,6 +1885,9 @@
     transform: translateY(4px);
     box-shadow: 0 1px 0 #bbc6ea;
   }
+  [data-ring-recording] [data-command-key] {
+    transition-duration: 40ms;
+  }
   .home-jiggler-pointer {
     position: absolute;
     transition:
@@ -1929,6 +2022,7 @@
   @media (prefers-reduced-motion: reduce) {
     .home-ring-reveal,
     .home-ring-keys span,
+    [data-ring-recording] [data-command-key],
     .home-jiggler-pointer,
     .home-export-progress,
     .home-display-shade {
@@ -2048,6 +2142,7 @@
     height: 130px;
     width: 100%;
     max-width: 320px;
+    margin-inline: auto;
     align-self: center;
   }
   .du-system-gauges {
@@ -2155,7 +2250,9 @@
     }
     .du-metric-symbol,
     .du-metric-value,
-    .du-metric-arc {
+    .du-metric-arc,
+    .home-ocr-recording video,
+    .home-ocr-recording img {
       transition: none;
     }
   }
@@ -2173,5 +2270,328 @@
     outline: 2px solid #1450f5;
     outline-offset: 4px;
     border-radius: 10px;
+  }
+}
+
+/* Pricing geometry restored from 7cba418's page.module.css and Site.module.css.
+   Styling is scoped; commercial copy and launch state use current product data. */
+@layer utilities {
+  .home-pricing-original {
+    --home-pricing-blue: #235bea;
+    --home-pricing-muted: #626977;
+    margin-top: 72px;
+    padding: 36px 0 72px;
+    background: #f6f6f7;
+    color: #1d2028;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  .home-pricing-shell {
+    width: min(960px, calc(100% - 64px));
+    margin-inline: auto;
+  }
+  .home-pricing-heading {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .home-pricing-heading h2 {
+    font-size: clamp(1.875rem, 3.4vw, 2.5rem);
+    font-weight: 550;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+  }
+  .home-pricing-heading p {
+    font-size: 1rem;
+    color: var(--home-pricing-muted);
+    margin-top: 12px;
+  }
+  .home-pricing-plan > a {
+    display: inline-flex;
+    width: 100%;
+    height: auto;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid var(--home-pricing-blue);
+    border-radius: 999px;
+    background: var(--home-pricing-blue);
+    color: white;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    font-weight: 600;
+    box-shadow:
+      0 1px 2px rgb(21 48 112 / 18%),
+      0 5px 14px rgb(35 91 234 / 12%);
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease,
+      transform 0.15s ease;
+  }
+  .home-pricing-plan > a:hover {
+    background: #174bc9;
+    border-color: #174bc9;
+    box-shadow:
+      0 2px 3px rgb(21 48 112 / 18%),
+      0 7px 18px rgb(35 91 234 / 17%);
+    transform: translateY(-1px);
+  }
+  .home-pricing-plans {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 56px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .home-pricing-plan {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .home-pricing-pro {
+    position: relative;
+    order: 1;
+    padding: 30px 30px 26px;
+    border: 1px solid rgb(255 255 255 / 8%);
+    border-radius: 32px;
+    background: #0d0e10;
+    color: white;
+    text-align: center;
+    box-shadow:
+      0 28px 70px rgb(17 18 20 / 15%),
+      0 8px 24px rgb(17 18 20 / 8%);
+  }
+  .home-pricing-free {
+    order: 2;
+    padding-inline: 12px 24px;
+  }
+  .home-pricing-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .home-pricing-eyebrow {
+    color: var(--home-pricing-blue);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .home-pricing-pro .home-pricing-eyebrow {
+    position: relative;
+    color: #aebee8;
+  }
+  .home-pricing-pro .home-pricing-top {
+    position: relative;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  .home-pricing-launch {
+    padding: 5px 9px;
+    border: 1px solid rgb(158 184 255 / 24%);
+    border-radius: 999px;
+    background: rgb(76 103 174 / 18%);
+    color: #d9e2ff;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .home-pricing-pitch {
+    max-width: 320px;
+    margin-top: 22px;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+  }
+  .home-pricing-pro .home-pricing-pitch {
+    position: relative;
+    margin-inline: auto;
+    margin-top: 18px;
+    font-size: 1.75rem;
+  }
+  .home-pricing-description {
+    margin-top: 10px;
+    color: var(--home-pricing-muted);
+    font-size: 0.875rem;
+  }
+  .home-pricing-pro .home-pricing-description {
+    position: relative;
+    max-width: 290px;
+    margin-inline: auto;
+    margin-top: 8px;
+    color: #aeb3bd;
+    line-height: 1.45;
+  }
+  .home-pricing-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px 14px;
+    margin: 24px 0;
+    min-height: 56px;
+  }
+  .home-pricing-price strong {
+    font-size: 3.25rem;
+    font-weight: 550;
+    letter-spacing: -0.055em;
+    line-height: 1;
+  }
+  .home-pricing-pro .home-pricing-price {
+    position: relative;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px 12px;
+    margin: 20px 0 4px;
+  }
+  .home-pricing-lifetime {
+    flex-basis: 100%;
+  }
+  .home-pricing-pro .home-pricing-price strong {
+    font-size: 3.75rem;
+    font-weight: 650;
+  }
+  .home-pricing-price span {
+    font-size: 0.75rem;
+    color: var(--home-pricing-muted);
+  }
+  .home-pricing-pro .home-pricing-price span,
+  .home-pricing-pro .home-pricing-price del,
+  .home-pricing-pro .home-pricing-footnote {
+    color: #b9bfca;
+  }
+  .home-pricing-price del {
+    font-size: 1rem;
+  }
+  .home-pricing-pro .home-pricing-price del {
+    font-size: 1.125rem;
+    font-weight: 550;
+  }
+  .home-pricing-code {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    color: #9399a4;
+    font-size: 0.75rem;
+  }
+  .home-pricing-code code {
+    font-family: 'SF Mono', ui-monospace, 'Cascadia Code', Menlo, monospace;
+    padding: 3px 8px;
+    border: 1px solid rgb(255 255 255 / 13%);
+    border-radius: 7px;
+    background: rgb(255 255 255 / 7%);
+    color: #e9edfa;
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+  }
+  .home-pricing-plan ul {
+    padding: 0;
+    margin: 0 0 20px;
+    display: grid;
+    gap: 7px;
+    list-style: none;
+    font-size: 0.875rem;
+  }
+  .home-pricing-pro ul {
+    position: relative;
+    width: min(290px, 100%);
+    margin-inline: auto;
+    margin-bottom: 22px;
+    text-align: left;
+  }
+  .home-pricing-plan li {
+    position: relative;
+    padding-left: 22px;
+  }
+  .home-pricing-plan li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--home-pricing-blue);
+  }
+  .home-pricing-pro li::before {
+    color: #9eb8ff;
+  }
+  .home-pricing-plan > a {
+    margin-top: auto;
+  }
+  .home-pricing-pro > a {
+    position: relative;
+    min-height: 46px;
+    border-color: #f4f6fb;
+    background: #f4f6fb;
+    color: #17191e;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 22%);
+  }
+  .home-pricing-pro > a:hover {
+    border-color: #fff;
+    background: white;
+    color: #111214;
+    box-shadow: 0 11px 28px rgb(0 0 0 / 26%);
+  }
+  .home-pricing-footnote {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--home-pricing-muted);
+    margin-top: 12px;
+  }
+  .home-pricing-pro .home-pricing-footnote {
+    position: relative;
+    margin-top: 10px;
+  }
+
+  @media (min-width: 1200px) {
+    .home-pricing-original {
+      margin-top: 110px;
+    }
+  }
+  @media (max-width: 760px) {
+    .home-pricing-shell {
+      width: calc(100% - 40px);
+    }
+  }
+  @media (max-width: 600px) {
+    .home-pricing-original {
+      padding: 36px 0 48px;
+    }
+    .home-pricing-plans {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+    .home-pricing-plan {
+      padding: 26px;
+    }
+    .home-pricing-pro {
+      padding: 30px 26px 26px;
+      border-radius: 32px;
+    }
+    .home-pricing-free {
+      padding-inline: 0;
+    }
+  }
+}
+
+@layer utilities {
+  .home-pricing-original.pricing-page-plans {
+    margin-top: 48px;
+    padding: 48px 0 72px;
+  }
+  @media (max-width: 600px) {
+    .home-pricing-original.pricing-page-plans {
+      padding: 36px 0 48px;
+    }
   }
 }

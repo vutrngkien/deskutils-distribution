@@ -99,7 +99,9 @@ export function UtilityPage({ locale = 'en', id }: { locale?: Locale; id: string
               </div>
               <p className="text-[14px] text-muted">{t(page.shortcutNote)}</p>
             </div>
-            <div className="flex h-[260px] items-center justify-center rounded-[28px] bg-[#f6f8fc] p-8 dt:h-[440px]">
+            <div
+              className={`flex h-[260px] items-center justify-center rounded-[28px] p-8 dt:h-[440px] ${page.id === 'prevent-sleep' ? 'bg-neutral' : 'bg-[#f6f8fc]'}`}
+            >
               <ProductVisual id={page.mediaSlot} locale={locale} className="w-full">
                 <MockupCanvas width={600} height={300}>
                   <div

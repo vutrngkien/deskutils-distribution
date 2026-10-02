@@ -1,6 +1,6 @@
 import { ShieldCheck } from 'lucide-react';
 import { StructuredData } from '@/components/StructuredData';
-import { ProductVisual } from '@/components/media/ProductVisual';
+import { DemoMedia } from '@/components/DemoMedia';
 import { Button } from '@/components/ui/Button';
 import { FinalCta } from '@/components/layout/FinalCta';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
@@ -10,7 +10,6 @@ import { ShortcutsCard } from '@/components/sections/ShortcutsCard';
 import { RelatedGuides } from '@/components/sections/RelatedGuides';
 import { RelatedTools } from '@/components/sections/RelatedTools';
 import { MockupCanvas } from '@/components/mockups/MockupCanvas';
-import { CaptureTextScene } from '@/components/mockups/CaptureTextScene';
 import { QrCodeVisual } from '@/components/mockups/QrCodeVisual';
 import {
   captureTextFaqs,
@@ -22,7 +21,7 @@ import { translate } from '@/content/i18n';
 import { localePath, type Locale } from '@/content/locales';
 import { routeHref } from '@/content/routes';
 import { breadcrumbData, faqData } from '@/content/structured-data';
-import { product } from '@/content/product';
+import { demos, product } from '@/content/product';
 
 export function CaptureTextPage({ locale = 'en' }: { locale?: Locale }) {
   const t = translate.bind(null, locale);
@@ -93,11 +92,13 @@ export function CaptureTextPage({ locale = 'en' }: { locale?: Locale }) {
             </p>
           </div>
           <div className="rounded-[28px] bg-[#eef3ff] p-6 dt:col-span-2">
-            <ProductVisual id="capture-text-scene" locale={locale} className="w-full">
-              <MockupCanvas width={715} height={306}>
-                <CaptureTextScene />
-              </MockupCanvas>
-            </ProductVisual>
+            <div className="[&_img]:object-cover! [&_video]:object-cover!">
+              <DemoMedia
+                demo={{ ...demos.captureText, aspectRatio: '16 / 9' }}
+                caption={false}
+                locale={locale}
+              />
+            </div>
           </div>
         </header>
 

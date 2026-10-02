@@ -17,7 +17,11 @@ web/public/assets/
 web/public/appcast.xml
 web/public/CNAME
 web/public/media/
-web/media-src/
+web/media-src/*
+!web/media-src/hero.png
+!web/media-src/color-picker-panel.png
+!web/media-src/screenshot-hero.png
+!web/media-src/screenshot-menu.png
 web/private-media/
 web/test-results/
 web/playwright-report/

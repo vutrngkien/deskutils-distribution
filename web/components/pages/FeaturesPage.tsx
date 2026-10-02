@@ -6,17 +6,14 @@ import { FinalCta } from '@/components/layout/FinalCta';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { RelatedGuides } from '@/components/sections/RelatedGuides';
 import { RelatedTools } from '@/components/sections/RelatedTools';
-import { MockupCanvas } from '@/components/mockups/MockupCanvas';
-import { ScreenshotStage } from '@/components/mockups/ScreenshotStage';
-import { ClipboardPanel } from '@/components/mockups/ClipboardPanel';
-import { QuickRing } from '@/components/mockups/QuickRing';
+import { DemoMedia } from '@/components/DemoMedia';
 import { featureCompares, featureGroups } from '@/content/features-page';
 import { productMenu } from '@/content/features';
 import { translate } from '@/content/i18n';
 import { localePath, type Locale } from '@/content/locales';
 import { routeHref } from '@/content/routes';
 import { breadcrumbData, itemListData } from '@/content/structured-data';
-import { product } from '@/content/product';
+import { demos, product, quickRingStaticPoster } from '@/content/product';
 
 export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
   const t = translate.bind(null, locale);
@@ -89,44 +86,19 @@ export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
         </header>
 
         {/* Featured */}
-        <section className="container-page flex flex-col gap-6 pt-16 dt:pt-[130px]">
+        <section className="container-page flex flex-col gap-5 pt-12 dt:pt-20">
           <div className="flex flex-col gap-3">
             <p className="eyebrow">{t('features.featured.eyebrow')}</p>
             <h2 className="h-section text-[28px] dt:text-[40px]">{t('features.featured.title')}</h2>
           </div>
-          <div className="grid grid-cols-1 gap-4 dt:grid-cols-[7fr_5fr] dt:grid-rows-2">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
             <article
-              className="flex flex-col gap-4 overflow-hidden rounded-[28px] p-8 dt:row-span-2 dt:p-10"
-              style={{
-                background:
-                  'radial-gradient(80% 90% at 80% 0%, #7cc4ff 0%, #2a6bff 40%, #2330c9 72%, #4b2fb8 100%)',
-                color: '#fff',
-              }}
-              data-testid="featured-screenshot"
-            >
-              <h3 className="text-[26px] font-bold leading-tight dt:text-[32px]">
-                {t('tool.screenshot.name')}
-              </h3>
-              <p className="max-w-[460px] text-[17px] text-white/90">
-                {t('features.featured.screenshot')}
-              </p>
-              <a
-                href={routeHref(locale, 'screenshot', '/#tools')}
-                className="text-[15px] font-semibold text-white hover:text-[#dfe7ff]"
-              >
-                {t('features.featured.explore', { feature: t('tool.screenshot.name') })} →
-              </a>
-              <div className="mt-2">
-                <MockupCanvas width={1000} height={640}>
-                  <ScreenshotStage />
-                </MockupCanvas>
-              </div>
-            </article>
-            <article
-              className="flex flex-col gap-4 overflow-hidden rounded-[28px] bg-neutral p-8 text-white"
+              className="flex flex-col gap-3 overflow-hidden rounded-[20px] bg-neutral p-5 text-white dt:p-6"
               data-testid="featured-clipboard"
             >
-              <h3 className="text-[22px] font-bold">{t('tool.clipboard-manager.name')}</h3>
+              <h3 className="text-[22px] font-bold leading-tight">
+                {t('tool.clipboard-manager.name')}
+              </h3>
               <p className="text-[15.5px] text-neutral-content">
                 {t('features.featured.clipboard')}
               </p>
@@ -136,14 +108,40 @@ export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
               >
                 {t('features.featured.explore', { feature: t('tool.clipboard-manager.name') })} →
               </a>
-              <div className="mt-2">
-                <MockupCanvas width={840} height={520}>
-                  <ClipboardPanel />
-                </MockupCanvas>
+              <div className="mt-auto pt-2 [&_img]:object-cover! [&_video]:object-cover! [&_img]:scale-125 [&_video]:scale-125 [&_img]:origin-[75%_50%] [&_video]:origin-[75%_50%]">
+                <DemoMedia
+                  demo={{ ...demos.clipboard, mockup: false, aspectRatio: '16 / 10' }}
+                  caption={false}
+                  locale={locale}
+                />
               </div>
             </article>
             <article
-              className="flex flex-col gap-4 overflow-hidden rounded-[28px] bg-[#eaf0ff] p-8"
+              className="flex flex-col gap-3 overflow-hidden rounded-[20px] p-5 text-white dt:p-6"
+              style={{
+                background:
+                  'radial-gradient(80% 90% at 80% 0%, #7cc4ff 0%, #2a6bff 40%, #2330c9 72%, #4b2fb8 100%)',
+              }}
+              data-testid="featured-screenshot"
+            >
+              <h3 className="text-[22px] font-bold">{t('tool.screenshot.name')}</h3>
+              <p className="text-[15.5px] text-white/90">{t('features.featured.screenshot')}</p>
+              <a
+                href={routeHref(locale, 'screenshot', '/#tools')}
+                className="text-[15px] font-semibold text-white hover:text-[#dfe7ff]"
+              >
+                {t('features.featured.explore', { feature: t('tool.screenshot.name') })} →
+              </a>
+              <div className="mt-auto pt-2 [&_img]:object-cover! [&_video]:object-cover!">
+                <DemoMedia
+                  demo={{ ...demos.screenshot, mockup: false, aspectRatio: '16 / 10' }}
+                  caption={false}
+                  locale={locale}
+                />
+              </div>
+            </article>
+            <article
+              className="flex flex-col gap-3 overflow-hidden rounded-[20px] bg-[#eaf0ff] p-5 dt:p-6"
               data-testid="featured-quick-ring"
             >
               <h3 className="text-[22px] font-bold">{t('tool.quick-ring.name')}</h3>
@@ -154,10 +152,16 @@ export function FeaturesPage({ locale = 'en' }: { locale?: Locale }) {
               >
                 {t('features.featured.explore', { feature: t('tool.quick-ring.name') })} →
               </a>
-              <div className="mx-auto mt-1 w-[180px]">
-                <MockupCanvas width={300} height={300}>
-                  <QuickRing selected={0} />
-                </MockupCanvas>
+              <div className="mt-auto w-full pt-2 [&_img]:object-cover! [&_video]:object-cover! [&_img]:scale-150 [&_video]:scale-150">
+                <DemoMedia
+                  demo={{
+                    ...demos.quickring,
+                    poster: quickRingStaticPoster,
+                    aspectRatio: '16 / 10',
+                  }}
+                  caption={false}
+                  locale={locale}
+                />
               </div>
             </article>
           </div>

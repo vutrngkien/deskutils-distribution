@@ -93,6 +93,36 @@ export type Demo = {
 
 // Add recordings here when ready. Use /videos/file.mp4 for videos in web/public/videos/.
 export const demos = {
+  quickAccess: {
+    title: 'screenshot.quickAccess.title',
+    description: 'screenshot.quickAccess.body',
+    poster: '/videos/quick-access-poster.webp',
+    posterWidth: 1920,
+    posterHeight: 1200,
+    sources: [{ src: '/videos/quick-access-demo.mp4', type: 'video/mp4' }],
+    aspectRatio: '30 / 19',
+    autoplay: true,
+  },
+  captureText: {
+    title: 'tool.capture-text.name',
+    description: 'capture.ocr.description',
+    poster: '/videos/capture-text-poster.webp',
+    posterWidth: 1920,
+    posterHeight: 1200,
+    sources: [{ src: '/videos/capture-text-demo.mp4', type: 'video/mp4' }],
+    aspectRatio: '8 / 5',
+    autoplay: true,
+  },
+  quickring: {
+    title: 'tool.quick-ring.name',
+    description: 'home.quickring.lede',
+    poster: '/videos/quickring-start.webp',
+    posterWidth: 1396,
+    posterHeight: 994,
+    sources: [{ src: '/videos/quickring-demo.mp4', type: 'video/mp4' }],
+    aspectRatio: '1396 / 994',
+    autoplay: true,
+  },
   screenshot: {
     title: 'capture.demoTitle',
     description: 'capture.demoDescription',
@@ -108,9 +138,9 @@ export const demos = {
   clipboard: {
     title: 'clipboard.demoTitle',
     description: 'clipboard.demoDescription',
-    poster: '/assets/images/clipboard_search.webp',
-    posterWidth: 1200,
-    posterHeight: 758,
+    poster: '/videos/clipboard-poster.webp',
+    posterWidth: 1280,
+    posterHeight: 800,
     sources: [{ src: '/videos/clipboard-demo.mp4', type: 'video/mp4' }],
     aspectRatio: '8 / 5',
     mockup: true,
@@ -142,6 +172,13 @@ export const demos = {
     inset: true,
   },
 } satisfies Record<string, Demo>;
+
+// Finish both presses clearly before the ring starts appearing at 0.75 seconds.
+export const quickRingCommandPresses = [
+  [0.16, 0.32],
+  [0.42, 0.58],
+] as const;
+export const quickRingStaticPoster = '/videos/quickring-poster.webp';
 
 export const clipboardFeatures = [
   { label: 'home.clipboard.search' },

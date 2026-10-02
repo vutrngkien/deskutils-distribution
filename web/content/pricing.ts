@@ -45,14 +45,14 @@ export const pricingComparison: PricingRow[] = [
   {
     id: 'external-display',
     feature: 'pricing.compare.externalDisplayLabel',
-    free: { kind: 'text', key: 'pricing.compare.externalDisplayFree' },
-    pro: { kind: 'text', key: 'pricing.compare.externalDisplayPro' },
+    free: none,
+    pro: included,
   },
   {
     id: 'dimming',
     feature: 'pricing.compare.dimming',
-    free: { kind: 'text', key: 'pricing.dimmingPreview' },
-    pro: { kind: 'text', key: 'pricing.persistentDimming' },
+    free: none,
+    pro: included,
   },
   {
     id: 'devices',

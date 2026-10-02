@@ -1,7 +1,7 @@
 import { Accessibility, Link2, Wifi } from 'lucide-react';
 import { ToolIcon } from '@/components/ToolIcon';
 import { StructuredData } from '@/components/StructuredData';
-import { ProductVisual } from '@/components/media/ProductVisual';
+import { DemoMedia } from '@/components/DemoMedia';
 import { Button } from '@/components/ui/Button';
 import { FinalCta } from '@/components/layout/FinalCta';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
@@ -9,8 +9,6 @@ import { Faq } from '@/components/ui/Faq';
 import { Flows } from '@/components/sections/Flows';
 import { RelatedGuides } from '@/components/sections/RelatedGuides';
 import { RelatedTools } from '@/components/sections/RelatedTools';
-import { MockupCanvas } from '@/components/mockups/MockupCanvas';
-import { ClipboardPanel } from '@/components/mockups/ClipboardPanel';
 import {
   clipboardFaqs,
   clipboardFilters,
@@ -22,19 +20,9 @@ import { translate } from '@/content/i18n';
 import { localePath, type Locale } from '@/content/locales';
 import { routeHref } from '@/content/routes';
 import { breadcrumbData, faqData } from '@/content/structured-data';
-import { product } from '@/content/product';
+import { demos, product } from '@/content/product';
 
 const privacyIcons = [Wifi, Link2, Accessibility];
-
-function ClipboardVisual({ locale, className = '' }: { locale: Locale; className?: string }) {
-  return (
-    <ProductVisual id="clipboard" locale={locale} className={className}>
-      <MockupCanvas width={840} height={520}>
-        <ClipboardPanel />
-      </MockupCanvas>
-    </ProductVisual>
-  );
-}
 
 export function ClipboardManagerPage({ locale = 'en' }: { locale?: Locale }) {
   const t = translate.bind(null, locale);
@@ -109,12 +97,12 @@ export function ClipboardManagerPage({ locale = 'en' }: { locale?: Locale }) {
                 {t('home.freeNote', { version: product.minimumMacOS })}
               </p>
             </div>
-            <div className="rounded-[28px] bg-white/5 p-4 backdrop-blur">
-              <ProductVisual id="clipboard" locale={locale} className="w-full">
-                <MockupCanvas width={840} height={520}>
-                  <ClipboardPanel />
-                </MockupCanvas>
-              </ProductVisual>
+            <div className="w-full [&_img]:origin-[50%_33%] [&_video]:origin-[50%_33%] [&_img]:scale-[1.45] [&_video]:scale-[1.45] [&_img]:object-cover! [&_video]:object-cover!">
+              <DemoMedia
+                demo={{ ...demos.clipboard, mockup: false, aspectRatio: '21 / 13' }}
+                caption={false}
+                locale={locale}
+              />
             </div>
           </div>
         </header>
@@ -129,8 +117,16 @@ export function ClipboardManagerPage({ locale = 'en' }: { locale?: Locale }) {
 
         {/* Search */}
         <section className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[7fr_5fr] dt:items-center dt:gap-14 dt:pt-[130px]">
-          <div className="rounded-[28px] bg-[#eef3ff] p-6">
-            <ClipboardVisual locale={locale} className="w-full" />
+          <div className="w-full">
+            <DemoMedia
+              demo={{
+                ...demos.clipboardSearch,
+                title: 'clipboard-manager.search.title',
+                description: 'clipboard-manager.search.body',
+              }}
+              caption={false}
+              locale={locale}
+            />
           </div>
           <div className="flex flex-col gap-4">
             <p className="eyebrow">{t('clipboard-manager.search.eyebrow')}</p>
@@ -161,37 +157,53 @@ export function ClipboardManagerPage({ locale = 'en' }: { locale?: Locale }) {
             <p className="text-[17px] leading-[1.55] text-muted">
               {t('clipboard-manager.pin.body')}
             </p>
+            <div className="mt-2 grid grid-cols-2 gap-4">
+              {clipboardFilters.map((filter) => (
+                <div
+                  key={filter.id}
+                  className={`flex flex-col gap-2 rounded-[20px] p-4 ${
+                    filter.active ? 'bg-primary text-white' : 'bg-[#f3f6ff]'
+                  }`}
+                >
+                  <span className={filter.active ? 'text-white' : 'text-primary'}>
+                    <ToolIcon name={filter.icon} size={22} />
+                  </span>
+                  <b className="text-[17px]">{t(filter.title)}</b>
+                  <span className={`text-[14px] ${filter.active ? 'text-white/80' : 'text-muted'}`}>
+                    {t(filter.body)}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            {clipboardFilters.map((filter) => (
-              <div
-                key={filter.id}
-                className={`flex flex-col gap-2 rounded-[20px] p-6 ${
-                  filter.active ? 'bg-primary text-white' : 'bg-[#f3f6ff]'
-                }`}
-              >
-                <span className={filter.active ? 'text-white' : 'text-primary'}>
-                  <ToolIcon name={filter.icon} size={22} />
-                </span>
-                <b className="text-[17px]">{t(filter.title)}</b>
-                <span className={`text-[14px] ${filter.active ? 'text-white/80' : 'text-muted'}`}>
-                  {t(filter.body)}
-                </span>
-              </div>
-            ))}
+          <div className="mx-auto w-full max-w-[440px]">
+            <DemoMedia
+              demo={{
+                title: 'clipboard-manager.pin.title',
+                description: 'clipboard-manager.pin.body',
+                poster: '/assets/images/clipboard_filter.webp',
+                posterWidth: 1200,
+                posterHeight: 1217,
+                aspectRatio: '1200 / 1217',
+              }}
+              caption={false}
+              locale={locale}
+            />
           </div>
         </section>
 
         {/* Preview */}
         <section className="container-page grid grid-cols-1 gap-10 pt-16 dt:grid-cols-[7fr_5fr] dt:items-center dt:gap-14 dt:pt-[130px]">
-          <div
-            className="rounded-[28px] p-6"
-            style={{
-              background:
-                'radial-gradient(80% 80% at 20% 0%, #dfe8ff 0%, #f3f6ff 60%, #efeaff 100%)',
-            }}
-          >
-            <ClipboardVisual locale={locale} className="w-full" />
+          <div className="w-full">
+            <DemoMedia
+              demo={{
+                ...demos.clipboardPreview,
+                title: 'clipboard-manager.preview.title',
+                description: 'clipboard-manager.preview.body1',
+              }}
+              caption={false}
+              locale={locale}
+            />
           </div>
           <div className="flex flex-col gap-4">
             <p className="eyebrow">{t('clipboard-manager.preview.eyebrow')}</p>

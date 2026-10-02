@@ -2,9 +2,9 @@
   "slots": [
     {
       "id": "hero",
-      "width": 1200,
-      "height": 700,
-      "aspectRatio": "12 / 7",
+      "width": 685,
+      "height": 559,
+      "aspectRatio": "685 / 559",
       "icon": "tools",
       "kind": "product",
       "master": "hero.png",
@@ -22,13 +22,23 @@
     },
     {
       "id": "screenshot-hero",
-      "width": 2000,
-      "height": 1280,
-      "aspectRatio": "25 / 16",
+      "width": 1098,
+      "height": 769,
+      "aspectRatio": "1098 / 769",
       "icon": "capture",
       "kind": "product",
       "master": "screenshot-hero.png",
       "altKey": "media.screenshot.hero.alt"
+    },
+    {
+      "id": "screenshot-menu",
+      "width": 525,
+      "height": 749,
+      "aspectRatio": "525 / 749",
+      "icon": "capture",
+      "kind": "product",
+      "master": "screenshot-menu.png",
+      "altKey": "screenshot.modes.title"
     },
     {
       "id": "screenshot-quick-access",
@@ -142,9 +152,9 @@
     },
     {
       "id": "color-picker-panel",
-      "width": 680,
-      "height": 660,
-      "aspectRatio": "34 / 33",
+      "width": 369,
+      "height": 285,
+      "aspectRatio": "123 / 95",
       "icon": "color",
       "kind": "product",
       "master": "color-picker-panel.png",

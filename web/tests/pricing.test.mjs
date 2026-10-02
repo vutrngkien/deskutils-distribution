@@ -50,12 +50,15 @@ test('pricing table never overclaims the Free toolkit and lists External Display
         `feature label leaked a placeholder: ${row.feature}`,
       );
     }
-    // External Display Only is present with a Free limitation and a Pro value.
+    // Pro-only comparison rows use a dash for Free, without changing utility trial behavior.
     const external = pricingComparison.find((row) => row.id === 'external-display');
     assert.ok(external, 'External Display Only row is missing');
-    assert.equal(external.free.kind, 'text');
-    assert.equal(external.pro.kind, 'text');
-    assert.notEqual(external.free.key, external.pro.key);
+    assert.equal(external.free.kind, 'none');
+    assert.equal(external.pro.kind, 'included');
+    const dimming = pricingComparison.find((row) => row.id === 'dimming');
+    assert.ok(dimming, 'Display Dimming row is missing');
+    assert.equal(dimming.free.kind, 'none');
+    assert.equal(dimming.pro.kind, 'included');
   } finally {
     await cleanup();
   }

@@ -70,8 +70,13 @@ export function PricingPage({ locale = 'en' }: { locale?: Locale }) {
           <p className="lede max-w-[720px]">{t('pricing.page.lede')}</p>
         </header>
 
-        <section className="container-page pt-12 dt:pt-16" aria-label={t('pricing.page.eyebrow')}>
-          <PricingPlans locale={locale} />
+        <section
+          className="home-pricing-original pricing-page-plans"
+          aria-label={t('pricing.page.eyebrow')}
+        >
+          <div className="home-pricing-shell">
+            <PricingPlans locale={locale} />
+          </div>
         </section>
 
         {/* Compare */}

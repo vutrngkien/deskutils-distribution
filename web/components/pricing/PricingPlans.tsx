@@ -1,90 +1,76 @@
 import { Button } from '@/components/ui/Button';
-import { plans, product, launchOffer } from '@/content/product';
 import { translate } from '@/content/i18n';
 import type { Locale } from '@/content/locales';
+import { launchOffer, plans, product } from '@/content/product';
 
-/**
- * Free/Pro plan cards. All pricing, the checkout URL and the launch offer come
- * from `content/product.ts`, so launch-on and launch-off render consistently.
- */
+/** Original plan layout shared by Home and Pricing, using current product data. */
 export function PricingPlans({ locale }: { locale: Locale }) {
   const t = translate.bind(null, locale);
 
   return (
-    <div className="grid grid-cols-1 gap-4 dt:grid-cols-2 dt:gap-6">
+    <div className="home-pricing-plans">
       {plans.map((plan) => {
         const pro = plan.id === 'pro';
         return (
           <article
             key={plan.id}
-            className={`flex flex-col gap-5 rounded-[24px] border p-8 shadow-[0_16px_42px_rgba(29,32,40,0.06)] dt:p-10 ${
-              pro ? 'border-neutral bg-neutral text-white' : 'border-line bg-[#f3f6ff]'
-            }`}
+            className={`home-pricing-plan ${pro ? 'card home-pricing-pro' : 'home-pricing-free'}`}
           >
-            <div className="flex items-center justify-between gap-3">
-              <span className={`text-sm font-semibold ${pro ? 'text-[#9fbaff]' : 'text-primary'}`}>
-                {pro ? t('pricing.pro') : t('pricing.free')}
+            <div className="home-pricing-top">
+              <span className="home-pricing-eyebrow">
+                {t(pro ? 'pricing.pro' : 'pricing.free')}
               </span>
               {pro && launchOffer.enabled && (
-                <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white">
-                  {t('pricing.launchOffer')}
-                </span>
+                <span className="home-pricing-launch">{t('pricing.launchOffer')}</span>
               )}
             </div>
-            <h3 className="text-[24px] font-bold leading-tight dt:text-[30px]">{t(plan.pitch)}</h3>
-            <p className={`text-[15px] ${pro ? 'text-neutral-content' : 'text-muted'}`}>
-              {t(plan.description)}
-            </p>
-            {pro ? (
-              <div className="flex flex-wrap items-baseline gap-3">
-                {product.pricing.showOriginal && (
-                  <del className="text-lg text-neutral-content/60">
-                    {`$${product.pricing.originalAmount}`}
-                  </del>
-                )}
-                <strong className="text-4xl font-bold">{`$${product.pricing.amount}`}</strong>
-                <span className="text-sm text-neutral-content/80">{t('pricing.lifetime')}</span>
-              </div>
-            ) : (
-              <div className="flex flex-wrap items-baseline gap-2">
-                <strong className="text-4xl font-bold">$0</strong>
-                <span className="text-sm text-muted">{t('pricing.noLicense')}</span>
-              </div>
-            )}
-            <ul className="flex flex-col gap-3">
-              {plan.features.map((feature) => (
-                <li key={feature.key} className="flex items-center gap-3 text-[15.5px]">
-                  <span className={pro ? 'text-[#9fbaff]' : 'text-primary'}>✓</span>
-                  <span>{t(feature.key, feature.values)}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-2">
-              {pro ? (
-                <Button
-                  href={product.pricing.purchaseURL}
-                  locale={locale}
-                  placement="pricing_pro"
-                  variant="secondary"
-                  className="bg-white text-neutral"
-                >
-                  {t('pricing.cta')}
-                </Button>
-              ) : (
-                <Button locale={locale} placement="pricing_free">
-                  {t('home.download')} <span aria-hidden="true">↓</span>
-                </Button>
+            <h3 className="home-pricing-pitch">{t(plan.pitch)}</h3>
+            <p className="home-pricing-description">{t(plan.description)}</p>
+            <div className="home-pricing-price">
+              {pro && product.pricing.showOriginal && (
+                <del>{`$${product.pricing.originalAmount}`}</del>
               )}
+              <strong>{`$${pro ? product.pricing.amount : '0'}`}</strong>
+              {pro && <span className="home-pricing-lifetime">{t('pricing.lifetime')}</span>}
+              {!pro && <span>{t('pricing.noLicense')}</span>}
             </div>
             {pro && launchOffer.enabled && (
-              <p className="text-sm text-neutral-content/80">
-                {t('pricing.proFootnote', {
-                  customers: launchOffer.customerLimit,
-                  original: launchOffer.regularAmount,
-                })}
+              <p className="home-pricing-code">
+                <span>{t('pricing.promoLabel')}</span>
+                <code>{launchOffer.discountCode}</code>
               </p>
             )}
-            {!pro && <p className="text-sm text-muted">{t('pricing.freeFootnote')}</p>}
+            <ul>
+              {plan.features.map((feature) => (
+                <li key={feature.key}>{t(feature.key, feature.values)}</li>
+              ))}
+            </ul>
+            {pro ? (
+              <Button
+                href={product.pricing.purchaseURL}
+                locale={locale}
+                placement="pricing_pro"
+                variant="secondary"
+              >
+                {t('pricing.cta')}
+              </Button>
+            ) : (
+              <Button locale={locale} placement="pricing_free">
+                {t('home.download')} <span aria-hidden="true">↓</span>
+              </Button>
+            )}
+            {pro ? (
+              launchOffer.enabled && (
+                <p className="home-pricing-footnote">
+                  {t('pricing.proFootnote', {
+                    customers: launchOffer.customerLimit,
+                    original: launchOffer.regularAmount,
+                  })}
+                </p>
+              )
+            ) : (
+              <p className="home-pricing-footnote">{t('pricing.freeFootnote')}</p>
+            )}
           </article>
         );
       })}

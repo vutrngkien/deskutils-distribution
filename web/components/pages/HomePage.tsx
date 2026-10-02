@@ -2,19 +2,16 @@ import { ClipboardPaste, Pin, Search, ShieldCheck } from 'lucide-react';
 import { StructuredData } from '@/components/StructuredData';
 import { TrackedFaq } from '@/components/TrackedFaq';
 import { SocialProof } from '@/components/SocialProof';
+import { DemoMedia } from '@/components/DemoMedia';
 import { ProductVisual } from '@/components/media/ProductVisual';
 import { Button } from '@/components/ui/Button';
 import { FinalCta } from '@/components/layout/FinalCta';
+import { HomePricing } from '@/components/pricing/HomePricing';
 import { HeroMockup, HeroMockupMobile } from '@/components/mockups/HeroMockup';
 import { MockupCanvas } from '@/components/mockups/MockupCanvas';
-import { ScreenshotStage } from '@/components/mockups/ScreenshotStage';
-import { ScreenshotTabs } from '@/components/mockups/ScreenshotTabs';
-import { ClipboardPanel } from '@/components/mockups/ClipboardPanel';
-import { QuickRingDemo } from '@/components/mockups/QuickRingDemo';
-import { screenshotDemoSources } from '@/content/screenshot-demos';
+import { QuickRingRecording } from '@/components/media/QuickRingRecording';
 import { ColorPickerPanel } from '@/components/mockups/ColorPickerPanel';
 import { WindowSwitcher } from '@/components/mockups/WindowSwitcher';
-import { CaptureTextScene, CaptureTextSceneMobile } from '@/components/mockups/CaptureTextScene';
 import { UtilitiesDisclosure } from '@/components/mockups/UtilitiesDisclosure';
 import {
   CleanKeyboardVisual,
@@ -25,14 +22,7 @@ import {
   PreventSleepVisual,
   SystemMonitoringVisual,
 } from '@/components/mockups/UtilityVisuals';
-import {
-  product,
-  clipboardFeatures,
-  plans,
-  faqs,
-  launchOffer,
-  type Locale,
-} from '@/content/product';
+import { product, demos, clipboardFeatures, faqs, type Locale } from '@/content/product';
 import { allTools } from '@/content/features';
 import { translate } from '@/content/i18n';
 import { localePath } from '@/content/locales';
@@ -42,11 +32,6 @@ const modes = [
   { label: 'home.mode.area', keys: '⌥⇧⌘4' },
   { label: 'home.mode.scrolling', keys: '⌥⇧⌘6' },
   { label: 'home.mode.window', keys: '⌥⇧⌘9' },
-] as const;
-const tabs = [
-  { title: 'home.tab.capture', body: 'home.tab.capture.body' },
-  { title: 'home.tab.annotate', body: 'home.tab.annotate.body' },
-  { title: 'home.tab.save', body: 'home.tab.save.body' },
 ] as const;
 const benefitIcons = [Search, Pin, ClipboardPaste];
 
@@ -109,15 +94,33 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
                 {t('home.freeNote', { version: product.minimumMacOS })}
               </p>
             </div>
-            <div className="home-hero-desktop">
-              <ProductVisual id="hero" locale={locale} priority className="h-[580px]">
-                <HeroMockup />
-              </ProductVisual>
+            <div className="home-hero-desktop min-w-0">
+              <div className="home-hero-photo-shell">
+                <ProductVisual
+                  id="hero"
+                  locale={locale}
+                  priority
+                  className="home-hero-photo h-[580px] w-full min-w-0 [&_img]:object-cover [&_img]:object-right-top"
+                  frameStyle={{ aspectRatio: 'auto', border: 0, background: 'transparent' }}
+                >
+                  <HeroMockup />
+                </ProductVisual>
+              </div>
             </div>
             <div className="home-hero-mobile">
-              <ProductVisual id="hero" locale={locale} priority className="h-[440px]">
-                <HeroMockupMobile />
-              </ProductVisual>
+              <div className="home-hero-photo-shell">
+                <ProductVisual
+                  id="hero"
+                  locale={locale}
+                  priority
+                  className="home-hero-photo"
+                  frameClassName="h-[440px] overflow-hidden"
+                  frameStyle={{ border: 0, background: 'transparent' }}
+                  cropClassName="absolute top-0 left-1/2 h-[470px] w-[576px] -translate-x-[345px]"
+                >
+                  <HeroMockupMobile />
+                </ProductVisual>
+              </div>
             </div>
           </div>
         </header>
@@ -150,27 +153,27 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
             <PermissionsLink locale={locale} className="home-shot-permissions" />
           </div>
           <div className="home-shot-demo">
-            <ScreenshotTabs
-              labels={tabs.map((tab) => t(tab.title))}
-              descriptions={tabs.map((tab) => t(tab.body))}
-              videos={screenshotDemoSources()}
-              playLabel={t('home.demo.play')}
-            >
-              <ProductVisual id="screenshot" locale={locale} className="home-shot-stage">
-                <MockupCanvas width={1000} height={640} className="home-shot-art">
-                  <ScreenshotStage />
-                </MockupCanvas>
-              </ProductVisual>
-            </ScreenshotTabs>
+            <div className="home-shot-stage [&>figure]:h-full [&>figure>div]:h-full [&_img]:object-cover! [&_video]:object-cover!">
+              <DemoMedia
+                demo={{ ...demos.screenshot, mockup: false }}
+                caption={false}
+                locale={locale}
+              />
+            </div>
+            <p className="home-shot-caption">{t('home.tab.annotate.body')}</p>
           </div>
         </section>
         <section className="home-clipboard" data-umami-section="clipboard">
           <div className="container-page home-clipboard-grid">
-            <ProductVisual id="clipboard" locale={locale} className="home-clip-visual">
-              <MockupCanvas width={840} height={520} className="home-clip-art">
-                <ClipboardPanel />
-              </MockupCanvas>
-            </ProductVisual>
+            <div className="home-clip-visual">
+              <div className="home-clip-recording">
+                <DemoMedia
+                  demo={{ ...demos.clipboard, mockup: false }}
+                  caption={false}
+                  locale={locale}
+                />
+              </div>
+            </div>
             <div className="home-clip-copy">
               <p className="home-clip-eyebrow">{t('home.clipboard.eyebrow')} · ⇧⌘V</p>
               <h2 className="home-clip-title">{t('home.clipboard.title')}</h2>
@@ -210,11 +213,7 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
                 </ArrowLink>
               </p>
             </div>
-            <ProductVisual id="quickring" locale={locale} className="home-ring-visual">
-              <QuickRingDemo
-                steps={[t('home.ring.press'), t('home.ring.opens'), t('home.ring.choose')]}
-              />
-            </ProductVisual>
+            <QuickRingRecording locale={locale} />
           </div>
         </section>
         <section
@@ -242,9 +241,15 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
                 </ArrowLink>
               </div>
               <PixelLoupe className="home-color-loupe" />
-              <MockupCanvas width={340} height={330} className="home-color-art">
-                <ColorPickerPanel />
-              </MockupCanvas>
+              <ProductVisual
+                id="color-picker-panel"
+                locale={locale}
+                className="home-color-art overflow-visible! rounded-none! border-0! bg-transparent!"
+              >
+                <MockupCanvas width={340} height={330}>
+                  <ColorPickerPanel />
+                </MockupCanvas>
+              </ProductVisual>
             </article>
             <article className="home-ocr-card" data-testid="capture-text-card">
               <div className="home-focused-copy">
@@ -257,10 +262,9 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
                   <PermissionsLink locale={locale} />
                 </div>
               </div>
-              <MockupCanvas width={715} height={306} className="home-ocr-desktop">
-                <CaptureTextScene />
-              </MockupCanvas>
-              <CaptureTextSceneMobile />
+              <div className="home-ocr-recording [&>figure]:h-full [&>figure>div]:h-full [&_img]:object-cover! [&_video]:object-cover! [&_img]:object-[50%_30%]! [&_video]:object-[50%_30%]!">
+                <DemoMedia demo={demos.captureText} caption={false} locale={locale} />
+              </div>
             </article>
             <article className="home-window-card">
               <div className="home-focused-copy">
@@ -359,89 +363,7 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
           </UtilitiesDisclosure>
         </section>
         {/* ================= Pricing ================= */}
-        <section
-          className="container-page flex flex-col gap-4 pt-12 dt:gap-8 dt:pt-[130px]"
-          id="pricing"
-          aria-labelledby="home-pricing"
-          data-umami-section="pricing"
-        >
-          <h2 id="home-pricing" className="h-section text-[30px] dt:text-[40px]">
-            {t('home.pricing.title')}
-          </h2>
-          <div className="grid grid-cols-1 gap-3 dt:gap-5 dt:grid-cols-2">
-            {plans.map((plan) => {
-              const pro = plan.id === 'pro';
-              return (
-                <article
-                  key={plan.id}
-                  className={`flex flex-col gap-4 rounded-[22px] p-6 dt:rounded-[28px] dt:p-10 ${
-                    pro ? 'bg-neutral text-white' : 'bg-[#f3f6ff]'
-                  }`}
-                >
-                  <span
-                    className={`text-sm font-semibold ${pro ? 'text-[#9fbaff]' : 'text-primary'}`}
-                  >
-                    {pro ? t('pricing.pro') : t('pricing.free')}
-                  </span>
-                  <h3 className="text-[24px] font-bold leading-tight dt:text-[30px]">
-                    {t(plan.pitch)}
-                  </h3>
-                  {pro ? (
-                    <div className="flex flex-wrap items-baseline gap-3">
-                      {product.pricing.showOriginal && (
-                        <del className="text-lg text-neutral-content/60">
-                          {`$${product.pricing.originalAmount}`}
-                        </del>
-                      )}
-                      <strong className="text-4xl font-bold">{`$${product.pricing.amount}`}</strong>
-                      <span className="text-sm text-neutral-content/80">
-                        {t('pricing.lifetime')}
-                      </span>
-                    </div>
-                  ) : (
-                    <div className="flex flex-wrap items-baseline gap-2">
-                      <strong className="text-4xl font-bold">$0</strong>
-                      <span className="text-sm text-muted">{t('pricing.noLicense')}</span>
-                    </div>
-                  )}
-                  <ul className="flex flex-col gap-3">
-                    {plan.features.map((feature) => (
-                      <li key={feature.key} className="flex items-center gap-3 text-[15.5px]">
-                        <span className={pro ? 'text-[#9fbaff]' : 'text-primary'}>✓</span>
-                        <span>{t(feature.key, feature.values)}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-2">
-                    {pro ? (
-                      <Button
-                        href={product.pricing.purchaseURL}
-                        locale={locale}
-                        placement="pricing_pro"
-                        variant="secondary"
-                        className="bg-white text-neutral"
-                      >
-                        {t('pricing.cta')}
-                      </Button>
-                    ) : (
-                      <Button locale={locale} placement="pricing_free">
-                        {t('home.download')} <span aria-hidden="true">↓</span>
-                      </Button>
-                    )}
-                  </div>
-                  {pro && launchOffer.enabled && (
-                    <p className="text-sm text-neutral-content/80">
-                      {t('pricing.proFootnote', {
-                        customers: launchOffer.customerLimit,
-                        original: launchOffer.regularAmount,
-                      })}
-                    </p>
-                  )}
-                </article>
-              );
-            })}
-          </div>
-        </section>
+        <HomePricing locale={locale} />
 
         {/* ================= FAQ ================= */}
         <section

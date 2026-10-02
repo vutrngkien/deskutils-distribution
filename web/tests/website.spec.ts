@@ -53,22 +53,57 @@ for (const width of [390, 768, 1200, 1440]) {
 
     // Published homepage never shows an empty placeholder; temporary mockups
     // stand in until generated media is supplied.
-    await expect(page.locator('[data-media-slot]')).toHaveCount(5);
+    await expect(page.locator('[data-media-slot]')).toHaveCount(4);
     await expect(page.locator('[data-media-state="placeholder"]')).toHaveCount(0);
     await expect(
       page.locator('[data-media-state="ready"], [data-media-state="mockup"]'),
-    ).toHaveCount(5);
-    for (const id of ['screenshot', 'clipboard', 'quickring']) {
+    ).toHaveCount(4);
+    for (const id of ['quickring', 'color-picker-panel']) {
       await expect(page.locator(`[data-media-slot="${id}"]`)).toHaveAttribute(
         'data-media-state',
         /^(mockup|ready)$/,
       );
     }
 
+    const screenshotDemo = page.locator('.home-shot-demo');
+    await expect(screenshotDemo.locator('.home-shot-tabs')).toHaveCount(0);
+    await screenshotDemo.scrollIntoViewIfNeeded();
+    const video = screenshotDemo.locator('video');
+    await expect(video).toHaveAttribute('poster', '/videos/annotate-poster.webp');
+    await expect(video.locator('source')).toHaveAttribute('src', '/videos/annotate-demo.mp4');
+    await expect
+      .poll(() => video.evaluate((el) => (el as HTMLVideoElement).readyState))
+      .toBeGreaterThanOrEqual(2);
+    const box = await video.boundingBox();
+    if (width < 768) {
+      expect(box!.height).toBe(352);
+    } else {
+      expect(box!.width / box!.height).toBeCloseTo(1000 / 640, 2);
+    }
+    await expect(video).toHaveCSS('object-fit', 'cover');
+
+    const clipboardFrame = page.locator('.home-clip-visual');
+    await clipboardFrame.scrollIntoViewIfNeeded();
+    const clipboardVideo = clipboardFrame.locator('video');
+    await expect(clipboardVideo.locator('source')).toHaveAttribute(
+      'src',
+      '/videos/clipboard-demo.mp4',
+    );
+    await expect(clipboardVideo).toHaveAttribute('poster', '/videos/clipboard-poster.webp');
+    await expect
+      .poll(() => clipboardVideo.evaluate((el) => (el as HTMLVideoElement).readyState))
+      .toBeGreaterThanOrEqual(2);
+    const clipboardBox = (await clipboardFrame.boundingBox())!;
+    const clipVideoBox = (await clipboardVideo.boundingBox())!;
+    expect(clipboardBox.height).toBe(width >= 1200 ? 520 : 310);
+    expect(clipVideoBox.width).toBeGreaterThan(clipboardBox.width);
+    expect(clipVideoBox.x).toBeLessThan(clipboardBox.x);
+    expect(clipVideoBox.width / clipVideoBox.height).toBeCloseTo(8 / 5, 2);
+
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );
-    // Catch the actual fidelity regressions: responsive column ordering and clipped OCR.
+    // Catch responsive column ordering and a clipped Capture Text recording.
     const grid = page.getByTestId('utility-grid');
     if (width >= 1200) {
       expect(
@@ -76,7 +111,17 @@ for (const width of [390, 768, 1200, 1440]) {
       ).toBe(4);
     }
     const ocrCard = page.getByTestId('capture-text-card');
-    const result = ocrCard.getByTestId('ocr-result').filter({ visible: true });
+    const result = ocrCard.locator('.home-ocr-recording');
+    await result.scrollIntoViewIfNeeded();
+    const ocrVideo = result.locator('video');
+    await expect(ocrVideo.locator('source')).toHaveAttribute(
+      'src',
+      '/videos/capture-text-demo.mp4',
+    );
+    await expect(ocrVideo).toHaveAttribute('poster', '/videos/capture-text-poster.webp');
+    await expect
+      .poll(() => ocrVideo.evaluate((el) => (el as HTMLVideoElement).readyState))
+      .toBeGreaterThanOrEqual(2);
     const cardBox = await ocrCard.boundingBox();
     const resultBox = await result.boundingBox();
     expect(cardBox).not.toBeNull();
@@ -84,6 +129,14 @@ for (const width of [390, 768, 1200, 1440]) {
     expect(resultBox!.y).toBeGreaterThanOrEqual(cardBox!.y);
     expect(resultBox!.y + resultBox!.height).toBeLessThanOrEqual(cardBox!.y + cardBox!.height + 1);
     expect(resultBox!.x + resultBox!.width).toBeLessThanOrEqual(cardBox!.x + cardBox!.width + 1);
+    if (width >= 1200) {
+      const colorCard = (await page.getByTestId('color-picker-card').boundingBox())!;
+      const panel = (await page.locator('.home-color-art').boundingBox())!;
+      const rightInset = colorCard.x + colorCard.width - panel.x - panel.width;
+      const bottomInset = colorCard.y + colorCard.height - panel.y - panel.height;
+      expect(rightInset).toBeCloseTo(bottomInset, 0);
+    }
+    await expect(ocrVideo).toHaveCSS('transform', 'matrix(1.42, 0, 0, 1.42, 0, 0)');
     expect(errors).toEqual([]);
   });
 }
@@ -525,11 +578,40 @@ for (const width of [390, 768, 1200, 1440]) {
 
     // Every demo slot has real media or its approved mockup, never an empty placeholder.
     await expect(page.locator('[data-media-state="placeholder"]')).toHaveCount(0);
+
     await expect(
       page.locator(
         '[data-media-slot][data-media-state="mockup"], [data-media-slot][data-media-state="ready"]',
       ),
-    ).toHaveCount(6);
+    ).toHaveCount(5);
+
+    // The replaced slots now use real recordings, including the poster fallback.
+    const quickAccess = page.locator('[data-umami-section="quick-access"] figure');
+    await quickAccess.scrollIntoViewIfNeeded();
+    const quickAccessVideo = quickAccess.locator('video');
+    await expect(quickAccessVideo).toHaveAttribute('poster', '/videos/quick-access-poster.webp');
+    await expect(quickAccessVideo.locator('source')).toHaveAttribute(
+      'src',
+      '/videos/quick-access-demo.mp4',
+    );
+    await expect
+      .poll(() => quickAccessVideo.evaluate((el) => (el as HTMLVideoElement).readyState))
+      .toBeGreaterThanOrEqual(2);
+    await expect(quickAccessVideo).toHaveCSS('object-fit', 'cover');
+
+    if (width >= 1200) {
+      const annotate = page.locator('[data-umami-section="screenshot-annotate"] figure');
+      await annotate.scrollIntoViewIfNeeded();
+      const annotateVideo = annotate.locator('video');
+      await expect(annotateVideo).toHaveAttribute('poster', '/videos/annotate-poster.webp');
+      await expect(annotateVideo.locator('source')).toHaveAttribute(
+        'src',
+        '/videos/annotate-demo.mp4',
+      );
+      await expect
+        .poll(() => annotateVideo.evaluate((el) => (el as HTMLVideoElement).readyState))
+        .toBeGreaterThanOrEqual(2);
+    }
 
     const schemaTypes = await page
       .locator('script[type="application/ld+json"]')
@@ -556,22 +638,19 @@ test('screenshot FAQ keeps one answer open at a time', async ({ page }) => {
 });
 
 test('feature media frames keep their mobile crop and desktop scale', async ({ page }) => {
-  // The mockup child and the generated-media <img> are both placed inside the
-  // shared crop positioner (ProductVisual.cropClassName / MediaSlot), so the
-  // crop survives a real master replacing the mockup. Mobile crops to a fixed
-  // height; desktop is unconstrained.
+  // Screenshot uses the prepared image in full, without a crop or transform.
+  // Window Switcher retains its approved fixed mobile crop.
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto('/screenshot/');
   const shotMobile = await page.locator('[data-media-slot="screenshot-hero"]').boundingBox();
-  expect(shotMobile?.height).toBeCloseTo(352, 0);
-  // The crop is an inner positioner wider than the frame, offset to the left
-  // (the approved mobile crop). It must exist in the mockup state too.
-  const crop = await page.locator('[data-media-slot="screenshot-hero"] > *').evaluate((el) => ({
-    width: el.getBoundingClientRect().width,
-    left: el.getBoundingClientRect().left,
-  }));
-  expect(crop.width).toBeGreaterThan(shotMobile!.width);
-  expect(crop.left).toBeLessThan(shotMobile!.x);
+  expect(shotMobile?.height).toBeCloseTo((shotMobile!.width * 769) / 1098, 0);
+  const imageStyle = await page
+    .locator('[data-media-slot="screenshot-hero"] img')
+    .evaluate((el) => ({
+      fit: getComputedStyle(el).objectFit,
+      transform: getComputedStyle(el).transform,
+    }));
+  expect(imageStyle).toEqual({ fit: 'contain', transform: 'none' });
   await expect(
     page.locator('[data-umami-section="screenshot-annotate"] [data-media-slot]'),
   ).toBeHidden();
@@ -669,6 +748,8 @@ for (const width of [390, 1440]) {
     ).toBeVisible();
     await expect(page.locator('article')).toHaveCount(2);
 
+    await expect(page.getByText('Lifetime license', { exact: true })).toBeVisible();
+
     // Pro checkout uses the real Lemon Squeezy URL with the launch discount.
     const proCheckout = page.getByRole('link', { name: 'Get DeskUtils Pro', exact: true });
     const checkoutURL = new URL((await proCheckout.getAttribute('href')) ?? '');
@@ -750,6 +831,7 @@ test.describe('pricing plans render for launch on and off', () => {
       'line-through',
     );
     await expect(page.getByText('Launch Offer')).toBeVisible();
+    await expect(page.getByText('Lifetime license', { exact: true })).toBeVisible();
     await expect(page.getByText('First 100 customers · Then $14.99')).toBeVisible();
     const checkout = new URL(
       (await page
@@ -766,6 +848,7 @@ test.describe('pricing plans render for launch on and off', () => {
     await expect(page.getByText('$14.99', { exact: true })).toBeVisible();
     await expect(page.getByText('$7.99', { exact: true })).toHaveCount(0);
     await expect(page.getByText('Launch Offer')).toHaveCount(0);
+    await expect(page.getByText('Lifetime license', { exact: true })).toBeVisible();
     await expect(page.getByText('$14.99', { exact: true })).not.toHaveCSS(
       'text-decoration-line',
       'line-through',
@@ -937,6 +1020,12 @@ for (const feature of featurePages) {
 
     await expect(page.getByRole('heading', { name: feature.h1, level: 1 })).toBeVisible();
     await expect(page.locator('[data-media-state="placeholder"]')).toHaveCount(0);
+
+    if (feature.path === '/capture-text/') {
+      const video = page.locator('header video');
+      await expect(video.locator('source')).toHaveAttribute('src', '/videos/capture-text-demo.mp4');
+      await expect(video).toHaveAttribute('poster', '/videos/capture-text-poster.webp');
+    }
 
     const schemaTypes = await page
       .locator('script[type="application/ld+json"]')
@@ -1402,16 +1491,85 @@ test('mockup motion runs when visible and freezes with Reduce Motion', async ({ 
   await expect(shade).toHaveCSS('opacity', '0.74');
   await expect(shade).toHaveCSS('background-color', 'rgb(8, 17, 35)');
   expect(await shade.evaluate((el) => getComputedStyle(el.parentElement!).opacity)).toBe('1');
+});
 
-  const ring = page.locator('.home-ring-demo');
+test('Quick Ring recording synchronizes one Command key and respects playback and Reduce Motion', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const ring = page.locator('[data-ring-recording]');
   await ring.scrollIntoViewIfNeeded();
-  const canvas = await ring.locator('.home-ring-art').boundingBox();
-  const icon = await ring.locator('[data-ring-icon="0"]').boundingBox();
-  expect(Math.abs(icon!.x + icon!.width / 2 - (canvas!.x + canvas!.width / 2))).toBeLessThan(1);
-  expect(Math.abs(icon!.y + icon!.height / 2 - (canvas!.y + canvas!.height / 6))).toBeLessThan(1);
+  const video = ring.locator('video');
+  const key = ring.locator('[data-command-key]');
+  await expect(key).toHaveCount(1);
+  await expect(key).toHaveAttribute('data-pressed', 'false');
+  await expect(video).toHaveCSS('opacity', '0');
+  expect(await video.evaluate((el) => (el as HTMLVideoElement).paused)).toBe(true);
+  await expect(ring.locator('img')).toBeVisible();
+  await expect(ring.locator('img')).toHaveAttribute('src', '/videos/quickring-poster.webp');
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  const phase = await ring.getAttribute('data-ring-phase');
-  await expect.poll(() => ring.getAttribute('data-ring-phase')).not.toBe(phase);
+  await expect(video).toHaveCSS('opacity', '1');
+  await expect(video).toHaveCSS('object-fit', 'cover');
+  await expect(video.locator('source')).toHaveAttribute('src', '/videos/quickring-demo.mp4');
+  await expect(video).toHaveAttribute('poster', '/videos/quickring-start.webp');
+  await expect(ring.locator('img')).toHaveAttribute('src', '/videos/quickring-start.webp');
+  await expect(key).toHaveCSS('transition-duration', '0.04s');
+  for (const start of [0, 7.55]) {
+    const presses = await video.evaluate(async (element, start) => {
+      const player = element as HTMLVideoElement;
+      player.pause();
+      player.currentTime = start;
+      await new Promise<void>((resolve) =>
+        player.addEventListener('seeked', () => resolve(), { once: true }),
+      );
+      const key = player.parentElement!.querySelector('[data-command-key]')!;
+      const presses: number[] = [];
+      let previous = false;
+      let wrapped = start === 0;
+      const sample = new Promise<number[]>((resolve) => {
+        const tick = () => {
+          if (player.currentTime < 0.2) wrapped = true;
+          const pressed = key.getAttribute('data-pressed') === 'true';
+          if (pressed && !previous) presses.push(player.currentTime);
+          previous = pressed;
+          if (wrapped && player.currentTime > 1.1) resolve(presses);
+          else requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+      await player.play();
+      return sample;
+    }, start);
+    expect(presses).toHaveLength(2);
+    expect(presses[0]).toBeGreaterThanOrEqual(0.16);
+    expect(presses[0]).toBeLessThan(0.35);
+    expect(presses[1]).toBeGreaterThanOrEqual(0.42);
+    expect(presses[1]).toBeLessThan(0.61);
+  }
+  await page.locator('main > header').scrollIntoViewIfNeeded();
+  await expect.poll(() => video.evaluate((el) => (el as HTMLVideoElement).paused)).toBe(true);
+  await expect(key).toHaveAttribute('data-pressed', 'false');
+  await expect.poll(() => video.evaluate((el) => (el as HTMLVideoElement).currentTime)).toBe(0);
+  await expect(video).toHaveCSS('opacity', '0');
+  await ring.scrollIntoViewIfNeeded();
+  await expect.poll(() => video.evaluate((el) => (el as HTMLVideoElement).paused)).toBe(false);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(video).toHaveCSS('opacity', '0');
+  await expect(key).toHaveAttribute('data-pressed', 'false');
+  expect(await video.evaluate((el) => (el as HTMLVideoElement).paused)).toBe(true);
+});
+
+test('Quick Ring recording keeps the real poster when playback fails', async ({ page }) => {
+  await page.route('**/videos/quickring-demo.mp4', (route) => route.fulfill({ status: 404 }));
+  await page.goto('/');
+  const ring = page.locator('[data-ring-recording]');
+  await ring.scrollIntoViewIfNeeded();
+  await expect(ring.locator('video')).toHaveCount(0);
+  await expect(ring.locator('img')).toBeVisible();
+  await expect(ring.locator('img')).toHaveAttribute('src', '/videos/quickring-poster.webp');
+  await expect(ring.locator('[data-command-key]')).toHaveAttribute('data-pressed', 'false');
 });
 
 test.describe('screenshot recording tabs', () => {

@@ -101,7 +101,7 @@ export function ColorPickerPage({ locale = 'en' }: { locale?: Locale }) {
               <ProductVisual
                 id="color-picker-panel"
                 locale={locale}
-                className="w-[300px] max-w-full"
+                className="w-[300px] max-w-full overflow-visible! rounded-none! border-0! bg-transparent!"
               >
                 <MockupCanvas width={340} height={330}>
                   <ColorPickerPanel />

@@ -7,7 +7,7 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { Faq } from '@/components/ui/Faq';
 import { RelatedGuides } from '@/components/sections/RelatedGuides';
 import { RelatedTools } from '@/components/sections/RelatedTools';
-import { QuickRingDemo } from '@/components/mockups/QuickRingDemo';
+import { QuickRingRecording } from '@/components/media/QuickRingRecording';
 import {
   quickRingActions,
   quickRingFaqs,
@@ -87,20 +87,8 @@ export function QuickRingPage({ locale = 'en' }: { locale?: Locale }) {
               {t('home.freeNote', { version: product.minimumMacOS })}
             </p>
           </div>
-          <div
-            className="relative flex h-[380px] items-center justify-center overflow-hidden rounded-[28px] dt:h-[580px]"
-            style={{
-              background:
-                'radial-gradient(80% 70% at 70% 10%, #efeaff 0%, #e6ecff 50%, #dfe8ff 100%)',
-            }}
-          >
-            <QuickRingDemo
-              steps={[
-                t('quick-ring.step.press.title'),
-                t('quick-ring.step.opens.title'),
-                t('quick-ring.step.choose.title'),
-              ]}
-            />
+          <div className="w-full">
+            <QuickRingRecording locale={locale} />
           </div>
         </header>
 

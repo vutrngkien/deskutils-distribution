@@ -2,6 +2,7 @@ import { Copy, PencilLine, Pin, Save, Trash2, X, type LucideIcon } from 'lucide-
 import { ToolIcon } from '@/components/ToolIcon';
 import { StructuredData } from '@/components/StructuredData';
 import { ProductVisual } from '@/components/media/ProductVisual';
+import { DemoMedia } from '@/components/DemoMedia';
 import { Button } from '@/components/ui/Button';
 import { FinalCta } from '@/components/layout/FinalCta';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
@@ -14,7 +15,6 @@ import { ScreenshotStage } from '@/components/mockups/ScreenshotStage';
 import { ScreenshotModes } from '@/components/features/screenshot/ScreenshotModes';
 import {
   PinnedScreenshotVisual,
-  QuickAccessCard,
   ScreenshotHistoryVisual,
   ScrollingCaptureVisual,
 } from '@/components/mockups/ScreenshotVisuals';
@@ -30,7 +30,7 @@ import { translate } from '@/content/i18n';
 import { localePath, type Locale } from '@/content/locales';
 import { routeHref } from '@/content/routes';
 import { breadcrumbData, faqData } from '@/content/structured-data';
-import { product } from '@/content/product';
+import { demos, product } from '@/content/product';
 
 const quickAccessIcons: Record<string, LucideIcon> = {
   copy: Copy,
@@ -85,9 +85,6 @@ export function ScreenshotPage({ locale = 'en' }: { locale?: Locale }) {
         {/* Hero */}
         <header
           className="container-page flex flex-col items-start gap-5 pt-10 text-left dt:items-center dt:text-center"
-          style={{
-            background: 'radial-gradient(60% 60% at 50% 100%, #dfe9ff 0%, rgba(223,233,255,0) 70%)',
-          }}
           data-umami-section="hero"
         >
           <div className="w-full max-w-[1100px]">
@@ -121,8 +118,7 @@ export function ScreenshotPage({ locale = 'en' }: { locale?: Locale }) {
             locale={locale}
             priority
             className="mt-9 w-full"
-            frameClassName="relative h-[352px] overflow-hidden rounded-[18px] dt:h-[704px] dt:max-w-[1100px] dt:rounded-[25px] dt:border dt:border-line dt:bg-base-200"
-            cropClassName="absolute left-[-100px] top-0 w-[550px] dt:left-1/2 dt:top-1/2 dt:w-[1000px] dt:-translate-x-1/2 dt:-translate-y-1/2"
+            frameClassName="rounded-none! border-0! bg-transparent! dt:max-w-[1100px]"
           >
             <MockupCanvas width={1000} height={640}>
               <ScreenshotStage />
@@ -132,6 +128,7 @@ export function ScreenshotPage({ locale = 'en' }: { locale?: Locale }) {
 
         {/* Capture modes */}
         <ScreenshotModes
+          locale={locale}
           eyebrow={t('screenshot.modes.eyebrow')}
           title={t('screenshot.modes.title')}
           body={t('screenshot.modes.body')}
@@ -151,11 +148,13 @@ export function ScreenshotPage({ locale = 'en' }: { locale?: Locale }) {
             <p className="text-[17px] leading-[1.55] text-muted">{t('screenshot.annotate.lede')}</p>
           </div>
           <div className="grid grid-cols-1 gap-8 dt:grid-cols-[8fr_4fr] dt:items-center dt:gap-10">
-            <ProductVisual id="screenshot" locale={locale} className="hidden w-full dt:block">
-              <MockupCanvas width={1000} height={640}>
-                <ScreenshotStage />
-              </MockupCanvas>
-            </ProductVisual>
+            <div className="hidden w-full dt:block [&_img]:object-cover! [&_video]:object-cover!">
+              <DemoMedia
+                demo={{ ...demos.screenshot, mockup: false, aspectRatio: '1000 / 640' }}
+                caption={false}
+                locale={locale}
+              />
+            </div>
             <div className="flex flex-col">
               {screenshotTools.map((tool) => (
                 <div key={tool.name} className="flex items-start gap-3.5 py-3">
@@ -200,13 +199,9 @@ export function ScreenshotPage({ locale = 'en' }: { locale?: Locale }) {
                 })}
               </ul>
             </div>
-            <ProductVisual id="screenshot-quick-access" locale={locale} className="w-full">
-              <MockupCanvas width={600} height={380}>
-                <div style={{ position: 'relative', width: 600, height: 380 }}>
-                  <QuickAccessCard />
-                </div>
-              </MockupCanvas>
-            </ProductVisual>
+            <div className="w-full [&_img]:object-cover! [&_video]:object-cover!">
+              <DemoMedia demo={demos.quickAccess} caption={false} locale={locale} />
+            </div>
           </div>
         </section>
 

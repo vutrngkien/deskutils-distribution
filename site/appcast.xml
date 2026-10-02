@@ -3,6 +3,41 @@
     <channel>
         <title>DeskUtils</title>
         <item>
+            <title>0.1.11</title>
+            <pubDate>Sat, 03 Oct 2026 06:26:46 +0700</pubDate>
+            <link>https://deskutils.app/</link>
+            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.11</sparkle:fullReleaseNotesLink>
+            <sparkle:version>15</sparkle:version>
+            <sparkle:shortVersionString>0.1.11</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# DeskUtils 0.1.11
+
+DeskUtils 0.1.11 makes window switching smoother, adds quick tool toggles during setup, and restores dragging for pinned screenshots and Clipboard on macOS 27.
+
+## Improvements
+
+- **Window Switcher** — cached previews appear immediately while updated snapshots load in the background. The selected window is refreshed first, with fewer unnecessary background captures.
+- **Onboarding** — enable or disable Color Picker, Clean Keyboard, Prevent Sleep, External Display Only, External Display Dimming, and Window Switcher directly during setup.
+- **Quick Ring** — added staggered icon entrance animations, smoother selection transitions, and clearer highlighting for the selected tool. Animations respect the system Reduce Motion setting.
+- **About** — release notes now open the [DeskUtils changelog](https://deskutils.app/changelog/), and the feedback action opens the [feedback and bug report page](https://deskutils.app/feedback/).
+
+## Fixes
+
+- Fixed pinned screenshots not moving when dragged on macOS 27. Locked screenshots remain fixed in place.
+- Fixed the Clipboard panel not moving when dragged from an empty area on macOS 27.
+- Fixed missing Dock Preview thumbnails when multiple preview requests occur at the same time.
+- Further improved onboarding window sizing on macOS 27 to prevent the setup window from stretching during initial layout.
+
+## Notes
+
+- Window Switcher is now enabled by default when no preference has been saved. Existing on/off preferences are preserved.
+- Window Switcher requires Accessibility permission. Screen Recording permission is optional and enables window previews.
+- Build 15.
+- Requires macOS 15.2 or later.
+]]></description>
+            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.11/DeskUtils-0.1.11-15.zip" length="59648990" type="application/octet-stream" sparkle:edSignature="3dwW0krhvbirrQizgWx97J5TWWyb0Ah5xDeXWdIWodvBb4FZE3hyZdXPp5cfnXpHBJ3mFDNApP7A/nA4yKt8Bg=="/>
+        </item>
+        <item>
             <title>0.1.10</title>
             <pubDate>Wed, 30 Sep 2026 16:11:07 +0700</pubDate>
             <link>https://deskutils.app/</link>
@@ -60,49 +95,6 @@ DeskUtils 0.1.9 adds Window Switcher with live window previews and Dock Preview,
             <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.9/DeskUtils-0.1.9-13.zip" length="59428294" type="application/octet-stream" sparkle:edSignature="Dc+yIxTCQ577OvL7bxj9A06eIToHLm/w+QIke6px4rSd0eEDDU4cCsbEDbdyZ3/33eFS3FWslWpJgv9LsZSxAw=="/>
         </item>
         <item>
-            <title>0.1.8</title>
-            <pubDate>Fri, 25 Sep 2026 18:35:47 +0700</pubDate>
-            <link>https://deskutils.app/</link>
-            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.8</sparkle:fullReleaseNotesLink>
-            <sparkle:version>12</sparkle:version>
-            <sparkle:shortVersionString>0.1.8</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[# DeskUtils 0.1.8
-
-DeskUtils 0.1.8 rebuilds onboarding around guided feature demos, replaces the inert Pro locks with one shared upgrade panel, and gives Full Annotate backgrounds and pinned screenshots a significant upgrade.
-
-## What's New
-
-- **New onboarding** — a seven-page flow with looping, muted video demos for Quick Ring, Screenshot, Clipboard, Capture Text, and more. Every feature page has an animated fallback when a demo is unavailable, **Skip** jumps to the end, and the final page offers Accessibility and Screen Recording access without making them mandatory. Launch at Login is set on the last page. Replay it from **Settings → General → Help → Restart**.
-- **Shared Pro upgrade panel** — every Pro-gated action (menu bar, Settings, Quick Ring, global shortcuts) now opens one consistent panel that names the feature being used, lists the Pro benefits, and offers a single **Get DeskUtils Pro** button. Locked items stay clickable instead of showing a static lock badge.
-- **Annotate background sidebar** — open it with the toolbar `rectangle.on.rectangle` button or ⌘B to style the canvas behind your screenshot. Choose gradients, five bundled wallpapers plus your own, blurred backgrounds, or solid colors, then tune padding, shadow, corners, aspect ratio, and alignment. Backgrounds are saved with the document and restored when you reopen it.
-- **Pinned screenshot windows** — pinned images now show **Close**, **Edit**, **Zoom**, **Lock**, and a drag handle on hover. Zoom with the percentage pill, scroll wheel, or pinch; lock the window to click through to apps underneath; drag the pin into another app as a file; and jump straight to Full Annotate with edits reflected in place.
-
-## Improvements
-
-- The curved arrow tool now has a control handle, so you can adjust its curvature after drawing.
-- Refined the Quick Ring radial menu: a softer glass background with a gradient rim, subtler slot fills, and active tools marked by a green icon instead of a small dot. The live panel and Settings preview share the same rendering.
-- External Display Only now appears in the menu as a session section with an inline on/off toggle, and keeps its explicit retry action when recovery fails.
-
-## Fixes
-
-- Corrected canvas background rendering and constrained backgrounds to the annotation canvas.
-- Annotation selection chrome is now shape-specific and matches the selected tool.
-- Fixed pinned screenshot windows drifting out of sync: source URLs stay current, Quick Access preview updates are gated by the editor's render generation, and focus and save state stay consistent.
-- Aligned and centered the Pro upgrade benefits with the panel subtitle, and fixed a race that could dismiss the panel right after it opened.
-- Onboarding now shows the display dimming tool.
-
-## Notes
-
-- Build 12.
-- The annotate wallpaper library ships five default wallpapers; custom wallpapers you add are stored as bookmarks and stay on your Mac.
-- Pinned windows and Full Annotate follow your system Reduce Motion setting.
-- Onboarding and upgrade interactions are covered by the existing opt-out anonymous analytics, configurable in **About → Privacy**.
-- Requires macOS 15.2 or later.
-]]></description>
-            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.8/DeskUtils-0.1.8-12.zip" length="58408294" type="application/octet-stream" sparkle:edSignature="QVB7aM0DBn+jNWtlGgOGullkZ+GUFVE48k92SzPzH10O5amDMzbGW3c1GG7MBBU1C5b8vGS9jSvFrbE9tn4LBw=="/>
-        </item>
-        <item>
             <title>0.1.1</title>
             <pubDate>Sun, 23 Aug 2026 19:05:48 +0700</pubDate>
             <link>https://deskutils.app/</link>
@@ -125,6 +117,6 @@ DeskUtils 0.1.8 rebuilds onboarding around guided feature demos, replaces the in
     </channel>
 </rss>
 <!-- sparkle-signatures:
-edSignature: KKPQQtdVQQWwO96F7VCRnTUDj4nI4SDSZQ5t1VWHoNYLbqw2xZQYEiklXfn4avW6Nj97AwXXeq0V1qhXaecKAg==
-length: 10557
+edSignature: x54nqPDISVbQiaoy28OZ70M/NZWzajXAfvk4nxa8+pvMkvQu99bdZLya8raunyJMQ7eQHimsrG0a2Jj53DFOCQ==
+length: 9040
 -->

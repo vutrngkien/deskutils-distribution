@@ -7,6 +7,12 @@ const internalRoutes = routes
   .filter((route) => route.publish && !route.guide && route.path !== '/')
   .map((route) => route.path);
 
+const releasesApi = 'https://api.github.com/repos/vutrngkien/deskutils-distribution/releases';
+test.beforeEach(async ({ page }) => {
+  // Ordinary browser tests stay offline and deterministic, including Changelog.
+  await page.route(`${releasesApi}**`, (route) => route.fulfill({ json: releaseSnapshot }));
+});
+
 for (const width of [390, 768, 1200, 1440]) {
   test(`homepage works at ${width}px`, async ({ page }) => {
     const errors: string[] = [];
@@ -932,7 +938,9 @@ test.describe('pricing plans render for launch on and off', () => {
 for (const width of [390, 1440]) {
   test(`changelog page renders every release at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 1000 });
-    await page.goto('/changelog/');
+    const response = await page.goto('/changelog/');
+    // The initial HTML retains release content for SEO and JavaScript-free access.
+    expect(await response!.text()).toContain(`<article id="${releaseSnapshot[0].tag_name}"`);
 
     await expect(page.getByRole('heading', { name: 'Changelog', level: 1 })).toBeVisible();
 
@@ -971,6 +979,103 @@ test('changelog shows version, date and link for a release without notes', async
   // No fabricated notes paragraph when the body is empty.
   await expect(empty.locator('p')).toHaveCount(0);
 });
+
+for (const { path, width, linkLabel } of [
+  { path: '/changelog/', width: 390, linkLabel: 'View on GitHub' },
+  { path: '/vi/changelog/', width: 1440, linkLabel: 'Xem trên GitHub' },
+]) {
+  test(`changelog refreshes paginated releases safely on each visit at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    const fresh = {
+      ...releaseSnapshot[0],
+      id: 8888,
+      tag_name: 'v0.1.11',
+      name: 'DeskUtils v0.1.11',
+      published_at: '2026-10-03T00:00:00Z',
+      html_url: 'https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.11',
+      body: `## New notes\n\n- **Fresh feature**\n- [unsafe](javascript:alert(1))\n\n<script>window.__pwned=true</script>\n\n${'long-word-'.repeat(60)}`,
+    };
+    const edited = { ...releaseSnapshot[0], body: 'Edited release notes from GitHub.' };
+    const empty = {
+      ...fresh,
+      id: 8889,
+      tag_name: 'v0.0.1',
+      name: 'DeskUtils v0.0.1',
+      body: null,
+      published_at: '2020-01-01T00:00:00Z',
+      html_url: 'https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.0.1',
+    };
+    const pagesRequested: string[] = [];
+    await page.route(`${releasesApi}**`, async (route) => {
+      expect(route.request().headers()['authorization']).toBeUndefined();
+      const pageNumber = new URL(route.request().url()).searchParams.get('page')!;
+      pagesRequested.push(pageNumber);
+      await route.fulfill({
+        json:
+          pageNumber === '1'
+            ? [
+                edited,
+                fresh,
+                ...Array.from({ length: 97 }, (_, i) => ({ ...fresh, id: 9000 + i, draft: true })),
+                { ...fresh, id: 9999, prerelease: true },
+              ]
+            : [empty],
+      });
+    });
+    await page.goto(`${path}#v0.1.11`);
+    const list = page.locator('[data-umami-section="changelog-releases"]');
+    await expect(list).toHaveAttribute('data-release-source', 'github');
+    await expect(list.locator('article')).toHaveCount(3);
+    await expect(list.locator('article').first()).toHaveAttribute('id', fresh.tag_name);
+    await expect(
+      list.locator('article').first().getByRole('link', { name: linkLabel }),
+    ).toHaveAttribute('href', fresh.html_url);
+    await expect(page.locator('[id="v0.1.10"]')).toContainText(edited.body);
+    await expect(list.locator('article').last().locator('p')).toHaveCount(0);
+    await expect(list.locator('time')).toHaveCount(3);
+    await expect(list.locator('strong')).toContainText('Fresh feature');
+    await expect(list.locator('a[href^="javascript:"], script')).toHaveCount(0);
+    expect(await page.evaluate(() => (window as { __pwned?: boolean }).__pwned)).toBeUndefined();
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    expect(pagesRequested).toEqual(['1', '2']);
+    await page.goto('/');
+    await page.goto(path);
+    await expect(list).toHaveAttribute('data-release-source', 'github');
+    expect(pagesRequested).toEqual(['1', '2', '1', '2']);
+  });
+}
+
+for (const failure of ['rate-limit', 'offline', 'malformed', 'empty', 'second-page']) {
+  test(`changelog retains the complete snapshot on ${failure} failure`, async ({ page }) => {
+    await page.route(`${releasesApi}**`, async (route) => {
+      if (failure === 'offline') return route.abort('failed');
+      if (failure === 'rate-limit')
+        return route.fulfill({ status: 403, json: { message: 'API rate limit exceeded' } });
+      if (failure === 'malformed') return route.fulfill({ json: [{ tag_name: 'invalid' }] });
+      if (failure === 'empty') return route.fulfill({ json: [] });
+      if (new URL(route.request().url()).searchParams.get('page') === '1') {
+        return route.fulfill({
+          json: Array.from({ length: 100 }, (_, i) => ({ ...releaseSnapshot[0], id: i })),
+        });
+      }
+      return route.fulfill({ status: 500, json: { message: 'Failed' } });
+    });
+    await page.goto('/changelog/');
+    const list = page.locator('[data-umami-section="changelog-releases"]');
+    await expect(list).toHaveAttribute('data-release-status', 'error');
+    await expect(list).toHaveAttribute('data-release-source', 'snapshot');
+    await expect(list.locator('article')).toHaveCount(releaseSnapshot.length);
+    await expect(list.locator('article').first()).toHaveAttribute(
+      'id',
+      releaseSnapshot[0].tag_name,
+    );
+  });
+}
 
 test('changelog markdown renders safely without executing or unsafe links', async ({ page }) => {
   const result = await build({

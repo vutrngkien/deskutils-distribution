@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import releaseSnapshot from '../content/releases.json';
 
 /**
  * Visual regression checks. These are opt-in (`RUN_VISUAL=1`) and are intended
@@ -11,6 +12,13 @@ import { test, expect } from '@playwright/test';
  *   RUN_VISUAL=1 npx playwright test tests/visual.spec.ts --update-snapshots
  */
 test.skip(!process.env.RUN_VISUAL, 'Visual checks run only with RUN_VISUAL=1');
+
+test.beforeEach(async ({ page }) => {
+  await page.route(
+    'https://api.github.com/repos/vutrngkien/deskutils-distribution/releases**',
+    (route) => route.fulfill({ json: releaseSnapshot }),
+  );
+});
 
 const regions: [name: string, selector: string][] = [
   ['hero-trust', 'main > header'],

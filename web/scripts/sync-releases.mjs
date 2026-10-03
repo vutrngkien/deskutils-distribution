@@ -4,8 +4,9 @@ import { fileURLToPath } from 'node:url';
 /**
  * Sync the in-site changelog snapshot from the public GitHub Releases API.
  *
- * This is the ONLY place the website talks to GitHub. `npm run build` and the
- * tests read `content/releases.json` and never touch the network.
+ * This refreshes initial HTML/fallback content. Changelog also reads the public
+ * API in the browser on each visit. Builds and ordinary tests read the snapshot
+ * without fetching; browser tests intercept API requests.
  *
  * Safety: the snapshot is only replaced after a successful fetch that yields at
  * least one release. A failed or empty sync exits non-zero and leaves the

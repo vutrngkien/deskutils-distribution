@@ -2,7 +2,8 @@ import snapshot from './releases.json';
 
 /**
  * Build-time snapshot of published GitHub releases. Regenerate with
- * `npm run sync:releases`; the build and tests never call GitHub.
+ * `npm run sync:releases`; builds never call GitHub. The Changelog browser
+ * component refreshes this initial HTML/fallback snapshot on each visit.
  */
 export type Release = {
   id: number;

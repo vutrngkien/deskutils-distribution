@@ -3,9 +3,10 @@
 Production hosting uses Vercel. Configure the project to build `web/` and set
 the public checkout, discount, launch-offer and feedback variables in Vercel.
 These values are embedded at build time, so changing them requires a rebuild.
-Builds read the committed release snapshot; run `npm run sync:releases` before
-`npm run build` when the changelog needs refreshing. Do not sync during ordinary
-tests. Committing source does not publish the website.
+Changelog refreshes from the public GitHub Releases API whenever a visitor opens
+the page; publishing or editing a release no longer requires a Vercel rebuild.
+Builds still read the committed snapshot for initial HTML and fallback content.
+Do not sync during ordinary tests. Committing source does not publish the website.
 
 ## Optional GitHub Pages workflow
 
@@ -41,13 +42,21 @@ manual artifact checks above; a successful source build does not establish them.
 ## Changelog snapshot
 
 `/changelog/` renders `web/content/releases.json`, a snapshot synced from the
-public GitHub Releases API. CI runs `npm run sync:releases` before the build; a
+public GitHub Releases API. On each visit, the browser fetches every API page,
+filters drafts/prereleases, sorts by publication date and replaces the list only
+after the complete fetch succeeds. Release notes remain verbatim and use the
+same safe Markdown renderer. API errors, rate limiting, malformed/empty data or
+a 15-second timeout leave the initial snapshot visible. No token is sent from
+the browser. Version anchors also work for releases newer than the snapshot.
+
+CI runs `npm run sync:releases` before the build; a
 failed sync fails the job and leaves the committed snapshot unchanged (it never
-overwrites with empty data). The site build and tests read the snapshot and never
-call GitHub from the browser. Publishing or editing a release in this repo
+overwrites with empty data). Builds never require a network call; browser tests
+mock GitHub responses. Run `npm run sync:releases` locally to refresh initial
+HTML/fallback content when convenient. Publishing or editing a release in this repo
 triggers the Pages workflow directly (`release: [published, edited]`); the app
 repo can also rebuild cross-repo with a `repository_dispatch` of type
-`release-published`. Run `npm run sync:releases` locally after cutting a release.
+`release-published`. These rebuild triggers are optional for live Changelog freshness.
 
 For rollback, disable `DESKUTILS_WEBSITE_RELEASE_READY`, revert the website source
 change, and rebuild/redeploy the previous website artifact. Never restore an older

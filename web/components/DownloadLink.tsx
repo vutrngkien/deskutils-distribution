@@ -12,6 +12,7 @@ export type DownloadPlacement =
   | 'nav'
   | 'pricing_free'
   | 'pricing_pro'
+  | 'offer_popup'
   | 'cta'
   | 'install_page'
   | 'not_found';

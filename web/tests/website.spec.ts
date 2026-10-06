@@ -9,6 +9,10 @@ const internalRoutes = routes
 
 const releasesApi = 'https://api.github.com/repos/vutrngkien/deskutils-distribution/releases';
 test.beforeEach(async ({ page }) => {
+  // The offer popup has its own suite; keep existing page checks unobstructed.
+  await page.addInitScript(() => {
+    sessionStorage.setItem('deskutils:launch-offer:seen', 'true');
+  });
   // Ordinary browser tests stay offline and deterministic, including Changelog.
   await page.route(`${releasesApi}**`, (route) => route.fulfill({ json: releaseSnapshot }));
 });

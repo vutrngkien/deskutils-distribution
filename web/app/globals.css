@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import './homepage.css';
+@import './offer-popup.css';
 
 @plugin "daisyui" {
   themes: false;

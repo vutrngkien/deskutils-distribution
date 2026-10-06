@@ -68,6 +68,17 @@ export const sharedRequiredKeys: MessageKey[] = [
  */
 export const routeRequiredKeys: Record<string, MessageKey[]> = {
   home: [
+    'offerPopup.badge',
+    'offerPopup.title',
+    'offerPopup.description',
+    'offerPopup.lifetimeTitle',
+    'offerPopup.devicesTitle',
+    'offerPopup.devicesDescription',
+    'offerPopup.cta',
+    'offerPopup.later',
+    'offerPopup.close',
+    'offerPopup.saving',
+    'offerPopup.priceNote',
     'home.focused.eyebrow',
     'home.focused.title',
     'home.title.accent',

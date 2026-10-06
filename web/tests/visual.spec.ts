@@ -14,6 +14,10 @@ import releaseSnapshot from '../content/releases.json';
 test.skip(!process.env.RUN_VISUAL, 'Visual checks run only with RUN_VISUAL=1');
 
 test.beforeEach(async ({ page }) => {
+  // The offer popup has its own suite; keep existing page checks unobstructed.
+  await page.addInitScript(() => {
+    sessionStorage.setItem('deskutils:launch-offer:seen', 'true');
+  });
   await page.route(
     'https://api.github.com/repos/vutrngkien/deskutils-distribution/releases**',
     (route) => route.fulfill({ json: releaseSnapshot }),

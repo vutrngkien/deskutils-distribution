@@ -1,0 +1,243 @@
+/* daisyUI components use the utilities layer; keep overrides scoped to this dialog. */
+@layer utilities {
+  .offer-popup .offer-popup-box {
+    position: relative;
+    width: calc(100% - 32px);
+    max-width: 740px;
+    max-height: calc(100dvh - 32px);
+    padding: 28px;
+    border: 1px solid var(--color-line);
+    border-radius: 26px;
+    color: var(--color-base-content);
+    background:
+      radial-gradient(ellipse at 100% 0%, var(--color-secondary), transparent 54%),
+      var(--color-base-100);
+    box-shadow: 0 30px 100px color-mix(in srgb, var(--color-neutral) 30%, transparent);
+  }
+  .offer-popup .offer-popup-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    width: 34px;
+    height: 34px;
+    min-height: 34px;
+    color: var(--color-muted);
+    background: color-mix(in srgb, var(--color-base-content) 5%, var(--color-base-100));
+  }
+  .offer-popup-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 176px;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 20px;
+  }
+  .offer-popup-copy {
+    position: relative;
+    z-index: 1;
+  }
+  .offer-popup .offer-popup-badge {
+    height: auto;
+    gap: 7px;
+    padding: 6px 11px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--color-secondary);
+    color: var(--color-secondary-content);
+    font-size: 13px;
+    font-weight: 650;
+  }
+  .offer-popup-title {
+    margin-top: 14px;
+    font-size: 32px;
+    font-weight: 740;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+    overflow-wrap: anywhere;
+  }
+  .offer-popup-price-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .offer-popup-price {
+    color: var(--color-primary);
+    font-size: 64px;
+    font-weight: 780;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    white-space: nowrap;
+  }
+  .offer-popup-price-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .offer-popup-price-detail del {
+    color: var(--color-muted);
+    font-size: 17px;
+    line-height: 1.2;
+  }
+  .offer-popup .offer-popup-saving {
+    height: auto;
+    padding: 5px 9px;
+    border: 0;
+    border-radius: 8px;
+    color: var(--color-success);
+    background: color-mix(in srgb, var(--color-success) 9%, var(--color-base-100));
+    font-size: 14px;
+    font-weight: 650;
+  }
+  .offer-popup-description {
+    margin-top: 14px;
+    color: var(--color-muted);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .offer-popup-art {
+    width: 176px;
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    pointer-events: none;
+    filter: saturate(0.8)
+      drop-shadow(0 8px 14px color-mix(in srgb, var(--color-primary) 8%, transparent));
+  }
+  .offer-popup-benefits {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .offer-popup .offer-popup-benefit {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--color-base-200) 45%, var(--color-base-100));
+  }
+  .offer-popup-benefit-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: var(--color-secondary);
+    color: var(--color-primary);
+  }
+  .offer-popup-benefit-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+  .offer-popup-benefit-devices .offer-popup-benefit-icon {
+    color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 10%, var(--color-base-100));
+  }
+  .offer-popup-benefit h3 {
+    font-size: 16px;
+    font-weight: 680;
+    line-height: 1.35;
+    letter-spacing: -0.025em;
+  }
+  .offer-popup-benefit p {
+    margin-top: 5px;
+    color: var(--color-muted);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .offer-popup-purchase {
+    margin-top: 20px;
+  }
+  .offer-popup .offer-popup-cta {
+    display: flex;
+    width: 100%;
+    min-height: 56px;
+    height: auto;
+    gap: 10px;
+    padding: 14px 20px;
+    border: 1px solid var(--color-primary);
+    border-radius: 14px;
+    color: var(--color-primary-content);
+    background: linear-gradient(115deg, var(--color-info), var(--color-primary));
+    font-size: 17px;
+    font-weight: 650;
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--color-primary) 18%, transparent);
+  }
+  .offer-popup .offer-popup-cta:hover {
+    filter: brightness(1.04);
+  }
+  .offer-popup-eligibility {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--color-muted);
+  }
+  .offer-popup-later {
+    margin-top: 6px;
+    text-align: center;
+  }
+  .offer-popup-later .btn {
+    min-height: 32px;
+    height: auto;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+  @media (max-width: 767px) {
+    .offer-popup .offer-popup-box {
+      padding: 24px;
+      border-radius: 24px;
+    }
+    .offer-popup .offer-popup-close {
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      min-height: 32px;
+    }
+    .offer-popup-hero {
+      display: block;
+      padding-bottom: 18px;
+    }
+    .offer-popup-title {
+      margin-top: 16px;
+      font-size: 28px;
+    }
+    .offer-popup-price {
+      font-size: 56px;
+    }
+    .offer-popup-description {
+      font-size: 15px;
+    }
+    .offer-popup-art {
+      position: absolute;
+      width: 60px;
+      top: -14px;
+      right: 32px;
+      margin: 0;
+    }
+    .offer-popup-benefits {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+    .offer-popup .offer-popup-benefit {
+      padding: 13px;
+    }
+    .offer-popup-benefit p {
+      font-size: 14px;
+    }
+    .offer-popup .offer-popup-cta {
+      min-height: 54px;
+      font-size: 16px;
+    }
+    .offer-popup-eligibility {
+      font-size: 13px;
+    }
+  }
+}

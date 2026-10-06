@@ -3,6 +3,42 @@
     <channel>
         <title>DeskUtils</title>
         <item>
+            <title>0.1.12</title>
+            <pubDate>Tue, 06 Oct 2026 10:36:15 +0700</pubDate>
+            <link>https://deskutils.app/</link>
+            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.12</sparkle:fullReleaseNotesLink>
+            <sparkle:version>16</sparkle:version>
+            <sparkle:shortVersionString>0.1.12</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# DeskUtils 0.1.12
+
+DeskUtils 0.1.12 brings Liquid Glass to screenshot editing and capture controls, makes Screenshot History smoother with large collections, and fixes editor focus when opening images from Quick Access or History.
+
+## Improvements
+
+- **Full Annotate** — refreshed toolbars, contextual controls, canvas background controls, and action buttons with Liquid Glass. Toolbar spacing is more consistent, with rounded controls and button press feedback.
+- **Quick Annotate** — updated floating toolbars and controls to match Full Annotate, including rounded panels and button press feedback.
+- **Screenshot History** — added Liquid Glass to the HUD background, search, time filters, selection actions, and Restore buttons in both Compact and Expanded modes. Improved scrolling, selection, and switching between modes with large screenshot collections, with more efficient thumbnail loading.
+- **Window Switcher** — refined the glass panel edge and close button, with button press feedback.
+- **Scrolling Capture** — updated the HUD and action buttons with Liquid Glass, with softer panel edges and shadows.
+
+## Fixes
+
+- Fixed Full Annotate opening without becoming fully active when Edit is selected in Quick Access or Screenshot History. The editor now comes to the front with active window controls immediately.
+- Fixed the Full Annotate traffic light buttons not staying centered with the toolbar after window updates or resizing.
+- Fixed editor toolbar actions being routed while a sheet, such as Save As, is open.
+- Improved toolbar click handling so dragging between buttons cancels the original click and releasing a button runs its action only once.
+
+## Notes
+
+- Liquid Glass is used on macOS 26 and later, with fallback surfaces on macOS 15.2 and when Reduce Transparency is enabled. Button animations respect Reduce Motion.
+- Screenshot History keeps its Solid background option. Quick Access retains its existing appearance.
+- Build 16.
+- Requires macOS 15.2 or later.
+]]></description>
+            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.12/DeskUtils-0.1.12-16.zip" length="59787668" type="application/octet-stream" sparkle:edSignature="nTR8/9sMNyi1J1cKtATAP4i6h0iUr7lwMfkTCwNiTHc4iB+OpdYR1KaWLFBHjpEt7StoUpCZQmnyh+mcTHF9DA=="/>
+        </item>
+        <item>
             <title>0.1.11</title>
             <pubDate>Sat, 03 Oct 2026 06:26:46 +0700</pubDate>
             <link>https://deskutils.app/</link>
@@ -64,37 +100,6 @@ DeskUtils 0.1.10 is a hotfix release that improves Window Switcher stability and
             <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.10/DeskUtils-0.1.10-14.zip" length="59445926" type="application/octet-stream" sparkle:edSignature="AxihkGh0weOYAMfc0nTPdqyg7eMRqJVPc2Hy6kdzQVxaC1jzVV0Mdu7DHAKRCTto5bilpQlNdHruYMOaiXlQDw=="/>
         </item>
         <item>
-            <title>0.1.9</title>
-            <pubDate>Wed, 30 Sep 2026 14:52:56 +0700</pubDate>
-            <link>https://deskutils.app/</link>
-            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.9</sparkle:fullReleaseNotesLink>
-            <sparkle:version>13</sparkle:version>
-            <sparkle:shortVersionString>0.1.9</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[# DeskUtils 0.1.9
-
-DeskUtils 0.1.9 adds Window Switcher with live window previews and Dock Preview, introduces Mouse Jiggler, and fixes the onboarding window height on macOS 27.
-
-## What's New
-
-- **Window Switcher** — an opt-in replacement for the macOS app switcher. Hold Command and press Tab (Shift-Tab reverses) to open a grid of every window on the display under the pointer, in the current Space, including occluded and minimized windows. Move through the grid with the arrow keys and release Command to focus the highlighted window; Return or a click focuses, Escape or an outside click cancels. A close button appears on the selected or hovered card, and closing a window never quits an app or answers a save dialog. Requires Accessibility; Screen Recording is optional and, when granted, enables live thumbnails (otherwise app icons and window titles are shown).
-- **Dock Preview** — hover a running app's Dock icon to preview its windows without leaving the Dock. It shows up to three cards before scrolling, follows the Dock's orientation (horizontal for a bottom Dock, vertical for side Docks), and swaps instantly as you move between icons. Clicking a card restores and focuses it, including a minimized window; hovering a card reveals a close button. It never consumes Dock clicks, and a secondary click (for example the Dock context menu) keeps it hidden so it cannot cover the menu.
-- **Mouse Jiggler** — keep the pointer active inside a screen, window, or custom area you choose, with an adjustable movement interval and automatic pause during user activity.
-
-## Fixes
-
-- Fixed the onboarding window growing beyond its intended maximum height on macOS 27. The window remains manually resizable within its supported size limits.
-
-## Notes
-
-- Window Switcher is off by default. Enable it in **Settings → Window Switcher**; it requires Accessibility access, and Screen Recording is optional for live previews.
-- Dock Preview is a separate setting, enabled by default once Window Switcher is on.
-- Build 13.
-- Requires macOS 15.2 or later.
-]]></description>
-            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.9/DeskUtils-0.1.9-13.zip" length="59428294" type="application/octet-stream" sparkle:edSignature="Dc+yIxTCQ577OvL7bxj9A06eIToHLm/w+QIke6px4rSd0eEDDU4cCsbEDbdyZ3/33eFS3FWslWpJgv9LsZSxAw=="/>
-        </item>
-        <item>
             <title>0.1.1</title>
             <pubDate>Sun, 23 Aug 2026 19:05:48 +0700</pubDate>
             <link>https://deskutils.app/</link>
@@ -117,6 +122,6 @@ DeskUtils 0.1.9 adds Window Switcher with live window previews and Dock Preview,
     </channel>
 </rss>
 <!-- sparkle-signatures:
-edSignature: x54nqPDISVbQiaoy28OZ70M/NZWzajXAfvk4nxa8+pvMkvQu99bdZLya8raunyJMQ7eQHimsrG0a2Jj53DFOCQ==
-length: 9040
+edSignature: Kp3tkXHb84X9SByE77ypjSHL3Mfc98mSl+A7W5vB0Hfh6WD1BS5Pz+Gzp17GvvP1mloeq76vizibQ/Lqkuk8DA==
+length: 8984
 -->

@@ -5,8 +5,6 @@ import { loadContent } from './load-content.mjs';
 const web = new URL('../', import.meta.url);
 const out = new URL('out/', web);
 const origin = 'https://deskutils.app';
-const launchOfferEnabled =
-  (process.env.NEXT_PUBLIC_DESKUTILS_LAUNCH_OFFER ?? 'true').trim().toLowerCase() !== 'false';
 
 const { mod, cleanup } = await loadContent();
 const { routes, languages, localePath, translatedLocalesFor } = mod;
@@ -34,7 +32,7 @@ try {
       if (route.id !== 'changelog') {
         assert.doesNotMatch(
           html,
-          /\$19\.99|\$29\.99|Multi-Mac|annual license|USD \/ year|Pro is coming soon|macOS 26|Notarized by Apple/i,
+          /\$19\.99|\$29\.99|Multi-Mac|annual license|USD \/ year|Pro is coming soon|DeskUtils Pro\b|\$7\.99|\$14\.99|LAUNCH799|deskutils\.lemonsqueezy\.com\/checkout|macOS 26|Notarized by Apple/i,
           `${file}: outdated product copy`,
         );
       }
@@ -58,15 +56,10 @@ try {
 
       if (route.id === 'home') {
         assert.match(html, /SoftwareApplication/, `${file}: app schema`);
-        if (launchOfferEnabled) {
-          assert.match(html, /\$7\.99/, `${file}: launch price`);
-          assert.match(html, /\$14\.99/, `${file}: regular price`);
-        } else {
-          assert.match(html, /\$14\.99/, `${file}: regular price`);
-          assert.doesNotMatch(html, /\$7\.99/, `${file}: launch price hidden`);
-        }
+        assert.match(html, /"price":"0"/, `${file}: free app offer`);
+        assert.match(html, /https:\/\/ko-fi.com\/vutrngkien/, `${file}: Ko-fi support link`);
         assert.match(html, /data-track-event="download"/, `${file}: download event`);
-        assert.match(html, /data-track-event="checkout"/, `${file}: checkout event`);
+        assert.match(html, /data-track-event="donate_click"/, `${file}: donation event`);
       }
       if (route.id === 'privacy') {
         assert.match(html, /Umami/, `${file}: analytics disclosure`);

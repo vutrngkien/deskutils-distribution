@@ -7,7 +7,6 @@ import { ProductVisual } from '@/components/media/ProductVisual';
 import { Button } from '@/components/ui/Button';
 import { FinalCta } from '@/components/layout/FinalCta';
 import { HomePricing } from '@/components/pricing/HomePricing';
-import { LaunchOfferPopup } from '@/components/pricing/LaunchOfferPopup';
 import { HeroMockup, HeroMockupMobile } from '@/components/mockups/HeroMockup';
 import { MockupCanvas } from '@/components/mockups/MockupCanvas';
 import { QuickRingRecording } from '@/components/media/QuickRingRecording';
@@ -422,7 +421,6 @@ export function HomePage({ locale = 'en' }: { locale?: Locale }) {
         </section>
       </main>
       <FinalCta locale={locale} />
-      <LaunchOfferPopup locale={locale} />
     </>
   );
 }

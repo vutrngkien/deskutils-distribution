@@ -18,9 +18,7 @@ Markdown are covered by the same link listener without changing the notes.
 | Event                                                     | Trigger / extra properties                                                              |
 | --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | `download`                                                | Download CTA; `placement`                                                               |
-| `offer_popup_view`                                        | Launch offer opens when Quick Ring enters view; `placement: offer_popup`                |
-| `offer_popup_dismiss`                                     | Offer closes; `placement: offer_popup`, `reason: close / later / escape / backdrop`     |
-| `checkout`                                                | Pro checkout; `placement`                                                               |
+| `donate_click`                                            | Ko-fi link; `placement: notarization_goal / free_support / footer`                      |
 | `nav_click`                                               | Internal links, catalog, breadcrumbs, related tools/guides; `placement`, `target`       |
 | `permissions_click`                                       | Link to Install permissions; `placement`, `target`                                      |
 | `support_click`                                           | Email link; `placement`, `target: email`                                                |

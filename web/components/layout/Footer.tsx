@@ -2,6 +2,7 @@ import { localePath, type Locale } from '@/content/locales';
 import { translate } from '@/content/i18n';
 import { product } from '@/content/product';
 import { productMenu, toolHref } from '@/content/features';
+import { DonationLink } from '@/components/DonationLink';
 import { routeHref } from '@/content/routes';
 
 function Column({ title, children }: { title: string; children: React.ReactNode }) {
@@ -78,6 +79,9 @@ export function Footer({ locale }: { locale: Locale }) {
         </Column>
 
         <Column title={t('footer.support')}>
+          <li>
+            <DonationLink locale={locale} placement="footer" className="hover:text-primary" />
+          </li>
           <li>
             <a className="hover:text-primary" href={routeHref(locale, 'support', '/#faq')}>
               {t('nav.support')}

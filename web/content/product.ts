@@ -2,40 +2,6 @@ import type { ToolIconName } from '@/components/ToolIcon';
 import type { MessageKey, MessageValues } from './i18n';
 export { languages, type Locale } from './locales';
 
-const fallbackDiscountCode = 'LAUNCH799';
-const fallbackCheckoutURL =
-  'https://deskutils.lemonsqueezy.com/checkout/buy/c9fb0feb-6305-4361-9f15-10c1ff9f15f6';
-const discountCode =
-  process.env.NEXT_PUBLIC_DESKUTILS_DISCOUNT_CODE?.trim() || fallbackDiscountCode;
-
-/**
- * Operational switch for the first-100-customer launch promotion. Set
- * `NEXT_PUBLIC_DESKUTILS_LAUNCH_OFFER=false` to end the promotion without
- * redesigning the page: the active price becomes the regular price, the
- * struck-through price and first-100 copy disappear, the discount code is no
- * longer appended to the checkout URL, and metadata/structured data use the
- * regular price.
- */
-const launchOfferEnabled =
-  process.env.NEXT_PUBLIC_DESKUTILS_LAUNCH_OFFER?.trim().toLowerCase() !== 'false';
-
-export const launchOffer = {
-  enabled: launchOfferEnabled,
-  customerLimit: 100,
-  discountCode,
-  launchAmount: '7.99',
-  regularAmount: '14.99',
-} as const;
-
-const activeAmount = launchOfferEnabled ? launchOffer.launchAmount : launchOffer.regularAmount;
-
-function checkoutURLWithDiscountCode(checkoutURL: string) {
-  if (!launchOfferEnabled) return checkoutURL;
-  const url = new URL(checkoutURL);
-  url.searchParams.set('checkout[discount_code]', discountCode);
-  return url.toString();
-}
-
 export const product = {
   name: 'DeskUtils',
   origin: 'https://deskutils.app',
@@ -45,25 +11,11 @@ export const product = {
   repositoryURL: 'https://github.com/vutrngkien/deskutils-distribution',
   supportEmail: 'deskutils.app@gmail.com',
   minimumMacOS: '15.2',
-  freeHistory: 50,
-  proHistory: 500,
+  maximumHistory: 500,
+  donationURL: 'https://ko-fi.com/vutrngkien',
   description:
     'Clipboard history, screenshots, color tools and everyday utilities. One native macOS app, right in your menu bar.',
-  pricing: {
-    amount: activeAmount,
-    originalAmount: launchOffer.regularAmount,
-    launchAmount: launchOffer.launchAmount,
-    showOriginal: launchOfferEnabled,
-    currency: 'USD',
-    period: 'lifetime',
-    macs: 2,
-    customerLimit: launchOffer.customerLimit,
-    discountCode,
-    status: launchOfferEnabled ? 'launch-offer' : 'regular',
-    purchaseURL: checkoutURLWithDiscountCode(
-      process.env.NEXT_PUBLIC_DESKUTILS_CHECKOUT_URL?.trim() || fallbackCheckoutURL,
-    ),
-  },
+  pricing: { amount: '0', currency: 'USD' },
 } as const;
 
 // Product facts in this file are verified against the DeskUtils app source and
@@ -269,39 +221,6 @@ export const permissions = [
     description: 'permission.accessibility.description',
   },
 ] satisfies { name: MessageKey; description: MessageKey }[];
-type CopyRef = { key: MessageKey; values?: MessageValues };
-export const plans = [
-  {
-    id: 'free',
-    pitch: 'pricing.free.pitch',
-    description: 'pricing.free.description',
-    features: [
-      { key: 'pricing.freeItems', values: { count: product.freeHistory } },
-      { key: 'pricing.screenshots' },
-      { key: 'pricing.color' },
-      { key: 'pricing.cleanSleep' },
-    ],
-  },
-  {
-    id: 'pro',
-    pitch: 'pricing.pro.pitch',
-    description: 'pricing.oneTime',
-    features: [
-      { key: 'pricing.devices', values: { count: product.pricing.macs } },
-      { key: 'pricing.everythingFree' },
-      { key: 'pricing.proItems' },
-      { key: 'pricing.ocr' },
-      { key: 'pricing.scrolling' },
-      { key: 'pricing.subject' },
-      { key: 'pricing.persistentDimming' },
-    ],
-  },
-] satisfies {
-  id: 'free' | 'pro';
-  pitch: MessageKey;
-  description: MessageKey;
-  features: CopyRef[];
-}[];
 export const faqs: { question: MessageKey; answer: MessageKey; values?: MessageValues }[] = [
   {
     question: 'faq.subscription.question',
@@ -310,7 +229,6 @@ export const faqs: { question: MessageKey; answer: MessageKey; values?: MessageV
   {
     question: 'faq.devices.question',
     answer: 'faq.devices.answer',
-    values: { count: product.pricing.macs },
   },
   {
     question: 'faq.macos.question',

@@ -86,13 +86,12 @@ unknown locales to avoid duplicate routes.
 - Preserve release notes, Reddit quotes and app mockup text in their source
   language; do not translate or invent release notes.
 
-**Product facts live in `content/product.ts`** — pricing, checkout URL, download URLs,
-minimum macOS, history limits. This is the source of truth for public pricing/license
-copy. The Lemon Squeezy checkout URL and discount code come from
-`NEXT_PUBLIC_DESKUTILS_CHECKOUT_URL` / `NEXT_PUBLIC_DESKUTILS_DISCOUNT_CODE` env vars
-with in-file fallbacks. Check both launch-offer states; setting
-`NEXT_PUBLIC_DESKUTILS_LAUNCH_OFFER=false` must remove discounted prices, launch
-copy and discount parameters from rendered UI and structured data.
+**Product facts live in `content/product.ts`** — free app pricing, optional Ko-fi
+support URL, downloads, minimum macOS and clipboard capacity. Every feature is
+free; no checkout, discount or launch-offer environment variable changes that.
+Donations do not unlock features. The existing `/pricing/` URL and `#pricing`
+anchor remain available as Free & Support so incoming links keep working.
+Publish this copy only after a matching free app release is publicly available.
 
 **Post-build verification** (`scripts/verify-output.mjs`, part of `npm run build`)
 asserts each exported route has the right `<html lang>`, a `#main` landmark, an `<h1>`,
@@ -127,9 +126,8 @@ blocker or generate replacement baselines without checking the approved design.
 
 ## Release / deploy
 
-Production uses **Vercel** with project root `web/`. Public checkout, discount,
-launch-offer and feedback variables are embedded at build time; rebuild after
-changing them. The Feedback endpoint is
+Production uses **Vercel** with project root `web/`. Public feedback configuration
+is embedded at build time; rebuild after changing it. The Feedback endpoint is
 `NEXT_PUBLIC_DESKUTILS_FEEDBACK_FORM_ENDPOINT`, with a support-email fallback when
 unset. Tests mock submissions; never send test feedback to production.
 

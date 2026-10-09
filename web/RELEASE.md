@@ -1,12 +1,22 @@
 # Publish the redesign
 
 Production hosting uses Vercel. Configure the project to build `web/` and set
-the public checkout, discount, launch-offer and feedback variables in Vercel.
+the public feedback variable in Vercel. The app is free; Ko-fi support is optional.
+Checkout, discount and launch-offer environment variables are obsolete and ignored.
 These values are embedded at build time, so changing them requires a rebuild.
 Changelog refreshes from the public GitHub Releases API whenever a visitor opens
 the page; publishing or editing a release no longer requires a Vercel rebuild.
 Builds still read the committed snapshot for initial HTML and fallback content.
 Do not sync during ordinary tests. Committing source does not publish the website.
+
+## Ko-fi goal sync
+
+The community notarization goal uses a static 99 USD / 9% fallback. To enable
+automatic progress, deploy the separate `kofi-sync` Vercel project and follow
+[`../kofi-sync/README.md`](../kofi-sync/README.md). Set only the public
+`NEXT_PUBLIC_DESKUTILS_KOFI_GOAL_ENDPOINT` on the website project, then rebuild
+and review its preview. Webhook and Redis secrets belong exclusively to the sync
+project. Funding completion is not a notarization status claim.
 
 ## Optional GitHub Pages workflow
 
@@ -20,13 +30,14 @@ production deployment is deliberately disabled until the matching app is ready.
 Before enabling deployment:
 
 1. Check the released DMG on supported Macs: macOS 15.2 minimum, supported CPU
-   architectures, screenshot/annotation, clipboard 50 Free / 500 Pro, OCR,
-   Scrolling Capture, Capture Subject and persistent display dimming gates.
-2. Confirm the actual license behavior is lifetime access for up to two devices.
-   Set `NEXT_PUBLIC_DESKUTILS_CHECKOUT_URL` to the Lemon Squeezy shareable
-   checkout URL (the `/checkout/buy/` URL) and
-   `NEXT_PUBLIC_DESKUTILS_DISCOUNT_CODE` to the active discount code. The site
-   applies that code automatically when a customer selects Pro.
+   architectures, screenshot/annotation, clipboard capacity up to 500, OCR,
+   Scrolling Capture, Capture Subject, persistent display dimming, Quick Ring
+   customization and External Display Only without a trial countdown.
+2. Confirm every feature works with no license key, including a fresh install,
+   offline use and an upgrade from earlier Free or Pro installs. Check that the
+   app makes no license activation/validation requests. Verify the optional
+   Ko-fi links point to `https://ko-fi.com/vutrngkien`. Publish the free app before
+   publishing the website’s all-features-free copy, including on Vercel.
 3. Verify signing/notarization on the artifact before adding any notarization claim.
 4. Publish the matching app release and update `site/appcast.xml` using the existing
    signing scripts in the private app repository. Never hand-edit the signed feed.

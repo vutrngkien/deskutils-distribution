@@ -29,7 +29,12 @@ npm run preview
 `web/out/` is the deployment artifact; do not commit generated output. `site/`
 retains distribution-owned images, icons, `CNAME` and the signed `appcast.xml`.
 The asset preparation step copies those into the build. Source pages now live in
-`web/app/`; product details, prices and media live in `web/content/product.ts`.
+`web/app/`; product details, free pricing, Ko-fi support and media live in
+`web/content/product.ts`.
+
+DeskUtils is moving to an all-features-free release with optional support on
+[Ko-fi](https://ko-fi.com/vutrngkien). The local website copy is prepared for that
+release; publish the matching free app before deploying this website.
 
 See [media instructions](web/MEDIA.md) to replace the video placeholders.
 See [release checks](web/RELEASE.md) before enabling production deployment.

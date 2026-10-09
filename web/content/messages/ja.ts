@@ -1,6 +1,23 @@
 import type { Messages } from './en';
 
 export const ja = {
+  'notarization.eyebrow': 'コミュニティの目標',
+  'notarization.title': 'DeskUtilsの公証を応援してください',
+  'notarization.titleLead': 'DeskUtilsの',
+  'notarization.titleAccent': '公証を応援しよう。',
+  'notarization.benefit.signed': '署名・公証済みのリリース',
+  'notarization.benefit.install': 'macOSでスムーズにインストール',
+  'notarization.benefit.development': '継続的な開発を支援',
+  'notarization.year': '年',
+  'notarization.body':
+    'Ko-fiでの支援は、Apple Developer Programの初年度の会費に充てられます。これによりDeskUtilsに署名し、Appleの公証に提出できるようになります。',
+  'notarization.raised': 'Ko-fiでの達成率',
+  'notarization.target': '初年度の目標',
+  'notarization.progress': '目標の{percent}%を達成',
+  'notarization.cta': '目標達成を応援する',
+  'notarization.note': '目標に向けて支援してくださる皆さん、ありがとうございます。',
+  'notarization.freeNote': 'すべての機能は、誰でも引き続き無料で使えます。',
+
   'home.social.comments': 'Reddit のコメント',
   'home.social.label': 'Mac ユーザーの声',
   'home.demo.play': 'デモを再生',
@@ -32,7 +49,7 @@ export const ja = {
   'media.clipboard.alt': 'DeskUtils の検索可能なクリップボード履歴',
   'media.quickring.alt': '8つのデフォルトアクションを備えた Quick Ring の放射状メニュー',
   'nav.features': '機能',
-  'nav.pricing': '料金',
+  'nav.pricing': '無料・支援',
   'nav.help': 'ヘルプ',
   'nav.download': 'ダウンロード',
   'nav.menu': 'メニュー',
@@ -53,7 +70,7 @@ export const ja = {
   'meta.privacy.description':
     'DeskUtils におけるクリップボード、画面キャプチャ、ライセンス、サポート情報の取り扱いについて。',
   'meta.terms.title': '利用規約 — DeskUtils',
-  'meta.terms.description': 'DeskUtils のダウンロードと利用、永続 Pro ライセンスに関する規約です。',
+  'meta.terms.description': '無料のDeskUtilsのダウンロード・利用と開発支援の条件。',
   'meta.feedback.title': 'フィードバック — DeskUtils',
   'meta.feedback.description': 'DeskUtils の不具合報告、フィードバック、アイデアをお送りください。',
   'meta.ogAlt': 'DeskUtils — 必要な macOS ツールをひとつのアプリに。',
@@ -123,51 +140,9 @@ export const ja = {
   'localization.description': 'DeskUtils は、どこで作業しても自然になじみます。',
   'localization.detail': '設定で言語を選び、DeskUtils を自分らしく使えます。',
   'localization.cta': '対応言語を見る',
-  'pricing.title': '無料で使って、必要なときに Pro へ。',
-  'pricing.subtitle': '日常のツールから始めて、必要になったら機能を追加できます。',
+  'pricing.subtitle': '全機能を利用できます。開発支援は任意です。',
   'pricing.free': '無料',
-  'pricing.pro': 'DeskUtils Pro',
-  'pricing.free.pitch': '必要な機能を、ずっと無料で。',
-  'pricing.free.description': '日々のコピーとキャプチャに。',
-  'pricing.pro.pitch': 'もっと多くのツールを使おう。',
-  'pricing.pro.description': '履歴を増やし、追加のキャプチャツールも利用できます。',
-  'offerPopup.badge': 'リリース記念価格',
-  'offerPopup.title': 'DeskUtils Pro を購入',
-  'offerPopup.description':
-    'クリップボード履歴の拡張、OCR、高度なスクリーンショットツールを一つの Mac アプリで。',
-  'offerPopup.lifetimeTitle': '一度の購入でずっと使える',
-  'offerPopup.devicesTitle': '最大 {count} 台の Mac で利用可能',
-  'offerPopup.cta': '${amount} の特別価格で購入',
-  'offerPopup.later': '後で',
-  'offerPopup.close': '特別価格の案内を閉じる',
-  'offerPopup.saving': '{percent}% お得',
-  'offerPopup.priceNote': '最初の {customers} 名様限定。割引は購入手続き時に自動適用されます。',
-  'offerPopup.devicesDescription': '同じライセンスキーで有効化できます。',
-  'pricing.launchOffer': '🚀 ローンチオファー',
-  'pricing.lifetime': '永続ライセンス',
-  'pricing.oneTime': '買い切り。サブスクリプションではありません。',
-  'pricing.devices': '最大 {count} 台のデバイスで利用可能',
-  'pricing.promoLabel': 'ローンチコード',
-  'pricing.cta': 'DeskUtils Pro を入手',
-  'pricing.deviceNote':
-    '1 つのライセンスキーで最大 {count} 台のデバイスの DeskUtils Pro を有効化できます。',
-  'pricing.usdYear': 'USD / 年',
-  'pricing.noLicense': 'ライセンス不要',
-  'pricing.everythingFree': '無料版の全機能',
-  'pricing.freeItems': 'クリップボード {count} 件',
-  'pricing.proItems': '拡張クリップボード履歴',
-  'pricing.screenshots': 'スクリーンショットと注釈',
-  'pricing.color': 'カラーピッカー',
-  'pricing.cleanSleep': 'キーボード清掃とスリープ防止',
-  'pricing.dimmingPreview': '画面調光プレビュー',
-  'pricing.ocr': 'OCR',
-  'pricing.scrolling': 'スクロールキャプチャ',
-  'pricing.subject': '被写体をキャプチャ',
-  'pricing.persistentDimming': '画面の調光を維持',
-  'pricing.updates': 'ライセンス期間中のアップデート',
-  'pricing.comingSoon': 'Pro は近日公開',
-  'pricing.proFootnote': '先着 {customers} 名 · 以降は ${original}',
-  'pricing.freeFootnote': 'アカウントも支払い情報も不要です。',
+  'pricing.freeFootnote': 'アカウント不要 · サブスクなし · ライセンスキー不要',
   'faq.title': 'よくある質問',
   'faq.contact': 'お問い合わせ',
   'meta.changelog.title': '更新履歴 — DeskUtils',
@@ -181,34 +156,21 @@ export const ja = {
   'changelog.releasedOn': '{date} にリリース',
   'changelog.latest': '最新',
   'changelog.viewOnGitHub': 'GitHub で見る',
-  'meta.pricing.title': 'DeskUtils の料金 — 無料版と Pro',
+  'meta.pricing.title': 'DeskUtils — 無料のMacツールと任意の支援',
   'meta.pricing.description':
-    'DeskUtils は無料でダウンロードして利用できます。Pro は最大2台の Mac で使える買い切りの永続ライセンスで、拡張クリップボード履歴と追加のキャプチャツールが加わります。',
-  'pricing.page.eyebrow': '料金',
+    'DeskUtilsの全機能は無料です。ライセンスキー、サブスクリプション、支払いは不要。Ko-fiで任意の開発支援ができます。',
+  'pricing.page.eyebrow': '無料・支援',
   'pricing.page.lede':
-    'DeskUtils は無料でダウンロードして利用できます。Pro は買い切りの永続ライセンスで、拡張クリップボード履歴、スクロールキャプチャ、テキスト抽出などが加わります。',
-  'pricing.compare.title': '無料版と Pro を比較',
-  'pricing.compare.feature': '機能',
-  'pricing.included': '含まれる',
-  'pricing.none': '—',
-  'pricing.compare.freeToolsLabel': '無料ツール',
-  'pricing.compare.freeTools':
-    'スクリーンショット、クリップボードマネージャー、Quick Ring、カラーピッカー、ウィンドウ切り替え、メニューバーのユーティリティ',
-  'pricing.compare.quickRing': 'デフォルトの Quick Ring レイアウト',
-  'pricing.compare.customize': 'Quick Ring のアクションをカスタマイズ',
-  'pricing.compare.clipboard': 'クリップボード {count} 件',
-  'pricing.compare.clipboardLabel': 'クリップボード履歴',
-  'pricing.compare.screenshots': 'スクリーンショットと注釈',
+    'DeskUtilsは全機能無料です。日々の作業に役立ったら、Ko-fiで開発を支援できます。',
+  'pricing.compare.customize': 'カスタマイズできるQuick Ringショートカット',
+  'pricing.compare.clipboard': '検索とピン留めができる{count}件のクリップボード履歴',
+  'pricing.compare.screenshots': 'スクリーンショット、スクロール撮影、注釈',
   'pricing.compare.extraCapture': 'スクロールキャプチャ、被写体をキャプチャ、スマート要素',
-  'pricing.compare.ocr': 'テキスト抽出（OCR）',
+  'pricing.compare.ocr': 'デバイス上のOCR、色の取得、ウインドウ切り替え',
   'pricing.compare.externalDisplayLabel': '外部ディスプレイのみ',
-  'pricing.compare.externalDisplayFree': '60秒間の試用',
-  'pricing.compare.externalDisplayPro': '時間制限なし',
-  'pricing.compare.dimming': '画面の調光',
-  'pricing.compare.devices': 'Mac {count} 台',
-  'pricing.compare.devicesLabel': 'ライセンスあたりの Mac 台数',
-  'pricing.faq.title': 'ライセンスに関する質問',
-  'pricing.cta.title': 'フルツールキットを一度の購入でアンロック。',
+  'pricing.compare.dimming': '画面の減光と外部ディスプレイのみの表示',
+  'pricing.faq.title': '無料利用と支援について',
+  'pricing.cta.title': 'すべてのツールをメニューバーに。',
   'feedback.label': 'DeskUtils フィードバック',
   'feedback.title.line1': '不具合を見つけましたか？',
   'feedback.title.line2': '新しいアイデアがありますか？',
@@ -271,26 +233,20 @@ export const ja = {
   'feedback.links.support': 'サポートと FAQ',
   'feedback.links.email': 'メールを送る',
   'faq.subscription.question': 'DeskUtils はサブスクリプションですか？',
-  'faq.subscription.answer':
-    'いいえ。DeskUtils Pro は買い切りで、ライセンスに有効期限はありません。',
+  'faq.subscription.answer': 'いいえ。全機能無料で、サブスクリプションやライセンスキーは不要です。',
   'faq.devices.question': '何台の Mac で DeskUtils を使えますか？',
-  'faq.devices.answer': 'DeskUtils Pro ライセンスは最大 {count} 台のデバイスで有効化できます。',
-  'faq.lifetime.question': 'ライセンスの有効期限は？',
-  'faq.lifetime.answer': 'DeskUtils Pro ライセンスに有効期限はありません。',
-  'faq.launchPrice.question': 'DeskUtils が ${amount} なのはなぜですか？',
-  'faq.launchPrice.answer':
-    '${amount} は先着 {customers} 名限定のローンチ価格です。通常価格は ${original} です。',
+  'faq.devices.answer':
+    '所有または管理する対応Macにインストールできます。有料プランによる台数制限はありません。',
   'faq.macos.question': '必要な macOS のバージョンは？',
   'faq.macos.answer':
     'DeskUtils には macOS {version} 以降が必要です。ダウンロード前にリリースノートで対応 Mac を確認してください。',
   'faq.free.question': 'DeskUtils は無料ですか？',
-  'faq.free.answer':
-    'はい。クリップボード履歴、スクリーンショットと注釈、カラーピッカー、キーボード清掃、スリープ防止は無料です。',
+  'faq.free.answer': 'はい。全機能を無料で利用できます。Ko-fiでの寄付は完全に任意です。',
   'faq.account.question': 'アカウントは必要ですか？',
   'faq.account.answer': 'DeskUtils アカウントは必要ありません。',
   'faq.clipboard.question': 'クリップボードの内容は Mac の外へ送信されますか？',
   'faq.clipboard.answer':
-    'いいえ。履歴は Mac に保存され、画面の文字認識もデバイス上で実行されます。更新確認とライセンス認証は通信しますが、クリップボードの内容は含まれません。',
+    '履歴はMac内に保存され、文字認識も端末内で実行されます。更新確認と任意のリンクプレビューはネットワークを使用しますが、履歴はアップロードしません。',
   'faq.store.question': 'Mac App Store で入手できますか？',
   'faq.store.answer':
     'DeskUtils は公式サイトと GitHub Releases から直接配布しています。ディスクイメージをダウンロードし、Applications に移動してインストールガイドに従ってください。',
@@ -300,7 +256,7 @@ export const ja = {
   'footer.independent': 'Vu Trung Kien による独立系 macOS ソフトウェア。',
   'document.back': 'DeskUtils に戻る',
   'document.updated': '最終更新日：{date}',
-  'document.date': '2026年9月11日',
+  'document.date': '2026年10月7日',
   'install.label': 'インストールガイド',
   'install.title': 'ほんの数ステップで完了。',
   'install.download': 'DeskUtils をダウンロード',
@@ -345,7 +301,7 @@ export const ja = {
     'キーボード清掃、直接貼り付け、対応するキャプチャ操作に使用します。',
   'permission.network.title': 'ネットワークアクセス',
   'permission.network.description':
-    '更新確認と、Pro 提供後のライセンス認証・検証に使用します。クリップボードの内容は含まれません。',
+    '更新確認と任意のリンクプレビューに使用します。履歴はアップロードしません。',
   'install.verify.title': 'ダウンロードを検証',
   'install.verify.heading': '開く前にファイルを確認',
   'install.verify.body':
@@ -391,11 +347,6 @@ export const ja = {
   'privacy.website.title': 'このウェブサイト',
   'privacy.website.body':
     'このサイトは、プライバシーを重視した解析サービス Umami を使用し、ページビュー、参照元、ブラウザ、OS、デバイスの種類、国のほか、閲覧したセクションやデモ、開いた FAQ、調光コントロールの操作、言語の変更、ナビゲーション、ダウンロード、購入手続き、サポート、外部リンクのクリックといった操作を匿名で収集します。Umami は Cookie を使用せず、個人を特定できる情報を収集しません。DeskUtils は、クリップボードの内容、スクリーンショット、メールアドレス、ライセンスキー、支払い情報を解析サービスに送信しません。デモ動画は第三者プレーヤーを使わずサイトのファイルとして配信します。ホスティング事業者は安全で安定した配信のため標準的なサーバーログを処理する場合があります。',
-  'privacy.purchase.title': '購入とライセンス認証',
-  'privacy.purchase.body1':
-    'Pro の支払いは Lemon Squeezy が同社のプライバシー方針に従って処理します。DeskUtils はライセンスの提供とサポートに必要な注文・ライセンス情報を受け取ります。',
-  'privacy.purchase.body2':
-    'Pro の認証と検証にはライセンスサービスとの通信が必要です。ライセンスキーと認証情報はアクセス確認とデバイス上限の適用に使われます。クリップボードの内容やスクリーンショットは送信されません。',
   'privacy.support.title': 'サポートへのメッセージ',
   'privacy.support.body':
     'DeskUtils へメールするかフィードバックフォームを送信すると、メールアドレス、種類、本文、任意の画像、言語などの情報が Formspree により処理され、回答とアプリ改善のため DeskUtils に送られます。必要な場合を除き機密情報を含めないでください。DeskUtils がこの情報を Umami Analytics に送信することはありません。',
@@ -408,18 +359,7 @@ export const ja = {
   'terms.using.body1':
     'DeskUtils は Vu Trung Kien が開発する独立系 macOS アプリです。本規約に従い、所有または管理する対応 Mac に本アプリをインストールして使用するための、限定的、個人的、非独占的、譲渡不能なライセンスが付与されます。',
   'terms.using.body2':
-    'ライセンスキーの販売、再許諾、再配布、第三者への提供、ライセンス制限の回避、適用法に反する方法での利用は禁止します。',
-  'terms.plans.title': '無料版と Pro',
-  'terms.plans.body1':
-    '無料版は支払いや DeskUtils アカウントなしで利用できます。Pro の購入には最大 {macs} 台のデバイス向け永続ライセンスと DeskUtils Pro 機能が含まれます。',
-  'terms.plans.body2':
-    'ローンチ価格は先着 {customers} 名限定の ${amount} USD、通常価格は ${original} USD です。適用税と最終購入条件は決済時に表示されます。',
-  'terms.renewal.title': '買い切り',
-  'terms.renewal.body':
-    'Pro は買い切りで、サブスクリプションではありません。永続ライセンスに有効期限はなく、継続的なライセンス料金もありません。',
-  'terms.payment.title': '支払いとライセンスの提供',
-  'terms.payment.body':
-    '販売開始後、支払いは Merchant of Record である Lemon Squeezy が処理します。支払い、適用税、領収書、支払い関連の返金を同社が扱います。購入後、DeskUtils で認証するためのライセンスキーが提供されます。',
+    'DeskUtilsの販売、再許諾、再配布、または適用法令に違反する使用は禁止されています。',
   'terms.refunds.title': '返金',
   'terms.refunds.body':
     '初回購入から 14 日以内に、取引を特定できる注文情報を添えて {email} へ返金を申請できます。承認された返金は Lemon Squeezy が処理し、関連ライセンスが無効になる場合があります。',
@@ -457,7 +397,7 @@ export const ja = {
   'home.lede': '撮影、コピー、切り替え、カラー選択、集中。作業の流れを止めずに。',
   'home.download': 'Mac版をダウンロード',
   'home.exploreTools': 'すべてのツールを見る',
-  'home.freeNote': '無料版あり · macOS {version} 以降が必要',
+  'home.freeNote': '全機能無料 · macOS {version}以降が必要',
   'home.trust.built.title': 'macOS のために設計',
   'home.trust.built.body': 'ネイティブで、macOS に自然になじみます。',
   'home.trust.free.title': '無料で始められる',
@@ -490,7 +430,7 @@ export const ja = {
   'home.quickring.eyebrow': 'Quick Ring',
   'home.quickring.title': 'よく使うツールを、2回のタップで。',
   'home.quickring.lede': '⌘ を2回押して、アクションを選びます。',
-  'home.quickring.note': '表示するアクションのカスタマイズには Pro が必要です。',
+  'home.quickring.note': 'よく使うアクションを選んで並べ替えられます。',
   'home.quickring.cta': 'Quick Ring を見る',
   'home.focused.title': '色を取り出し、文字をコピーし、目的のウィンドウを見つける。',
   'home.utilities.title': 'macOS だけでは届かない瞬間のための小さなユーティリティ。',
@@ -511,7 +451,7 @@ export const ja = {
   'home.util.monitor.eyebrow': 'システムモニタリング',
   'home.util.monitor.title': 'Mac の状態を見守る。',
   'home.util.monitor.body': 'CPU、メモリ、ディスクの使用状況をメニューバーから。',
-  'home.pricing.title': '無料で始めて、必要になったら Pro へ。',
+  'home.pricing.title': 'すべてのツールを完全無料で。',
   'home.faq.title': 'よくある質問',
   'home.cta.title': '毎日の Mac ツールを、手の届くところに。',
   'cta.title': '毎日のMacツールを、いつでも手の届くところに。',
@@ -670,7 +610,7 @@ export const ja = {
   'features.title': 'Mac のための DeskUtils のすべてのツール',
   'features.lede':
     'DeskUtils は、macOS 15.2 以降向けの1つのメニューバーアプリに12の日常ツールをまとめています。まずはスクリーンショット、クリップボードマネージャー、Quick Ring から始め、必要になったら小さなユーティリティをオンにできます。',
-  'features.pricing': '料金を見る',
+  'features.pricing': '無料・支援',
   'features.featured.eyebrow': 'ここから始める',
   'features.featured.title': '毎日使うツール。',
   'features.featured.screenshot': '撮影、注釈、ぼかしを1つの流れで。',
@@ -757,8 +697,7 @@ export const ja = {
     '各項目にはコピー元のアプリ、種類、サイズが表示されるので、正しいものを貼り付けられます。',
   'clipboard-manager.privacy.eyebrow': 'プライバシー',
   'clipboard-manager.privacy.title': 'Mac の外に出るもの、出ないもの',
-  'clipboard-manager.privacy.network':
-    '更新確認とライセンス検証にクリップボードの内容は含まれません。',
+  'clipboard-manager.privacy.network': '更新確認にクリップボードの内容は含まれません。',
   'clipboard-manager.privacy.link':
     'リンクのプレビューでは、ウェブからページの詳細を取得する場合があります。',
   'clipboard-manager.privacy.accessibility':
@@ -778,7 +717,7 @@ export const ja = {
   'clipboard-manager.faq.a3': '履歴を開いて F を押し、入力します。一致する語が強調表示されます。',
   'clipboard-manager.faq.q4': 'クリップボードの内容はどこかへ送信されますか？',
   'clipboard-manager.faq.a4':
-    'ネットワークアクセスは更新確認と、利用可能な場合はライセンス検証に使われます。クリップボードの内容は含まれません。リンクのプレビューでは、ウェブからページの詳細を取得する場合があります。',
+    'ネットワークアクセスは更新確認に使われますが、クリップボードの履歴はアップロードしません。任意のリンクプレビューでは、ウェブからページの詳細を取得する場合があります。',
   'clipboard-manager.faq.q5': 'DeskUtils がアクセシビリティの許可を求めるのはなぜですか？',
   'clipboard-manager.faq.a5':
     '履歴、検索、プレビュー、コピーはなしで動作します。アクセシビリティが必要なのは、項目を使用中のアプリへ直接貼り付ける「直接貼り付け」のときだけです。',
@@ -821,7 +760,7 @@ export const ja = {
   'quick-ring.faq.a2':
     'デフォルトでは、範囲をキャプチャ、テキスト抽出、クリップボード、スリープ防止、スクリーンショット履歴、キーボード清掃、クイック注釈、カラーピッカーです。',
   'quick-ring.faq.q3': 'アクションは変更できますか？',
-  'quick-ring.faq.a3': 'はい。DeskUtils Pro なら、リングに表示するアクションを選べます。',
+  'quick-ring.faq.a3': 'はい。設定でリングに表示するアクションと順序を変更できます。',
   'quick-ring.faq.q4': 'Quick Ring の内容はすべてメニューバーにもありますか？',
   'quick-ring.faq.a4':
     'はい。Quick Ring は、DeskUtils のメニューバーアイコンからも使えるツールにすばやくアクセスする方法です。',
@@ -1066,7 +1005,7 @@ export const ja = {
   'utilities.dimming.shortcut': 'メニューバーから調整',
   'utilities.dimming.howTitle': 'スライダー1つ、10〜100%',
   'utilities.dimming.howDesc':
-    '画面の調光スライダーをドラッグして、接続した外部ディスプレイを視覚的に暗くします。これは表示される映像を調整するもので、モニターの物理的なハードウェア輝度を変更するものではありません。無料版では調光はライブプレビューで、DeskUtils メニューが開いている間だけ適用され、閉じると最大の明るさに戻ります。DeskUtils Pro はメニューを閉じた後も設定したレベルを維持します。',
+    'スライダーで外部ディスプレイを10〜100%の範囲で暗くします。変更するのは表示画像で、ハードウェアの明るさではありません。メニューを閉じても設定は保持されます。',
   'utilities.dimming.permission': '追加の macOS プライバシー権限は必要ありません。',
   'utilities.dimming.related.external': '外部ディスプレイでも機能します。',
   'utilities.dimming.faq.q1': 'モニターの物理的な明るさを変更しますか？',
@@ -1075,8 +1014,7 @@ export const ja = {
   'utilities.dimming.faq.q2': 'どの範囲を設定できますか？',
   'utilities.dimming.faq.a2': '10%〜100%の単一スライダーです。',
   'utilities.dimming.faq.q3': 'メニューを閉じても調光は維持されますか？',
-  'utilities.dimming.faq.a3':
-    '無料版では調光はメニューを開いている間のプレビューで、閉じると最大の明るさに戻ります。DeskUtils Pro はメニューを閉じた後も調光レベルを維持します。',
+  'utilities.dimming.faq.a3': 'はい。メニューを閉じても選んだ暗さが保持されます。',
   'utilities.dimming.faq.q4': '権限は必要ですか？',
   'utilities.dimming.faq.a4': '追加の macOS プライバシー権限は必要ありません。',
   'meta.external-display-only.title':
@@ -1149,4 +1087,41 @@ export const ja = {
     '{email} までメールするか、フィードバックから不具合やアイデアをお送りください。',
   'support.stuck.email': 'メールでサポート',
   'support.stuck.feedback': 'フィードバックへ',
+  'donation.mobileCommunityBody':
+    'ずっと無料。アカウント、サブスクリプション、ライセンスキーは不要です。',
+  'donation.communityBody':
+    'スクリーンショット、クリップボード、Macでの日常作業に必要なツールをすべて。',
+  'donation.features.utilities': 'スリープ防止、マウス移動、キーボードの掃除',
+  'donation.features.monitor': 'CPU、メモリ、ディスクの監視',
+  'donation.frequency': '一度だけ / 毎月',
+  'donation.costs': '開発とホスティングの費用をサポート',
+  'donation.independent': '独立した開発者を応援',
+  'donation.supportFootnote': '完全に任意 · 誰でも同じ無料アプリを利用',
+  'donation.community': 'コミュニティ',
+  'donation.forever': 'ずっと無料',
+  'donation.supporter': 'サポーター',
+  'donation.voluntary': '任意',
+  'donation.payWhatYouWant': '好きな金額で応援',
+  'donation.improvements': '新機能、バグ修正、アップデートを支援',
+  'donation.sameApp': 'すべてのツールを誰でも無料で使えるように',
+  'donation.directTitle': 'Ko-fiで直接支援',
+  'donation.directBody': '下のKo-fiパネルから直接支援できます。',
+  'donation.widgetTitle': 'Ko-fiでDeskUtilsを支援',
+  'donation.freeTitle': 'DeskUtilsの全ツール。',
+  'donation.freeBody':
+    'スクリーンショット、クリップボード履歴、Quick Ring、OCR、日常のユーティリティ。すべて利用でき、ライセンスキーや定期契約は不要です。',
+  'donation.title': 'DeskUtilsの開発を応援する。',
+  'donation.body': '寄付はDeskUtilsを無料で独立したアプリとして維持し、改善を続ける力になります。',
+  'donation.optional': '支援は任意です。寄付の有無にかかわらず全機能を利用できます。',
+  'donation.cta': 'Ko-fiで支援する',
+  'donation.thanks': '金額にかかわらず、すべての支援に感謝します',
+  'donation.faq.question': '機能を使うために寄付が必要ですか？',
+  'donation.faq.answer':
+    'いいえ。寄付は開発支援であり、追加機能を解放するものではありません。全員が同じ無料アプリを利用できます。',
+  'donation.privacy.title': 'Ko-fiでの任意の支援',
+  'donation.privacy.body':
+    'Ko-fiで支援する場合、Ko-fiと決済事業者が各自のプライバシーポリシーに従って支払いを処理します。支援の管理のため、名前、メールアドレス、支援情報が開発者に共有されることがあります。決済情報はウェブサイトの分析に送信しません。 埋め込みパネルとフローティング支援ボタンはKo-fiからコンテンツを読み込みます。Ko-fiは独自のプライバシーポリシーに基づき、技術データの処理やCookieの使用を行う場合があります。',
+  'donation.earlierPurchases': '過去のPro購入',
+  'donation.earlierPurchasesBody':
+    'DeskUtilsは現在、全機能無料です。過去のPro購入はLemon Squeezyで処理されました。以前の注文や当時適用された返金方針については{email}にお問い合わせください。',
 } satisfies Partial<Messages>;

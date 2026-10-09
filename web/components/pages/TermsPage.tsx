@@ -4,10 +4,9 @@ import { translate } from '@/content/i18n';
 import type { Locale } from '@/content/locales';
 const sections = [
   ['terms.using.title', ['terms.using.body1', 'terms.using.body2']],
-  ['terms.plans.title', ['terms.plans.body1', 'terms.plans.body2']],
-  ['terms.renewal.title', ['terms.renewal.body']],
-  ['terms.payment.title', ['terms.payment.body']],
-  ['terms.refunds.title', ['terms.refunds.body']],
+  ['donation.freeTitle', ['donation.freeBody']],
+  ['donation.title', ['donation.optional']],
+  ['donation.earlierPurchases', ['donation.earlierPurchasesBody', 'terms.refunds.body']],
   ['terms.beta.title', ['terms.beta.body']],
   ['terms.requirements.title', ['terms.requirements.body']],
   ['terms.changes.title', ['terms.changes.body']],
@@ -15,10 +14,6 @@ const sections = [
 export function TermsPage({ locale = 'en' }: { locale?: Locale }) {
   const t = translate.bind(null, locale);
   const values = {
-    macs: product.pricing.macs,
-    amount: product.pricing.amount,
-    original: product.pricing.originalAmount,
-    customers: product.pricing.customerLimit,
     version: product.minimumMacOS,
     email: product.supportEmail,
   };

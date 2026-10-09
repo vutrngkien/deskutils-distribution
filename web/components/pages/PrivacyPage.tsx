@@ -6,7 +6,8 @@ const sections = [
   ['privacy.local.title', ['privacy.local.body1', 'privacy.local.body2']],
   ['privacy.network.title', ['privacy.network.body']],
   ['privacy.website.title', ['privacy.website.body']],
-  ['privacy.purchase.title', ['privacy.purchase.body1', 'privacy.purchase.body2']],
+  ['donation.privacy.title', ['donation.privacy.body']],
+  ['donation.earlierPurchases', ['donation.earlierPurchasesBody']],
   ['privacy.support.title', ['privacy.support.body']],
   ['privacy.changes.title', ['privacy.changes.body']],
 ] as const;

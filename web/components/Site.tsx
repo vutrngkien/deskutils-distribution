@@ -53,7 +53,7 @@ export function Button({
       </DownloadLink>
     );
   }
-  const isCheckout = href === product.pricing.purchaseURL;
+  const isDonation = href === product.donationURL;
   const isReleaseNotes = href === product.releasesURL;
   const isHome = href === '/';
   return (
@@ -61,16 +61,16 @@ export function Button({
       className={className}
       data-button
       data-umami-event={
-        isCheckout
-          ? 'checkout'
+        isDonation
+          ? 'donate_click'
           : isReleaseNotes
             ? 'external_link'
             : isHome
               ? 'nav_click'
               : undefined
       }
-      data-umami-event-locale={isCheckout || isReleaseNotes || isHome ? locale : undefined}
-      data-umami-event-placement={isCheckout || isReleaseNotes || isHome ? placement : undefined}
+      data-umami-event-locale={isDonation || isReleaseNotes || isHome ? locale : undefined}
+      data-umami-event-placement={isDonation || isReleaseNotes || isHome ? placement : undefined}
       data-umami-event-target={isReleaseNotes ? 'release_notes' : isHome ? 'home' : undefined}
       href={href}
     >

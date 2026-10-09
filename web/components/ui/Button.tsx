@@ -55,17 +55,15 @@ export function Button({
     );
   }
 
-  const isCheckout =
-    href === product.pricing.purchaseURL ||
-    href.startsWith('https://deskutils.lemonsqueezy.com/checkout/');
+  const isDonation = href === product.donationURL;
 
   return (
     <a
       className={classes}
       href={href}
-      data-track-event={isCheckout ? 'checkout' : undefined}
-      data-track-event-locale={isCheckout ? locale : undefined}
-      data-track-event-placement={isCheckout ? placement : undefined}
+      data-track-event={isDonation ? 'donate_click' : undefined}
+      data-track-event-locale={isDonation ? locale : undefined}
+      data-track-event-placement={isDonation ? placement : undefined}
     >
       {children}
     </a>

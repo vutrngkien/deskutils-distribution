@@ -28,3 +28,6 @@ web/playwright-report/
 
 # Local website environment settings
 web/.env*.local
+kofi-sync/.env
+kofi-sync/.env*.local
+kofi-sync/.vercel/

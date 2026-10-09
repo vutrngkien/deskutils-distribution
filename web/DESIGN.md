@@ -8,12 +8,36 @@ Temporary Claude product mockups are explicitly approved until real captures are
 
 `ProductVisual` prefers generated media, then the approved mockup. Published homepage media must not be blank. See MEDIA.md for replacement instructions.
 
-Feature facts, permissions, and compatibility come from the DeskUtils app source. Pricing and checkout come from `content/product.ts`, including the confirmed $7.99 launch / $14.99 regular offer. Published routes come from `content/routes.ts`. SEO and locale completeness remain governed by their existing registries.
+Feature facts, permissions, and compatibility come from the DeskUtils app source. Free distribution and the optional Ko-fi support URL come from `content/product.ts`. The supplied Snapzy reference guides the free/support section: three flat cards for the free toolkit, voluntary support, and the official Ko-fi tip panel. Keep DeskUtils feature claims accurate; donations do not unlock features. The direct card renders the official 712px Ko-fi tip panel inside a compact keyboard-accessible scroll region that fills the remaining card height. There is no separate link below the panel. The community checklist groups all twelve tools; the supporter checklist explains voluntary contributions without promising extra features. The shared shell loads the supplied floating overlay once, using “Support me”, #00b9fe and white text. Do not add GitHub sponsorship or open-source claims. Published routes come from `content/routes.ts`. SEO and locale completeness remain governed by their existing registries.
 
 Review rendered regions against the approved Claude export at identical viewport sizes before updating visual baselines. A passing regression comparison records stability, not design acceptance. Keep deliberate differences for real pricing, real FAQs, Lucide icons, and unpublished routes documented.
 
 ## Review adjustments
 
+- Free & Support follows the user-approved “Site v1 - Free and Support” design
+  viewed in Chrome on 2026-10-09. Its heading retains the shared 46px/30px
+  landing-page scale, separate description and blue eyebrow, now visible on
+  mobile too. The community goal sits below that heading and above the cards.
+  It uses a compact centered composition, pale blue surface, white Apple SVG
+  tile, 30px/24px goal heading, and black progress fill on a gray track. The
+  fill animates for 1.1 seconds unless Reduce Motion is enabled. The Apple SVG
+  renders across platforms without relying on a private system-font glyph.
+  `public/images/apple-logo.svg` preserves the exact path from the Apple logo
+  in [apple.com](https://www.apple.com/) global navigation, retrieved 2026-10-09.
+  Only its viewBox is cropped to remove navigation-bar padding.
+  Cards have 24px corners; buttons keep 12px corners. The download button is
+  white with ink text and a light border; Ko-fi is #D93645 with white text and
+  #C62828 on hover. Desktop retains the official widget in its own scroll area.
+  Mobile uses two concise cards and the full-width goal CTA; the detailed
+  toolkit remains available elsewhere on the homepage and on the pricing route.
+  The pricing route uses the same goal and cards beneath its existing header.
+- `content/notarization.ts` holds the creator-confirmed 99 USD first-year
+  membership goal and 9% starting progress. Show the goal and percentage rather
+  than inferring dollars raised from that percentage. The current snapshot
+  remains available without JavaScript or when sync fails. The optional public
+  endpoint connects the panel to `kofi-sync`; no credentials enter the website
+  bundle. The design's sample $20 and 20% are not production values. Do not
+  describe DeskUtils as already notarized.
 - Homepage FAQ retains seven real answers. Subscription and license duration
   share one answer; rows keep Claude's dividers and plus/minus affordance. Native named details provide an exclusive accordion
   that also works without JavaScript.
@@ -53,10 +77,10 @@ Review rendered regions against the approved Claude export at identical viewport
 - Retain all three Screenshot modes and keyboard shortcuts on the homepage.
 - Clipboard uses three concise benefit lines; Quick Ring uses one instruction
   and its animated illustration instead of repeating eight action names.
-- Pricing states the lifetime license once beside the price. Display dimming
-  is a Free preview while the menu is open; persistent dimming requires Pro.
-- The launch-price FAQ is omitted because the pricing footnote already explains
-  the offer. Locale FAQ and plan copy follow the same product facts.
+- Pricing presents the full free toolkit and voluntary support. Display dimming
+  and every other tool are included for everyone.
+- Pricing FAQs cover free use and optional donations. Locale FAQ and card copy
+  follow the same product facts.
 - Historical macOS visual baselines predate this approved copy refinement.
   Refresh visual references in the pinned Linux/Chromium environment described
   in AGENTS.md; local macOS validation uses functional tests and manual screenshots.

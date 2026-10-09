@@ -1,6 +1,23 @@
 import type { Messages } from './en';
 
 export const vi = {
+  'notarization.eyebrow': 'Mục tiêu cộng đồng',
+  'notarization.title': 'Giúp DeskUtils được notarization',
+  'notarization.titleLead': 'Giúp DeskUtils',
+  'notarization.titleAccent': 'được notarization.',
+  'notarization.benefit.signed': 'Ứng dụng được ký và notarize',
+  'notarization.benefit.install': 'Cài đặt thuận tiện trên macOS',
+  'notarization.benefit.development': 'Hỗ trợ phát triển lâu dài',
+  'notarization.year': 'năm',
+  'notarization.body':
+    'Tip qua Ko-fi giúp trang trải năm đầu tham gia Apple Developer Program, để mình có thể ký DeskUtils và gửi app cho Apple kiểm tra qua quy trình notarization.',
+  'notarization.raised': 'Đã đạt qua Ko-fi',
+  'notarization.target': 'Mục tiêu năm đầu',
+  'notarization.progress': 'Đã đạt {percent}% mục tiêu',
+  'notarization.cta': 'Góp sức đạt mục tiêu',
+  'notarization.note': 'Cảm ơn mọi người đã cùng góp sức.',
+  'notarization.freeNote': 'Mọi tính năng luôn miễn phí cho tất cả.',
+
   'home.social.comments': 'Bình luận Reddit',
   'home.social.label': 'Người dùng Mac nói gì',
   'home.demo.play': 'Chạy demo',
@@ -33,7 +50,7 @@ export const vi = {
   'media.clipboard.alt': 'Lịch sử clipboard có thể tìm kiếm trong DeskUtils',
   'media.quickring.alt': 'Menu tròn Quick Ring với tám thao tác mặc định',
   'nav.features': 'Tính năng',
-  'nav.pricing': 'Giá',
+  'nav.pricing': 'Miễn phí & Ủng hộ',
   'nav.help': 'Trợ giúp',
   'nav.download': 'Tải xuống',
   'nav.menu': 'Menu',
@@ -55,7 +72,7 @@ export const vi = {
     'Cách DeskUtils xử lý nội dung clipboard, ảnh chụp màn hình, giấy phép và thông tin hỗ trợ.',
   'meta.terms.title': 'Điều khoản sử dụng — DeskUtils',
   'meta.terms.description':
-    'Điều khoản tải xuống và sử dụng DeskUtils, bao gồm giấy phép Pro trọn đời.',
+    'Điều khoản tải và sử dụng DeskUtils miễn phí và ủng hộ việc phát triển.',
   'meta.feedback.title': 'Phản hồi — DeskUtils',
   'meta.feedback.description': 'Báo lỗi, chia sẻ phản hồi hoặc đề xuất ý tưởng cho DeskUtils.',
   'meta.ogAlt': 'DeskUtils — các tiện ích macOS thiết yếu trong một ứng dụng.',
@@ -127,51 +144,9 @@ export const vi = {
   'localization.description': 'DeskUtils luôn vừa vặn với nơi bạn làm việc.',
   'localization.detail': 'Chọn ngôn ngữ trong Settings để biến DeskUtils thành của riêng bạn.',
   'localization.cta': 'Xem tất cả ngôn ngữ',
-  'pricing.title': 'Dùng miễn phí. Nâng cấp Pro khi cần thêm.',
-  'pricing.subtitle': 'Bắt đầu với các công cụ quen thuộc. Mở rộng khi bạn cần thêm.',
+  'pricing.subtitle': 'Đầy đủ tính năng. Bạn có thể tự nguyện ủng hộ việc phát triển.',
   'pricing.free': 'Miễn phí',
-  'pricing.pro': 'DeskUtils Pro',
-  'pricing.free.pitch': 'Đủ mọi thứ cần thiết, miễn phí mãi mãi.',
-  'pricing.free.description': 'Cho việc sao chép và chụp màn hình hằng ngày.',
-  'pricing.pro.pitch': 'Mở khóa thêm công cụ.',
-  'pricing.pro.description': 'Nhiều lịch sử hơn và thêm một số công cụ chụp.',
-  'offerPopup.badge': 'Ưu đãi ra mắt',
-  'offerPopup.title': 'Nhận DeskUtils Pro',
-  'offerPopup.description':
-    'Thêm lịch sử clipboard, OCR và công cụ chụp màn hình nâng cao trong một ứng dụng Mac.',
-  'offerPopup.lifetimeTitle': 'Mua một lần, dùng trọn đời',
-  'offerPopup.devicesTitle': 'Dùng trên tối đa {count} Mac',
-  'offerPopup.cta': 'Nhận ưu đãi ${amount}',
-  'offerPopup.later': 'Để sau',
-  'offerPopup.close': 'Đóng ưu đãi',
-  'offerPopup.saving': 'Tiết kiệm {percent}%',
-  'offerPopup.priceNote':
-    'Dành cho {customers} khách hàng đầu tiên. Ưu đãi tự áp dụng khi thanh toán.',
-  'offerPopup.devicesDescription': 'Dùng chung một khóa giấy phép.',
-  'pricing.launchOffer': '🚀 Ưu đãi ra mắt',
-  'pricing.lifetime': 'Giấy phép trọn đời',
-  'pricing.oneTime': 'Thanh toán một lần. Không thuê bao.',
-  'pricing.devices': 'Dùng trên tối đa {count} thiết bị',
-  'pricing.promoLabel': 'Mã ra mắt',
-  'pricing.cta': 'Mua DeskUtils Pro',
-  'pricing.deviceNote': 'Một khóa giấy phép kích hoạt DeskUtils Pro trên tối đa {count} thiết bị.',
-  'pricing.usdYear': 'USD / năm',
-  'pricing.noLicense': 'Không cần giấy phép',
-  'pricing.everythingFree': 'Tất cả tính năng của gói Miễn phí',
-  'pricing.freeItems': '{count} mục clipboard',
-  'pricing.proItems': 'Lịch sử clipboard mở rộng',
-  'pricing.screenshots': 'Chụp màn hình và chú thích',
-  'pricing.color': 'Chọn màu',
-  'pricing.cleanSleep': 'Vệ sinh bàn phím & Ngăn Mac ngủ',
-  'pricing.dimmingPreview': 'Xem trước tính năng giảm độ sáng',
-  'pricing.ocr': 'OCR',
-  'pricing.scrolling': 'Chụp màn hình cuộn',
-  'pricing.subject': 'Tách chủ thể',
-  'pricing.persistentDimming': 'Duy trì mức giảm độ sáng màn hình',
-  'pricing.updates': 'Cập nhật trong thời hạn giấy phép',
-  'pricing.comingSoon': 'Pro sắp ra mắt',
-  'pricing.proFootnote': '{customers} khách hàng đầu tiên · Sau đó ${original}',
-  'pricing.freeFootnote': 'Không cần tài khoản hay thông tin thanh toán.',
+  'pricing.freeFootnote': 'Không tài khoản · Không đăng ký · Không khóa bản quyền',
   'faq.title': 'Câu hỏi?',
   'faq.contact': 'Liên hệ',
   'meta.changelog.title': 'Nhật ký thay đổi — DeskUtils',
@@ -185,34 +160,21 @@ export const vi = {
   'changelog.releasedOn': 'Phát hành {date}',
   'changelog.latest': 'Mới nhất',
   'changelog.viewOnGitHub': 'Xem trên GitHub',
-  'meta.pricing.title': 'Giá DeskUtils — Miễn phí và Pro',
+  'meta.pricing.title': 'DeskUtils — Công cụ Mac miễn phí & Ủng hộ tự nguyện',
   'meta.pricing.description':
-    'DeskUtils miễn phí tải về và sử dụng. Pro là giấy phép trọn đời thanh toán một lần cho tối đa 2 máy Mac, bổ sung lịch sử clipboard mở rộng và các công cụ chụp thêm.',
-  'pricing.page.eyebrow': 'Giá',
+    'Mọi tính năng DeskUtils đều miễn phí. Tải app cho Mac mà không cần khóa bản quyền, đăng ký hay thanh toán. Bạn có thể tự nguyện ủng hộ qua Ko-fi.',
+  'pricing.page.eyebrow': 'Miễn phí & Ủng hộ',
   'pricing.page.lede':
-    'DeskUtils miễn phí tải về và sử dụng. Pro là giấy phép trọn đời thanh toán một lần, bổ sung lịch sử clipboard mở rộng, Chụp màn hình cuộn, Trích xuất văn bản và nhiều hơn nữa.',
-  'pricing.compare.title': 'So sánh Miễn phí và Pro',
-  'pricing.compare.feature': 'Tính năng',
-  'pricing.included': 'Có sẵn',
-  'pricing.none': '—',
-  'pricing.compare.freeToolsLabel': 'Bộ công cụ miễn phí',
-  'pricing.compare.freeTools':
-    'Chụp màn hình, Quản lý clipboard, Quick Ring, Chọn màu, Chuyển cửa sổ và các tiện ích thanh menu',
-  'pricing.compare.quickRing': 'Bố cục Quick Ring mặc định',
-  'pricing.compare.customize': 'Tùy chỉnh thao tác Quick Ring',
-  'pricing.compare.clipboard': '{count} mục clipboard',
-  'pricing.compare.clipboardLabel': 'Lịch sử clipboard',
-  'pricing.compare.screenshots': 'Chụp màn hình và chú thích',
+    'DeskUtils miễn phí với đầy đủ tính năng. Nếu app giúp ích cho bạn, bạn có thể ủng hộ việc phát triển qua Ko-fi.',
+  'pricing.compare.customize': 'Tùy chỉnh thao tác nhanh trong Quick Ring',
+  'pricing.compare.clipboard': '{count} mục clipboard, có tìm kiếm và ghim',
+  'pricing.compare.screenshots': 'Chụp màn hình, chụp cuộn và chú thích',
   'pricing.compare.extraCapture': 'Chụp màn hình cuộn, Tách chủ thể và Smart Element',
-  'pricing.compare.ocr': 'Trích xuất văn bản (OCR)',
+  'pricing.compare.ocr': 'OCR trên máy, lấy màu và chuyển cửa sổ',
   'pricing.compare.externalDisplayLabel': 'Chỉ màn hình ngoài',
-  'pricing.compare.externalDisplayFree': 'Dùng thử 60 giây',
-  'pricing.compare.externalDisplayPro': 'Không giới hạn thời gian',
-  'pricing.compare.dimming': 'Giảm độ sáng màn hình',
-  'pricing.compare.devices': '{count} máy Mac',
-  'pricing.compare.devicesLabel': 'Số máy Mac mỗi giấy phép',
-  'pricing.faq.title': 'Câu hỏi về giấy phép',
-  'pricing.cta.title': 'Mở khóa trọn bộ công cụ một lần.',
+  'pricing.compare.dimming': 'Giảm sáng và chế độ chỉ màn hình ngoài',
+  'pricing.faq.title': 'Câu hỏi về miễn phí và ủng hộ',
+  'pricing.cta.title': 'Đưa bộ công cụ đầy đủ lên thanh menu.',
   'feedback.label': 'Phản hồi DeskUtils',
   'feedback.title.line1': 'Phát hiện lỗi?',
   'feedback.title.line2': 'Có ý tưởng mới?',
@@ -275,26 +237,20 @@ export const vi = {
   'feedback.links.email': 'Gửi email',
   'faq.subscription.question': 'DeskUtils có phải là gói thuê bao không?',
   'faq.subscription.answer':
-    'Không. DeskUtils Pro chỉ cần thanh toán một lần. Giấy phép không hết hạn.',
+    'Không. Mọi tính năng DeskUtils đều miễn phí, không cần đăng ký hay khóa bản quyền.',
   'faq.devices.question': 'Tôi có thể dùng DeskUtils trên bao nhiêu máy Mac?',
   'faq.devices.answer':
-    'Mỗi giấy phép DeskUtils Pro có thể kích hoạt trên tối đa {count} thiết bị.',
-  'faq.lifetime.question': 'Giấy phép có hiệu lực trong bao lâu?',
-  'faq.lifetime.answer': 'Giấy phép DeskUtils Pro của bạn không hết hạn.',
-  'faq.launchPrice.question': 'Tại sao DeskUtils có giá ${amount}?',
-  'faq.launchPrice.answer':
-    '${amount} là giá ra mắt dành cho {customers} khách hàng đầu tiên. Giá thông thường là ${original}.',
+    'Cài DeskUtils trên mọi máy Mac được hỗ trợ mà bạn sở hữu hoặc quản lý. Không có giới hạn thiết bị theo gói trả phí.',
   'faq.macos.question': 'DeskUtils yêu cầu phiên bản macOS nào?',
   'faq.macos.answer':
     'DeskUtils yêu cầu macOS {version} trở lên. Hãy xem ghi chú phát hành để kiểm tra máy được hỗ trợ trước khi tải xuống.',
   'faq.free.question': 'DeskUtils có miễn phí không?',
-  'faq.free.answer':
-    'Có. Lịch sử clipboard, chụp màn hình kèm chú thích, Chọn màu, Vệ sinh bàn phím và Ngăn Mac ngủ đều miễn phí.',
+  'faq.free.answer': 'Có. Mọi tính năng đều miễn phí. Việc ủng hộ qua Ko-fi hoàn toàn tự nguyện.',
   'faq.account.question': 'Tôi có cần tài khoản không?',
   'faq.account.answer': 'Bạn không cần tài khoản DeskUtils.',
   'faq.clipboard.question': 'Clipboard có rời khỏi máy Mac không?',
   'faq.clipboard.answer':
-    'Không. Lịch sử clipboard nằm trên máy Mac và nhận dạng văn bản chạy trên thiết bị. Kiểm tra cập nhật và kích hoạt giấy phép có dùng mạng nhưng không gửi nội dung clipboard.',
+    'Lịch sử clipboard được lưu trên Mac, nhận dạng văn bản chạy trên thiết bị. Kiểm tra cập nhật và xem trước liên kết tùy chọn dùng mạng nhưng không tải lịch sử clipboard lên.',
   'faq.store.question': 'DeskUtils có trên Mac App Store không?',
   'faq.store.answer':
     'DeskUtils được phân phối trực tiếp từ trang chính thức và GitHub Releases. Tải disk image, chuyển ứng dụng vào Applications và làm theo hướng dẫn cài đặt.',
@@ -304,7 +260,7 @@ export const vi = {
   'footer.independent': 'Phần mềm macOS độc lập của Vũ Trung Kiên.',
   'document.back': 'Quay lại DeskUtils',
   'document.updated': 'Cập nhật lần cuối: {date}',
-  'document.date': '11 tháng 9, 2026',
+  'document.date': '7 tháng 10, 2026',
   'install.label': 'Hướng dẫn cài đặt',
   'install.title': 'Vài bước là xong.',
   'install.download': 'Tải DeskUtils',
@@ -348,7 +304,7 @@ export const vi = {
     'Dùng cho vệ sinh bàn phím, dán trực tiếp và các thao tác chụp được hỗ trợ.',
   'permission.network.title': 'Truy cập mạng',
   'permission.network.description':
-    'Dùng để kiểm tra cập nhật và, khi Pro ra mắt, kích hoạt và xác thực giấy phép. Nội dung clipboard không được gửi đi.',
+    'Dùng để kiểm tra cập nhật và xem trước liên kết tùy chọn. Lịch sử clipboard không được tải lên.',
   'install.verify.title': 'Xác minh tệp tải xuống',
   'install.verify.heading': 'Kiểm tra tệp trước khi mở',
   'install.verify.body':
@@ -394,11 +350,6 @@ export const vi = {
   'privacy.website.title': 'Trang web này',
   'privacy.website.body':
     'Trang web này dùng Umami, một dịch vụ phân tích chú trọng quyền riêng tư, để thu thập ẩn danh lượt xem trang, nguồn giới thiệu, trình duyệt, hệ điều hành, loại thiết bị, quốc gia và các tương tác như phần nội dung hoặc demo đã xem, mục FAQ đã mở, điều chỉnh độ mờ, đổi ngôn ngữ, cùng lượt nhấp điều hướng, tải xuống, thanh toán, hỗ trợ và liên kết ngoài. Umami không dùng cookie hay thu thập thông tin nhận dạng cá nhân. DeskUtils không gửi nội dung clipboard, ảnh chụp màn hình, địa chỉ email, khóa bản quyền hoặc thông tin thanh toán cho dịch vụ phân tích. Video demo được phục vụ dưới dạng tệp của website, không nhúng trình phát bên thứ ba. Nhà cung cấp dịch vụ lưu trữ có thể xử lý log máy chủ tiêu chuẩn để bảo mật và phân phối ổn định.',
-  'privacy.purchase.title': 'Mua hàng và kích hoạt giấy phép',
-  'privacy.purchase.body1':
-    'Thanh toán Pro do Lemon Squeezy xử lý theo chính sách quyền riêng tư của họ. DeskUtils nhận thông tin đơn hàng và giấy phép cần thiết để cung cấp và hỗ trợ giấy phép của bạn.',
-  'privacy.purchase.body2':
-    'Việc kích hoạt và xác thực Pro cần liên lạc với dịch vụ giấy phép. Khóa giấy phép và thông tin kích hoạt được dùng để xác minh quyền truy cập và giới hạn thiết bị. Nội dung clipboard và ảnh chụp màn hình không được gửi trong các yêu cầu này.',
   'privacy.support.title': 'Tin nhắn hỗ trợ',
   'privacy.support.body':
     'Nếu bạn gửi email cho DeskUtils hoặc dùng biểu mẫu phản hồi, thông tin bạn cung cấp—như địa chỉ email, loại phản hồi, nội dung, ảnh tùy chọn và ngôn ngữ—sẽ được Formspree xử lý và gửi đến DeskUtils để chúng tôi phản hồi và cải thiện ứng dụng. Không gửi nội dung nhạy cảm trừ khi cần thiết. DeskUtils không gửi thông tin này cho Umami Analytics.',
@@ -411,18 +362,7 @@ export const vi = {
   'terms.using.body1':
     'DeskUtils là ứng dụng macOS độc lập do Vũ Trung Kiên phát triển. Theo các điều khoản này, bạn được cấp giấy phép có giới hạn, dành cho cá nhân, không độc quyền và không thể chuyển nhượng để cài đặt và sử dụng ứng dụng trên các máy Mac được hỗ trợ mà bạn sở hữu hoặc kiểm soát.',
   'terms.using.body2':
-    'Bạn không được bán, cấp phép lại, phân phối lại hoặc đưa khóa giấy phép cho người khác, vượt qua giới hạn giấy phép hay sử dụng DeskUtils theo cách vi phạm pháp luật hiện hành.',
-  'terms.plans.title': 'Miễn phí và Pro',
-  'terms.plans.body1':
-    'Bản miễn phí có thể được sử dụng mà không cần thanh toán hay tài khoản DeskUtils. Một lần mua Pro cung cấp giấy phép trọn đời cho tối đa {macs} thiết bị và bao gồm các tính năng DeskUtils Pro.',
-  'terms.plans.body2':
-    'Giá ra mắt là ${amount} USD cho {customers} khách hàng đầu tiên; giá thông thường là ${original} USD. Thuế áp dụng và điều khoản mua cuối cùng được hiển thị khi thanh toán.',
-  'terms.renewal.title': 'Mua một lần',
-  'terms.renewal.body':
-    'Pro là khoản mua một lần, không phải thuê bao. Giấy phép trọn đời không hết hạn và không có phí giấy phép định kỳ.',
-  'terms.payment.title': 'Thanh toán và cấp giấy phép',
-  'terms.payment.body':
-    'Thanh toán do Lemon Squeezy xử lý với vai trò Merchant of Record. Lemon Squeezy phụ trách xử lý thanh toán, thuế áp dụng, hóa đơn và hoàn tiền liên quan đến thanh toán. Khóa giấy phép được gửi sau khi mua để kích hoạt trong DeskUtils.',
+    'Bạn không được bán, cấp phép lại hoặc phân phối lại DeskUtils, hay sử dụng app theo cách vi phạm pháp luật hiện hành.',
   'terms.refunds.title': 'Hoàn tiền',
   'terms.refunds.body':
     'Bạn có thể yêu cầu hoàn tiền trong vòng 14 ngày kể từ lần mua ban đầu bằng cách gửi email đến {email} cùng đủ thông tin để xác định giao dịch. Khoản hoàn tiền được chấp thuận được xử lý qua Lemon Squeezy và có thể thu hồi giấy phép liên quan.',
@@ -462,7 +402,7 @@ export const vi = {
     'Chụp, sao chép, chuyển cửa sổ, chọn màu và giữ tập trung — mà không làm gián đoạn công việc.',
   'home.download': 'Tải cho Mac',
   'home.exploreTools': 'Khám phá tất cả công cụ',
-  'home.freeNote': 'Có bản miễn phí · Yêu cầu macOS {version}+',
+  'home.freeNote': 'Mọi tính năng miễn phí · Yêu cầu macOS {version}+',
   'home.trust.built.title': 'Dành cho macOS',
   'home.trust.built.body': 'Native và hài hòa với hệ thống.',
   'home.trust.free.title': 'Miễn phí để bắt đầu',
@@ -494,7 +434,7 @@ export const vi = {
   'home.quickring.eyebrow': 'Quick Ring',
   'home.quickring.title': 'Công cụ yêu thích của bạn. Chỉ cách hai lần nhấn.',
   'home.quickring.lede': 'Nhấn ⌘ hai lần, rồi chọn một thao tác.',
-  'home.quickring.note': 'Tùy chỉnh thao tác hiển thị yêu cầu bản Pro.',
+  'home.quickring.note': 'Chọn và sắp xếp những thao tác bạn dùng nhiều nhất.',
   'home.quickring.cta': 'Khám phá Quick Ring',
   'home.focused.title': 'Lấy một màu, sao chép mọi văn bản, tìm đúng cửa sổ.',
   'home.utilities.title': 'Tiện ích nhỏ cho những khoảnh khắc macOS chưa đáp ứng.',
@@ -516,7 +456,7 @@ export const vi = {
   'home.util.monitor.eyebrow': 'Giám sát hệ thống',
   'home.util.monitor.title': 'Theo dõi máy Mac của bạn.',
   'home.util.monitor.body': 'Mức sử dụng CPU, bộ nhớ và ổ đĩa, ngay trên thanh menu.',
-  'home.pricing.title': 'Miễn phí để bắt đầu. Pro khi bạn cần thêm.',
+  'home.pricing.title': 'Mọi công cụ. Hoàn toàn miễn phí.',
   'home.faq.title': 'Câu hỏi thường gặp',
   'home.cta.title': 'Đưa công cụ Mac hằng ngày của bạn vào tầm tay.',
   'cta.title': 'Đưa công cụ Mac hằng ngày của bạn vào tầm tay.',
@@ -674,7 +614,7 @@ export const vi = {
   'features.title': 'Mọi công cụ DeskUtils cho máy Mac',
   'features.lede':
     'DeskUtils đặt 12 công cụ hằng ngày vào một ứng dụng thanh menu cho macOS 15.2 trở lên. Bắt đầu với Chụp màn hình, Quản lý clipboard và Quick Ring, rồi bật các tiện ích nhỏ hơn khi cần.',
-  'features.pricing': 'Xem giá',
+  'features.pricing': 'Miễn phí & Ủng hộ',
   'features.featured.eyebrow': 'Bắt đầu tại đây',
   'features.featured.title': 'Những công cụ bạn sẽ dùng hằng ngày.',
   'features.featured.screenshot': 'Chụp, chú thích và làm mờ trong một luồng.',
@@ -761,8 +701,7 @@ export const vi = {
     'Mỗi mục hiển thị ứng dụng nguồn, loại và kích thước, để bạn dán đúng mục.',
   'clipboard-manager.privacy.eyebrow': 'Quyền riêng tư',
   'clipboard-manager.privacy.title': 'Điều gì rời khỏi máy Mac và điều gì không',
-  'clipboard-manager.privacy.network':
-    'Kiểm tra cập nhật và xác thực giấy phép không bao gồm nội dung clipboard.',
+  'clipboard-manager.privacy.network': 'Kiểm tra cập nhật không bao gồm nội dung clipboard.',
   'clipboard-manager.privacy.link': 'Xem trước liên kết có thể tải thông tin trang từ web.',
   'clipboard-manager.privacy.accessibility':
     'Lịch sử, tìm kiếm, xem trước và Sao chép hoạt động mà không cần Trợ năng. Quyền này chỉ cần cho Dán trực tiếp.',
@@ -781,7 +720,7 @@ export const vi = {
   'clipboard-manager.faq.a3': 'Mở lịch sử, nhấn F rồi gõ. Các từ khớp được tô sáng.',
   'clipboard-manager.faq.q4': 'Nội dung clipboard của tôi có bị gửi đi đâu không?',
   'clipboard-manager.faq.a4':
-    'Truy cập mạng được dùng để kiểm tra cập nhật và, khi có, xác thực giấy phép — nội dung clipboard không được gửi kèm. Xem trước liên kết có thể tải thông tin trang từ web.',
+    'Truy cập mạng được dùng để kiểm tra cập nhật mà không tải lịch sử clipboard lên. Xem trước liên kết tùy chọn có thể tải thông tin trang từ web.',
   'clipboard-manager.faq.q5': 'Vì sao DeskUtils yêu cầu quyền Trợ năng?',
   'clipboard-manager.faq.a5':
     'Lịch sử, tìm kiếm, xem trước và Sao chép hoạt động mà không cần quyền này. Trợ năng chỉ cần cho Dán trực tiếp — dán một mục thẳng vào ứng dụng bạn đang dùng.',
@@ -824,7 +763,8 @@ export const vi = {
   'quick-ring.faq.a2':
     'Mặc định: Chụp vùng, Trích xuất văn bản, Clipboard, Ngăn Mac ngủ, Lịch sử ảnh chụp, Vệ sinh bàn phím, Chú thích nhanh và Chọn màu.',
   'quick-ring.faq.q3': 'Tôi có thể thay đổi thao tác không?',
-  'quick-ring.faq.a3': 'Có, với DeskUtils Pro bạn có thể chọn thao tác nào hiện trong vòng tròn.',
+  'quick-ring.faq.a3':
+    'Có. Bạn có thể chọn và sắp xếp các thao tác trong vòng tròn ở phần Cài đặt.',
   'quick-ring.faq.q4': 'Mọi thứ trong Quick Ring có cả trên thanh menu không?',
   'quick-ring.faq.a4':
     'Có. Quick Ring là cách nhanh hơn để đến các công cụ cũng có sẵn từ biểu tượng thanh menu DeskUtils.',
@@ -1064,7 +1004,7 @@ export const vi = {
   'utilities.dimming.shortcut': 'Điều chỉnh từ thanh menu',
   'utilities.dimming.howTitle': 'Một thanh trượt, 10–100%',
   'utilities.dimming.howDesc':
-    'Kéo thanh trượt Giảm độ sáng màn hình để làm tối màn hình ngoài đang kết nối. Thao tác này điều chỉnh hình ảnh hiển thị, không phải độ sáng phần cứng của màn hình. Ở bản Miễn phí, việc giảm sáng là bản xem trước: áp dụng khi menu DeskUtils mở và trở lại độ sáng đầy đủ khi menu đóng. DeskUtils Pro giữ mức bạn đặt sau khi menu đóng.',
+    'Kéo thanh trượt để làm tối hình ảnh trên màn hình ngoài từ 10% đến 100%. Thao tác này thay đổi hình ảnh hiển thị, không thay đổi độ sáng phần cứng. Mức đã chọn được giữ khi đóng menu.',
   'utilities.dimming.permission': 'Không cần thêm quyền riêng tư macOS nào.',
   'utilities.dimming.related.external': 'Cũng hoạt động với màn hình ngoài của bạn.',
   'utilities.dimming.faq.q1': 'Công cụ có thay đổi độ sáng phần cứng của màn hình không?',
@@ -1073,8 +1013,7 @@ export const vi = {
   'utilities.dimming.faq.q2': 'Tôi có thể đặt trong khoảng nào?',
   'utilities.dimming.faq.a2': 'Một thanh trượt từ 10% đến 100%.',
   'utilities.dimming.faq.q3': 'Mức giảm sáng có giữ sau khi tôi đóng menu không?',
-  'utilities.dimming.faq.a3':
-    'Ở bản Miễn phí, việc giảm sáng là bản xem trước khi menu mở và trở lại độ sáng đầy đủ khi menu đóng. DeskUtils Pro giữ mức giảm sáng sau khi menu đóng.',
+  'utilities.dimming.faq.a3': 'Có. Mức làm tối đã chọn được giữ khi đóng menu.',
   'utilities.dimming.faq.q4': 'Công cụ có cần quyền không?',
   'utilities.dimming.faq.a4': 'Không cần thêm quyền riêng tư macOS nào.',
   'meta.external-display-only.title': 'Chỉ màn hình ngoài — Tắt màn hình MacBook | DeskUtils',
@@ -1147,4 +1086,43 @@ export const vi = {
   'support.stuck.body': 'Gửi email đến {email}, hoặc gửi lỗi hay ý tưởng qua Phản hồi.',
   'support.stuck.email': 'Hỗ trợ qua email',
   'support.stuck.feedback': 'Đi đến Phản hồi',
+  'donation.mobileCommunityBody':
+    'Miễn phí mãi mãi. Không cần tài khoản, đăng ký hay mã bản quyền.',
+  'donation.communityBody':
+    'Đầy đủ công cụ chụp màn hình, clipboard và tiện ích cho công việc hằng ngày trên Mac.',
+  'donation.features.utilities': 'Giữ máy thức, di chuyển chuột và vệ sinh bàn phím',
+  'donation.features.monitor': 'Theo dõi CPU, bộ nhớ và ổ đĩa',
+  'donation.frequency': 'Một lần / hằng tháng',
+  'donation.costs': 'Góp phần chi trả việc phát triển và duy trì website',
+  'donation.independent': 'Ủng hộ một lập trình viên độc lập',
+  'donation.supportFootnote': 'Hoàn toàn tự nguyện · Mọi người dùng cùng bản miễn phí',
+  'donation.community': 'Cộng đồng',
+  'donation.forever': 'Miễn phí mãi mãi',
+  'donation.supporter': 'Người ủng hộ',
+  'donation.voluntary': 'Tự nguyện',
+  'donation.payWhatYouWant': 'Ủng hộ tùy tâm',
+  'donation.improvements': 'Hỗ trợ tính năng mới, sửa lỗi và cập nhật',
+  'donation.sameApp': 'Giúp mọi công cụ luôn miễn phí cho mọi người',
+  'donation.directTitle': 'Ko-fi trực tiếp',
+  'donation.directBody': 'Ủng hộ trực tiếp qua bảng Ko-fi bên dưới.',
+  'donation.widgetTitle': 'Ủng hộ DeskUtils qua Ko-fi',
+  'donation.freeTitle': 'Bộ công cụ DeskUtils đầy đủ.',
+  'donation.freeBody':
+    'Chụp màn hình, lịch sử clipboard, Quick Ring, OCR và các tiện ích hằng ngày. Đầy đủ tính năng, không cần khóa bản quyền hay đăng ký.',
+  'donation.title': 'Giúp DeskUtils tiếp tục phát triển.',
+  'donation.body':
+    'Mỗi khoản đóng góp giúp DeskUtils tiếp tục miễn phí, độc lập và ngày càng tốt hơn.',
+  'donation.optional':
+    'Ủng hộ hoàn toàn tự nguyện. Mọi tính năng đều dùng được dù bạn có donate hay không.',
+  'donation.cta': 'Ủng hộ qua Ko-fi',
+  'donation.thanks': 'Mọi đóng góp, dù lớn hay nhỏ, đều đáng quý',
+  'donation.faq.question': 'Tôi có cần donate để mở khóa tính năng không?',
+  'donation.faq.answer':
+    'Không. Donate hỗ trợ việc phát triển, không mở khóa tính năng riêng. Mọi người đều dùng cùng một app miễn phí.',
+  'donation.privacy.title': 'Ủng hộ tự nguyện qua Ko-fi',
+  'donation.privacy.body':
+    'Nếu bạn chọn ủng hộ qua Ko-fi, Ko-fi và nhà cung cấp thanh toán xử lý giao dịch theo chính sách riêng. Tên, email và thông tin ủng hộ có thể được chia sẻ với lập trình viên để quản lý khoản ủng hộ. Thông tin thanh toán không được gửi tới hệ thống phân tích website. Bảng nhúng và nút ủng hộ nổi tải nội dung từ Ko-fi. Ko-fi có thể xử lý dữ liệu kỹ thuật và dùng cookie theo chính sách quyền riêng tư của họ.',
+  'donation.earlierPurchases': 'Các giao dịch Pro trước đây',
+  'donation.earlierPurchasesBody':
+    'DeskUtils hiện miễn phí với đầy đủ tính năng. Các giao dịch Pro trước đây được xử lý qua Lemon Squeezy. Nếu có câu hỏi về đơn hàng cũ hoặc chính sách hoàn tiền áp dụng cho đơn đó, hãy liên hệ {email}.',
 } satisfies Partial<Messages>;

@@ -5,11 +5,13 @@ on:
     branches: [main]
     paths:
       - "web/**"
+      - "kofi-sync/**"
       - "site/**"
       - ".github/workflows/pages.yml"
   pull_request:
     paths:
       - "web/**"
+      - "kofi-sync/**"
       - "site/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -52,6 +54,8 @@ jobs:
       - run: npm run typecheck
       - run: npm run format:check
       - run: npm test
+      - name: Verify Ko-fi webhook and goal handling
+        run: npm test --prefix ../kofi-sync
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: 1

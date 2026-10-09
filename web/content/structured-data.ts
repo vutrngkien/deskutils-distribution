@@ -51,9 +51,8 @@ export function faqData(entries: { question: string; answer: string }[]): Schema
 }
 
 /**
- * SoftwareApplication + Offer for the pricing page. The price, currency and
- * checkout URL come from `product.pricing`, so launch and regular states stay
- * in sync with the visible copy.
+ * SoftwareApplication + free Offer. Donations are optional and are never
+ * represented as the price of the application.
  */
 export function pricingStructuredData(locale: Locale): SchemaObject {
   const url = `${product.origin}${localePath(locale, '/pricing/')}`;
@@ -72,7 +71,7 @@ export function pricingStructuredData(locale: Locale): SchemaObject {
       price: product.pricing.amount,
       priceCurrency: product.pricing.currency,
       availability: 'https://schema.org/InStock',
-      url: product.pricing.purchaseURL,
+      url: product.downloadURL,
     },
     inLanguage: locale,
     sameAs: [product.repositoryURL],
@@ -109,7 +108,7 @@ export function homeStructuredData(locale: Locale): SchemaObject {
           price: product.pricing.amount,
           priceCurrency: product.pricing.currency,
           availability: 'https://schema.org/InStock',
-          url: product.pricing.purchaseURL,
+          url: product.downloadURL,
         },
         inLanguage: locale,
         sameAs: [product.repositoryURL],

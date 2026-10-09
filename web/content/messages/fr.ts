@@ -1,6 +1,23 @@
 import type { Messages } from './en';
 
 export const fr = {
+  'notarization.eyebrow': 'Objectif communautaire',
+  'notarization.title': 'Aidez à faire notariser DeskUtils',
+  'notarization.titleLead': 'Aidez DeskUtils',
+  'notarization.titleAccent': 'à être notarisé.',
+  'notarization.benefit.signed': 'Versions signées et notarisées',
+  'notarization.benefit.install': 'Installation simplifiée sur macOS',
+  'notarization.benefit.development': 'Soutenez le développement',
+  'notarization.year': 'an',
+  'notarization.body':
+    'Vos dons sur Ko-fi contribuent à financer la première année du programme Apple Developer, afin que je puisse signer DeskUtils et le soumettre à Apple pour notarisation.',
+  'notarization.raised': 'Financé via Ko-fi',
+  'notarization.target': 'Objectif de la première année',
+  'notarization.progress': '{percent}% de l’objectif financé',
+  'notarization.cta': 'Aider à atteindre l’objectif',
+  'notarization.note': 'Merci à toutes les personnes qui nous aident à y parvenir.',
+  'notarization.freeNote': 'Toutes les fonctionnalités restent gratuites pour tous.',
+
   'home.social.comments': 'commentaires Reddit',
   'home.social.label': 'Ce que disent les utilisateurs de Mac',
   'home.demo.play': 'Lancer la démo',
@@ -33,7 +50,7 @@ export const fr = {
   'media.clipboard.alt': 'Historique du presse-papiers avec recherche dans DeskUtils',
   'media.quickring.alt': 'Menu radial Quick Ring avec huit actions par défaut',
   'nav.features': 'Fonctionnalités',
-  'nav.pricing': 'Tarifs',
+  'nav.pricing': 'Gratuit et soutien',
   'nav.help': 'Aide',
   'nav.download': 'Télécharger',
   'nav.menu': 'Menu',
@@ -55,7 +72,7 @@ export const fr = {
     'Comment DeskUtils gère le presse-papiers, les captures, les licences et l’assistance.',
   'meta.terms.title': 'Conditions d’utilisation — DeskUtils',
   'meta.terms.description':
-    'Conditions de téléchargement et d’utilisation de DeskUtils, avec la licence Pro à vie.',
+    'Conditions de téléchargement et d’utilisation de DeskUtils gratuit et de soutien à son développement.',
   'meta.feedback.title': 'Avis — DeskUtils',
   'meta.feedback.description':
     'Signalez un bug, partagez un avis ou proposez une idée pour DeskUtils.',
@@ -134,51 +151,10 @@ export const fr = {
   'localization.detail':
     'Choisissez votre langue dans les réglages et faites de DeskUtils le vôtre.',
   'localization.cta': 'Voir toutes les langues',
-  'pricing.title': 'Utilisez-le gratuitement. Passez à Pro quand il vous faut plus.',
   'pricing.subtitle':
-    'Commencez avec les outils du quotidien et ajoutez-en quand vous en avez besoin.',
+    'Toutes les fonctions incluses. Soutenez le développement si vous le souhaitez.',
   'pricing.free': 'Gratuit',
-  'pricing.pro': 'DeskUtils Pro',
-  'pricing.free.pitch': 'Tout l’essentiel, gratuit pour toujours.',
-  'pricing.free.description': 'Pour copier et capturer au quotidien.',
-  'pricing.pro.pitch': 'Débloquez plus d’outils.',
-  'pricing.pro.description': 'Plus d’historique et quelques outils de capture supplémentaires.',
-  'offerPopup.badge': 'Offre de lancement',
-  'offerPopup.title': 'Obtenez DeskUtils Pro',
-  'offerPopup.description':
-    'Historique du presse-papiers étendu, OCR et outils de capture avancés dans une seule app Mac.',
-  'offerPopup.lifetimeTitle': 'Un seul paiement, une utilisation à vie',
-  'offerPopup.devicesTitle': 'Utilisez-le sur jusqu’à {count} Mac',
-  'offerPopup.cta': 'Profiter de l’offre à ${amount}',
-  'offerPopup.later': 'Plus tard',
-  'offerPopup.close': 'Fermer l’offre',
-  'offerPopup.saving': 'Économisez {percent}%',
-  'offerPopup.priceNote': 'Pour les {customers} premiers clients. Remise appliquée au paiement.',
-  'offerPopup.devicesDescription': 'Activez vos Mac avec la même clé de licence.',
-  'pricing.launchOffer': '🚀 Offre de lancement',
-  'pricing.lifetime': 'Licence à vie',
-  'pricing.oneTime': 'Paiement unique. Sans abonnement.',
-  'pricing.devices': 'Utilisable sur {count} appareils maximum',
-  'pricing.promoLabel': 'Code de lancement',
-  'pricing.cta': 'Obtenir DeskUtils Pro',
-  'pricing.deviceNote': 'Une clé de licence active DeskUtils Pro sur {count} appareils maximum.',
-  'pricing.usdYear': 'USD / an',
-  'pricing.noLicense': 'Aucune licence nécessaire',
-  'pricing.everythingFree': 'Tout ce qui est inclus dans Gratuit',
-  'pricing.freeItems': '{count} éléments du presse-papiers',
-  'pricing.proItems': 'Historique du presse-papiers étendu',
-  'pricing.screenshots': 'Captures et annotations',
-  'pricing.color': 'Pipette',
-  'pricing.cleanSleep': 'Nettoyage du clavier et veille empêchée',
-  'pricing.dimmingPreview': 'Aperçu de l’atténuation',
-  'pricing.ocr': 'OCR',
-  'pricing.scrolling': 'Capture avec défilement',
-  'pricing.subject': 'Capture du sujet',
-  'pricing.persistentDimming': 'Atténuation persistante de l’écran',
-  'pricing.updates': 'Mises à jour pendant votre licence',
-  'pricing.comingSoon': 'Pro arrive bientôt',
-  'pricing.proFootnote': '{customers} premiers clients · Puis ${original}',
-  'pricing.freeFootnote': 'Pas de compte ni de données de paiement.',
+  'pricing.freeFootnote': 'Sans compte · Sans abonnement · Sans clé de licence',
   'faq.title': 'Des questions ?',
   'faq.contact': 'Nous contacter',
   'meta.changelog.title': 'Nouveautés — DeskUtils',
@@ -192,35 +168,22 @@ export const fr = {
   'changelog.releasedOn': 'Publié le {date}',
   'changelog.latest': 'Dernière',
   'changelog.viewOnGitHub': 'Voir sur GitHub',
-  'meta.pricing.title': 'Tarifs DeskUtils — Gratuit et Pro',
+  'meta.pricing.title': 'DeskUtils — Outils Mac gratuits et soutien facultatif',
   'meta.pricing.description':
-    'DeskUtils est gratuit à télécharger et à utiliser. Pro est une licence à vie unique pour jusqu’à 2 Mac qui ajoute un historique du presse-papiers étendu et des outils de capture supplémentaires.',
-  'pricing.page.eyebrow': 'Tarifs',
+    'Toutes les fonctions de DeskUtils sont gratuites. Téléchargez l’app sans clé de licence, abonnement ni paiement. Soutenez son développement sur Ko-fi si vous le souhaitez.',
+  'pricing.page.eyebrow': 'Gratuit et soutien',
   'pricing.page.lede':
-    'DeskUtils est gratuit à télécharger et à utiliser. Pro est une licence à vie unique qui ajoute un historique du presse-papiers étendu, la Capture avec défilement, l’Extraction de texte et plus.',
-  'pricing.compare.title': 'Comparer Gratuit et Pro',
-  'pricing.compare.feature': 'Fonctionnalité',
-  'pricing.included': 'Inclus',
-  'pricing.none': '—',
-  'pricing.compare.freeToolsLabel': 'Boîte à outils gratuite',
-  'pricing.compare.freeTools':
-    'Capture d’écran, Gestionnaire du presse-papiers, Quick Ring, Pipette, Sélecteur de fenêtres et les utilitaires de la barre des menus',
-  'pricing.compare.quickRing': 'Disposition Quick Ring par défaut',
-  'pricing.compare.customize': 'Personnaliser les actions de Quick Ring',
-  'pricing.compare.clipboard': '{count} éléments du presse-papiers',
-  'pricing.compare.clipboardLabel': 'Historique du presse-papiers',
-  'pricing.compare.screenshots': 'Captures et annotations',
+    'DeskUtils est gratuit avec toutes ses fonctions. Si l’app vous aide au quotidien, vous pouvez soutenir son développement sur Ko-fi.',
+  'pricing.compare.customize': 'Raccourcis Quick Ring personnalisables',
+  'pricing.compare.clipboard': '{count} éléments du presse-papiers avec recherche et épinglage',
+  'pricing.compare.screenshots': 'Captures, capture défilante et annotations',
   'pricing.compare.extraCapture':
     'Capture avec défilement, Capturer le sujet et Élément intelligent',
-  'pricing.compare.ocr': 'Extraction de texte (OCR)',
+  'pricing.compare.ocr': 'OCR local, pipette et changement de fenêtres',
   'pricing.compare.externalDisplayLabel': 'Écran externe uniquement',
-  'pricing.compare.externalDisplayFree': 'Essai de 60 secondes',
-  'pricing.compare.externalDisplayPro': 'Sans limite de temps',
-  'pricing.compare.dimming': 'Atténuation de l’écran',
-  'pricing.compare.devices': '{count} Mac',
-  'pricing.compare.devicesLabel': 'Mac par licence',
-  'pricing.faq.title': 'Questions sur les licences',
-  'pricing.cta.title': 'Débloquez toute la boîte à outils une fois pour toutes.',
+  'pricing.compare.dimming': 'Atténuation et écran externe uniquement',
+  'pricing.faq.title': 'Questions sur la gratuité et le soutien',
+  'pricing.cta.title': 'Tous les outils dans votre barre des menus.',
   'feedback.label': 'Avis sur DeskUtils',
   'feedback.title.line1': 'Vous avez trouvé un bug ?',
   'feedback.title.line2': 'Une nouvelle idée ?',
@@ -286,26 +249,21 @@ export const fr = {
   'feedback.links.email': 'Envoyer un e-mail',
   'faq.subscription.question': 'DeskUtils est-il un abonnement ?',
   'faq.subscription.answer':
-    'Non. DeskUtils Pro se paie une seule fois. Votre licence n’expire jamais.',
+    'Non. Toutes les fonctions sont gratuites, sans abonnement ni clé de licence.',
   'faq.devices.question': 'Sur combien de Mac puis-je utiliser DeskUtils ?',
   'faq.devices.answer':
-    'Chaque licence DeskUtils Pro peut être activée sur {count} appareils maximum.',
-  'faq.lifetime.question': 'Combien de temps la licence est-elle valable ?',
-  'faq.lifetime.answer': 'Votre licence DeskUtils Pro n’expire pas.',
-  'faq.launchPrice.question': 'Pourquoi DeskUtils coûte-t-il ${amount} ?',
-  'faq.launchPrice.answer':
-    '${amount} est notre prix de lancement pour les {customers} premiers clients. Le prix normal est de ${original}.',
+    'Installez DeskUtils sur tout Mac compatible que vous possédez ou gérez. Aucun plafond payant d’appareils.',
   'faq.macos.question': 'Quelle version de macOS me faut-il ?',
   'faq.macos.answer':
     'DeskUtils nécessite macOS {version} ou une version ultérieure. Consultez les notes de version pour vérifier les Mac compatibles avant de télécharger.',
   'faq.free.question': 'DeskUtils est-il gratuit ?',
   'faq.free.answer':
-    'Oui. L’historique du presse-papiers, les captures annotées, la pipette, le nettoyage du clavier et la prévention de la veille sont gratuits.',
+    'Oui. Toutes les fonctions sont gratuites. Les dons sur Ko-fi sont facultatifs.',
   'faq.account.question': 'Ai-je besoin d’un compte ?',
   'faq.account.answer': 'Aucun compte DeskUtils n’est nécessaire.',
   'faq.clipboard.question': 'Mon presse-papiers quitte-t-il mon Mac ?',
   'faq.clipboard.answer':
-    'Non. L’historique reste sur votre Mac et la reconnaissance du texte fonctionne sur l’appareil. Les mises à jour et l’activation de licence utilisent le réseau, sans contenu du presse-papiers.',
+    'L’historique reste sur votre Mac et la reconnaissance de texte s’effectue localement. Les mises à jour et aperçus de liens facultatifs utilisent le réseau sans téléverser l’historique.',
   'faq.store.question': 'DeskUtils est-il disponible sur le Mac App Store ?',
   'faq.store.answer':
     'DeskUtils est distribué directement depuis le site officiel et GitHub Releases. Téléchargez l’image disque, placez l’app dans Applications et suivez le guide.',
@@ -315,7 +273,7 @@ export const fr = {
   'footer.independent': 'Logiciel macOS indépendant par Vu Trung Kien.',
   'document.back': 'Retour à DeskUtils',
   'document.updated': 'Dernière mise à jour : {date}',
-  'document.date': '11 septembre 2026',
+  'document.date': '7 octobre 2026',
   'install.label': 'Guide d’installation',
   'install.title': 'Quelques étapes, puis vous êtes chez vous.',
   'install.download': 'Télécharger DeskUtils',
@@ -360,7 +318,7 @@ export const fr = {
     'Pour nettoyer le clavier, coller directement et utiliser les interactions de capture prises en charge.',
   'permission.network.title': 'Accès réseau',
   'permission.network.description':
-    'Utilisé pour vérifier les mises à jour et, lorsque Pro sera disponible, activer et valider la licence. Le contenu du presse-papiers n’est jamais inclus.',
+    'Pour les mises à jour et les aperçus de liens facultatifs. L’historique du presse-papiers n’est pas téléversé.',
   'install.verify.title': 'Vérifier votre téléchargement',
   'install.verify.heading': 'Vérifier le fichier avant de l’ouvrir',
   'install.verify.body':
@@ -409,11 +367,6 @@ export const fr = {
   'privacy.website.title': 'Ce site web',
   'privacy.website.body':
     'Ce site utilise Umami, un service d’analyse respectueux de la vie privée, pour recueillir de façon anonyme les pages vues, les sites référents, le navigateur, le système d’exploitation, le type d’appareil, le pays et des interactions telles que les sections et démonstrations consultées, les questions fréquentes ouvertes, les réglages de luminosité, les changements de langue et les clics de navigation, téléchargement, paiement, assistance et liens externes. Umami n’utilise pas de cookies et ne collecte aucune information permettant d’identifier une personne. DeskUtils n’envoie au service d’analyse aucun contenu du presse-papiers, capture d’écran, adresse e-mail, clé de licence ou détail de paiement. Les vidéos de démonstration sont servies comme des fichiers du site, sans lecteur vidéo tiers. L’hébergeur peut traiter des journaux serveur standard pour la sécurité et la fiabilité de la diffusion.',
-  'privacy.purchase.title': 'Achats et activation de licence',
-  'privacy.purchase.body1':
-    'Les paiements Pro sont traités par Lemon Squeezy selon ses propres pratiques de confidentialité. DeskUtils reçoit les informations de commande et de licence nécessaires pour fournir et prendre en charge votre licence.',
-  'privacy.purchase.body2':
-    'L’activation et la validation de Pro nécessitent une communication avec le service de licences. Votre clé et vos informations d’activation servent à vérifier l’accès et à appliquer la limite d’appareils. Aucun contenu du presse-papiers ni aucune capture n’est envoyé.',
   'privacy.support.title': 'Messages d’assistance',
   'privacy.support.body':
     'Si vous écrivez à DeskUtils ou envoyez le formulaire d’avis, les informations fournies—adresse e-mail, type d’avis, message, image facultative et langue—sont traitées par Formspree et transmises à DeskUtils afin de répondre et d’améliorer l’app. N’incluez pas de contenu sensible sauf nécessité. DeskUtils ne transmet jamais ces informations à Umami Analytics.',
@@ -426,18 +379,7 @@ export const fr = {
   'terms.using.body1':
     'DeskUtils est une application macOS indépendante développée par Vu Trung Kien. Vous recevez une licence limitée, personnelle, non exclusive et non transférable pour installer et utiliser l’application sur les Mac compatibles que vous possédez ou contrôlez, sous réserve des présentes conditions.',
   'terms.using.body2':
-    'Vous ne pouvez pas vendre, sous-licencier, redistribuer ou communiquer votre clé à une autre personne, contourner les limites de licence ni utiliser DeskUtils en violation de la loi applicable.',
-  'terms.plans.title': 'Gratuit et Pro',
-  'terms.plans.body1':
-    'La version gratuite peut être utilisée sans paiement ni compte DeskUtils. L’achat Pro fournit une licence à vie pour {macs} appareils maximum et inclut les fonctions DeskUtils Pro.',
-  'terms.plans.body2':
-    'Le prix de lancement est de ${amount} USD pour les {customers} premiers clients ; le prix normal est de ${original} USD. Les taxes et conditions finales sont affichées lors du paiement.',
-  'terms.renewal.title': 'Achat unique',
-  'terms.renewal.body':
-    'Pro est un achat unique, pas un abonnement. La licence à vie n’expire pas et ne comporte aucuns frais récurrents.',
-  'terms.payment.title': 'Paiement et livraison de la licence',
-  'terms.payment.body':
-    'Lorsqu’ils seront disponibles, les paiements seront traités par Lemon Squeezy, qui agit comme vendeur officiel. Lemon Squeezy gère les paiements, taxes, reçus et remboursements associés. Une clé de licence vous sera remise après l’achat pour activer DeskUtils.',
+    'Vous ne pouvez pas vendre, sous-licencier ni redistribuer DeskUtils, ni l’utiliser en violation des lois applicables.',
   'terms.refunds.title': 'Remboursements',
   'terms.refunds.body':
     'Vous pouvez demander un remboursement dans les 14 jours suivant l’achat initial en écrivant à {email} avec suffisamment d’informations pour identifier la transaction. Les remboursements approuvés sont traités par Lemon Squeezy et peuvent révoquer la licence associée.',
@@ -477,7 +419,7 @@ export const fr = {
     'Capturez, copiez, basculez, prélevez des couleurs et restez concentré — sans interrompre votre travail.',
   'home.download': 'Télécharger pour Mac',
   'home.exploreTools': 'Explorer tous les outils',
-  'home.freeNote': 'Version gratuite disponible · Nécessite macOS {version}+',
+  'home.freeNote': 'Toutes les fonctions gratuites · macOS {version}+ requis',
   'home.trust.built.title': 'Conçu pour macOS',
   'home.trust.built.body': 'Natif et parfaitement intégré.',
   'home.trust.free.title': 'Gratuit pour commencer',
@@ -511,7 +453,7 @@ export const fr = {
   'home.quickring.eyebrow': 'Quick Ring',
   'home.quickring.title': 'Vos outils préférés. À deux pressions.',
   'home.quickring.lede': 'Appuyez deux fois sur ⌘, puis choisissez une action.',
-  'home.quickring.note': 'Personnaliser les actions affichées nécessite Pro.',
+  'home.quickring.note': 'Choisissez et réorganisez vos actions favorites.',
   'home.quickring.cta': 'Explorer Quick Ring',
   'home.focused.title':
     'Prélevez une couleur, copiez n’importe quel texte, trouvez la bonne fenêtre.',
@@ -536,7 +478,7 @@ export const fr = {
   'home.util.monitor.title': 'Gardez un œil sur votre Mac.',
   'home.util.monitor.body':
     'Utilisation du processeur, de la mémoire et du disque, depuis la barre des menus.',
-  'home.pricing.title': 'Gratuit pour commencer. Pro quand vous en avez besoin.',
+  'home.pricing.title': 'Tous les outils. Entièrement gratuits.',
   'home.faq.title': 'Questions fréquentes',
   'home.cta.title': 'Gardez vos outils Mac du quotidien à portée de main.',
   'cta.title': 'Gardez vos outils Mac du quotidien à portée de main.',
@@ -703,7 +645,7 @@ export const fr = {
   'features.title': 'Chaque outil DeskUtils pour votre Mac',
   'features.lede':
     'DeskUtils réunit 12 outils du quotidien dans une seule app de barre des menus pour macOS 15.2 et versions ultérieures. Commencez par Capture d’écran, Gestionnaire du presse-papiers et Quick Ring, puis activez les petits utilitaires quand vous en avez besoin.',
-  'features.pricing': 'Voir les tarifs',
+  'features.pricing': 'Gratuit et soutien',
   'features.featured.eyebrow': 'Commencez ici',
   'features.featured.title': 'Les outils que vous utiliserez chaque jour.',
   'features.featured.screenshot': 'Capturez, annotez et floutez en un seul flux.',
@@ -795,7 +737,7 @@ export const fr = {
   'clipboard-manager.privacy.eyebrow': 'Confidentialité',
   'clipboard-manager.privacy.title': 'Ce qui quitte votre Mac, et ce qui n’en sort pas',
   'clipboard-manager.privacy.network':
-    'Les vérifications de mise à jour et la validation de licence n’incluent aucun contenu du presse-papiers.',
+    'Les vérifications de mise à jour n’incluent aucun contenu du presse-papiers.',
   'clipboard-manager.privacy.link':
     'Les aperçus de liens peuvent récupérer des détails de page sur le web.',
   'clipboard-manager.privacy.accessibility':
@@ -816,7 +758,7 @@ export const fr = {
     'Ouvrez l’historique et appuyez sur F, puis saisissez. Les mots correspondants sont mis en évidence.',
   'clipboard-manager.faq.q4': 'Mon contenu de presse-papiers est-il envoyé quelque part ?',
   'clipboard-manager.faq.a4':
-    'L’accès réseau sert aux vérifications de mise à jour et, lorsqu’elle est disponible, à la validation de licence — le contenu du presse-papiers n’est pas inclus. Les aperçus de liens peuvent récupérer des détails de page sur le web.',
+    'L’accès réseau sert aux vérifications de mise à jour sans téléverser l’historique du presse-papiers. Les aperçus de liens facultatifs peuvent récupérer des détails de page sur le web.',
   'clipboard-manager.faq.q5': 'Pourquoi DeskUtils demande-t-il l’accès Accessibilité ?',
   'clipboard-manager.faq.a5':
     'L’historique, la recherche, l’aperçu et Copier fonctionnent sans elle. L’Accessibilité n’est requise que pour le collage direct — coller un élément directement dans l’app que vous utilisez.',
@@ -860,8 +802,7 @@ export const fr = {
   'quick-ring.faq.a2':
     'Par défaut : Capturer une zone, Extraction de texte, Presse-papiers, Empêcher la veille, Historique des captures, Nettoyer le clavier, Annotation rapide et Pipette.',
   'quick-ring.faq.q3': 'Puis-je modifier les actions ?',
-  'quick-ring.faq.a3':
-    'Oui, avec DeskUtils Pro vous pouvez choisir les actions qui apparaissent dans la roue.',
+  'quick-ring.faq.a3': 'Oui. Choisissez les actions du cercle et leur ordre dans les Réglages.',
   'quick-ring.faq.q4': 'Tout ce qui est dans Quick Ring est-il aussi dans la barre des menus ?',
   'quick-ring.faq.a4':
     'Oui. Quick Ring est un moyen plus rapide d’atteindre des outils également disponibles depuis l’icône de barre des menus DeskUtils.',
@@ -1118,7 +1059,7 @@ export const fr = {
   'utilities.dimming.shortcut': 'Réglez depuis la barre des menus',
   'utilities.dimming.howTitle': 'Un seul curseur, 10 à 100 %',
   'utilities.dimming.howDesc':
-    'Faites glisser le curseur d’Atténuation de l’écran pour atténuer visuellement les écrans externes connectés. Cela ajuste l’image affichée, pas la luminosité matérielle du moniteur. Dans la version gratuite, l’atténuation est un aperçu en direct : elle s’applique tant que le menu DeskUtils est ouvert et revient à la luminosité maximale à sa fermeture. DeskUtils Pro conserve le niveau défini après la fermeture du menu.',
+    'Déplacez le curseur pour atténuer les écrans externes de 10 % à 100 %. Cela modifie l’image affichée, pas la luminosité matérielle. Le niveau choisi reste après la fermeture du menu.',
   'utilities.dimming.permission':
     'Aucune autorisation de confidentialité macOS supplémentaire n’est requise.',
   'utilities.dimming.related.external': 'Fonctionne aussi avec votre écran externe.',
@@ -1128,8 +1069,7 @@ export const fr = {
   'utilities.dimming.faq.q2': 'Quelle plage puis-je définir ?',
   'utilities.dimming.faq.a2': 'Un seul curseur de 10 % à 100 %.',
   'utilities.dimming.faq.q3': 'L’atténuation reste-t-elle après la fermeture du menu ?',
-  'utilities.dimming.faq.a3':
-    'Dans la version gratuite, l’atténuation est un aperçu tant que le menu est ouvert et revient à la luminosité maximale à sa fermeture. DeskUtils Pro conserve le niveau d’atténuation après la fermeture du menu.',
+  'utilities.dimming.faq.a3': 'Oui. Le niveau choisi reste après la fermeture du menu.',
   'utilities.dimming.faq.q4': 'A-t-il besoin d’une autorisation ?',
   'utilities.dimming.faq.a4':
     'Aucune autorisation de confidentialité macOS supplémentaire n’est requise.',
@@ -1207,4 +1147,43 @@ export const fr = {
     'Écrivez à {email}, ou envoyez un bug ou une idée via le formulaire d’avis.',
   'support.stuck.email': 'Assistance par e-mail',
   'support.stuck.feedback': 'Aller aux avis',
+  'donation.mobileCommunityBody':
+    'Gratuit pour toujours. Sans compte, abonnement ni clé de licence.',
+  'donation.communityBody':
+    'Tous les outils pour vos captures, votre presse-papiers et vos tâches quotidiennes sur Mac.',
+  'donation.features.utilities': 'Maintien en éveil, mouvement de souris et nettoyage du clavier',
+  'donation.features.monitor': 'Suivi du processeur, de la mémoire et du disque',
+  'donation.frequency': 'Ponctuel / mensuel',
+  'donation.costs': 'Contribue aux frais de développement et d’hébergement',
+  'donation.independent': 'Soutient un développeur indépendant',
+  'donation.supportFootnote': '100 % facultatif · La même application gratuite pour tous',
+  'donation.community': 'Communauté',
+  'donation.forever': 'Gratuit pour toujours',
+  'donation.supporter': 'Soutien',
+  'donation.voluntary': 'Facultatif',
+  'donation.payWhatYouWant': 'Donnez ce que vous voulez',
+  'donation.improvements': 'Soutient les nouvelles fonctions, corrections et mises à jour',
+  'donation.sameApp': 'Aide à garder tous les outils gratuits pour tous',
+  'donation.directTitle': 'Ko-fi en direct',
+  'donation.directBody': 'Soutenez le projet via le panneau Ko-fi ci-dessous.',
+  'donation.widgetTitle': 'Soutenir DeskUtils sur Ko-fi',
+  'donation.freeTitle': 'Tous les outils DeskUtils.',
+  'donation.freeBody':
+    'Captures, historique du presse-papiers, Quick Ring, OCR et utilitaires quotidiens. Tout est inclus, sans licence ni abonnement.',
+  'donation.title': 'Aidez DeskUtils à continuer.',
+  'donation.body':
+    'Chaque don aide DeskUtils à rester gratuit, indépendant et à continuer de progresser.',
+  'donation.optional':
+    'Le soutien est facultatif. Toutes les fonctions sont disponibles avec ou sans don.',
+  'donation.cta': 'Soutenir sur Ko-fi',
+  'donation.thanks': 'Chaque contribution, petite ou grande, est appréciée',
+  'donation.faq.question': 'Dois-je faire un don pour débloquer des fonctions ?',
+  'donation.faq.answer':
+    'Non. Les dons soutiennent le développement et ne débloquent aucune fonction supplémentaire. Tout le monde reçoit la même app gratuite.',
+  'donation.privacy.title': 'Soutien facultatif sur Ko-fi',
+  'donation.privacy.body':
+    'Si vous soutenez DeskUtils sur Ko-fi, Ko-fi et ses prestataires de paiement traitent le paiement selon leurs propres politiques de confidentialité. Votre nom, adresse e-mail et informations de soutien peuvent être transmis au développeur pour gérer votre soutien. Aucune donnée de paiement n’est envoyée aux outils d’analyse du site. Le panneau intégré et le bouton flottant chargent du contenu depuis Ko-fi. Ko-fi peut traiter des données techniques et utiliser des cookies selon sa propre politique de confidentialité.',
+  'donation.earlierPurchases': 'Achats Pro antérieurs',
+  'donation.earlierPurchasesBody':
+    'DeskUtils est désormais gratuit avec toutes ses fonctions. Les anciens achats Pro ont été traités par Lemon Squeezy. Pour toute question sur une ancienne commande ou les conditions de remboursement applicables, contactez {email}.',
 } satisfies Partial<Messages>;

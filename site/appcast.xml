@@ -3,6 +3,41 @@
     <channel>
         <title>DeskUtils</title>
         <item>
+            <title>0.2.0</title>
+            <pubDate>Fri, 09 Oct 2026 14:08:42 +0700</pubDate>
+            <link>https://deskutils.app/</link>
+            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.2.0</sparkle:fullReleaseNotesLink>
+            <sparkle:version>17</sparkle:version>
+            <sparkle:shortVersionString>0.2.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# DeskUtils 0.2.0
+
+DeskUtils 0.2.0 makes every feature free and improves screenshot editing, Quick Access, display dimming, and Color Picker.
+
+## Every feature is now free
+
+- All features are included without a license key, activation, or a Pro purchase. This includes Quick Ring customization, Capture Text (OCR), Scrolling Capture, Capture Subject, Capture Smart Element, External Display Only, and persistent External Display Dimming.
+- Clipboard history capacity can be configured up to 500 items. Existing preferences and saved data are preserved.
+- You can support development through the optional **Support on Ko-fi** action in the menu bar and About settings. Support does not unlock extra features.
+
+## Improvements and fixes
+
+- **Annotate text** — fixed a rendering state issue that could intermittently flip text upside down, including when text was drawn alongside counters or watermarks.
+- **Live annotation preview** — Blur and Spotlight regions now appear while dragging, before releasing the mouse. Highlight shows an outline around the brush footprint so the affected area stays visible on similar-colored backgrounds. Large new blur regions use a lightweight preview while dragging. Interaction outlines are excluded from copied and saved images.
+- **Quick Access** — improved button responsiveness, especially Close and Edit. Completed clicks are preserved when the pointer leaves the card, and asynchronous saving no longer loses its interaction state. Fixed clipped card shadows.
+- **External Display Dimming** — reduced repeated work while dragging the brightness slider and combined brightness updates. The final brightness is applied and saved when dragging finishes or the menu closes.
+- **Color Picker** — separated HUD movement from color sampling for more responsive cursor tracking. Fixed clipped rounded edges on the Liquid Glass HUD and improved cleanup when canceling or starting another picking session.
+
+## Notes
+
+- Build 17.
+- Requires macOS 15.2 or later. Liquid Glass uses fallback surfaces on earlier supported versions.
+- Existing macOS permissions are still required for features that capture the screen or control other applications.
+- No license activation is required after upgrading from either Free or Pro.
+]]></description>
+            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.2.0/DeskUtils-0.2.0-17.zip" length="59521948" type="application/octet-stream" sparkle:edSignature="9WYZv3idKCSr/LakfOlgY+8Z47Oqst2TOr13bVm7XQW8FHXHpoz9BXL7UFrKJm4zgzjDruIft16v2lWt8T5oCw=="/>
+        </item>
+        <item>
             <title>0.1.12</title>
             <pubDate>Tue, 06 Oct 2026 10:36:15 +0700</pubDate>
             <link>https://deskutils.app/</link>
@@ -74,32 +109,6 @@ DeskUtils 0.1.11 makes window switching smoother, adds quick tool toggles during
             <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.11/DeskUtils-0.1.11-15.zip" length="59648990" type="application/octet-stream" sparkle:edSignature="3dwW0krhvbirrQizgWx97J5TWWyb0Ah5xDeXWdIWodvBb4FZE3hyZdXPp5cfnXpHBJ3mFDNApP7A/nA4yKt8Bg=="/>
         </item>
         <item>
-            <title>0.1.10</title>
-            <pubDate>Wed, 30 Sep 2026 16:11:07 +0700</pubDate>
-            <link>https://deskutils.app/</link>
-            <sparkle:fullReleaseNotesLink>https://github.com/vutrngkien/deskutils-distribution/releases/tag/v0.1.10</sparkle:fullReleaseNotesLink>
-            <sparkle:version>14</sparkle:version>
-            <sparkle:shortVersionString>0.1.10</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>15.2</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[# DeskUtils 0.1.10
-
-DeskUtils 0.1.10 is a hotfix release that improves Window Switcher stability and keeps onboarding at its intended size on macOS 27.
-
-## Fixes
-
-- Fixed a Window Switcher crash caused by duplicate window identities, including collisions involving minimized windows.
-- Fixed Settings windows appearing as unavailable in Window Switcher, including macOS System Settings and DeskUtils Settings.
-- Fixed stale Window Switcher thumbnails. Cached previews now expire and visible windows are captured again so their latest content is shown.
-- Fixed the onboarding window stretching to full-screen height on macOS 27. Resize proposals are constrained before display, and the setup window cannot enter full-screen mode.
-
-## Notes
-
-- Build 14.
-- Requires macOS 15.2 or later.
-]]></description>
-            <enclosure url="https://github.com/vutrngkien/deskutils-distribution/releases/download/v0.1.10/DeskUtils-0.1.10-14.zip" length="59445926" type="application/octet-stream" sparkle:edSignature="AxihkGh0weOYAMfc0nTPdqyg7eMRqJVPc2Hy6kdzQVxaC1jzVV0Mdu7DHAKRCTto5bilpQlNdHruYMOaiXlQDw=="/>
-        </item>
-        <item>
             <title>0.1.1</title>
             <pubDate>Sun, 23 Aug 2026 19:05:48 +0700</pubDate>
             <link>https://deskutils.app/</link>
@@ -122,6 +131,6 @@ DeskUtils 0.1.10 is a hotfix release that improves Window Switcher stability and
     </channel>
 </rss>
 <!-- sparkle-signatures:
-edSignature: Kp3tkXHb84X9SByE77ypjSHL3Mfc98mSl+A7W5vB0Hfh6WD1BS5Pz+Gzp17GvvP1mloeq76vizibQ/Lqkuk8DA==
-length: 8984
+edSignature: mtiEjwzBteOoDUtOUR+/49U5l24jzZZI/4RIHN2jCR8V+74/KdMnCQJM4lQ9SMJjvl2LeKTxDsOiUblczO/OBA==
+length: 10457
 -->

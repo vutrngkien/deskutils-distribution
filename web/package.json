@@ -12,7 +12,7 @@
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
-    "test:browser": "playwright test tests/website.spec.ts tests/launch-offer-popup.spec.ts",
+    "test:browser": "playwright test tests/website.spec.ts",
     "test:visual": "RUN_VISUAL=1 playwright test tests/visual.spec.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

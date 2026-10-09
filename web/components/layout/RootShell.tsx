@@ -3,6 +3,7 @@ import { translate } from '@/content/i18n';
 import type { Locale } from '@/content/locales';
 import { Nav } from '@/components/layout/Nav';
 import { Footer } from '@/components/layout/Footer';
+import { KofiFloatingWidget } from '@/components/KofiFloatingWidget';
 
 /**
  * Shared chrome rendered by both root layouts. Pages provide their own
@@ -17,6 +18,7 @@ export function RootShell({ locale, children }: { locale: Locale; children: Reac
       <Nav locale={locale} />
       {children}
       <Footer locale={locale} />
+      <KofiFloatingWidget />
     </>
   );
 }

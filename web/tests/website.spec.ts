@@ -9,12 +9,40 @@ const internalRoutes = routes
 
 const releasesApi = 'https://api.github.com/repos/vutrngkien/deskutils-distribution/releases';
 test.beforeEach(async ({ page }) => {
-  // The offer popup has its own suite; keep existing page checks unobstructed.
-  await page.addInitScript(() => {
-    sessionStorage.setItem('deskutils:launch-offer:seen', 'true');
-  });
-  // Ordinary browser tests stay offline and deterministic, including Changelog.
+  // Ordinary browser tests stay offline and deterministic, including external widgets.
+  await page.route('https://storage.ko-fi.com/**', (route) => route.abort());
+  await page.route('https://ko-fi.com/**', (route) => route.abort());
   await page.route(`${releasesApi}**`, (route) => route.fulfill({ json: releaseSnapshot }));
+});
+
+test('Ko-fi overlay initializes after loading with the supplied account and button settings', async ({
+  page,
+}) => {
+  await page.route('https://storage.ko-fi.com/cdn/scripts/overlay-widget.js', (route) =>
+    route.fulfill({
+      contentType: 'application/javascript',
+      body: `window.__kofiDraws = []; window.kofiWidgetOverlay = {
+        draw: (handle, options) => window.__kofiDraws.push({ handle, options })
+      };`,
+    }),
+  );
+  for (const path of ['/', '/vi/pricing/']) {
+    await page.goto(path);
+    await expect
+      .poll(() => page.evaluate(() => Reflect.get(window, '__kofiDraws')))
+      .toEqual([
+        {
+          handle: 'vutrngkien',
+          options: {
+            type: 'floating-chat',
+            'floating-chat.donateButton.text': 'Support me',
+            'floating-chat.donateButton.background-color': '#00b9fe',
+            'floating-chat.donateButton.text-color': '#fff',
+          },
+        },
+      ]);
+    await expect(page.locator('script[src$="/overlay-widget.js"]')).toHaveCount(1);
+  }
 });
 
 for (const width of [390, 768, 1200, 1440]) {
@@ -33,19 +61,30 @@ for (const width of [390, 768, 1200, 1440]) {
     await expect(
       page.getByRole('heading', { name: 'Your favorite tools. Two taps away.' }),
     ).toBeVisible();
-    await expect(page.getByText('$7.99', { exact: true })).toBeVisible();
-    await expect(page.getByText('$14.99', { exact: true })).toHaveCSS(
-      'text-decoration-line',
-      'line-through',
+    await expect(page.getByText('$0', { exact: true }).filter({ visible: true })).toBeVisible();
+    const goal = page.locator('#notarization');
+    await expect(goal.getByRole('progressbar')).toHaveAttribute('value', '9');
+    await expect(goal.getByRole('progressbar')).toHaveAttribute('max', '100');
+    await expect(goal.getByRole('progressbar')).toHaveAttribute(
+      'aria-valuetext',
+      '9% of the goal funded',
     );
-    await expect(page.getByText('Lifetime license', { exact: true })).toBeVisible();
-    await expect(page.getByText('Use on up to 2 devices', { exact: true })).toBeVisible();
-
-    const proCheckout = page.getByRole('link', { name: 'Get DeskUtils Pro', exact: true });
-    const checkoutURL = new URL((await proCheckout.getAttribute('href')) ?? '');
-    expect(checkoutURL.origin).toBe('https://deskutils.lemonsqueezy.com');
-    expect(checkoutURL.pathname).toBe('/checkout/buy/c9fb0feb-6305-4361-9f15-10c1ff9f15f6');
-    expect(checkoutURL.searchParams.get('checkout[discount_code]')).toBe('LAUNCH799');
+    await expect(goal.getByText('$99', { exact: true })).toBeVisible();
+    await expect(goal.getByRole('link', { name: 'Support on Ko-fi' })).toHaveAttribute(
+      'href',
+      'https://ko-fi.com/vutrngkien',
+    );
+    expect(
+      await goal.evaluate((el) => ({
+        section: el.parentElement?.parentElement?.id,
+        next: el.nextElementSibling?.classList.contains('support-plans'),
+      })),
+    ).toEqual({ section: 'pricing', next: true });
+    const support = goal.getByRole('link', { name: 'Support on Ko-fi' });
+    await expect(support).toHaveAttribute('href', 'https://ko-fi.com/vutrngkien');
+    await expect(support).toHaveAttribute('target', '_blank');
+    await expect(page.locator('a[href*="lemonsqueezy.com/checkout"]')).toHaveCount(0);
+    await expect(page.getByRole('dialog')).toHaveCount(0);
 
     const softwareNodes = await page
       .locator('script[type="application/ld+json"]')
@@ -151,15 +190,17 @@ for (const width of [390, 768, 1200, 1440]) {
   });
 }
 
-test('pricing section keeps both plans and the Pro checkout action in view', async ({ page }) => {
+test('free support section keeps download and optional Ko-fi in view', async ({ page }) => {
   await page.setViewportSize({ width: 1024, height: 900 });
   await page.goto('/');
   const pricing = page.locator('#pricing');
   await expect(
-    pricing.getByRole('heading', { name: 'Free to start. Pro when you need more.' }),
+    pricing.getByRole('heading', { name: 'Every tool. Completely free.' }),
   ).toBeVisible();
-  await expect(pricing.locator('article')).toHaveCount(2);
-  const proCheckout = page.getByRole('link', { name: 'Get DeskUtils Pro', exact: true });
+  await expect(pricing.locator('article')).toHaveCount(3);
+  const proCheckout = pricing
+    .locator('.support-plans')
+    .getByRole('link', { name: 'Support on Ko-fi' });
   await proCheckout.scrollIntoViewIfNeeded();
   await expect(proCheckout).toBeVisible();
 });
@@ -815,129 +856,84 @@ test('feedback tips follow the selected type', async ({ page }) => {
   ).toBeVisible();
 });
 
-for (const width of [390, 1440]) {
-  test(`pricing page renders plans, checkout and schema at ${width}px`, async ({ page }) => {
+for (const width of [390, 768, 1200, 1440]) {
+  test(`free app and optional support render at ${width}px`, async ({ page }) => {
+    // Ko-fi is an external service: even when it is blocked, the direct link remains usable.
+    await page.route('https://ko-fi.com/**', (route) => route.abort());
     await page.setViewportSize({ width, height: 1000 });
     await page.goto('/pricing/');
-
     await expect(
-      page.getByRole('heading', { name: 'Free to start. Pro when you need more.', level: 1 }),
+      page.getByRole('heading', { name: 'Every tool. Completely free.', level: 1 }),
     ).toBeVisible();
-    await expect(page.locator('article')).toHaveCount(2);
-
-    await expect(page.getByText('Lifetime license', { exact: true })).toBeVisible();
-
-    // Pro checkout uses the real Lemon Squeezy URL with the launch discount.
-    const proCheckout = page.getByRole('link', { name: 'Get DeskUtils Pro', exact: true });
-    const checkoutURL = new URL((await proCheckout.getAttribute('href')) ?? '');
-    expect(checkoutURL.origin).toBe('https://deskutils.lemonsqueezy.com');
-    expect(checkoutURL.searchParams.get('checkout[discount_code]')).toBe('LAUNCH799');
-
-    // Price, compare table and FAQ.
-    await expect(page.getByText('$7.99', { exact: true })).toBeVisible();
-    await expect(page.getByText('$14.99', { exact: true })).toHaveCSS(
-      'text-decoration-line',
-      'line-through',
+    await expect(page.locator('article')).toHaveCount(3);
+    await expect(page.getByText('$0', { exact: true }).filter({ visible: true })).toBeVisible();
+    const goal = page.locator('#notarization');
+    await expect(goal.getByRole('heading', { level: 2 })).toBeVisible();
+    await expect(goal.getByRole('progressbar')).toHaveAttribute('value', '9');
+    const donation = goal.getByRole('link', { name: 'Support on Ko-fi' });
+    await expect(donation).toHaveAttribute('href', 'https://ko-fi.com/vutrngkien');
+    await expect(donation).toHaveAttribute('rel', 'noopener noreferrer');
+    const panel = page.getByTitle('Support DeskUtils on Ko-fi', { exact: true });
+    if (width >= 768) await expect(panel).toBeVisible();
+    else await expect(panel).toBeHidden();
+    await expect(panel).toHaveAttribute('height', '712');
+    await expect(panel).toHaveAttribute('loading', 'lazy');
+    await expect(panel).toHaveAttribute(
+      'src',
+      'https://ko-fi.com/vutrngkien/?hidefeed=true&widget=true&embed=true&preview=true',
     );
-    await expect(
-      page.getByText('50 clipboard items').filter({ visible: true }).first(),
-    ).toBeVisible();
-    await expect(
-      page.getByText('500 clipboard items').filter({ visible: true }).first(),
-    ).toBeVisible();
-    // Pro card text must stay visible on its dark background, and compare
-    // labels must not leak `{count}` placeholders.
-    await expect(page.getByText('Extended clipboard history', { exact: true })).toBeVisible();
-    await expect(
-      page.getByText('Clipboard history', { exact: true }).filter({ visible: true }).first(),
-    ).toBeVisible();
-    await expect(
-      page.getByText('Macs per license', { exact: true }).filter({ visible: true }).first(),
-    ).toBeVisible();
-    await expect(page.getByText(/\{count\}/)).toHaveCount(0);
-
+    if (width >= 768) {
+      await expect(
+        page.getByText('500 clipboard items with search & pins', { exact: true }),
+      ).toBeVisible();
+      const scroller = page.getByRole('region', {
+        name: 'Support DeskUtils on Ko-fi',
+        exact: true,
+      });
+      const scrollSize = await scroller.evaluate((element) => ({
+        viewport: element.clientHeight,
+        content: element.scrollHeight,
+      }));
+      expect(scrollSize.content).toBeGreaterThan(scrollSize.viewport);
+      await scroller.scrollIntoViewIfNeeded();
+      await scroller.focus();
+      const pageScroll = await page.evaluate(() => window.scrollY);
+      await page.keyboard.press('End');
+      await expect.poll(() => scroller.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
+      expect(await page.evaluate(() => window.scrollY)).toBe(pageScroll);
+      await expect(page.getByText('CPU, memory & disk monitoring', { exact: true })).toBeVisible();
+    } else {
+      await expect(
+        page.getByText('Free forever. No account, no subscription, no license key.', {
+          exact: true,
+        }),
+      ).toBeVisible();
+    }
+    if (width === 1440) {
+      const positions = await page
+        .locator('article')
+        .evaluateAll((cards) => cards.map((card) => card.getBoundingClientRect().top));
+      expect(new Set(positions).size).toBe(1);
+      const heights = await page
+        .locator('article')
+        .evaluateAll((cards) => cards.map((card) => card.getBoundingClientRect().height));
+      expect(Math.max(...heights)).toBeLessThan(800);
+    }
+    await expect(page.locator('a[href*="lemonsqueezy.com/checkout"]')).toHaveCount(0);
+    await expect(page.locator('#faq details')).toHaveCount(6);
     const schemaTypes = await page
       .locator('script[type="application/ld+json"]')
       .evaluateAll((elements) =>
         elements.map((element) => JSON.parse(element.textContent ?? '{}')['@type']),
       );
-    expect(schemaTypes).toContain('BreadcrumbList');
-    expect(schemaTypes).toContain('FAQPage');
-    expect(schemaTypes).toContain('SoftwareApplication');
+    expect(schemaTypes).toEqual(
+      expect.arrayContaining(['BreadcrumbList', 'FAQPage', 'SoftwareApplication']),
+    );
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );
   });
 }
-
-test.describe('pricing plans render for launch on and off', () => {
-  const bundles: Record<'on' | 'off', string> = { on: '', off: '' };
-  test.beforeAll(async () => {
-    for (const state of ['on', 'off'] as const) {
-      const result = await build({
-        entryPoints: ['tests/fixtures/pricing-plans.tsx'],
-        bundle: true,
-        write: false,
-        outdir: `/private/tmp/deskutils-pricing-${state}`,
-        format: 'iife',
-        jsx: 'automatic',
-        banner: { js: 'var process = globalThis.process || { env: {} };' },
-        define: {
-          'process.env.NODE_ENV': '"production"',
-          'process.env.NEXT_PUBLIC_DESKUTILS_LAUNCH_OFFER': JSON.stringify(
-            state === 'on' ? 'true' : 'false',
-          ),
-        },
-      });
-      bundles[state] = result.outputFiles.find((file) => file.path.endsWith('.js'))!.text;
-    }
-  });
-
-  async function mount(page: import('@playwright/test').Page, state: 'on' | 'off') {
-    await page.setContent('<div id="root"></div>');
-    await page.addScriptTag({ content: bundles[state] });
-  }
-
-  test('launch offer on shows the launch price, badge and discount checkout', async ({ page }) => {
-    await page.goto('/');
-    await mount(page, 'on');
-
-    await expect(page.getByText('$7.99', { exact: true })).toBeVisible();
-    await expect(page.getByText('$14.99', { exact: true })).toHaveCSS(
-      'text-decoration-line',
-      'line-through',
-    );
-    await expect(page.getByText('Launch Offer')).toBeVisible();
-    await expect(page.getByText('Lifetime license', { exact: true })).toBeVisible();
-    await expect(page.getByText('First 100 customers · Then $14.99')).toBeVisible();
-    const checkout = new URL(
-      (await page
-        .getByRole('link', { name: 'Get DeskUtils Pro', exact: true })
-        .getAttribute('href')) ?? '',
-    );
-    expect(checkout.searchParams.get('checkout[discount_code]')).toBe('LAUNCH799');
-  });
-
-  test('launch offer off shows the regular price with no discount', async ({ page }) => {
-    await page.goto('/');
-    await mount(page, 'off');
-
-    await expect(page.getByText('$14.99', { exact: true })).toBeVisible();
-    await expect(page.getByText('$7.99', { exact: true })).toHaveCount(0);
-    await expect(page.getByText('Launch Offer')).toHaveCount(0);
-    await expect(page.getByText('Lifetime license', { exact: true })).toBeVisible();
-    await expect(page.getByText('$14.99', { exact: true })).not.toHaveCSS(
-      'text-decoration-line',
-      'line-through',
-    );
-    const checkout = new URL(
-      (await page
-        .getByRole('link', { name: 'Get DeskUtils Pro', exact: true })
-        .getAttribute('href')) ?? '',
-    );
-    expect(checkout.searchParams.get('checkout[discount_code]')).toBeNull();
-  });
-});
 
 for (const width of [390, 1440]) {
   test(`changelog page renders every release at ${width}px`, async ({ page }) => {
@@ -1125,7 +1121,7 @@ test('changelog markdown renders safely without executing or unsafe links', asyn
   expect(await page.locator('#root b').count()).toBe(0);
 });
 
-test('pricing page keeps the launch price and JSON-LD offer in sync', async ({ page }) => {
+test('free app price and JSON-LD offer stay separate from optional donations', async ({ page }) => {
   await page.goto('/pricing/');
   const offer = await page
     .locator('script[type="application/ld+json"]')
@@ -1134,11 +1130,12 @@ test('pricing page keeps the launch price and JSON-LD offer in sync', async ({ p
         .map((element) => JSON.parse(element.textContent ?? '{}'))
         .find((data) => data['@type'] === 'SoftwareApplication'),
     );
-  expect(offer.offers.price).toBe('7.99');
+  expect(offer.offers.price).toBe('0');
   expect(offer.offers.priceCurrency).toBe('USD');
-  const checkout = new URL(offer.offers.url);
-  expect(checkout.origin).toBe('https://deskutils.lemonsqueezy.com');
-  expect(checkout.searchParams.get('checkout[discount_code]')).toBe('LAUNCH799');
+  expect(offer.offers.url).toBe(
+    'https://github.com/vutrngkien/deskutils-distribution/releases/latest/download/DeskUtils.dmg',
+  );
+  expect(offer.isAccessibleForFree).toBe(true);
 });
 
 test('install page exposes the permissions anchor used by feature pages', async ({ page }) => {
@@ -1274,9 +1271,9 @@ test('localized utility breadcrumb schema points at the localized URL', async ({
   expect(breadcrumb.at(-1)).toBe('https://deskutils.app/de/prevent-sleep/');
 });
 
-test('display dimming explains the Free preview versus Pro persistence', async ({ page }) => {
+test('display dimming includes persistent dimming for everyone', async ({ page }) => {
   await page.goto('/display-dimming/');
-  await expect(page.getByText(/In the Free version the dimming is a live preview/)).toBeVisible();
+  await expect(page.getByText(/Your chosen level stays after the menu closes/)).toBeVisible();
   await expect(page.locator('#faq details')).toHaveCount(4);
 });
 
@@ -1316,7 +1313,7 @@ test('published feature routes are linked from the shared navigation', async ({ 
   );
 });
 
-test('Umami tracks downloads and checkout only on the production domain', async ({ page }) => {
+test('Umami tracks downloads and donations only on the production domain', async ({ page }) => {
   await page.route('**/cloud.umami.is/**', (route) =>
     route.fulfill({ body: '', contentType: 'application/javascript' }),
   );
@@ -1330,9 +1327,10 @@ test('Umami tracks downloads and checkout only on the production domain', async 
   const downloads = page.locator('[data-track-event="download"]');
   expect(await downloads.count()).toBeGreaterThanOrEqual(4);
 
-  const checkout = page.locator('[data-track-event="checkout"]');
-  await expect(checkout).toHaveCount(1);
-  await expect(checkout).toHaveAttribute('data-track-event-placement', 'pricing_pro');
+  const checkout = page.locator('[data-track-event="donate_click"]');
+  await expect(checkout).toHaveCount(3);
+  await expect(checkout.first()).toHaveAttribute('data-track-event-placement', 'notarization_goal');
+  await expect(checkout.nth(1)).toHaveAttribute('data-track-event-placement', 'free_support');
 
   await page.goto('/privacy/');
   await expect(page.getByText(/uses Umami, a privacy-focused analytics service/)).toBeVisible();
@@ -1353,7 +1351,7 @@ test('Umami records meaningful engagement signals', async ({ page }) => {
   );
   await page.goto('/');
 
-  await expect(page.locator('[data-umami-section]')).toHaveCount(10);
+  await expect(page.locator('[data-umami-section]')).toHaveCount(11);
   await expect(page.locator('[data-track-event="language_change"]')).toHaveCount(20);
 
   await page.locator('#faq').scrollIntoViewIfNeeded();
@@ -1386,7 +1384,7 @@ test('content and native controls work without JavaScript', async ({ browser, ba
   await page.locator('summary[aria-label="Mobile navigation"]').click();
   await expect(mobileDetails.getByRole('link', { name: 'All features' })).toBeVisible();
   await expect(page.locator('#faq details')).toHaveCount(7);
-  await expect(page.getByText(/^No. Clipboard history stays on your Mac/)).toBeAttached();
+  await expect(page.getByText(/^Clipboard history stays on your Mac/)).toBeAttached();
   await expect(
     page.getByRole('link', { name: 'Download for Mac', exact: false }).first(),
   ).toHaveAttribute('href', '/install/');
@@ -1425,6 +1423,91 @@ test('reduced motion and enlarged text remain usable', async ({ page }) => {
   expect(await page.locator('main').evaluate((el) => getComputedStyle(el).animationName)).toBe(
     'none',
   );
+});
+
+test.describe('notarization progress sync', () => {
+  let js = '';
+  const endpoint = 'https://goal.test/api/goal';
+  test.beforeAll(async () => {
+    const result = await build({
+      entryPoints: ['tests/fixtures/notarization-progress.tsx'],
+      bundle: true,
+      write: false,
+      outdir: '/private/tmp/deskutils-notarization-test',
+      format: 'iife',
+      jsx: 'automatic',
+      define: {
+        'process.env.NODE_ENV': '"production"',
+        'process.env.NEXT_PUBLIC_DESKUTILS_KOFI_GOAL_ENDPOINT': JSON.stringify(endpoint),
+      },
+    });
+    js = result.outputFiles.find((file) => file.path.endsWith('.js'))!.text;
+  });
+
+  async function mount(page: import('@playwright/test').Page) {
+    await page.route('**/__goal-fixture__', (route) =>
+      route.fulfill({ contentType: 'text/html', body: '<div id="root"></div>' }),
+    );
+    await page.goto('/__goal-fixture__');
+    await page.addScriptTag({ content: js });
+  }
+
+  test('new tips refresh progress, retaining the last confirmation during an outage', async ({
+    page,
+  }) => {
+    await page.clock.install();
+    let requests = 0;
+    await page.route(endpoint, (route) => {
+      requests += 1;
+      return requests === 2
+        ? route.fulfill({
+            status: 503,
+            headers: { 'access-control-allow-origin': '*' },
+            body: '{}',
+          })
+        : route.fulfill({
+            headers: { 'access-control-allow-origin': '*' },
+            json: { currency: 'USD', targetUSD: 99, fundedPercent: requests === 1 ? 25 : 31 },
+          });
+    });
+    await mount(page);
+    const progress = page.getByRole('progressbar');
+    await expect(progress).toHaveAttribute('value', '25');
+    await expect(progress).toHaveAttribute('aria-valuetext', '25% of the goal funded');
+    await page.clock.runFor(60000);
+    await expect.poll(() => requests).toBe(2);
+    await expect(progress).toHaveAttribute('value', '25');
+    await page.clock.runFor(60000);
+    await expect(progress).toHaveAttribute('value', '31');
+    await expect(page.getByText('$99', { exact: true })).toBeVisible();
+  });
+
+  test('mismatched goals and invalid totals never overwrite the confirmed snapshot', async ({
+    page,
+  }) => {
+    await page.clock.install();
+    const responses = [
+      { currency: 'EUR', targetUSD: 99, fundedPercent: 80 },
+      { currency: 'USD', targetUSD: 100, fundedPercent: 80 },
+      { currency: 'USD', targetUSD: 99, fundedPercent: 101 },
+      { currency: 'USD', targetUSD: 99, fundedPercent: -1 },
+    ];
+    let requests = 0;
+    await page.route(endpoint, (route) =>
+      route.fulfill({
+        headers: { 'access-control-allow-origin': '*' },
+        json: responses[requests++],
+      }),
+    );
+    await mount(page);
+    const progress = page.getByRole('progressbar');
+    await expect.poll(() => requests).toBe(1);
+    for (let count = 2; count <= responses.length; count += 1) {
+      await page.clock.runFor(60000);
+      await expect.poll(() => requests).toBe(count);
+      await expect(progress).toHaveAttribute('value', '9');
+    }
+  });
 });
 
 test.describe('media slot fixture', () => {
@@ -1624,12 +1707,12 @@ test('homepage FAQ uses divided rows and one open answer at a time', async ({ pa
   await expect(rows.nth(1).locator('summary')).toHaveCSS('list-style-type', 'none');
 });
 
-test('navigation exposes Features, Pricing, Feedback and Changelog', async ({ page }) => {
+test('navigation exposes Features, Free & Support, Feedback and Changelog', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
   const nav = page.getByRole('navigation', { name: 'Primary navigation' });
   await expect(nav.locator('summary', { hasText: 'Features' })).toBeVisible();
-  await expect(nav.getByRole('link', { name: 'Pricing', exact: true })).toHaveAttribute(
+  await expect(nav.getByRole('link', { name: 'Free & Support', exact: true })).toHaveAttribute(
     'href',
     '/pricing/',
   );
@@ -1646,7 +1729,7 @@ test('navigation exposes Features, Pricing, Feedback and Changelog', async ({ pa
   await page.locator('summary[aria-label="Mobile navigation"]').click();
   const mobile = page.locator('div[aria-label="Mobile navigation"]');
   await expect(mobile.getByRole('link', { name: 'Feedback', exact: true })).toBeVisible();
-  await expect(mobile.getByRole('link', { name: 'Pricing', exact: true })).toBeVisible();
+  await expect(mobile.getByRole('link', { name: 'Free & Support', exact: true })).toBeVisible();
 });
 
 test('mockup motion runs when visible and freezes with Reduce Motion', async ({ page }) => {
@@ -2103,7 +2186,7 @@ test.describe('tracking across the expanded website', () => {
     expect(await events(page, 'duplicate_sdk_click')).toHaveLength(0);
   });
 
-  test('downloads, checkout and language retain named events without double counting', async ({
+  test('downloads, donations and language retain named events without double counting', async ({
     page,
   }) => {
     await page.goto('/pricing/');
@@ -2123,10 +2206,14 @@ test.describe('tracking across the expanded website', () => {
         (element as HTMLElement).click();
       });
     expect(await events(page, 'download')).toHaveLength(1);
-    await clickWithoutLeaving(page.locator('[data-track-event="checkout"]'));
-    expect(await events(page, 'checkout')).toHaveLength(1);
-    expect(await events(page, 'checkout')).toEqual([
-      expect.objectContaining({ data: expect.objectContaining({ placement: 'pricing_pro' }) }),
+    await clickWithoutLeaving(
+      page.locator(
+        'main [data-track-event="donate_click"][data-track-event-placement="free_support"]',
+      ),
+    );
+    expect(await events(page, 'donate_click')).toHaveLength(1);
+    expect(await events(page, 'donate_click')).toEqual([
+      expect.objectContaining({ data: expect.objectContaining({ placement: 'free_support' }) }),
     ]);
     await page
       .locator('[data-track-event="language_change"][lang="vi"]')
@@ -2139,7 +2226,7 @@ test.describe('tracking across the expanded website', () => {
       expect.objectContaining({ data: expect.objectContaining({ from: 'en', to: 'vi' }) }),
     ]);
     expect(await events(page, 'duplicate_sdk_click')).toHaveLength(0);
-    expect(JSON.stringify(await events(page, 'checkout'))).not.toContain('discount_code');
+    expect(JSON.stringify(await events(page, 'donate_click'))).not.toContain('discount_code');
   });
 
   test('permissions and related links include stable localized targets and placement', async ({
@@ -2269,3 +2356,41 @@ test.describe('tracking across the expanded website', () => {
     });
   });
 });
+
+for (const locale of ['en', 'vi', 'de', 'es', 'fr', 'ja', 'ko', 'ru', 'zh-CN', 'zh-TW']) {
+  test(`free distribution works without JavaScript in ${locale}`, async ({ browser }) => {
+    const context = await browser.newContext({
+      javaScriptEnabled: false,
+      viewport: { width: 390, height: 844 },
+    });
+    const page = await context.newPage();
+    try {
+      await page.goto(`http://127.0.0.1:3100/${locale === 'en' ? '' : `${locale}/`}pricing/`);
+      await expect(
+        page.locator(
+          'main [data-track-event="donate_click"][data-track-event-placement="free_support"]',
+        ),
+      ).toHaveAttribute('href', 'https://ko-fi.com/vutrngkien');
+      await expect(
+        page.locator(
+          'main [data-track-event="donate_click"][data-track-event-placement="free_support"]',
+        ),
+      ).toHaveAttribute('target', '_blank');
+      await expect(page.locator('main [data-track-event="download"]').first()).toHaveAttribute(
+        'href',
+        /\/install\/$/,
+      );
+      await expect(page.locator('main')).not.toContainText(
+        /DeskUtils Pro|\$7\.99|\$14\.99|LAUNCH799/,
+      );
+      await expect(page.locator('main')).toContainText('$0');
+      await expect(page.locator('#notarization progress')).toHaveAttribute('value', '9');
+      await expect(page.locator('#notarization a[data-track-event="donate_click"]')).toBeVisible();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
+    } finally {
+      await context.close();
+    }
+  });
+}
